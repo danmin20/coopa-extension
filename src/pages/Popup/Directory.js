@@ -150,8 +150,27 @@ const DirList = style.div`
     grid-template-columns: 1fr;
     position: relative;
     overflow: auto;
-    width: 30.5rem;
+    width: 31rem;
     height: 20rem;
+    /* width */
+    ::-webkit-scrollbar {
+    width: 0.8rem;
+    }
+    /* Track */
+    ::-webkit-scrollbar-track {
+    background: none;
+    }
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+    background: #f1f1f1;
+    border: 0.1rem solid #BFBFBF;
+    border-radius: 0.8rem;
+    box-sizing: border-box;
+    }
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    }
 `;
 
 const BottomWrap = style.div`

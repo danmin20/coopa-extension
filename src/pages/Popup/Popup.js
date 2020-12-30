@@ -12,7 +12,7 @@ import { atom, selector, useRecoilState, DefaultValue } from 'recoil';
 // recoil atom
 const PageNumber = atom({
   key: 'PageNumber',
-  default: 0,
+  default: 1,
 })
 
 
