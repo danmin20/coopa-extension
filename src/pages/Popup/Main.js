@@ -15,6 +15,10 @@ const PageNumber = atom({
     default: 0,
 })
 
+const isClickNextPage = atom({
+    key: 'isClickNextPage',
+    default: false,
+})
 
 const Main = () => {
     const onClick = () => {
@@ -46,9 +50,11 @@ const Main = () => {
     }
     
     const [pageNum, setPageNum] = useRecoilState(PageNumber);
+    const [isclickNextPage, setIsclickNextPage] = useRecoilState(isClickNextPage);
 
     const handleBtnOneClick = () => {
         setPageNum(1);
+        setIsclickNextPage(true);
     }
 
 
@@ -61,7 +67,7 @@ const Main = () => {
         }, 3000);
     }, []);
 
-    if(isLoading){
+    if(isLoading & !isclickNextPage){
         return(
             <>
                 <Loading />
