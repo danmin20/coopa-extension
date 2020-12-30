@@ -1,5 +1,5 @@
 {
-    "name": "Chrome Extension with React & Webpack",
+    "name": "Cookie Parking Chrome Extention",
     "background": {
         "page": "background.html"
     },
@@ -13,7 +13,7 @@
     "icons": {
         "128": "icon-128.png"
     },
-    "permissons":[
+    "permissons": [
         "activeTab",
         "<all_urls>",
         "tabs"
@@ -22,11 +22,6 @@
         "icon-128.png",
         "icon-34.png"
     ],
-    "permissions": [
-        "activeTab",
-        "<all_urls>",
-        "tabs"
-      ],
     "manifest_version": 2,
     "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
 }

@@ -9,7 +9,7 @@ var WebpackDevServer = require('webpack-dev-server'),
     env = require('./env'),
     path = require('path');
 
-var options = config.chromeExtensionBoilerplate || {};
+var options = config.coopaextension || {};
 var excludeEntriesToHotReload = options.notHotReload || [];
 
 for (var entryName in config.entry) {
@@ -20,7 +20,7 @@ for (var entryName in config.entry) {
 
 config.plugins = [new webpack.HotModuleReplacementPlugin()].concat(config.plugins || []);
 
-delete config.chromeExtensionBoilerplate;
+delete config.coopaextension;
 
 var compiler = webpack(config);
 
