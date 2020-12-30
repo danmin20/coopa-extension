@@ -52,11 +52,36 @@ const Newtab = () => {
 
 export default Newtab;
 
+// 파일 구조 정해지면 옮길 예정
 const AllCookies = () => {
   return (
-    <div>난 쿠키 컴포넌트야</div>
+    <Container>
+      <Card/>
+      <Card/>
+      <Card/>
+      <Card/>
+      <Card/>
+      <Card/>
+    </Container>
   );
 };
+// AllCookies
+const Container = styled.div`
+  max-width: 100vw;
+  margin-top: 5.2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(36rem,auto));
+  grid-gap: 2.8rem;
+`;
+
+const Card = styled.div`
+  width: 100%;
+  height: 0;
+  padding-top: calc(220/360*100%);
+  background-color: #F3F3F4;
+  // background : url("") center cover no-repeat;
+  border-radius: 1.2rem;
+`;
 
 const Directory = () => {
   return <div>난 디렉토리 컴포넌트라구</div>;
@@ -115,11 +140,6 @@ const HomeBoard = styled.div`
 
 // Contents Area
 // ToDo : font 적용
-const Container = styled.div`
-  :hover{
-    background-color: gray;
-  }
-`;
 const Contents = styled.div`
   margin: 4.8rem 19.7rem 0;
 `;
