@@ -2,29 +2,29 @@ import React, { useState } from 'react';
 import Logo from "../../assets/img/logo_main.svg";
 import Profile from "../../assets/img/profile.svg";
 import Glass from "../../assets/img/glass.svg";
-import styled,{css} from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const Newtab = () => {
   const [cookie, setCookie] = useState(true);
   const [directroy, setDirectory] = useState(false);
-  const onClickCookie = () =>{
+  const onClickCookie = () => {
     setCookie(true);
     setDirectory(false);
   }
-  const onClickDir = () =>{
+  const onClickDir = () => {
     setCookie(false);
     setDirectory(true);
   }
   return (
     <div className="container">
       <Header>
-        <img className="main-logo" src={Logo}/>
-        <img className="profile" src={Profile}/>
+        <img className="main-logo" src={Logo} />
+        <img className="profile" src={Profile} />
       </Header>
       <HomeBoard>
         <div className="search-bar">
-          <img className="search-bar__icon" src={Glass}/>
-          <input className="search-bar__input" type="text" placeholder="내가 추가한 쿠키를 검색해 보세요!"/>
+          <img className="search-bar__icon" src={Glass} />
+          <input className="search-bar__input" type="text" placeholder="내가 추가한 쿠키를 검색해 보세요!" />
         </div>
       </HomeBoard>
       <Contents>
@@ -39,12 +39,12 @@ const Newtab = () => {
           </div>
         </ContentsHeader>
         {(() => {
-        if(cookie){
-          return <AllCookies/>
-        }else if(directroy){
-          return <Directory/>
-        }
-      })()}
+          if (cookie) {
+            return <AllCookies />
+          } else if (directroy) {
+            return <Directory />
+          }
+        })()}
       </Contents>
     </div>
   );
@@ -56,12 +56,12 @@ export default Newtab;
 const AllCookies = () => {
   return (
     <Container>
-      <Card/>
-      <Card/>
-      <Card/>
-      <Card/>
-      <Card/>
-      <Card/>
+      <Card />
+      <Card />
+      <Card />
+      <Card />
+      <Card />
+      <Card />
     </Container>
   );
 };
@@ -184,7 +184,7 @@ const ContentsHeader = styled.div`
 const CookieTab = styled.div`
   cursor: pointer;
   color: #C2C2C2;
-  ${props => 
+  ${props =>
     props.selected &&
     css`
       color: #FF7134;
@@ -202,7 +202,7 @@ const CookieTab = styled.div`
 const DirectoryTab = styled.div`
   cursor: pointer;
   color: #C2C2C2;
-  ${props => 
+  ${props =>
     props.selected &&
     css`
       color: #FF7134;
