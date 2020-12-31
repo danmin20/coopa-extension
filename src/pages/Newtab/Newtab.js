@@ -6,6 +6,7 @@ import styled, { css } from 'styled-components';
 import useInput from '../../hooks/useInput';
 import AllCookies from '../../components/AllCookies';
 import Directory from '../../components/Directory';
+import CookieCard from '../../components/CookieCard';
 
 export default () => {
   const [cookie, setCookie] = useState(true);
