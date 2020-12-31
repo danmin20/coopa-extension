@@ -6,6 +6,8 @@ import styled, { css } from 'styled-components';
 import useInput from '../../hooks/useInput';
 import AllCookies from '../../components/AllCookies';
 import Directory from '../../components/Directory';
+import theme from '../../assets/themes';
+import { Switch } from '@chakra-ui/react';
 
 export default () => {
   const [cookie, setCookie] = useState(true);
@@ -44,7 +46,12 @@ export default () => {
           <div className="toggle">
             <div className="toggle__help">?</div>
             <div className="toggle__title">안 읽은 쿠키 보기</div>
-            <div className="toggle__btn"></div>
+            <Switch
+              size='lg'
+              colorScheme='toggleBtn'
+              isFocusable='isDisabled' // 외않되??
+              ml="1.2rem"
+            />
           </div>
         </ContentsHeader>
         {(() => {
@@ -63,7 +70,7 @@ export default () => {
 const Header = styled.div`
   width: 100%;
   height: 6.5rem;
-  background-color: #000000;
+  background-color: ${theme.colors.black};
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -80,7 +87,7 @@ const Header = styled.div`
 const HomeBoard = styled.div`
   width: 100%;
   height: 28rem;
-  background-color: #f3f3f4;
+  background-color: ${theme.colors.homeBoardGray};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -88,7 +95,7 @@ const HomeBoard = styled.div`
     position: relative;
     width: 65.6rem;
     height: 6rem;
-    background-color: #fdfdfd;
+    background-color: ${theme.colors.white};
     border-radius: 1rem;
     display: flex;
     align-items: center;
@@ -105,6 +112,9 @@ const HomeBoard = styled.div`
       background-color: #fdfdfd;
       text-align: center;
       font-size: 2rem;
+      ::placeholder{
+        color: #818181;
+      }
       :focus {
         ::placeholder {
           color: transparent;
@@ -113,10 +123,8 @@ const HomeBoard = styled.div`
     }
   }
 `;
-// homeboard ends
 
 // Contents Area
-// ToDo : font 적용
 const Contents = styled.div`
   margin: 4.8rem 19.7rem 0;
 `;
@@ -133,12 +141,12 @@ const ContentsHeader = styled.div`
       cursor: pointer;
       width: 2.5rem;
       height: 2.5rem;
-      background: #c4c4c4;
+      background: ${theme.colors.mediumGray};
       border-radius: 2.5rem;
       display: flex;
       justify-content: center;
       align-items: center;
-      color: #ffffff;
+      color: ${theme.colors.white};
       font-size: 1.6rem;
       font-weight: 500;
     }
@@ -147,14 +155,14 @@ const ContentsHeader = styled.div`
       color: #404040;
       margin-left: 0.8rem;
     }
-    &__btn {
+    /* &__btn {
       cursor: pointer;
       width: 6rem;
       height: 4rem;
       background-color: #ef9f39;
       border-radius: 4rem;
       margin-left: 1.2rem;
-    }
+    } */
   }
 `;
 
@@ -164,14 +172,14 @@ const CookieTab = styled.div`
   ${props =>
     props.selected &&
     css`
-      color: #ff7134;
-      border-bottom: 0.4rem solid #ff7134;
+      color: ${theme.colors.orange};
+      border-bottom: 0.4rem solid ${theme.colors.orange};
     `};
   font-size: 2.8rem;
   font-weight: 600;
   line-height: 4.2rem;
   :hover {
-    color: #ff7134;
+    color: ${theme.colors.orange};
   }
 `;
 
@@ -181,15 +189,14 @@ const DirectoryTab = styled.div`
   ${props =>
     props.selected &&
     css`
-      color: #ff7134;
-      border-bottom: 0.4rem solid #ff7134;
+      color: ${theme.colors.orange};
+      border-bottom: 0.4rem solid ${theme.colors.orange};
     `}
   font-size: 2.8rem;
   font-weight: 600;
   line-height: 4.2rem;
   :hover {
-    color: #ff7134;
+    color: ${theme.colors.orange};
   }
   margin-left: 9.5rem;
 `;
-// Contents ends
