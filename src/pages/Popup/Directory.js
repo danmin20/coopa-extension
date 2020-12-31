@@ -1,87 +1,77 @@
 import React from 'react';
 import style from 'styled-components';
 import { atom, useRecoilState } from 'recoil';
-import {useState} from 'react';
+import { useState } from 'react';
 import back_arrow from '../../assets/img/back_arrow.svg';
 import search_icon from '../../assets/img/search_icon.svg';
 import plus_icon from '../../assets/img/plus_icon.svg';
 import plus_icon_white from '../../assets/img/plus_icon_white.svg';
 
-
-
 // recoil atom
 const PageNumber = atom({
-    key: 'PageNumber',
-    default: 0,
-})
-
+  key: 'PageNumber',
+  default: 0
+});
 
 const Directory = () => {
-    const [pageNum, setPageNum] = useRecoilState(PageNumber);
-    const [isHover, setIsHover] = useState(false);
+  const [pageNum, setPageNum] = useRecoilState(PageNumber);
+  const [isHover, setIsHover] = useState(false);
 
-    const handleBtnClick = () => {
-        setPageNum(2);
-    }
+  const handleBtnClick = () => {
+    setPageNum(2);
+  };
 
-    const handleBackArrClick = () => {
-        setPageNum(0);
-    }
-    
-    const handleDirClick = () => {
-        setPageNum(3);
-    }
+  const handleBackArrClick = () => {
+    setPageNum(0);
+  };
 
-    const handleBtnMouseOver = () => {
-        setIsHover(true);
-    }
+  const handleDirClick = () => {
+    setPageNum(3);
+  };
 
-    const handleBtnMouseLeave = () => {
-        setIsHover(false);
-    }
+  const handleBtnMouseOver = () => {
+    setIsHover(true);
+  };
 
-    return(
-        <>
-            <Wrap>
-                <HeadhWrap>
-                    <BackArrow onClick={handleBackArrClick} src={back_arrow}/>
-                    <SearchBar>
-                        <SearchIcon src={search_icon}/>
-                        <SearchInput />
-                    </SearchBar>
-                </HeadhWrap>
-                <DirListWrap>
-                    <DirList>
-                        <DirItem onClick={handleDirClick}>디자인</DirItem>
-                        <DirItem onClick={handleDirClick}>마케팅</DirItem>
-                        <DirItem onClick={handleDirClick}>g</DirItem>
-                        <DirItem onClick={handleDirClick}>g</DirItem>
-                        <DirItem onClick={handleDirClick}>g</DirItem>
-                        <DirItem onClick={handleDirClick}>g</DirItem>
-                        <DirItem onClick={handleDirClick}>g</DirItem>
-                        <DirItem onClick={handleDirClick}>g</DirItem>
-                        <DirItem onClick={handleDirClick}>g</DirItem>
-                    </DirList>
-                </DirListWrap>
-                <BottomWrap>
-                    <AddBtn 
-                    isHover={isHover}
-                    onMouseOver={handleBtnMouseOver}
-                    onMouseLeave={handleBtnMouseLeave} 
-                    onClick={handleBtnClick}
-                    >
-                        <PlusIconWhite isHover={isHover} src={plus_icon_white} />
-                        <PlusIcon isHover={isHover} src={plus_icon} />
-                        새 디렉토리 만들기
-                    </AddBtn>
-                </BottomWrap>
-            </Wrap>
-        </>
-    )
-}
+  const handleBtnMouseLeave = () => {
+    setIsHover(false);
+  };
+
+  return (
+    <>
+      <Wrap>
+        <HeadhWrap>
+          <BackArrow onClick={handleBackArrClick} src={back_arrow} />
+          <SearchBar>
+            <SearchIcon src={search_icon} />
+            <SearchInput />
+          </SearchBar>
+        </HeadhWrap>
+        <DirListWrap>
+          <DirList>
+            <DirItem onClick={handleDirClick}>디자인</DirItem>
+            <DirItem onClick={handleDirClick}>마케팅</DirItem>
+            <DirItem onClick={handleDirClick}>g</DirItem>
+            <DirItem onClick={handleDirClick}>g</DirItem>
+            <DirItem onClick={handleDirClick}>g</DirItem>
+            <DirItem onClick={handleDirClick}>g</DirItem>
+            <DirItem onClick={handleDirClick}>g</DirItem>
+            <DirItem onClick={handleDirClick}>g</DirItem>
+            <DirItem onClick={handleDirClick}>g</DirItem>
+          </DirList>
+        </DirListWrap>
+        <BottomWrap>
+          <AddBtn isHover={isHover} onMouseOver={handleBtnMouseOver} onMouseLeave={handleBtnMouseLeave} onClick={handleBtnClick}>
+            <PlusIconWhite isHover={isHover} src={plus_icon_white} />
+            <PlusIcon isHover={isHover} src={plus_icon} />새 디렉토리 만들기
+          </AddBtn>
+        </BottomWrap>
+      </Wrap>
+    </>
+  );
+};
 
 export default Directory;
-
 
 const Wrap = style.div`
   width: 36.1rem;
@@ -188,15 +178,15 @@ const BottomWrap = style.div`
 const AddBtn = style.div`
     width: 31.9rem;
     height: 4.9rem;
-    border: ${props=>props.isHover ? 'none' : '0.2rem solid #333333;'};
+    border: ${props => (props.isHover ? 'none' : '0.2rem solid #333333;')};
     border-radius: 1rem;
     display: flex;
     flex-direction: row;
     align-items: center;
     font-size: 1.6rem;
-    font-weight: ${props=>props.isHover ? '700' : '500 '};
-    color: ${props=>props.isHover ? '#ffffff' : '#3d3d3d'};
-    background-color: ${props=>props.isHover ? '#FF7034' : '#ffffff'};
+    font-weight: ${props => (props.isHover ? '700' : '500 ')};
+    color: ${props => (props.isHover ? '#ffffff' : '#3d3d3d')};
+    background-color: ${props => (props.isHover ? '#FF7034' : '#ffffff')};
     box-shadow: ${props => (props.isHover ? '0rem 0rem 1.2rem rgba(0, 0, 0, 0.13)' : 'none')};
 `;
 
@@ -205,7 +195,7 @@ const PlusIcon = style.img`
     height: 1.4rem;
     margin-right: 1.2rem;
     margin-left: 6.3rem;
-    display: ${props=>props.isHover ? 'none' : 'box'};
+    display: ${props => (props.isHover ? 'none' : 'box')};
 `;
 
 const PlusIconWhite = style.img`
@@ -213,5 +203,5 @@ const PlusIconWhite = style.img`
     height: 1.4rem;
     margin-right: 1.2rem;
     margin-left: 6.3rem;
-    display: ${props=>props.isHover ? 'box' : 'none'};
+    display: ${props => (props.isHover ? 'box' : 'none')};
 `;

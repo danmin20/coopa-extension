@@ -1,43 +1,37 @@
 import React from 'react';
 import style from 'styled-components';
 import { atom, useRecoilState } from 'recoil';
-import {useState} from 'react';
+import { useState } from 'react';
 import logo from '../../assets/img/logo.svg';
 
 const Finish = () => {
-    const [isHover, setIsHover] = useState(false);
-    
-    const handleBtnMouseOver = () => {
-        setIsHover(true);
-    }
+  const [isHover, setIsHover] = useState(false);
 
-    const handleBtnMouseLeave = () => {
-        setIsHover(false);
-    }
-    
-    return(
-        <>
-            <Wrap>
-                <LogoWrap>
-                    <LogoImg src={logo}/>
-                    <Text>유저 인터페이스</Text>
-                    <TextTwo>파킹했습니다!</TextTwo>
-                </LogoWrap>
-                <Btn 
-                isHover={isHover}
-                onMouseMove={handleBtnMouseOver}
-                onMouseLeave={handleBtnMouseLeave}
-                >
-                    Open Cookie Parking
-                </Btn>
-            </Wrap>
-        </>
-    )
-}
+  const handleBtnMouseOver = () => {
+    setIsHover(true);
+  };
 
+  const handleBtnMouseLeave = () => {
+    setIsHover(false);
+  };
+
+  return (
+    <>
+      <Wrap>
+        <LogoWrap>
+          <LogoImg src={logo} />
+          <Text>유저 인터페이스</Text>
+          <TextTwo>파킹했습니다!</TextTwo>
+        </LogoWrap>
+        <Btn isHover={isHover} onMouseMove={handleBtnMouseOver} onMouseLeave={handleBtnMouseLeave}>
+          Open Cookie Parking
+        </Btn>
+      </Wrap>
+    </>
+  );
+};
 
 export default Finish;
-
 
 const Wrap = style.div`
   width: 36.1rem;

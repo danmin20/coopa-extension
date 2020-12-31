@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import {useState} from 'react';
+import { useState } from 'react';
 import style from 'styled-components';
 import Loading from './Loading';
 import { atom, useRecoilState } from 'recoil';
@@ -7,108 +7,96 @@ import logo from '../../assets/img/logo.svg';
 import down_arrow from '../../assets/img/down_arrow.svg';
 import down_arrow_white from '../../assets/img/down_arrow_white';
 
-
-
 // recoil atom
 const PageNumber = atom({
-    key: 'PageNumber',
-    default: 0,
-})
+  key: 'PageNumber',
+  default: 0
+});
 
 const isClickNextPage = atom({
-    key: 'isClickNextPage',
-    default: false,
-})
+  key: 'isClickNextPage',
+  default: false
+});
 
 const Main = () => {
-    const onClick = () => {
-        chrome.tabs.query({ active: true, lastFocusedWindow: true },
-          tabs => {
-            console.log(tabs);
-            let url = tabs[0].url;
-            console.log("url: " + url);
-          });
-      }
-    
-    const [isBtnOneHover, setIsBtnOneHover] = useState(false);
-    const [isBtnTwoHover, setIsBtnTwoHover] = useState(false);
+  const onClick = () => {
+    chrome.tabs.query({ active: true, lastFocusedWindow: true }, tabs => {
+      console.log(tabs);
+      let url = tabs[0].url;
+      console.log('url: ' + url);
+    });
+  };
 
-    const handleBtnOneMouseOver = () => {
-        setIsBtnOneHover(true);
-    }
+  const [isBtnOneHover, setIsBtnOneHover] = useState(false);
+  const [isBtnTwoHover, setIsBtnTwoHover] = useState(false);
 
-    const handleBtnTwoMouseOver = () => {
-        setIsBtnTwoHover(true);
-    }
+  const handleBtnOneMouseOver = () => {
+    setIsBtnOneHover(true);
+  };
 
-    const handleBtnOneMouseLeave = () => {
-        setIsBtnOneHover(false);
-    }
+  const handleBtnTwoMouseOver = () => {
+    setIsBtnTwoHover(true);
+  };
 
-    const handleBtnTwoMouseLeave = () => {
-        setIsBtnTwoHover(false);
-    }
-    
-    const [pageNum, setPageNum] = useRecoilState(PageNumber);
-    const [isclickNextPage, setIsclickNextPage] = useRecoilState(isClickNextPage);
+  const handleBtnOneMouseLeave = () => {
+    setIsBtnOneHover(false);
+  };
 
-    const handleBtnOneClick = () => {
-        setPageNum(1);
-        setIsclickNextPage(true);
-    }
+  const handleBtnTwoMouseLeave = () => {
+    setIsBtnTwoHover(false);
+  };
 
+  const [pageNum, setPageNum] = useRecoilState(PageNumber);
+  const [isclickNextPage, setIsclickNextPage] = useRecoilState(isClickNextPage);
 
-    // 몇초간만 Loading 컴포넌트 return 하기
-    const [isLoading, setIsLoading] = useState(true);
+  const handleBtnOneClick = () => {
+    setPageNum(1);
+    setIsclickNextPage(true);
+  };
 
-    useEffect(() => {
-        setInterval(() => {
-            setIsLoading(false);
-        }, 3000);
-    }, []);
+  // 몇초간만 Loading 컴포넌트 return 하기
+  const [isLoading, setIsLoading] = useState(true);
 
-    if(isLoading & !isclickNextPage){
-        return(
-            <>
-                <Loading />
-            </>
-        )
-    }
-    else{
-        return(
-            <>
-                <Wrap>
-                    {/* <button onClick={onClick}>click</button> */}
-                    <LogoWrap>
-                        <LogoImg src={logo}/>
-                        <Text>파킹했습니다!</Text>
-                    </LogoWrap>
-                    <BtnWrap>
-                        <BtnOne 
-                        onMouseOver={handleBtnOneMouseOver} 
-                        onMouseLeave={handleBtnOneMouseLeave} 
-                        isHover={isBtnOneHover}
-                        onClick={handleBtnOneClick}
-                        >
-                            <BtnOneWrap>
-                                <BtnOneText isHover={isBtnOneHover}>디렉토리 선택</BtnOneText>
-                                <BtnOneArrow src={down_arrow} isHover={isBtnOneHover}/>
-                                <BtnOneArrowHover src={down_arrow_white} isHover={isBtnOneHover}/>
-                            </BtnOneWrap>
-                        </BtnOne>
-                        <BtnTwo onMouseOver={handleBtnTwoMouseOver} onMouseLeave={handleBtnTwoMouseLeave} isHover={isBtnTwoHover}>
-                            쿠키파킹으로 이동하기
-                        </BtnTwo>    
-                    </BtnWrap>
-                </Wrap>
-            </>
-        )
-    }
-}
+  useEffect(() => {
+    setInterval(() => {
+      setIsLoading(false);
+    }, 3000);
+  }, []);
 
+  if (isLoading & !isclickNextPage) {
+    return (
+      <>
+        <Loading />
+      </>
+    );
+  } else {
+    return (
+      <>
+        <Wrap>
+          {/* <button onClick={onClick}>click</button> */}
+          <LogoWrap>
+            <LogoImg src={logo} />
+            <Text>파킹했습니다!</Text>
+          </LogoWrap>
+          <BtnWrap>
+            <BtnOne onMouseOver={handleBtnOneMouseOver} onMouseLeave={handleBtnOneMouseLeave} isHover={isBtnOneHover} onClick={handleBtnOneClick}>
+              <BtnOneWrap>
+                <BtnOneText isHover={isBtnOneHover}>디렉토리 선택</BtnOneText>
+                <BtnOneArrow src={down_arrow} isHover={isBtnOneHover} />
+                <BtnOneArrowHover src={down_arrow_white} isHover={isBtnOneHover} />
+              </BtnOneWrap>
+            </BtnOne>
+            <BtnTwo onMouseOver={handleBtnTwoMouseOver} onMouseLeave={handleBtnTwoMouseLeave} isHover={isBtnTwoHover}>
+              쿠키파킹으로 이동하기
+            </BtnTwo>
+          </BtnWrap>
+        </Wrap>
+      </>
+    );
+  }
+};
 
 export default Main;
-
 
 const Wrap = style.div`
   width: 36.1rem;
@@ -145,7 +133,6 @@ const LogoImg = style.img`
     height: 8.605rem;
 `;
 
-
 const BtnWrap = style.div`
     
 `;
@@ -180,7 +167,7 @@ const BtnOneText = style.div`
 `;
 
 const BtnOneArrow = style.img`
-    display: ${props=>props.isHover ? 'none' : 'box'};
+    display: ${props => (props.isHover ? 'none' : 'box')};
     width: 1.6rem;
     height: 0.988rem;
     position: relative;
@@ -188,7 +175,7 @@ const BtnOneArrow = style.img`
 `;
 
 const BtnOneArrowHover = style.img`
-    display: ${props=>props.isHover ? 'box' : 'none'};
+    display: ${props => (props.isHover ? 'box' : 'none')};
     width: 1.6rem;
     height: 0.988rem;
     position: relative;

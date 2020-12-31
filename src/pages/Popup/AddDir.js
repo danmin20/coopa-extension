@@ -2,72 +2,62 @@ import React from 'react';
 import style from 'styled-components';
 import { atom, useRecoilState } from 'recoil';
 import back_arrow from '../../assets/img/back_arrow.svg';
-import {useState} from 'react';
-
-
-
+import { useState } from 'react';
 
 // recoil atom
 const PageNumber = atom({
-    key: 'PageNumber',
-    default: 0,
-})
-
+  key: 'PageNumber',
+  default: 0
+});
 
 const AddDir = () => {
-    const [pageNum, setPageNum] = useRecoilState(PageNumber);
-    const [isHover, setIsHover] = useState(false);
+  const [pageNum, setPageNum] = useRecoilState(PageNumber);
+  const [isHover, setIsHover] = useState(false);
 
-    const handleBtnClick = () => {
-        setPageNum(1);
-    }
+  const handleBtnClick = () => {
+    setPageNum(1);
+  };
 
-    const handleBackArrClick = () => {
-        setPageNum(1);
-    }
+  const handleBackArrClick = () => {
+    setPageNum(1);
+  };
 
-    const handleBtnMouseOver = () => {
-        setIsHover(true);
-    }
+  const handleBtnMouseOver = () => {
+    setIsHover(true);
+  };
 
-    const handleBtnMouseLeave = () => {
-        setIsHover(false);
-    }
+  const handleBtnMouseLeave = () => {
+    setIsHover(false);
+  };
 
-    return(
-        <>
-            <Wrap>
-                <HeadhWrap>
-                    <BackArrow onClick={handleBackArrClick} src={back_arrow}/>
-                </HeadhWrap>
-                <MiddleWrap>
-                    <InputWrap>
-                        <InputText>디렉토리 이름*</InputText>
-                        <InputSpace num={1}/>
-                    </InputWrap>
-                    <Space />
-                    <InputWrap>
-                        <InputText>메모</InputText>
-                        <InputSpace num={2}/>
-                    </InputWrap>
-                </MiddleWrap>
-                <BottomWrap>
-                    <AddBtn 
-                    isHover={isHover}
-                    onMouseMove={handleBtnMouseOver}
-                    onMouseLeave={handleBtnMouseLeave}
-                    onClick={handleBtnClick}
-                    >
-                        디렉토리 생성하기
-                    </AddBtn>
-                </BottomWrap>
-            </Wrap>
-        </>
-    )
-}
+  return (
+    <>
+      <Wrap>
+        <HeadhWrap>
+          <BackArrow onClick={handleBackArrClick} src={back_arrow} />
+        </HeadhWrap>
+        <MiddleWrap>
+          <InputWrap>
+            <InputText>디렉토리 이름*</InputText>
+            <InputSpace num={1} />
+          </InputWrap>
+          <Space />
+          <InputWrap>
+            <InputText>메모</InputText>
+            <InputSpace num={2} />
+          </InputWrap>
+        </MiddleWrap>
+        <BottomWrap>
+          <AddBtn isHover={isHover} onMouseMove={handleBtnMouseOver} onMouseLeave={handleBtnMouseLeave} onClick={handleBtnClick}>
+            디렉토리 생성하기
+          </AddBtn>
+        </BottomWrap>
+      </Wrap>
+    </>
+  );
+};
 
 export default AddDir;
-
 
 const Wrap = style.div`
     width: 36.1rem;
@@ -120,11 +110,10 @@ const InputText = style.div`
 
 const InputSpace = style.input`
     width: 32.4rem;
-    height: ${props=>(props.num == 1) ? '3.7rem' : '7.3rem'};
+    height: ${props => (props.num == 1 ? '3.7rem' : '7.3rem')};
     border: 0.1rem solid #D6CECE;
     border-radius: 0.8rem;
 `;
-
 
 const BottomWrap = style.div`
     width: 36.1rem;
@@ -140,15 +129,15 @@ const BottomWrap = style.div`
 const AddBtn = style.div`
     width: 31.8rem;
     height: 4.8rem;
-    border: ${props=>props.isHover ? 'none' : '0.2rem solid #333333;'};
+    border: ${props => (props.isHover ? 'none' : '0.2rem solid #333333;')};
     border-radius: 1rem;
     display: flex;
     flex-direction: row;
     align-items: center;
     font-size: 1.6rem;
-    font-weight: ${props=>props.isHover ? '700' : '500 '};
-    color: ${props=>props.isHover ? '#ffffff' : '#3d3d3d'};
-    background-color: ${props=>props.isHover ? '#FF7034' : '#ffffff'};
+    font-weight: ${props => (props.isHover ? '700' : '500 ')};
+    color: ${props => (props.isHover ? '#ffffff' : '#3d3d3d')};
+    background-color: ${props => (props.isHover ? '#FF7034' : '#ffffff')};
     box-shadow: ${props => (props.isHover ? '0rem 0rem 1.2rem rgba(0, 0, 0, 0.13)' : 'none')};
     display: flex;
     flex-direction: row;

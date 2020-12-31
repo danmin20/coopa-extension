@@ -2,23 +2,20 @@ import React from 'react';
 import style from 'styled-components';
 import logo from '../../assets/img/logo.svg';
 
-
-
 const Loading = () => {
-    return(
-        <>
-            <Wrap>
-                <LogoWrap>
-                    <LogoImg src={logo}/>
-                    <Text>쿠키 파킹 중..</Text>
-                </LogoWrap>
-            </Wrap>
-        </>
-    )
-}
+  return (
+    <>
+      <Wrap>
+        <LogoWrap>
+          <LogoImg src={logo} />
+          <Text>쿠키 파킹 중..</Text>
+        </LogoWrap>
+      </Wrap>
+    </>
+  );
+};
 
 export default Loading;
-
 
 const Wrap = style.div`
     width: 36.1rem;

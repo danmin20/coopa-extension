@@ -1,9 +1,7 @@
 import React from 'react';
-import style from 'styled-components';
 import Main from './Main';
 import Directory from './Directory';
 import AddDir from './AddDir';
-import Loading from './Loading';
 import Finish from './Finish';
 import { atom, selector, useRecoilState, DefaultValue } from 'recoil';
 
@@ -12,43 +10,39 @@ import { atom, selector, useRecoilState, DefaultValue } from 'recoil';
 // recoil atom
 const PageNumber = atom({
   key: 'PageNumber',
-  default: 0,
-})
-
+  default: 0
+});
 
 export default () => {
   //const [pageNum, setPageNum] = useState(0);
   const [pageNum, setPageNum] = useRecoilState(PageNumber);
-  
-  switch(pageNum){
+
+  switch (pageNum) {
     case 0:
-      return(
+      return (
         <>
-          <Main/>
+          <Main />
         </>
       );
     case 1:
-      return(
+      return (
         <>
-          <Directory/>
+          <Directory />
         </>
       );
     case 2:
-      return(
+      return (
         <>
-          <AddDir/>
+          <AddDir />
         </>
       );
     case 3:
-      return(
+      return (
         <>
           <Finish />
         </>
       );
     default:
-      return(
-        <div>
-          error
-        </div>
-      );
+      return <div>error</div>;
   }
+};
