@@ -15,6 +15,10 @@ const Finish = () => {
     setIsHover(false);
   };
 
+  const handleBtnClick = () => {
+    window.open("newtab.html", "_blank");
+  }
+
   return (
     <>
       <Wrap>
@@ -23,7 +27,12 @@ const Finish = () => {
           <Text>유저 인터페이스</Text>
           <TextTwo>파킹했습니다!</TextTwo>
         </LogoWrap>
-        <Btn isHover={isHover} onMouseMove={handleBtnMouseOver} onMouseLeave={handleBtnMouseLeave}>
+        <Btn 
+        isHover={isHover} 
+        onMouseMove={handleBtnMouseOver} 
+        onMouseLeave={handleBtnMouseLeave}
+        onClick={handleBtnClick}
+        >
           Open Cookie Parking
         </Btn>
       </Wrap>

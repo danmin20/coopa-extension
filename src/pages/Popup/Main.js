@@ -54,13 +54,17 @@ const Main = () => {
     setIsclickNextPage(true);
   };
 
+  const handleBtnTwoClick = () => {
+    window.open("newtab.html", "_blank");
+  }
+
   // 몇초간만 Loading 컴포넌트 return 하기
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setInterval(() => {
       setIsLoading(false);
-    }, 3000);
+    }, 2000);
   }, []);
 
   if (isLoading & !isclickNextPage) {
@@ -86,7 +90,12 @@ const Main = () => {
                 <BtnOneArrowHover src={down_arrow_white} isHover={isBtnOneHover} />
               </BtnOneWrap>
             </BtnOne>
-            <BtnTwo onMouseOver={handleBtnTwoMouseOver} onMouseLeave={handleBtnTwoMouseLeave} isHover={isBtnTwoHover}>
+            <BtnTwo 
+            onMouseOver={handleBtnTwoMouseOver} 
+            onMouseLeave={handleBtnTwoMouseLeave} 
+            onClick={handleBtnTwoClick}
+            isHover={isBtnTwoHover}
+            >
               쿠키파킹으로 이동하기
             </BtnTwo>
           </BtnWrap>
