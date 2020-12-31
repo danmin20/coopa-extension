@@ -16,7 +16,7 @@ const PageNumber = atom({
 })
 
 
-const Popup = () => {
+export default () => {
   //const [pageNum, setPageNum] = useState(0);
   const [pageNum, setPageNum] = useRecoilState(PageNumber);
   
@@ -52,11 +52,3 @@ const Popup = () => {
         </div>
       );
   }
-  // return(
-  //   <>
-  //    <Wrap/>
-  //   </>
-  // )
-};
-
-export default Popup;
