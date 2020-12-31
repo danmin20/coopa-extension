@@ -1,19 +1,54 @@
 import React from 'react';
+import style from 'styled-components';
+import Main from './Main';
+import Directory from './Directory';
+import AddDir from './AddDir';
+import Loading from './Loading';
+import Finish from './Finish';
+import { atom, selector, useRecoilState, DefaultValue } from 'recoil';
 
-const Popup = () => {
-  const onClick = () => {
-    chrome.tabs.query({ active: true, lastFocusedWindow: true }, tabs => {
-      console.log(tabs);
-      let url = tabs[0].url;
-      console.log('url: ' + url);
-    });
-  };
+//const pageNum = 0;
 
-  return (
-    <div className="App">
-      <button onClick={onClick}>click</button>
-    </div>
-  );
-};
+// recoil atom
+const PageNumber = atom({
+  key: 'PageNumber',
+  default: 0,
+})
 
-export default Popup;
+
+export default () => {
+  //const [pageNum, setPageNum] = useState(0);
+  const [pageNum, setPageNum] = useRecoilState(PageNumber);
+  
+  switch(pageNum){
+    case 0:
+      return(
+        <>
+          <Main/>
+        </>
+      );
+    case 1:
+      return(
+        <>
+          <Directory/>
+        </>
+      );
+    case 2:
+      return(
+        <>
+          <AddDir/>
+        </>
+      );
+    case 3:
+      return(
+        <>
+          <Finish />
+        </>
+      );
+    default:
+      return(
+        <div>
+          error
+        </div>
+      );
+  }
