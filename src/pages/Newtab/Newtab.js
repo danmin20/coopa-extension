@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Logo from '../../assets/img/logo_main.svg';
 import Profile from '../../assets/img/profile.svg';
 import Glass from '../../assets/img/glass.svg';
@@ -8,8 +8,8 @@ import AllCookies from '../../components/AllCookies';
 import Directory from '../../components/Directory';
 import theme from '../../assets/themes';
 import { Switch } from '@chakra-ui/react';
-import {useSetRecoilState} from 'recoil';
-import {CookieState} from '../../states/atom';
+import { useSetRecoilState } from 'recoil';
+import { CookieState } from '../../states/atom';
 
 export default () => {
   const [cookie, setCookie] = useState(true);
@@ -23,15 +23,29 @@ export default () => {
     setCookie(false);
     setDirectory(true);
   };
-  const onClickLogo = () =>{
-    console.log("mainLogo clicked");
-    // 리로딩 하는 법 : 클릭 시 새로 데이터 받아오기(리렌더링) 
-  }
+  const onClickLogo = () => {
+    console.log('mainLogo clicked');
+    setCookie(true);
+    setDirectory(false);
+    // (1) AllCookies tab으로 이동
+    // (2) 새로 데이터 받아오기(리렌더링)
+  };
   const searchText = useInput('');
-  useEffect(()=>{
-    // api codes here
+  const onToggleSwitch = e => {
+    if (e.target.value) {
+      // true 면
+      // setCookieState 에 안본 쿠키들만 골라서 받아오기
+    } else {
+      // false 면
+      // setCookieState 에 전체 쿠키 받아오기
+    }
+    // or useRef 사용하여 .isChecked props 사용하기
+  };
+  useEffect(() => {
+    console.log("rendered!")
+    // 최초에 AllCookies 데이터 받아오기
     // setCookieState();
-  },[]);
+  }, []);
 
   return (
     <div className="container">
@@ -64,8 +78,9 @@ export default () => {
             <Switch
               size="lg" // how to custom??
               colorScheme="toggleBtn"
-              isFocusable="isDisabled" // why it didn't works??
+              isFocusable="isDisabled" // why it dosen't works??
               ml="1.2rem"
+              onChange={onToggleSwitch}
             />
           </div>
         </ContentsHeader>
@@ -81,7 +96,6 @@ export default () => {
   );
 };
 
-// header
 const Header = styled.div`
   width: 100%;
   height: 6.5rem;
@@ -99,9 +113,7 @@ const Header = styled.div`
     margin-right: 2.2rem;
   }
 `;
-// header ends
 
-// homeboard
 const HomeBoard = styled.div`
   width: 100%;
   height: 28rem;
@@ -130,7 +142,7 @@ const HomeBoard = styled.div`
       background-color: ${theme.colors.white};
       text-align: center;
       font-size: 2.6rem;
-      ::placeholder{
+      ::placeholder {
         color: #818181;
       }
       :focus {
@@ -142,7 +154,6 @@ const HomeBoard = styled.div`
   }
 `;
 
-// Contents Area
 const Contents = styled.div`
   margin: 4.8rem 19.7rem 0;
 `;
