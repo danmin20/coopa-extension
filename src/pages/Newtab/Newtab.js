@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import Logo from '../../assets/img/logo_main.svg';
 import Profile from '../../assets/img/profile.svg';
 import Glass from '../../assets/img/glass.svg';
@@ -8,10 +8,13 @@ import AllCookies from '../../components/AllCookies';
 import Directory from '../../components/Directory';
 import theme from '../../assets/themes';
 import { Switch } from '@chakra-ui/react';
+import {useSetRecoilState} from 'recoil';
+import {CookieState} from '../../states/atom';
 
 export default () => {
   const [cookie, setCookie] = useState(true);
   const [directroy, setDirectory] = useState(false);
+  const setCookieState = useSetRecoilState(CookieState);
   const onClickCookie = () => {
     setCookie(true);
     setDirectory(false);
@@ -20,13 +23,25 @@ export default () => {
     setCookie(false);
     setDirectory(true);
   };
+  const onClickLogo = () =>{
+    console.log("mainLogo clicked");
+    // 리로딩 하는 법 : 클릭 시 새로 데이터 받아오기(리렌더링) 
+  }
   const searchText = useInput('');
+  useEffect(()=>{
+    // api codes here
+    // setCookieState();
+  },[]);
 
   return (
     <div className="container">
       <Header>
-        <img className="main-logo" src={Logo} />
-        <img className="profile" src={Profile} />
+        <div className="main-logo" onClick={onClickLogo}>
+          <img className="main-logo__img" src={Logo} />
+        </div>
+        <a className="profile" href="#">
+          <img className="profile__img" src={Profile} /> {/* Todo : mypage link 걸기 */}
+        </a>
       </Header>
       <HomeBoard>
         <div className="search-bar">
@@ -45,11 +60,11 @@ export default () => {
           <div className="empty"></div>
           <div className="toggle">
             <div className="toggle__help">?</div>
-            <div className="toggle__title">안 읽은 쿠키 보기</div>
+            <div className="toggle__title">안 읽은 쿠키 모아보기</div>
             <Switch
-              size='lg'
-              colorScheme='toggleBtn'
-              isFocusable='isDisabled' // 외않되??
+              size="lg" // how to custom??
+              colorScheme="toggleBtn"
+              isFocusable="isDisabled" // why it didn't works??
               ml="1.2rem"
             />
           </div>
@@ -75,6 +90,9 @@ const Header = styled.div`
   justify-content: space-between;
   align-items: center;
   .main-logo {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
     margin-left: 2.2rem;
   }
   .profile {
@@ -94,7 +112,7 @@ const HomeBoard = styled.div`
   .search-bar {
     position: relative;
     width: 65.6rem;
-    height: 6rem;
+    height: 7rem;
     background-color: ${theme.colors.white};
     border-radius: 1rem;
     display: flex;
@@ -109,9 +127,9 @@ const HomeBoard = styled.div`
       max-height: 100%;
       border: none;
       outline: none;
-      background-color: #fdfdfd;
+      background-color: ${theme.colors.white};
       text-align: center;
-      font-size: 2rem;
+      font-size: 2.6rem;
       ::placeholder{
         color: #818181;
       }
@@ -139,10 +157,10 @@ const ContentsHeader = styled.div`
     align-items: center;
     &__help {
       cursor: pointer;
-      width: 2.5rem;
-      height: 2.5rem;
+      width: 2.8rem;
+      height: 2.8rem;
       background: ${theme.colors.mediumGray};
-      border-radius: 2.5rem;
+      border-radius: 2.8rem;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -155,26 +173,18 @@ const ContentsHeader = styled.div`
       color: #404040;
       margin-left: 0.8rem;
     }
-    /* &__btn {
-      cursor: pointer;
-      width: 6rem;
-      height: 4rem;
-      background-color: #ef9f39;
-      border-radius: 4rem;
-      margin-left: 1.2rem;
-    } */
   }
 `;
 
 const CookieTab = styled.div`
   cursor: pointer;
-  color: #c2c2c2;
+  color: ${theme.colors.lightGray};
   ${props =>
     props.selected &&
     css`
       color: ${theme.colors.orange};
       border-bottom: 0.4rem solid ${theme.colors.orange};
-    `};
+    `}
   font-size: 2.8rem;
   font-weight: 600;
   line-height: 4.2rem;
