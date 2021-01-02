@@ -2,21 +2,11 @@ import React, { useEffect } from 'react';
 import { useState } from 'react';
 import styled from 'styled-components';
 import Loading from './Loading';
-import { atom, useRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import logo from '../../assets/img/logo.svg';
 import down_arrow from '../../assets/img/down_arrow.svg';
 import down_arrow_white from '../../assets/img/down_arrow_white';
-
-// recoil atom
-const PageNumber = atom({
-  key: 'PageNumber',
-  default: 0
-});
-
-const isClickNextPage = atom({
-  key: 'isClickNextPage',
-  default: false
-});
+import { ClipperPageNumState, isClickNextPageState } from '../../states/atom';
 
 const Main = () => {
   const onClick = () => {
@@ -46,8 +36,8 @@ const Main = () => {
     setIsBtnTwoHover(false);
   };
 
-  const [pageNum, setPageNum] = useRecoilState(PageNumber);
-  const [isclickNextPage, setIsclickNextPage] = useRecoilState(isClickNextPage);
+  const [pageNum, setPageNum] = useRecoilState(ClipperPageNumState);
+  const [isclickNextPage, setIsclickNextPage] = useRecoilState(isClickNextPageState);
 
   const handleBtnOneClick = () => {
     setPageNum(1);

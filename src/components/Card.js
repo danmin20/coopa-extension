@@ -3,22 +3,23 @@ import styled from 'styled-components';
 import defaultImg from '../assets/img/img_default.svg';
 import theme from '../assets/themes';
 
-export default ({cookies}) => {
-    return (
-      <Container>
-        <Contents thumbnail={cookies.thumbnail}>
-          <div className="thumbnail"></div>
-          <div className="title">{cookies.title}</div>
-          <div className="profile">
-            <img className="profile__og" src={cookies.og} />
-            <div className="profile__author">{cookies.author}</div>
-          </div>
-        </Contents>
-      </Container>
-    );
-}
+export default ({ cookies }) => {
+  return (
+    <Container>
+      <Contents thumbnail={cookies.thumbnail}>
+        <div className="thumbnail"></div>
+        <div className="title">{cookies.title}</div>
+        <div className="profile">
+          <img className="profile__og" src={cookies.og} />
+          <div className="profile__author">{cookies.author}</div>
+        </div>
+      </Contents>
+    </Container>
+  );
+};
 
 const Container = styled.div`
+  cursor: pointer;
   position: relative;
   width: 100%;
   height: 0;

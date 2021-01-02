@@ -19,11 +19,11 @@ export default () => {
       <div className="dir">
         <div className="dir__title">캐릭터/일러스트레이션</div>
         <div className="dir__num">
-          <CookieIcon />
+          <CookieIcon isHover={isHover} onMouseOver={handleBtnMouseOver} onMouseLeave={handleBtnMouseOver}/>
           <div>37개</div>
         </div>
       </div>
-      <div className="update-icon"></div>
+      <UpdateIcon src = {updateDirIcon} onMouseOver={handleBtnMouseOver} onMouseLeave={handleBtnMouseOver} isHover={isHover}/>
     </Container>
   );
 };
@@ -85,3 +85,14 @@ const Container = styled.div`
     }
   }
 `;
+
+const UpdateIcon = styled.img`
+  display: ${props=>props.isHover ? 'box' : 'none'};
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  width: 3rem;
+  height: 3rem;
+`;
+
+// ToDo: 새 디렉토리 만들기 버튼 추가

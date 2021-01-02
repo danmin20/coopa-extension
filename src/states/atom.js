@@ -55,3 +55,13 @@ export const CookieState = atom({
     }
   ]
 });
+
+export const ClipperPageNumState = atom({
+  key: 'ClipperPageNumState',
+  default: 0,
+});
+
+export const isClickNextPageState = atom({
+  key: 'isClickNextPageState',
+  default: false
+});
