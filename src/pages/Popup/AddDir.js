@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { atom, useRecoilState } from 'recoil';
 import back_arrow from '../../assets/img/back_arrow.svg';
-import { useState } from 'react';
+
 
 // recoil atom
 const PageNumber = atom({
@@ -13,6 +13,8 @@ const PageNumber = atom({
 const AddDir = () => {
   const [pageNum, setPageNum] = useRecoilState(PageNumber);
   const [isHover, setIsHover] = useState(false);
+
+  var name, description;
 
   const handleBtnClick = () => {
     setPageNum(1);
@@ -39,12 +41,12 @@ const AddDir = () => {
         <MiddleWrap>
           <InputWrap>
             <InputText>디렉토리 이름*</InputText>
-            <InputSpace num={1} />
+            <InputSpace num={1} value={name}/>
           </InputWrap>
           <Space />
           <InputWrap>
             <InputText>메모</InputText>
-            <InputSpace num={2} />
+            <InputSpace num={2} value={description}/>
           </InputWrap>
         </MiddleWrap>
         <BottomWrap>
