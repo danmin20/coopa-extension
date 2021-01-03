@@ -8,7 +8,7 @@ export default () => {
   const [pageNum, setPageNum] = useRecoilState(ClipperPageNumState);
   const [isHover, setIsHover] = useState(false);
 
-  var name, description;
+  let name, description;
 
   const handleBtnClick = () => {
     setPageNum(1);
