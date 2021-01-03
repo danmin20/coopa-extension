@@ -65,3 +65,8 @@ export const isClickNextPageState = atom({
   key: 'isClickNextPageState',
   default: false
 });
+
+export const isCheckedState = atom({
+  key: 'isCheckedState',
+  default: false
+})
