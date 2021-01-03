@@ -3,19 +3,11 @@ import Main from './Main';
 import Directory from './Directory';
 import AddDir from './AddDir';
 import Finish from './Finish';
-import { atom, selector, useRecoilState, DefaultValue } from 'recoil';
-
-//const pageNum = 0;
-
-// recoil atom
-const PageNumber = atom({
-  key: 'PageNumber',
-  default: 0
-});
+import { useRecoilState } from 'recoil';
+import {ClipperPageNumState} from '../../states/atom';
 
 export default () => {
-  //const [pageNum, setPageNum] = useState(0);
-  const [pageNum, setPageNum] = useRecoilState(PageNumber);
+  const [pageNum, setPageNum] = useRecoilState(ClipperPageNumState);
 
   switch (pageNum) {
     case 0:
