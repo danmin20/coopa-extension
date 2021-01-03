@@ -7,18 +7,13 @@ import search_icon from '../../assets/img/search_icon.svg';
 import plus_icon from '../../assets/img/plus_icon.svg';
 import plus_icon_white from '../../assets/img/plus_icon_white.svg';
 import useInput from '../../hooks/useInput';
-
-// recoil atom
-const PageNumber = atom({
-  key: 'PageNumber',
-  default: 0
-});
+import {ClipperPageNumState} from '../../states/atom';
 
 // 나중에 api 연결
 const item = ['디자인', '마케팅', '프로그래밍', '기획', '쿠키파킹'];
 
 export default () => {
-  const [pageNum, setPageNum] = useRecoilState(PageNumber);
+  const [pageNum, setPageNum] = useRecoilState(ClipperPageNumState);
   const [isHover, setIsHover] = useState(false);
   const searchText = useInput('');
 
