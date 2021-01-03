@@ -1,8 +1,12 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import styled from 'styled-components';
 import logo from '../../assets/img/logo.svg';
 
 const Loading = () => {
+  useEffect(()=>{
+    chrome.runtime.sendMessage({popupOpen: true});
+  }, [])
+  
   return (
     <>
       <Wrap>

@@ -6,6 +6,14 @@ import Finish from './Finish';
 import { useRecoilState } from 'recoil';
 import {ClipperPageNumState} from '../../states/atom';
 
+//const pageNum = 0;
+
+// // recoil atom
+// const PageNumber = atom({
+//   key: 'PageNumber',
+//   default: 0,
+// });
+
 export default () => {
   const [pageNum, setPageNum] = useRecoilState(ClipperPageNumState);
 
