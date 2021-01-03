@@ -1,10 +1,11 @@
 import React from 'react';
-import Main from './Main';
-import Directory from './Directory';
+
+import { useRecoilState } from 'recoil';
+import { ClipperPageNumState } from '../../states/atom';
 import AddDir from './AddDir';
 import Finish from './Finish';
-import { useRecoilState } from 'recoil';
-import {ClipperPageNumState} from '../../states/atom';
+import Main from './Main';
+import Directory from '../../components/Directory';
 
 //const pageNum = 0;
 
@@ -19,29 +20,13 @@ export default () => {
 
   switch (pageNum) {
     case 0:
-      return (
-        <>
-          <Main />
-        </>
-      );
+      return <Main />;
     case 1:
-      return (
-        <>
-          <Directory />
-        </>
-      );
+      return <Directory />;
     case 2:
-      return (
-        <>
-          <AddDir />
-        </>
-      );
+      return <AddDir />;
     case 3:
-      return (
-        <>
-          <Finish />
-        </>
-      );
+      return <Finish />;
     default:
       return <div>error</div>;
   }

@@ -4,7 +4,7 @@ import { atom, useRecoilState } from 'recoil';
 import { useState } from 'react';
 import logo from '../../assets/img/logo.svg';
 
-const Finish = () => {
+export default () => {
   const [isHover, setIsHover] = useState(false);
 
   const handleBtnMouseOver = () => {
@@ -16,31 +16,22 @@ const Finish = () => {
   };
 
   const handleBtnClick = () => {
-    window.open("newtab.html", "_blank");
-  }
+    window.open('newtab.html', '_blank');
+  };
 
   return (
-    <>
-      <Wrap>
-        <LogoWrap>
-          <LogoImg src={logo} />
-          <Text>유저 인터페이스</Text>
-          <TextTwo>파킹했습니다!</TextTwo>
-        </LogoWrap>
-        <Btn 
-        isHover={isHover} 
-        onMouseMove={handleBtnMouseOver} 
-        onMouseLeave={handleBtnMouseLeave}
-        onClick={handleBtnClick}
-        >
-          Open Cookie Parking
-        </Btn>
-      </Wrap>
-    </>
+    <Wrap>
+      <LogoWrap>
+        <LogoImg src={logo} />
+        <Text>유저 인터페이스</Text>
+        <TextTwo>파킹했습니다!</TextTwo>
+      </LogoWrap>
+      <Btn isHover={isHover} onMouseMove={handleBtnMouseOver} onMouseLeave={handleBtnMouseLeave} onClick={handleBtnClick}>
+        Open Cookie Parking
+      </Btn>
+    </Wrap>
   );
 };
-
-export default Finish;
 
 const Wrap = styled.div`
   width: 36.1rem;
