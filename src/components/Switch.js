@@ -12,7 +12,7 @@ export default withStyles(theme => ({
   switchBase: {
     padding: 1,
     '&$checked': {
-      transform: 'translateX(23px)',
+      transform: 'translateX(20px)',
       '& + $track': {
         backgroundColor: chakraTheme.colors.orange,
         opacity: 1,
@@ -21,15 +21,15 @@ export default withStyles(theme => ({
     }
   },
   thumb: {
-    width: 30,
-    height: 30,
-    marginTop: 3,
-    marginLeft: 2,
+    width: 27,
+    height: 27,
+    marginTop: 5,
+    marginLeft: 5,
     color: theme.palette.common.white
   },
   track: {
     borderRadius: 39 / 2,
-    backgroundColor: chakraTheme.colors.lightGray,
+    backgroundColor: '#dddddd',
     opacity: 1,
     transition: theme.transitions.create(['background-color', 'border'])
   },

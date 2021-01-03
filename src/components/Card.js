@@ -1,14 +1,15 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import defaultImg from '../assets/img/img_default.svg';
 import theme from '../assets/themes';
 import CardHover from './CardHover';
 
 export default ({ cookies }) => {
-  const [cardHover,setCardHover]=useState(false);
+  // const [cardHover, setCardHover] = useState(false);
   return (
-    <Container onMouseEnter={()=>setCardHover(true)} onMouseLeave={()=>setCardHover(false)}>
-      {cardHover?(<CardHover />):(" ")}
+    // <Container onMouseEnter={() => setCardHover(true)} onMouseLeave={() => setCardHover(false)}>
+    <Container>
+      {/* {cardHover&&<CardHover />} */}
       <Contents thumbnail={cookies.thumbnail}>
         <div className="thumbnail"></div>
         <div className="title">{cookies.title}</div>
