@@ -7,26 +7,20 @@ import useInput from '../../hooks/useInput';
 import AllCookies from '../../components/AllCookies';
 import Directory from '../../components/Directory';
 import theme from '../../assets/themes';
-import { Switch } from '@chakra-ui/react';
 import { useSetRecoilState } from 'recoil';
 import { CookieState } from '../../states/atom';
+import Switch from '../../components/Switch';
 
 export default () => {
-  const [cookie, setCookie] = useState(true);
-  const [directroy, setDirectory] = useState(false);
-  const setCookieState = useSetRecoilState(CookieState);
-  const onClickCookie = () => {
-    setCookie(true);
-    setDirectory(false);
+  const [isSelected, setIsSelected] = useState('cookie');
+  // const setCookieState = useSetRecoilState(CookieState);
+  const handleTab = tab => {
+    if (tab === 'cookie') setIsSelected('cookie');
+    else setIsSelected('directory');
   };
-  const onClickDir = () => {
-    setCookie(false);
-    setDirectory(true);
-  };
-  const onClickLogo = () => {
+  const handleRefresh = () => {
     console.log('mainLogo clicked');
-    setCookie(true);
-    setDirectory(false);
+    setIsSelected('cookie');
     // (1) AllCookies tab으로 이동
     // (2) 새로 데이터 받아오기(리렌더링)
   };
@@ -42,7 +36,7 @@ export default () => {
     // or useRef 사용하여 .isChecked props 사용하기
   };
   useEffect(() => {
-    console.log("rendered!")
+    console.log('rendered!');
     // 최초에 AllCookies 데이터 받아오기
     // setCookieState();
   }, []);
@@ -50,7 +44,7 @@ export default () => {
   return (
     <div className="container">
       <Header>
-        <div className="main-logo" onClick={onClickLogo}>
+        <div className="main-logo" onClick={handleRefresh}>
           <img className="main-logo__img" src={Logo} />
         </div>
         <a className="profile" href="#">
@@ -65,31 +59,24 @@ export default () => {
       </HomeBoard>
       <Contents>
         <ContentsHeader selected>
-          <CookieTab selected={cookie} onClick={onClickCookie}>
+          <TabBtn isSelected={isSelected === 'cookie'} onClick={() => handleTab('cookie')}>
             All cookies
-          </CookieTab>
-          <DirectoryTab selected={directroy} onClick={onClickDir}>
+          </TabBtn>
+          <TabBtn style={{ marginLeft: '9.5rem' }} isSelected={isSelected === 'directory'} onClick={() => handleTab('directory')}>
             Directory
-          </DirectoryTab>
+          </TabBtn>
           <div className="empty"></div>
           <div className="toggle">
             <div className="toggle__help">?</div>
             <div className="toggle__title">안 읽은 쿠키 모아보기</div>
-            <Switch
-              size="lg" // how to custom??
-              colorScheme="toggleBtn"
-              isFocusable="isDisabled" // why it dosen't works??
-              ml="1.2rem"
-              onChange={onToggleSwitch}
-            />
+            <span style={{ marginLeft: '15px' }}>
+              <Switch onChange={onToggleSwitch} />
+            </span>
           </div>
         </ContentsHeader>
         {(() => {
-          if (cookie) {
-            return <AllCookies />;
-          } else if (directroy) {
-            return <Directory />;
-          }
+          if (isSelected === 'cookie') return <AllCookies />;
+          else return <Directory />;
         })()}
       </Contents>
     </div>
@@ -160,10 +147,8 @@ const Contents = styled.div`
 
 const ContentsHeader = styled.div`
   display: flex;
-  .empty {
-    flex: 1;
-  }
   .toggle {
+    margin-left: auto;
     display: flex;
     align-items: center;
     &__help {
@@ -187,11 +172,11 @@ const ContentsHeader = styled.div`
   }
 `;
 
-const CookieTab = styled.div`
+const TabBtn = styled.div`
   cursor: pointer;
   color: ${theme.colors.lightGray};
   ${props =>
-    props.selected &&
+    props.isSelected &&
     css`
       color: ${theme.colors.orange};
       border-bottom: 0.4rem solid ${theme.colors.orange};
@@ -202,22 +187,4 @@ const CookieTab = styled.div`
   :hover {
     color: ${theme.colors.orange};
   }
-`;
-
-const DirectoryTab = styled.div`
-  cursor: pointer;
-  color: #c2c2c2;
-  ${props =>
-    props.selected &&
-    css`
-      color: ${theme.colors.orange};
-      border-bottom: 0.4rem solid ${theme.colors.orange};
-    `}
-  font-size: 2.8rem;
-  font-weight: 600;
-  line-height: 4.2rem;
-  :hover {
-    color: ${theme.colors.orange};
-  }
-  margin-left: 9.5rem;
 `;

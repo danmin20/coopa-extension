@@ -1,16 +1,15 @@
-import React,{useState} from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import {CookieState} from '../states/atom';
+import { CookieState } from '../states/atom';
 import { useRecoilValue } from 'recoil';
 import Card from './Card';
-import CardHover from './CardHover';
 
 export default () => {
   const cookies = useRecoilValue(CookieState);
   return (
     <Container>
-      {cookies.map((c,idx) => (
-        <Card cookies={c} key={idx}/>
+      {cookies.map((cookie, idx) => (
+        <Card cookies={cookie} key={idx} />
       ))}
     </Container>
   );

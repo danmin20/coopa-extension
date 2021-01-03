@@ -19,19 +19,20 @@ export default () => {
       <div className="dir">
         <div className="dir__title">캐릭터/일러스트레이션</div>
         <div className="dir__num">
-          <CookieIcon isHover={isHover} onMouseOver={handleBtnMouseOver} onMouseLeave={handleBtnMouseOver}/>
+          <CookieIcon isHover={isHover} onMouseOver={handleBtnMouseOver} onMouseLeave={handleBtnMouseOver} />
           <div>37개</div>
         </div>
       </div>
-      <UpdateIcon src = {updateDirIcon} onMouseOver={handleBtnMouseOver} onMouseLeave={handleBtnMouseOver} isHover={isHover}/>
+      <UpdateIcon src={updateDirIcon} onMouseOver={handleBtnMouseOver} onMouseLeave={handleBtnMouseOver} isHover={isHover} />
     </Container>
   );
 };
+
 const CookieIcon = styled.div`
   width: 2rem;
   height: 2rem;
   margin-right: 0.7rem;
-  background: url(${props => (props.isHover? cookieIconW : cookieIcon)}) center center / cover no-repeat;
+  background: url(${props => (props.isHover ? cookieIconW : cookieIcon)}) center center / cover no-repeat;
 `;
 
 const Container = styled.div`
@@ -87,7 +88,7 @@ const Container = styled.div`
 `;
 
 const UpdateIcon = styled.img`
-  display: ${props=>props.isHover ? 'box' : 'none'};
+  display: ${props => (props.isHover ? 'box' : 'none')};
   position: absolute;
   bottom: 2rem;
   right: 2rem;

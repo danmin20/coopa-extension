@@ -7,7 +7,7 @@ import search_icon from '../../assets/img/search_icon.svg';
 import plus_icon from '../../assets/img/plus_icon.svg';
 import plus_icon_white from '../../assets/img/plus_icon_white.svg';
 import useInput from '../../hooks/useInput';
-import {ClipperPageNumState} from '../../states/atom';
+import { ClipperPageNumState } from '../../states/atom';
 
 // 나중에 api 연결
 const item = ['디자인', '마케팅', '프로그래밍', '기획', '쿠키파킹'];
@@ -38,32 +38,30 @@ export default () => {
   };
 
   return (
-    <>
-      <Wrap>
-        <HeadhWrap>
-          <BackArrow onClick={handleBackArrClick} src={back_arrow} />
-          <SearchBar>
-            <SearchIcon src={search_icon} />
-            <SearchInput value={searchText.value} onChange={searchText.onChange} />
-          </SearchBar>
-        </HeadhWrap>
-        <DirListWrap>
-          <DirList>
-            {item.map((item, idx) => (
-              <DirItem onClick={handleDirClick} key={idx}>
-                {item}
-              </DirItem>
-            ))}
-          </DirList>
-        </DirListWrap>
-        <BottomWrap>
-          <AddBtn isHover={isHover} onMouseOver={handleBtnMouseOver} onMouseLeave={handleBtnMouseLeave} onClick={handleBtnClick}>
-            <PlusIconWhite isHover={isHover} src={plus_icon_white} />
-            <PlusIcon isHover={isHover} src={plus_icon} />새 디렉토리 만들기
-          </AddBtn>
-        </BottomWrap>
-      </Wrap>
-    </>
+    <Wrap>
+      <HeadhWrap>
+        <BackArrow onClick={handleBackArrClick} src={back_arrow} />
+        <SearchBar>
+          <SearchIcon src={search_icon} />
+          <SearchInput value={searchText.value} onChange={searchText.onChange} />
+        </SearchBar>
+      </HeadhWrap>
+      <DirListWrap>
+        <DirList>
+          {item.map((item, idx) => (
+            <DirItem onClick={handleDirClick} key={idx}>
+              {item}
+            </DirItem>
+          ))}
+        </DirList>
+      </DirListWrap>
+      <BottomWrap>
+        <AddBtn isHover={isHover} onMouseOver={handleBtnMouseOver} onMouseLeave={handleBtnMouseLeave} onClick={handleBtnClick}>
+          <PlusIconWhite isHover={isHover} src={plus_icon_white} />
+          <PlusIcon isHover={isHover} src={plus_icon} />새 디렉토리 만들기
+        </AddBtn>
+      </BottomWrap>
+    </Wrap>
   );
 };
 

@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
 import back_arrow from '../../assets/img/back_arrow.svg';
-import { useState } from 'react';
-import {ClipperPageNumState} from '../../states/atom';
+import { ClipperPageNumState } from '../../states/atom';
 
-
-const AddDir = () => {
+export default () => {
   const [pageNum, setPageNum] = useRecoilState(ClipperPageNumState);
   const [isHover, setIsHover] = useState(false);
+
+  let name, description;
 
   const handleBtnClick = () => {
     setPageNum(1);
@@ -27,33 +27,29 @@ const AddDir = () => {
   };
 
   return (
-    <>
-      <Wrap>
-        <HeadhWrap>
-          <BackArrow onClick={handleBackArrClick} src={back_arrow} />
-        </HeadhWrap>
-        <MiddleWrap>
-          <InputWrap>
-            <InputText>디렉토리 이름*</InputText>
-            <InputSpace num={1} />
-          </InputWrap>
-          <Space />
-          <InputWrap>
-            <InputText>메모</InputText>
-            <InputSpace num={2} />
-          </InputWrap>
-        </MiddleWrap>
-        <BottomWrap>
-          <AddBtn isHover={isHover} onMouseMove={handleBtnMouseOver} onMouseLeave={handleBtnMouseLeave} onClick={handleBtnClick}>
-            디렉토리 생성하기
-          </AddBtn>
-        </BottomWrap>
-      </Wrap>
-    </>
+    <Wrap>
+      <HeadhWrap>
+        <BackArrow onClick={handleBackArrClick} src={back_arrow} />
+      </HeadhWrap>
+      <MiddleWrap>
+        <InputWrap>
+          <InputText>디렉토리 이름*</InputText>
+          <InputSpace num={1} value={name} />
+        </InputWrap>
+        <Space />
+        <InputWrap>
+          <InputText>메모</InputText>
+          <InputSpace num={2} value={description} />
+        </InputWrap>
+      </MiddleWrap>
+      <BottomWrap>
+        <AddBtn isHover={isHover} onMouseMove={handleBtnMouseOver} onMouseLeave={handleBtnMouseLeave} onClick={handleBtnClick}>
+          디렉토리 생성하기
+        </AddBtn>
+      </BottomWrap>
+    </Wrap>
   );
 };
-
-export default AddDir;
 
 const Wrap = styled.div`
   width: 36.1rem;

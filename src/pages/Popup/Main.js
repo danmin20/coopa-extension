@@ -8,7 +8,7 @@ import down_arrow from '../../assets/img/down_arrow.svg';
 import down_arrow_white from '../../assets/img/down_arrow_white';
 import { ClipperPageNumState, isClickNextPageState } from '../../states/atom';
 
-const Main = () => {
+export default () => {
   const onClick = () => {
     chrome.tabs.query({ active: true, lastFocusedWindow: true }, tabs => {
       console.log(tabs);
@@ -44,49 +44,45 @@ const Main = () => {
     setIsclickNextPage(true);
   };
 
+  const handleBtnTwoClick = () => {
+    window.open('newtab.html', '_blank');
+  };
+
   // 몇초간만 Loading 컴포넌트 return 하기
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setInterval(() => {
       setIsLoading(false);
-    }, 3000);
+    }, 2000);
   }, []);
 
   if (isLoading & !isclickNextPage) {
-    return (
-      <>
-        <Loading />
-      </>
-    );
-  } else {
-    return (
-      <>
-        <Wrap>
-          {/* <button onClick={onClick}>click</button> */}
-          <LogoWrap>
-            <LogoImg src={logo} />
-            <Text>파킹했습니다!</Text>
-          </LogoWrap>
-          <BtnWrap>
-            <BtnOne onMouseOver={handleBtnOneMouseOver} onMouseLeave={handleBtnOneMouseLeave} isHover={isBtnOneHover} onClick={handleBtnOneClick}>
-              <BtnOneWrap>
-                <BtnOneText isHover={isBtnOneHover}>디렉토리 선택</BtnOneText>
-                <BtnOneArrow src={down_arrow} isHover={isBtnOneHover} />
-                <BtnOneArrowHover src={down_arrow_white} isHover={isBtnOneHover} />
-              </BtnOneWrap>
-            </BtnOne>
-            <BtnTwo onMouseOver={handleBtnTwoMouseOver} onMouseLeave={handleBtnTwoMouseLeave} isHover={isBtnTwoHover}>
-              쿠키파킹으로 이동하기
-            </BtnTwo>
-          </BtnWrap>
-        </Wrap>
-      </>
-    );
+    return <Loading />;
   }
-};
 
-export default Main;
+  return (
+    <Wrap>
+      {/* <button onClick={onClick}>click</button> */}
+      <LogoWrap>
+        <LogoImg src={logo} />
+        <Text>파킹했습니다!</Text>
+      </LogoWrap>
+      <BtnWrap>
+        <BtnOne onMouseOver={handleBtnOneMouseOver} onMouseLeave={handleBtnOneMouseLeave} isHover={isBtnOneHover} onClick={handleBtnOneClick}>
+          <BtnOneWrap>
+            <BtnOneText isHover={isBtnOneHover}>디렉토리 선택</BtnOneText>
+            <BtnOneArrow src={down_arrow} isHover={isBtnOneHover} />
+            <BtnOneArrowHover src={down_arrow_white} isHover={isBtnOneHover} />
+          </BtnOneWrap>
+        </BtnOne>
+        <BtnTwo onMouseOver={handleBtnTwoMouseOver} onMouseLeave={handleBtnTwoMouseLeave} onClick={handleBtnTwoClick} isHover={isBtnTwoHover}>
+          쿠키파킹으로 이동하기
+        </BtnTwo>
+      </BtnWrap>
+    </Wrap>
+  );
+};
 
 const Wrap = styled.div`
   width: 36.1rem;
