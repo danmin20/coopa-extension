@@ -1,19 +1,33 @@
 import React from 'react';
 
-const Popup = () => {
-  const onClick = () => {
-    chrome.tabs.query({ active: true, lastFocusedWindow: true }, tabs => {
-      console.log(tabs);
-      let url = tabs[0].url;
-      console.log('url: ' + url);
-    });
-  };
+import { useRecoilState } from 'recoil';
+import { ClipperPageNumState } from '../../states/atom';
+import AddDir from './AddDir';
+import Finish from './Finish';
+import Main from './Main';
+import Directory from '../../components/Directory';
 
-  return (
-    <div className="App">
-      <button onClick={onClick}>click</button>
-    </div>
-  );
+//const pageNum = 0;
+
+// // recoil atom
+// const PageNumber = atom({
+//   key: 'PageNumber',
+//   default: 0,
+// });
+
+export default () => {
+  const [pageNum, setPageNum] = useRecoilState(ClipperPageNumState);
+
+  switch (pageNum) {
+    case 0:
+      return <Main />;
+    case 1:
+      return <Directory />;
+    case 2:
+      return <AddDir />;
+    case 3:
+      return <Finish />;
+    default:
+      return <div>error</div>;
+  }
 };
-
-export default Popup;
