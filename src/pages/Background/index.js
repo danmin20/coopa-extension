@@ -7,6 +7,7 @@ import axios from 'axios';
 console.log('This is the background page.');
 console.log('Put the background scripts here.');
 
+<<<<<<< refs/remotes/origin/dev
 // recoil에 적용하기
 let data = {
   type: '',
@@ -118,3 +119,18 @@ const sliceURL = url => {
   let slice_url = url.substring(0, end);
   return slice_url;
 };
+=======
+// chrome.browserAction.openPopup(popupView => {
+//   console.log('click');
+//   // chrome.tabs.sendMessage(tab.id, { message: 'load' });
+//   chrome.tabs.query({ active: true, lastFocusedWindow: true }, tabs => {
+//     console.log(tabs);
+//     let url = tabs[0].url;
+//     console.log('url: ' + url);
+//   });
+// });
+
+chrome.tabs.onUpdated.addListener((res)=>{
+  console.log(res);
+});
+>>>>>>> feat: newtab on/off function

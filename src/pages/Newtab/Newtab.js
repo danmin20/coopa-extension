@@ -41,7 +41,15 @@ export default () => {
     // or useRef 사용하여 .isChecked props 사용하기
   };
   useEffect(() => {
+<<<<<<< refs/remotes/origin/dev
     console.log('rendered!');
+=======
+    chrome.storage.sync.get("defaultnewtab", function(storage) {
+      if(storage.defaultnewtab) {
+       chrome.tabs.update({ url: "chrome-search://local-ntp/local-ntp.html" });
+      }
+     });
+>>>>>>> feat: newtab on/off function
     // 최초에 AllCookies 데이터 받아오기
     // setCookieState();
   }, []);

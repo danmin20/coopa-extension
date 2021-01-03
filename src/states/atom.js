@@ -69,6 +69,7 @@ export const ClipperPageNumState = atom({
 });
 
 export const isClickNextPageState = atom({
+<<<<<<< refs/remotes/origin/chaerin
     key: 'isClickNextPageState',
     default: false
 });
@@ -76,4 +77,13 @@ export const isClickNextPageState = atom({
 export const listSelectState = atom({
     key: 'listSelectState',
     value: false
+=======
+  key: 'isClickNextPageState',
+  default: false
+});
+
+export const isCheckedState = atom({
+  key: 'isCheckedState',
+  default: false
+>>>>>>> feat: newtab on/off function
 })
