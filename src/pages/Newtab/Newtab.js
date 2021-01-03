@@ -7,9 +7,9 @@ import useInput from '../../hooks/useInput';
 import AllCookies from '../../components/AllCookies';
 import Directory from '../../components/Directory';
 import theme from '../../assets/themes';
-import { Switch } from '@chakra-ui/react';
 import { useSetRecoilState } from 'recoil';
 import { CookieState } from '../../states/atom';
+import Switch from '../../components/Switch';
 
 export default () => {
   const [cookie, setCookie] = useState(true);
@@ -42,7 +42,7 @@ export default () => {
     // or useRef 사용하여 .isChecked props 사용하기
   };
   useEffect(() => {
-    console.log("rendered!")
+    console.log('rendered!');
     // 최초에 AllCookies 데이터 받아오기
     // setCookieState();
   }, []);
@@ -75,13 +75,9 @@ export default () => {
           <div className="toggle">
             <div className="toggle__help">?</div>
             <div className="toggle__title">안 읽은 쿠키 모아보기</div>
-            <Switch
-              size="lg" // how to custom??
-              colorScheme="toggleBtn"
-              isFocusable="isDisabled" // why it dosen't works??
-              ml="1.2rem"
-              onChange={onToggleSwitch}
-            />
+            <span style={{ marginLeft: '15px' }}>
+              <Switch onChange={onToggleSwitch} />
+            </span>
           </div>
         </ContentsHeader>
         {(() => {
