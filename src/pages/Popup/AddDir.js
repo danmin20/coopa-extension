@@ -1,17 +1,11 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { atom, useRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import back_arrow from '../../assets/img/back_arrow.svg';
-
-
-// recoil atom
-const PageNumber = atom({
-  key: 'PageNumber',
-  default: 0
-});
+import {ClipperPageNumState} from '../../states/atom';
 
 const AddDir = () => {
-  const [pageNum, setPageNum] = useRecoilState(PageNumber);
+  const [pageNum, setPageNum] = useRecoilState(ClipperPageNumState);
   const [isHover, setIsHover] = useState(false);
 
   var name, description;
@@ -143,7 +137,7 @@ const AddBtn = styled.div`
   box-shadow: ${props => (props.isHover ? '0rem 0rem 1.2rem rgba(0, 0, 0, 0.13)' : 'none')};
   display: flex;
   flex-direction: row;
-  align-itmes: center;
+  align-items: center;
   justify-content: center;
 `;
 
