@@ -10,6 +10,8 @@ const HoverPage=style.div`
     display:flex;
     flex-direction:column;
     position:absolute;
+    top:0rem;
+    z-index:10;
   `;
 const Directory=style.div`
     width: 32.4rem;
@@ -52,7 +54,7 @@ const Directory=style.div`
 
 const ListWrap = style.div`
     width: 32.7rem;
-    height: 35.3rem;
+    height: 37rem;
     border-radius: 1.2rem;
     margin:1.6rem;
     padding-top: 1.9rem;
@@ -68,7 +70,7 @@ const SearchBar = style.div`
     margin:0;
     background: #F3F3F3;
     border-radius: 0.8rem;
-    flex-direction: row;
+    flex-direction: row; 
     margin:0;
     margin-left:1.8rem;
     .searchBar-icon{
@@ -92,6 +94,7 @@ const SearchBar = style.div`
 const DirList= style.div`
     margin-top:1.2rem;
     max-height:22.2rem;
+    max-width: 26.8rem;
     padding-left: 1.8rem;
     .list-sort{
         margin:1.4rem;
@@ -109,34 +112,28 @@ const DirList= style.div`
         font-weight: bold;
         font-size: 2rem;
         line-height: 2.4rem;
-        display: flex;
-        align-items: center;
         letter-spacing: -0.02em;
 
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.7rem; 
+        margin-right: 1.1rem;
+        max-width: 26.8rem;
+
         color: #333333;
-        padding: 0.7rem;
         &:hover{
-            background-color: rgba(0,0,0,0.2);
+            background: #F3F3F3;
+            border-radius: 0.8rem;
         }
     }
     .list-item__btn{
-        position: relative;
-        left:10rem;
-
-        width:3.5rem;
-        height:2rem;
-
-        border:none;
-        border-radius:1rem;
-
-        font-size:1rem;
-        font-weight:bold;
-        color:white;
+        display: ${props=>props.itemHover ? 'inline' : 'none'};
+        
+        width:1.4rem;
+        height:1.4rem;
+        border-radius:50%;
         background: #FF7034;
-
-        &:focus{
-            outline:none;
-        }
 
     }
     .list-div{
@@ -180,8 +177,6 @@ const BottonWrap = style.div`
         color: #3D3D3D;
         background: white;
         border-radius: 1rem;
-
-        margin:0;
         &:hover{
         color:white;
         background: #FF7034;
@@ -195,12 +190,24 @@ const BottonWrap = style.div`
     }
 `;
 
-const ListTest=()=>{
+const CardHover=()=>{
+    // 나중에 api 연결
+    const items = [
+        '디자인','마케팅','프로그래밍','기획','쿠키파킹','사랑해'
+        // {idx:0,title:'디자인'},
+        // {idx:1,title:'마케팅'},
+        // {idx:2,title:'프로그래밍'},
+        // {idx:3,title:'기획'},
+        // {idx:4,title:'쿠키파킹'},
+        // {idx:5,title:'사랑해'}
+    ];
+
     const [drop,setDrop]=useState(false);
     const [itemHover,setItemHover]=useState(false);
-    const clickList=()=>{
+    
+    const clickList=(e)=>{
         //쿠키 저장하기 & 서버에 선택한 디렉토리 넘기기
-        console.log('list click');
+        console.log(e+' :list click');
     };
     return(
         <>
@@ -208,7 +215,10 @@ const ListTest=()=>{
             <Directory>
                 <div class='dir-sort'>마이크로 인터렉션</div>
                 <button class='dir-btn'>
-                    <img src={dropdwnImg} alt='' onClick={()=>{drop?setDrop(false):setDrop(true)}}/>
+                    <img src={dropdwnImg} alt='' onClick={(e)=>{
+                        e.stopPropagation();
+                        drop?setDrop(false):setDrop(true);
+                    }}/>
                 </button>
             </Directory>
             {drop?(<ListWrap>
@@ -219,20 +229,12 @@ const ListTest=()=>{
                 <DirList>
                     <div class='list-div'>
                         <div class='list-sort'>모든 디렉토리</div>
-                        <div class='list-item'  onMouseEnter={()=>setItemHover(true)} onMouseLeave={()=>setItemHover(false)}>
-                            마케팅 전략
-                            {itemHover?(<button class='list-item__btn' onClick={clickList}>선택</button>):(" ")}
-                        </div>
-                        <div class='list-item'>유저 인터페이스</div>
-                        <div class='list-item'>디자인</div><div class='list-item'>마케팅 전략</div>
-                        <div class='list-item'>유저 인터페이스</div>
-                        <div class='list-item'>디자인</div><div class='list-item'>마케팅 전략</div>
-                        <div class='list-item'>유저 인터페이스</div>
-                        <div class='list-item'>디자인</div><div class='list-item'>마케팅 전략</div>
-                        <div class='list-item'>유저 인터페이스</div>
-                        <div class='list-item'>디자인</div><div class='list-item'>마케팅 전략</div>
-                        <div class='list-item'>유저 인터페이스</div>
-                        <div class='list-item'>디자인</div>
+                        {items.map((items,idx) => (
+                            <div class='list-item' key={idx} onMouseOver={()=>setItemHover(true)} onMouseLeave={()=>setItemHover(false)} onClick={clickList}>
+                                {items}
+                                <div itemHover={itemHover} class='list-item__btn'/>
+                            </div>
+                        ))}
                     </div>
                 </DirList>
                 <BottonWrap>
@@ -244,4 +246,4 @@ const ListTest=()=>{
     )
 }
 
-export default ListTest;
+export default CardHover;
