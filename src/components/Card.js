@@ -36,7 +36,7 @@ const Parking = styled.div`
     left: 0px;
     width: 100%;
     height: 0;
-    padding-bottom: ${props => (props.thumbnail == '' ? 'calc((160 / 360) * 100%)' : 'calc((220 / 360) * 100%)')};
+    padding-bottom: ${props => (!props.thumbnail ? 'calc((160 / 360) * 100%)' : 'calc((220 / 360) * 100%)')};
     border-radius: 1.2rem;
     z-index: 10;
     background: rgba(0, 0, 0, 0.3);
@@ -61,9 +61,9 @@ export default ({ cookies, keys }) => {
 
   return (
     <Container onMouseEnter={() => setCardHover(true)} onMouseLeave={() => setCardHover(false)}>
-      {cardHover && !listSelect ? <CardHover cookies={cookies} keys={keys} /> : ' '}
+      {cardHover && !listSelect && <CardHover cookies={cookies} keys={keys} />}
       <Contents thumbnail={cookies.thumbnail}>
-        <div className="thumbnail">{cardHover ? <ParkingView /> : ' '}</div>
+        <div className="thumbnail">{cardHover && <ParkingView />}</div>
         <div className="title">{cookies.title}</div>
         <div className="content">{cookies.content}</div>
         <div className="profile">
@@ -104,10 +104,11 @@ const Contents = styled.div`
   .thumbnail {
     width: 100%;
     height: 0;
-    padding-bottom: ${props => (props.thumbnail == '' ? 'calc((160 / 360) * 100%)' : 'calc((220 / 360) * 100%)')};
-    background: url(${props => (props.thumbnail == '' ? defaultImg : props.thumbnail)}) center center / cover no-repeat;
+    padding-bottom: ${props => (!props.thumbnail ? 'calc((160 / 360) * 100%)' : 'calc((220 / 360) * 100%)')};
+    background: url(${props => (!props.thumbnail ? defaultImg : props.thumbnail)}) center center / cover no-repeat;
     border-radius: 1.2rem;
   }
+
   .title {
     font-size: 2.4rem;
     font-weight: 500;
@@ -128,7 +129,7 @@ const Contents = styled.div`
     margin-bottom: 2.3rem;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: ${props => (props.thumbnail == '' ? 3 : 2)};
+    -webkit-line-clamp: ${props => (!props.thumbnail ? 3 : 2)};
     overflow: hidden;
     word-wrap: normal;
     word-break: break-all;

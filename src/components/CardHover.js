@@ -63,42 +63,38 @@ export default ({ cookies, keys }) => {
   const [drop, setDrop] = useState(false);
 
   return (
-    <>
-      <HoverPage>
-        <Directory
-          onClick={e => {
-            e.stopPropagation();
-            drop ? setDrop(false) : setDrop(true);
-          }}
-        >
-          <div className="dir-sort">{cookies.directory}</div>
-          <button className="dir-btn">
-            <img src={dropdwnImg} alt="" />
-          </button>
-        </Directory>
-        {drop ? (
-          <ListWrap>
-            <SearchBar>
-              <img className="searchBar-icon" src={seachImg} alt="" />
-              <input className="searchBar-input"></input>
-            </SearchBar>
-            <DirList>
-              <div className="list-div">
-                <div className="list-sort">모든 디렉토리</div>
-                {items.map(item => (
-                  <List item={item} idx={keys} />
-                ))}
-              </div>
-            </DirList>
-            <BottonWrap>
-              <button className="addBtn">+ 새 디렉토리 만들기</button>
-            </BottonWrap>
-          </ListWrap>
-        ) : (
-          ' '
-        )}
-      </HoverPage>
-    </>
+    <HoverPage>
+      <Directory
+        onClick={e => {
+          e.stopPropagation();
+          drop ? setDrop(false) : setDrop(true);
+        }}
+      >
+        <div className="dir-sort">{cookies.directory}</div>
+        <button className="dir-btn">
+          <img src={dropdwnImg} alt="" />
+        </button>
+      </Directory>
+      {drop && (
+        <ListWrap>
+          <SearchBar>
+            <img className="searchBar-icon" src={seachImg} alt="" />
+            <input className="searchBar-input"></input>
+          </SearchBar>
+          <DirList>
+            <div className="list-div">
+              <div className="list-sort">모든 디렉토리</div>
+              {items.map(item => (
+                <List item={item} idx={keys} />
+              ))}
+            </div>
+          </DirList>
+          <BottonWrap>
+            <button className="addBtn">+ 새 디렉토리 만들기</button>
+          </BottonWrap>
+        </ListWrap>
+      )}
+    </HoverPage>
   );
 };
 
