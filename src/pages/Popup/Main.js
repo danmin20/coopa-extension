@@ -9,14 +9,6 @@ import down_arrow_white from '../../assets/img/down_arrow_white';
 import { ClipperPageNumState, isClickNextPageState } from '../../states/atom';
 
 export default () => {
-  const onClick = () => {
-    chrome.tabs.query({ active: true, lastFocusedWindow: true }, tabs => {
-      console.log(tabs);
-      let url = tabs[0].url;
-      console.log('url: ' + url);
-    });
-  };
-
   const [isBtnOneHover, setIsBtnOneHover] = useState(false);
   const [isBtnTwoHover, setIsBtnTwoHover] = useState(false);
 

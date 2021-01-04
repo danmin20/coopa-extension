@@ -3,41 +3,54 @@
 import '../../assets/img/icon-34.png';
 import '../../assets/img/icon-128.png';
 import axios from 'axios';
+import cookieAPI from '../../lib/api/cookieApi';
 
 console.log('This is the background page.');
 console.log('Put the background scripts here.');
 
-// recoil에 적용하기
-let data = {
-  type: '',
-  title: '',
-  description: '',
-  url: '',
-  site_name: '',
-  image: '',
-  author: '',
-  favicon: ''
-};
+
+const token = { 'x-access-token': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsInVzZXJFbWFpbCI6InJ1cnVAZW1haWwuY29tIiwiaWF0IjoxNjA5Nzc1MDYyfQ.hkdbXr68HQ-667AmfXzIrWIuJMRM03hbQ_eBwrqJZVA" };
+
+// let data = {
+//   type: '',
+//   title: '',
+//   description: '',
+//   url: '',
+//   site_name: '',
+//   image: '',
+//   author: '',
+//   "favicon": ''
+// };
+
 
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+  let data = {
+    "title": '',
+    "content": '',
+    "link": '',
+    "thumbnail": '',
+    "favicon": '',
+    "provider": '',
+  };
   if (message.popupOpen) {
     chrome.tabs.query({ active: true, lastFocusedWindow: true }, tabs => {
-      console.log(tabs);
       const url = tabs[0].url;
-      data.url = url;
+      data.link = url;
       console.log('url: ' + url);
       const HTML = returnHTML(url);
       HTML.then(function (html) {
-        findOgTag(html, 'image');
-        findOgTag(html, 'title');
-        findOgTag(html, 'description');
-        findOgTag(html, 'type');
-        findOgTag(html, 'site_name');
-        findAuthor(html);
-        findFavicon(html, url);
+        findOgTag(html, 'image', data);
+        findOgTag(html, 'title', data);
+        findOgTag(html, 'description', data);
+        findOgTag(html, 'type', data);
+        findOgTag(html, 'site_name', data);
+        findAuthor(html, data);
+        findFavicon(html, url, data);
         console.log(data);
-        console.log(data.image);
+        console.log(data.thumbnail);
         console.log(data.favicon);
+        cookieAPI.postCookie(token, data);
+        // console.log(res);
       });
     });
   }
@@ -56,7 +69,7 @@ const getHTML = async url => {
   }
 };
 
-const findOgTag = (html, ogTag) => {
+const findOgTag = (html, ogTag, data) => {
   // console.log('og:'+ogTag);
   let location = html.indexOf(`"og:` + ogTag + `"`);
   if (location != -1) {
@@ -65,20 +78,23 @@ const findOgTag = (html, ogTag) => {
       let end = html.indexOf(`"`, start + 9);
       switch (ogTag) {
         case 'image':
-          data.image = html.substring(start + 9, end);
+          data.thumbnail = html.substring(start + 9, end);
+          if(data.thumbnail[0] == '/' && data.thumbnail[1] == '/'){
+            data.thumbnail = 'http:' + data.thumbnail;
+          }
           break;
-        case 'type':
-          data.type = html.substring(start + 9, end);
-          break;
+        // case 'type':
+        //   data.type = html.substring(start + 9, end);
+        //   break;
         case 'title':
           data.title = html.substring(start + 9, end);
           break;
         case 'description':
-          data.description = html.substring(start + 9, end);
+          data.content = html.substring(start + 9, end);
           break;
-        case 'site_name':
-          data.site_name = html.substring(start + 9, end);
-          break;
+        // case 'site_name':
+        //   data.site_name = html.substring(start + 9, end);
+        //   break;
         default:
           console.log('default');
       }
@@ -86,19 +102,22 @@ const findOgTag = (html, ogTag) => {
   }
 };
 
-const findAuthor = html => {
+const findAuthor = (html, data) => {
   let location = html.indexOf(`<meta name="author"`);
   if (location != -1) {
     let start = html.indexOf(`content=`, location);
     if (start != -1) {
       let end = html.indexOf(`"`, start + 9);
-      data.author = html.substring(start + 9, end);
+      data.provider = html.substring(start + 9, end);
     }
   }
 };
 
-const findFavicon = (html, url) => {
-  let location = html.indexOf(`<link rel="apple-touch-icon"`);
+const findFavicon = (html, url, data) => {
+  let location = html.indexOf(`<link rel="shortcut icon`);
+  if(location == -1){
+    location = html.indexOf(`<link rel="apple-touch-icon`);
+  }
   if (location != -1) {
     let start = html.indexOf(`href=`, location);
     if (start != -1) {
@@ -106,6 +125,9 @@ const findFavicon = (html, url) => {
       let favicon_url = html.substring(start + 6, end);
       if (favicon_url[0] == '/' && favicon_url[1] != '/') {
         favicon_url = sliceURL(url) + favicon_url;
+      }
+      if (favicon_url[0] == '/' && favicon_url[1] == '/'){
+        favicon_url = 'http:' + favicon_url;
       }
       data.favicon = favicon_url;
     }
