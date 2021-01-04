@@ -7,7 +7,7 @@ import { listSelectState } from '../states/atom';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
 
-const ParkingView=({setParkingState})=>{
+const ParkingView=()=>{
     const [listSelect,setListSelect]=useRecoilState(listSelectState);
     
     setTimeout(() => {
@@ -15,7 +15,7 @@ const ParkingView=({setParkingState})=>{
     }, 1000)
     return(
         <Parking listSelect={listSelect}>
-          파킹중
+          파킹중..
         </Parking>
   )
 }
