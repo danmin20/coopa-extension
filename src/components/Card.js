@@ -6,47 +6,40 @@ import CardHover from './CardHover';
 import { listSelectState } from '../states/atom';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
+const ParkingView = () => {
+  const [listSelect, setListSelect] = useRecoilState(listSelectState);
 
-const ParkingView=()=>{
-    const [listSelect,setListSelect]=useRecoilState(listSelectState);
-    
-    //기능구현 하면서 수정
-    setTimeout(() => {
-      setListSelect(false);
-    }, 1000)
-    return(
-        <Parking listSelect={listSelect}>
-          파킹중..
-        </Parking>
-  )
-}
+  //기능구현 하면서 수정
+  setTimeout(() => {
+    setListSelect(false);
+  }, 1000);
+  return <Parking listSelect={listSelect}>파킹중..</Parking>;
+};
 
-const Parking=styled.div`
+const Parking = styled.div`
   display: box;
   position: absolute;
   top: 0px;
   left: 0px;
   width: 100%;
-  height:100%;
+  height: 100%;
   border-radius: 1.2rem;
   z-index: 10;
-  background: rgba(0,0,0,0.3);
+  background: rgba(0, 0, 0, 0.3);
 
-  text-align:center;
+  text-align: center;
   font-size: 10rem;
 `;
 
-export default ({ cookies, keys}) => {
-  const [cardHover,setCardHover]=useState(false);
-  const listSelect=useRecoilValue(listSelectState);
+export default ({ cookies }) => {
+  const [cardHover, setCardHover] = useState(false);
+  const listSelect = useRecoilValue(listSelectState);
 
   return (
-    <Container onMouseEnter={()=>setCardHover(true)} onMouseLeave={()=>setCardHover(false)}>
-      {cardHover&&(!listSelect)?(<CardHover cookies={cookies} keys={keys}/>):(" ")}
+    <Container onMouseEnter={() => setCardHover(true)} onMouseLeave={() => setCardHover(false)}>
+      {cardHover && !listSelect ? <CardHover cookies={cookies} /> : ' '}
       <Contents thumbnail={cookies.thumbnail}>
-        <div className="thumbnail">
-          {cardHover&&listSelect?(<ParkingView/>):" "}
-        </div>
+        <div className="thumbnail">{cardHover && listSelect ? <ParkingView /> : ' '}</div>
         <div className="title">{cookies.title}</div>
         <div className="content">{cookies.content}</div>
         <div className="profile">

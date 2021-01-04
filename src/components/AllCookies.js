@@ -9,7 +9,7 @@ export default () => {
   return (
     <Container>
       {cookies.map((cookie, idx) => (
-        <Card cookies={cookie} keys={idx} />
+        <Card cookies={cookie} key={idx} idx={idx} />
       ))}
     </Container>
   );
