@@ -17,6 +17,8 @@ const List=({item, idx})=>{
     const ListItemClick=()=>{
         console.log(item+" :click");
         console.log(cookies[idx]);
+        
+        //listSelect 변수 --> true
         setListSelect(true);
         cookies[idx].directory=item;
     }
@@ -64,7 +66,7 @@ const ListItemBtn=styled.div`
 
 export default ({cookies, keys}) => {
     const items = [
-        '디자인','마케팅','프로그래밍','기획','쿠키파킹','사랑해'
+        '디자인','마케팅','프로그래밍','기획','쿠키파킹','사랑해','디자인','마케팅','프로그래밍','기획','쿠키파킹','사랑해'
     ];
 
 
@@ -83,20 +85,18 @@ export default ({cookies, keys}) => {
               </button>
           </Directory>
           {drop?(<ListWrap>
-              <SearchBar>
-                  <img className='searchBar-icon' src={seachImg} alt=''/>
-                  <input className='searchBar-input'></input>
-              </SearchBar>
               <DirList>
                   <div className='list-div'>
                       <div className='list-sort'>모든 디렉토리</div>
                       {items.map((item) => (
                           <List item={item} idx={keys} />
                       ))}
+                      <div className="list-gradientBox"></div>
                   </div>
               </DirList>
               <BottonWrap>
-                  <button className='addBtn'>+ 새 디렉토리 만들기</button>
+                  <input class='addInput' placeholder="새 디렉토리 명을 입력하세요"/>
+                  <button className='addBtn'>저장 </button>
               </BottonWrap>
           </ListWrap>):(" ")}
         </HoverPage>
@@ -136,8 +136,8 @@ const Directory=styled.div`
     color: #333333;
   }
   .dir-btn {
-    position: relative;
-    left: 5rem;
+    position: absolute;
+    right: 4rem;
     border: none;
     width: 1.2rem;
     height: 1.2rem;
@@ -159,40 +159,9 @@ const ListWrap = styled.div`
   box-shadow: 0px 0.2rem 2rem rgba(0, 0, 0, 0.2);
 `;
 
-const SearchBar = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 29.5rem;
-  height: 4.3rem;
-  margin: 0;
-  background: #f3f3f3;
-  border-radius: 0.8rem;
-  flex-direction: row;
-  margin: 0;
-  margin-left: 1.8rem;
-  .searchBar-icon {
-    position: relative;
-    width: 1.8rem;
-    height: 1.8rem;
-    margin: 0;
-  }
-  .searchBar-input {
-    border: none;
-    width: 26rem;
-    height: 4rem;
-    background: #f3f3f3;
-    text-align: center;
-    &:focus {
-      outline: none;
-      margin: 0;
-      background: #f3f3f3;
-    }
-  }
-`;
 const DirList= styled.div`
     margin-top: 1.2rem;
-    max-height: 22.2rem;
+    min-height: 25.9rem;
     max-width: 26.8rem;
     padding-left: 1.8rem;
     .list-sort {
@@ -220,36 +189,66 @@ const DirList= styled.div`
             background: #f1f1f1;
         }
     width: 28.8rem;
-    max-height: 21rem;
+    max-height: 25.9rem;
     overflow: auto;
+    }
+    .list-gradientBox{
+        position: absolute;
+        top: 33.2rem;
+        width: 268px;
+        height: 56px;
+
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #FFFFFF 71.87%);
     }
 `;
 const BottonWrap = styled.div`
     padding: 1.8rem;
+    display:flex;
+    flex-direction:row;
     .addBtn {
-    display: flex;
-    justify-content: center;
-    font-family: Spoqa Han Sans Neo;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 1.6rem;
-    line-height: 1.9rem;
-    align-items: center;
-    text-align: center;
-    letter-spacing: -0.02em;
-    border: 2px solid #333333;
-    width: 28.8rem;
-    height: 5.3rem;
-    color: #3d3d3d;
-    background: white;
-    border-radius: 1rem;
-    &:hover {
-        color: white;
-        background: #ff7034;
-        border: none;
+        display: flex;
+        justify-content: center;
+        font-family: Spoqa Han Sans Neo;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 1.6rem;
+        line-height: 1.9rem;
+        align-items: center;
+        text-align: center;
+        letter-spacing: -0.02em;
+
+
+        border: 2px solid #ff7034;
+        width: 7.6rem;
+        height: 4.6rem;
+        color: #ff7034;
+        background: white;
+        border-radius: 1rem;
+        &:hover {
+            color: white;
+            background: #ff7034;
+            border: none;
+        }
+        &:focus {
+            outline: none;
+        }
     }
-    &:focus {
-        outline: none;
-    }
+    .addInput{
+        width: 20.4rem;
+        height: 4.6rem;
+
+        background: #F3F3F3;
+        border-radius: 0.8rem;
+        margin-right:0.8rem;
+
+        font-family: Spoqa Han Sans Neo;
+        font-weight: bold;
+        font-size: 1.4rem;
+        text-align:center;
+
+        color: #B7B7B7;
+        &:focus{
+            outline:none;
+        }
     }
 `;

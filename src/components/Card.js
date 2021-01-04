@@ -10,6 +10,7 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 const ParkingView=()=>{
     const [listSelect,setListSelect]=useRecoilState(listSelectState);
     
+    //기능구현 하면서 수정
     setTimeout(() => {
       setListSelect(false);
     }, 1000)
@@ -21,7 +22,7 @@ const ParkingView=()=>{
 }
 
 const Parking=styled.div`
-  display: ${props=>props.listSelect? 'box': 'none'};
+  display: box;
   position: absolute;
   top: 0px;
   left: 0px;
@@ -44,7 +45,7 @@ export default ({ cookies, keys}) => {
       {cardHover&&(!listSelect)?(<CardHover cookies={cookies} keys={keys}/>):(" ")}
       <Contents thumbnail={cookies.thumbnail}>
         <div className="thumbnail">
-          {cardHover?(<ParkingView/>):" "}
+          {cardHover&&listSelect?(<ParkingView/>):" "}
         </div>
         <div className="title">{cookies.title}</div>
         <div className="content">{cookies.content}</div>
