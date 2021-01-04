@@ -1,19 +1,12 @@
 import React from 'react';
-
 import { useRecoilState } from 'recoil';
 import { ClipperPageNumState } from '../../states/atom';
 import AddDir from './AddDir';
 import Finish from './Finish';
 import Main from './Main';
-import Directory from '../../components/Directory';
+import Directory from './Directory';
+import Login from './Login';
 
-//const pageNum = 0;
-
-// // recoil atom
-// const PageNumber = atom({
-//   key: 'PageNumber',
-//   default: 0,
-// });
 
 export default () => {
   const [pageNum, setPageNum] = useRecoilState(ClipperPageNumState);
@@ -30,4 +23,5 @@ export default () => {
     default:
       return <div>error</div>;
   }
+  // return <Login />
 };

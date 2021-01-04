@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = '';
+const baseURL = 'https://www.cookieparking.com';
 
 // token LocalStorage에서 받아오는지? (그러면 headers param 없애기)
 const postDir = (headers, body) => {
@@ -42,7 +42,7 @@ const getDirAll = headers => {
     const { data } = axios({
       baseURL,
       url: `/directories`,
-      method: 'put',
+      method: 'get',
       headers
     });
     console.log('[SUCCESS] GET ALL DIRECTORIES', data);
