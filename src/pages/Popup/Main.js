@@ -50,22 +50,21 @@ export default () => {
 
   // 몇초간만 Loading 컴포넌트 return 하기
   const [isLoading, setIsLoading] = useState(true);
-  const [isChecked,setIsChecked] = useRecoilState(isCheckedState);
+  const [isChecked, setIsChecked] = useRecoilState(isCheckedState);
 
-  const onChangeCb = (e) =>{
-    if(e.target.checked){
+  const onChangeCb = e => {
+    if (e.target.checked) {
       setIsChecked(true);
       console.log('checked!');
-      chrome.storage.sync.set({ defaultnewtab: isChecked});
-    }else{
+      chrome.storage.sync.set({ defaultnewtab: isChecked });
+    } else {
       setIsChecked(false);
       console.log('unchecked!');
-      chrome.storage.sync.set({defaultnewtab: isChecked});
+      chrome.storage.sync.set({ defaultnewtab: isChecked });
     }
-  }
+  };
 
   useEffect(() => {
-<<<<<<< refs/remotes/origin/dev
     setInterval(() => {
       setIsLoading(false);
     }, 2000);
@@ -73,45 +72,6 @@ export default () => {
 
   if (isLoading & !isclickNextPage) {
     return <Loading />;
-=======
-    setIsLoading(false);
-    // setInterval(() => {
-    //   setIsLoading(false);
-    // }, 3000);
-  }, []);
-
-  if (isLoading & !isclickNextPage) {
-    return (
-      <>
-        <Loading />
-      </>
-    );
-  } else {
-    return (
-      <>
-        <Wrap>
-          {/* <button onClick={onClick}>click</button> */}
-          <LogoWrap>
-            <LogoImg src={logo} />
-            <input type="checkbox" checked={isChecked} onChange={onChangeCb}/>
-            <Text>파킹했습니다!</Text>
-          </LogoWrap>
-          <BtnWrap>
-            <BtnOne onMouseOver={handleBtnOneMouseOver} onMouseLeave={handleBtnOneMouseLeave} isHover={isBtnOneHover} onClick={handleBtnOneClick}>
-              <BtnOneWrap>
-                <BtnOneText isHover={isBtnOneHover}>디렉토리 선택</BtnOneText>
-                <BtnOneArrow src={down_arrow} isHover={isBtnOneHover} />
-                <BtnOneArrowHover src={down_arrow_white} isHover={isBtnOneHover} />
-              </BtnOneWrap>
-            </BtnOne>
-            <BtnTwo onMouseOver={handleBtnTwoMouseOver} onMouseLeave={handleBtnTwoMouseLeave} isHover={isBtnTwoHover}>
-              쿠키파킹으로 이동하기
-            </BtnTwo>
-          </BtnWrap>
-        </Wrap>
-      </>
-    );
->>>>>>> feat: newtab on/off function
   }
 
   return (
