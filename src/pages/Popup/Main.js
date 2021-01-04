@@ -6,7 +6,7 @@ import { useRecoilState } from 'recoil';
 import logo from '../../assets/img/logo.svg';
 import down_arrow from '../../assets/img/down_arrow.svg';
 import down_arrow_white from '../../assets/img/down_arrow_white';
-import { ClipperPageNumState, isClickNextPageState } from '../../states/atom';
+import { ClipperPageNumState, isClickNextPageState, isCheckedState } from '../../states/atom';
 
 export default () => {
   const onClick = () => {
@@ -50,6 +50,19 @@ export default () => {
 
   // 몇초간만 Loading 컴포넌트 return 하기
   const [isLoading, setIsLoading] = useState(true);
+  const [isChecked, setIsChecked] = useRecoilState(isCheckedState);
+
+  const onChangeCb = e => {
+    if (e.target.checked) {
+      setIsChecked(true);
+      console.log('checked!');
+      chrome.storage.sync.set({ defaultnewtab: isChecked });
+    } else {
+      setIsChecked(false);
+      console.log('unchecked!');
+      chrome.storage.sync.set({ defaultnewtab: isChecked });
+    }
+  };
 
   useEffect(() => {
     setInterval(() => {

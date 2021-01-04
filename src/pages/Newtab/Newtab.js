@@ -7,8 +7,8 @@ import useInput from '../../hooks/useInput';
 import AllCookies from '../../components/AllCookies';
 import Directory from '../../components/Directory';
 import theme from '../../assets/themes';
-import { useSetRecoilState } from 'recoil';
-import { CookieState } from '../../states/atom';
+//import { useSetRecoilState } from 'recoil';
+//import { CookieState } from '../../states/atom';
 import Switch from '../../components/Switch';
 
 export default () => {

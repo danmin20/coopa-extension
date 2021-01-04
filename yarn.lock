@@ -6759,6 +6759,11 @@ recoil@^0.1.2:
   resolved "https://registry.yarnpkg.com/recoil/-/recoil-0.1.2.tgz#844c612f535826dbe54c977761a67ded16f6d063"
   integrity sha512-hIRrHlkmW4yITlBFprVYjVPhzPKYrJKoaDrrJtAtbkMeXfXaa/XE5OlyR10n+rNfnKWNToCKb3Z4fo86IGjkzg==
 
+recoilize@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/recoilize/-/recoilize-1.0.0.tgz#b4c1f1fffa2cd5b93a810b1d0f2af64f203e99b6"
+  integrity sha512-CJMPAvW9qodfkOjAiklwbGGh/1u2OlT5PwpDxmClmlaUHez0eY7iViz+drT/5jF5qXkuzunoFf3v3yezKtqbXQ==
+
 redent@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/redent/-/redent-1.0.0.tgz#cf916ab1fd5f1f16dfb20822dd6ec7f730c2afde"
