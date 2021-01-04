@@ -1,87 +1,118 @@
-import React, { useState } from 'react';
 import styled from 'styled-components';
+import React, { useState } from 'react';
 //import seachImg from '../../assets/img/search.svg';
 //import dropdwnImg from '../../assets/img/dropdown.svg';
 import seachImg from '../assets/img/search_icon.svg';
 import dropdwnImg from '../assets/img/dropdown.svg';
+import { listSelectState } from '../states/atom';
+import { CookieState } from '../states/atom';
+import { useRecoilState } from 'recoil';
 
-export default () => {
-  // 나중에 api 연결
-  const items = [
-    '디자인',
-    '마케팅',
-    '프로그래밍',
-    '기획',
-    '쿠키파킹',
-    '사랑해'
-    // {idx:0,title:'디자인'},
-    // {idx:1,title:'마케팅'},
-    // {idx:2,title:'프로그래밍'},
-    // {idx:3,title:'기획'},
-    // {idx:4,title:'쿠키파킹'},
-    // {idx:5,title:'사랑해'}
-  ];
 
-  const [drop, setDrop] = useState(false);
-  const [itemHover, setItemHover] = useState(false);
+const List=({item, idx})=>{
+    const [itemHover,setItemHover]=useState(false);
+    const [listSelect,setListSelect]=useRecoilState(listSelectState);
+    const [cookies,setCookies]=useRecoilState(CookieState);
 
-  const clickList = e => {
-    //쿠키 저장하기 & 서버에 선택한 디렉토리 넘기기
-    console.log(e + ' :list click');
-  };
-  return (
-    <HoverPage>
-      <Directory>
-        <div class="dir-sort">마이크로 인터렉션</div>
-        <button class="dir-btn">
-          <img
-            src={dropdwnImg}
-            alt=""
-            onClick={e => {
-              e.stopPropagation();
-              drop ? setDrop(false) : setDrop(true);
-            }}
-          />
-        </button>
-      </Directory>
-      {drop ? (
-        <ListWrap>
-          <SearchBar>
-            <img class="searchBar-icon" src={seachImg} alt="" />
-            <input class="searchBar-input"></input>
-          </SearchBar>
-          <DirList>
-            <div class="list-div">
-              <div class="list-sort">모든 디렉토리</div>
-              {items.map((items, idx) => (
-                <div class="list-item" key={idx} onMouseOver={() => setItemHover(true)} onMouseLeave={() => setItemHover(false)} onClick={clickList}>
-                  {items}
-                  <div itemHover={itemHover} class="list-item__btn" />
-                </div>
-              ))}
-            </div>
-          </DirList>
-          <BottonWrap>
-            <button class="addBtn">+ 새 디렉토리 만들기</button>
-          </BottonWrap>
-        </ListWrap>
-      ) : (
-        ' '
-      )}
-    </HoverPage>
-  );
-};
+    const ListItemClick=()=>{
+        console.log(item+" :click");
+        console.log(cookies[idx]);
+        setListSelect(true);
+        cookies[idx].directory=item;
+    }
+    return(
+        <>
+        <ListItem onMouseOver={()=>setItemHover(true)} onMouseLeave={()=>setItemHover(false)} onClick={ListItemClick} >
+            {item}
+            <ListItemBtn itemHover={itemHover}/>
+        </ListItem>
+        </>
+    )
+}
 
-const HoverPage = styled.div`
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  top: 0rem;
-  z-index: 10;
+const ListItem=styled.div`
+    font-family: Spoqa Han Sans Neo;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 2rem;
+    line-height: 2.4rem;
+    letter-spacing: -0.02em;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.7rem; 
+    margin-right: 1.1rem;
+    max-width: 26.8rem;
+
+    color: #333333;
+    &:hover{
+        background: #F3F3F3;
+        border-radius: 0.8rem;
+    }
 `;
 
-const Directory = styled.div`
-  width: 32.4rem;
+const ListItemBtn=styled.div`
+    display: ${props=>props.itemHover ? 'box' : 'none'};
+
+    width:1.4rem;
+    height:1.4rem;
+    border-radius:50%;
+    background: #FF7034;
+`;
+
+
+export default ({cookies, keys}) => {
+    const items = [
+        '디자인','마케팅','프로그래밍','기획','쿠키파킹','사랑해'
+    ];
+
+
+    const [drop,setDrop]=useState(false);
+  
+    return (
+        <>
+        <HoverPage>
+          <Directory>
+              <div className='dir-sort'>{cookies.directory}</div>
+              <button className='dir-btn'>
+                  <img src={dropdwnImg} alt='' onClick={(e)=>{
+                      e.stopPropagation();
+                      drop?setDrop(false):setDrop(true);
+                  }}/>
+              </button>
+          </Directory>
+          {drop?(<ListWrap>
+              <SearchBar>
+                  <img className='searchBar-icon' src={seachImg} alt=''/>
+                  <input className='searchBar-input'></input>
+              </SearchBar>
+              <DirList>
+                  <div className='list-div'>
+                      <div className='list-sort'>모든 디렉토리</div>
+                      {items.map((item) => (
+                          <List item={item} idx={keys} />
+                      ))}
+                  </div>
+              </DirList>
+              <BottonWrap>
+                  <button className='addBtn'>+ 새 디렉토리 만들기</button>
+              </BottonWrap>
+          </ListWrap>):(" ")}
+        </HoverPage>
+      </>
+    );
+  };
+
+const HoverPage=styled.div`
+    display:flex;
+    flex-direction:column;
+    top:0rem;
+    position:absolute;
+    z-index:10;
+  `;
+const Directory=styled.div`
+    width: 32.4rem;
   height: 5.7rem;
   margin: 1.5rem;
   margin-bottom: 0;
@@ -102,7 +133,6 @@ const Directory = styled.div`
     align-items: center;
     text-align: center;
     letter-spacing: -0.02em;
-
     color: #333333;
   }
   .dir-btn {
@@ -160,77 +190,43 @@ const SearchBar = styled.div`
     }
   }
 `;
-
-const DirList = styled.div`
-  margin-top: 1.2rem;
-  max-height: 22.2rem;
-  max-width: 26.8rem;
-  padding-left: 1.8rem;
-  .list-sort {
+const DirList= styled.div`
+    margin-top: 1.2rem;
+    max-height: 22.2rem;
+    max-width: 26.8rem;
+    padding-left: 1.8rem;
+    .list-sort {
     margin: 1.4rem;
     font-family: Spoqa Han Sans Neo;
     font-style: normal;
     font-weight: normal;
     font-size: 1rem;
     line-height: 1.2rem;
-
     color: #86888a;
-  }
-  .list-item {
-    font-family: Spoqa Han Sans Neo;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 2rem;
-    line-height: 2.4rem;
-    letter-spacing: -0.02em;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.7rem;
-    margin-right: 1.1rem;
-    max-width: 26.8rem;
-
-    color: #333333;
-    &:hover {
-      background: #f3f3f3;
-      border-radius: 0.8rem;
     }
-  }
-  .list-item__btn {
-    display: ${props => (props.itemHover ? 'inline' : 'none')};
-
-    width: 1.4rem;
-    height: 1.4rem;
-    border-radius: 50%;
-    background: #ff7034;
-  }
-  .list-div {
-    ::-webkit-scrollbar {
-      width: 0.8rem;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: transparent;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: #f1f1f1;
-      border: 1px solid #bfbfbf;
-      border-radius: 8px;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      background: #f1f1f1;
-    }
+    .list-div {
+        ::-webkit-scrollbar {
+            width: 0.8rem;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #f1f1f1;
+            border: 1px solid #bfbfbf;
+            border-radius: 8px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f1f1f1;
+        }
     width: 28.8rem;
     max-height: 21rem;
     overflow: auto;
-  }
+    }
 `;
 const BottonWrap = styled.div`
-  padding: 1.8rem;
-  .addBtn {
+    padding: 1.8rem;
+    .addBtn {
     display: flex;
     justify-content: center;
     font-family: Spoqa Han Sans Neo;
@@ -248,12 +244,12 @@ const BottonWrap = styled.div`
     background: white;
     border-radius: 1rem;
     &:hover {
-      color: white;
-      background: #ff7034;
-      border: none;
+        color: white;
+        background: #ff7034;
+        border: none;
     }
     &:focus {
-      outline: none;
+        outline: none;
     }
-  }
+    }
 `;

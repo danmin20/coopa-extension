@@ -8,8 +8,8 @@ export default () => {
   const cookies = useRecoilValue(CookieState);
   return (
     <Container>
-      {cookies.map((cookie, idx) => (
-        <Card cookies={cookie} key={idx} />
+      {cookies.map((c,idx) => (
+        <Card cookies={c} keys={idx}/>
       ))}
     </Container>
   );
