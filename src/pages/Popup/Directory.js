@@ -17,15 +17,11 @@ export default () => {
   const searchText = useInput('');
 
   const handleBtnClick = () => {
-   
+   //디렉토리 저장 추가
   };
 
   const handleBackArrClick = () => {
     setPageNum(0);
-  };
-
-  const handleDirClick = () => {
-    setPageNum(2);
   };
 
   const handleBtnMouseOver = () => {
@@ -47,7 +43,9 @@ export default () => {
         {item.map((item, idx) => (
           <ReturnDirItems item={item} idx={idx}/>
         ))}
+        <Space />
       </DirList>
+      <Blur/>
       <BottomWrap>
         <SearchInput
           placeholder={"새 디렉토리 명을 입력하세요"} 
@@ -86,7 +84,6 @@ const HeadhWrap = styled.div`
 const BackBtn = styled.div`
   width: 4.2rem;
   height: 4.2rem;
-  border: 0.1rem solid #C4C4C4;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -139,7 +136,6 @@ const DirList = styled.div`
   /* Track */
   ::-webkit-scrollbar-track {
     background: none;
-    border: 0.1rem solid #C4C4C4;
   }
   /* Handle */
   ::-webkit-scrollbar-thumb {
@@ -154,18 +150,23 @@ const DirList = styled.div`
   }
 `;
 
+const Blur = styled.div`
+  width: 29rem;
+  /* height: 0.1rem; */
+  box-shadow: 0rem -1rem 1.5rem 0.8rem rgba(255, 255, 255, 0.75);
+  z-index: 5;
+`;
+
 const BottomWrap = styled.div`
   bottom: 7.85%;
   width: 36.1rem;
   height: 8.9rem;
-  border-radius: 1.2rem;
   background-color: white;
   /* background: linear-gradient(to top, white); */
   display: flex;
   flex-direction: row;
   align-items: center;
-  box-shadow: 0rem -1rem 1.5rem 0.8rem rgba(255, 255, 255, 0.75);
-  z-index: 5;
+  /* box-shadow: 0rem -1rem 1.5rem 0.8rem rgba(255, 255, 255, 0.75); */
 `;
 
 const SearchInput = styled.input`
@@ -205,6 +206,11 @@ const AddBtn = styled.div`
   background-color: ${props => (props.isHover ? '#FF7134' : '#ffffff')};
   box-shadow: ${props => (props.isHover ? '0rem 0rem 1.2rem rgba(0, 0, 0, 0.13)' : 'none')};
   margin-left: 1rem;
+`;
+
+const Space = styled.div`
+  width: 28rem;
+  height: 1rem;
 `;
 
 const ReturnDirItems = ({item, idx}) => {
