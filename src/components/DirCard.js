@@ -5,7 +5,7 @@ import cookieIcon from '../assets/img/cookie_icon.svg';
 import cookieIconW from '../assets/img/cookie_icon_white.svg';
 import updateDirIcon from '../assets/img/update_dir_icon.svg';
 
-export default ({dir}) => {
+export default ({ dir }) => {
   const [isHover, setIsHover] = useState(false);
   const handleBtnMouseOver = () => {
     setIsHover(true);

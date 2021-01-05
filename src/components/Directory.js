@@ -27,7 +27,7 @@ export default ({ isSearched }) => {
       setDirState(result.data.data);
       setLoading(false);
     })();
-  },[searchValue]);
+  }, [searchValue]);
   return (
     <>
       {loading ? (
