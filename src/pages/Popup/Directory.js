@@ -2,10 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { atom, useRecoilState } from 'recoil';
 import { useState } from 'react';
-import back_arrow from '../../assets/img/back_arrow.svg';
-import search_icon from '../../assets/img/search_icon.svg';
-import plus_icon from '../../assets/img/plus_icon.svg';
-import plus_icon_white from '../../assets/img/plus_icon_white.svg';
+import back_arrow from '../../assets/img/back_arrow.svg'; 
 import useInput from '../../hooks/useInput';
 import { ClipperPageNumState } from '../../states/atom';
 
@@ -143,7 +140,6 @@ const DirList = styled.div`
   ::-webkit-scrollbar-track {
     background: none;
     border: 0.1rem solid #C4C4C4;
-    border-radius: 0.5rem;
   }
   /* Handle */
   ::-webkit-scrollbar-thumb {
@@ -177,9 +173,9 @@ const SearchInput = styled.input`
   height: 4.6rem;
   border-radius: 0.8rem;
   background-color: #f3f3f3;
-  color: #B7B7B7;
-  font-size: 1.5rem;
-  line-height: 1.8rem;
+  color: #111111;
+  font-size: 1.7rem;
+  line-height: 2.04rem;
   font-weight: 500;
   appearance: none;
   border: none;
