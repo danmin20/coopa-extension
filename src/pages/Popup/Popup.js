@@ -7,7 +7,6 @@ import Main from './Main';
 import Directory from './Directory';
 import Login from './Login';
 
-
 export default () => {
   const [pageNum, setPageNum] = useRecoilState(ClipperPageNumState);
 

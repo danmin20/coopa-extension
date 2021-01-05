@@ -1,21 +1,19 @@
-import React,{useEffect} from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import logo from '../../assets/img/logo.svg';
 
 const Loading = () => {
-  useEffect(()=>{
+  useEffect(() => {
     chrome.runtime.sendMessage({ popupOpen: true });
-  }, [])
-  
+  }, []);
+
   return (
-    <>
-      <Wrap>
-        <LogoWrap>
-          <LogoImg src={logo} />
-          <Text>쿠키 파킹 중..</Text>
-        </LogoWrap>
-      </Wrap>
-    </>
+    <Wrap>
+      <LogoWrap>
+        <LogoImg src={logo} />
+        <Text>쿠키 파킹 중..</Text>
+      </LogoWrap>
+    </Wrap>
   );
 };
 
