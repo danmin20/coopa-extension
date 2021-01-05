@@ -7,20 +7,8 @@ import { listSelectState } from '../states/atom';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import deleteicon from '../assets/img/cookiehover_icn_delete.svg';
 import shereicon from '../assets/img/cookiehover_icn_share.svg';
+import { useEffect } from 'react';
 
-const ParkingView = ({ cookies, idx }) => {
-  const [listSelect, setListSelect] = useRecoilState(listSelectState);
-
-  setTimeout(() => {
-    setListSelect(false);
-  }, 1000);
-
-  return (
-    <Parking listSelect={listSelect} thumbnail={cookies.thumbnail}>
-      <div className="parking--title">{cookies.directory}</div>
-    </Parking>
-  );
-};
 
 // !안채린 깃 마스터 고지가 앞이다!
 
@@ -50,17 +38,26 @@ const Parking = styled.div`
 
 export default ({ cookies, idx }) => {
   const [cardHover, setCardHover] = useState(false);
+  const [parkingState, setParkingState] = useState(false);
   const listSelect = useRecoilValue(listSelectState);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setParkingState(false);
+    }, 1000);
+  }, [parkingState]);
 
   return (
     <Container onMouseEnter={() => setCardHover(true)} onMouseLeave={() => setCardHover(false)}>
-      {cardHover && !listSelect && <CardHover cookies={cookies} idx={idx} />}
+      {cardHover && !parkingState && <CardHover cookies={cookies} idx={idx} setParkingState={setParkingState} />}
       <Contents thumbnail={cookies.thumbnail}>
         <div className="thumbnail">
-          {cardHover && listSelect && <ParkingView cookies={cookies} />}
-          {cardHover && !listSelect && <DeleteIcon src={deleteicon} />}
+          {parkingState && <Parking listSelect={listSelect} thumbnail={cookies.thumbnail}>
+            <div className="parking--title">{cookies.directory}</div>
+          </Parking>}
+          {cardHover && !parkingState && <DeleteIcon src={deleteicon} />}
           {/* 웹 과제 노션 보면서 해보기,. */}
-          {cardHover && !listSelect && <ShereIcon src={shereicon} />}
+          {cardHover && !parkingState && <ShereIcon src={shereicon} />}
           {/* url 복사 */}
         </div>
         {cardHover && <ThumbnailHover thumbnail={cookies.thumbnail}> </ThumbnailHover>}
