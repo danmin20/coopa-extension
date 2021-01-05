@@ -8,8 +8,8 @@ import theme from '../../assets/themes';
 import Switch from '../../components/Switch';
 import Header from '../../components/Header';
 import HomeBoard from '../../components/HomeBoard';
-import DelCookieModal from '../../components/DelCookieModal';
-import DirFixModal from '../../components/DirFixModal';
+// import DelCookieModal from '../../components/DelCookieModal';
+// import DirFixModal from '../../components/DirFixModal';
 
 export default () => {
   const [isSelected, setIsSelected] = useState('cookie');
@@ -45,7 +45,7 @@ export default () => {
           <TabBtn isSelected={isSelected === 'cookie'} onClick={() => handleTab('cookie')}>
             All cookies
           </TabBtn>
-          <TabBtn style={{ marginLeft: '9.5rem' }} isSelected={isSelected === 'directory'} onClick={() => handleTab('directory')}>
+          <TabBtn style={{ marginLeft: '2rem' }} isSelected={isSelected === 'directory'} onClick={() => handleTab('directory')}>
             Directory
           </TabBtn>
           <div style={{ marginLeft: 'auto' }}>
@@ -76,7 +76,7 @@ const Contents = styled.div`
   ${props =>
     props.isSearched &&
     css`
-      margin-top: -4.7rem;
+      margin-top: -7.5rem;
     `}
 `;
 
@@ -118,6 +118,7 @@ const TabBtn = styled.div`
   font-size: 2.8rem;
   font-weight: 600;
   line-height: 4.2rem;
+  padding: 1.5rem;
   :hover {
     color: ${theme.colors.orange};
   }

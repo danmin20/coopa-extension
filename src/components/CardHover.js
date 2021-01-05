@@ -5,7 +5,7 @@ import { listSelectState } from '../states/atom';
 import { CookieState } from '../states/atom';
 import { useRecoilState } from 'recoil';
 
-const List = ({ item,idx }) => {
+const List = ({ item, idx }) => {
   const [itemHover, setItemHover] = useState(false);
   const [listSelect, setListSelect] = useRecoilState(listSelectState);
   const [cookies, setCookies] = useRecoilState(CookieState);
@@ -16,13 +16,12 @@ const List = ({ item,idx }) => {
     setListSelect(true);
     cookies[idx].directory = item;
   };
+
   return (
-    <>
-      <ListItem onMouseOver={() => setItemHover(true)} onMouseLeave={() => setItemHover(false)} onClick={ListItemClick}>
-        {item}
-        <ListItemBtn itemHover={itemHover} />
-      </ListItem>
-    </>
+    <ListItem onMouseOver={() => setItemHover(true)} onMouseLeave={() => setItemHover(false)} onClick={ListItemClick}>
+      {item}
+      <ListItemBtn itemHover={itemHover} />
+    </ListItem>
   );
 };
 
@@ -50,7 +49,6 @@ const ListItem = styled.div`
 
 const ListItemBtn = styled.div`
   display: ${props => (props.itemHover ? 'box' : 'none')};
-
   width: 1.4rem;
   height: 1.4rem;
   border-radius: 50%;
@@ -71,9 +69,7 @@ export default ({ cookies, idx }) => {
         }}
       >
         <div className="dir-sort">{cookies.directory}</div>
-        <button className="dir-btn">
-          <img src={dropdwnImg} alt="" />
-        </button>
+        <img src={dropdwnImg} style={{ marginLeft: '1.3rem' }} />
       </Directory>
       {drop && (
         <ListWrap>
@@ -87,7 +83,7 @@ export default ({ cookies, idx }) => {
             </div>
           </DirList>
           <BottonWrap>
-            <input class='addInput' placeholder="새 디렉토리 명을 입력하세요"/>
+            <input class="addInput" placeholder="새 디렉토리 명을 입력하세요" />
             <button className="addBtn">저장</button>
           </BottonWrap>
         </ListWrap>
@@ -102,11 +98,12 @@ const HoverPage = styled.div`
   top: 0rem;
   position: absolute;
   z-index: 10;
+  width: 100%;
+  padding: 1.5rem;
 `;
 const Directory = styled.div`
-  width: 32.4rem;
+  width: 100%;
   height: 5.7rem;
-  margin: 1.5rem;
   margin-bottom: 0;
   background: rgba(255, 255, 255, 0.95);
   box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.35);
@@ -130,10 +127,10 @@ const Directory = styled.div`
 `;
 
 const ListWrap = styled.div`
-  width: 32.7rem;
+  width: 100%;
   height: 37rem;
   border-radius: 1.2rem;
-  margin: 1.6rem;
+  margin-top: 1.6rem;
   padding-top: 1.9rem;
   background: #ffffff;
   box-shadow: 0px 0.2rem 2rem rgba(0, 0, 0, 0.2);
@@ -171,14 +168,13 @@ const DirList = styled.div`
     width: 28.8rem;
     max-height: 25.9rem;
     overflow: auto;
-    }
-    .list-gradientBox{
-        position: absolute;
-        top: 33.2rem;
-        width: 268px;
-        height: 56px;
-        background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #FFFFFF 71.87%);
-    }
+  }
+  .list-gradientBox {
+    position: absolute;
+    top: 33.2rem;
+    width: 268px;
+    height: 56px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #ffffff 71.87%);
   }
 `;
 const BottonWrap = styled.div`
@@ -212,20 +208,19 @@ const BottonWrap = styled.div`
       outline: none;
     }
   }
-  .addInput{
+  .addInput {
     width: 20.4rem;
     height: 4.6rem;
-    background: #F3F3F3;
+    background: #f3f3f3;
     border-radius: 0.8rem;
-    margin-right:0.8rem;
+    margin-right: 0.8rem;
     font-family: Spoqa Han Sans Neo;
     font-weight: bold;
     font-size: 1.4rem;
-    text-align:center;
-    color: #B7B7B7;
-    &:focus{
-        outline:none;
+    text-align: center;
+    color: #b7b7b7;
+    &:focus {
+      outline: none;
     }
   }
-
 `;
