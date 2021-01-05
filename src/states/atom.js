@@ -88,10 +88,10 @@ export const isCheckedState = atom({
 
 export const DirState = atom({
   key: 'DirState',
-  deafult: 0,
+  deafult: 0
 });
 
 export const SearchState = atom({
   key: 'SearchState',
-  default: '',
+  default: ''
 });

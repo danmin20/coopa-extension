@@ -36,7 +36,7 @@ const updateDir = async (headers, body, id) => {
   }
 };
 
-const getDirAll = async (headers) => {
+const getDirAll = async headers => {
   try {
     const data = axios({
       baseURL,
@@ -118,7 +118,13 @@ const addCookieToDir = async (headers, body) => {
 };
 
 const dirApi = {
-  postDir, updateDir, getDirAll, getDirById, getDirSearch, deleteDir, addCookieToDir
+  postDir,
+  updateDir,
+  getDirAll,
+  getDirById,
+  getDirSearch,
+  deleteDir,
+  addCookieToDir
 };
 
 export default dirApi;
