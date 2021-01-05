@@ -22,6 +22,8 @@ const ParkingView = ({ cookies, idx }) => {
   );
 };
 
+// !안채린 깃 마스터 고지가 앞이다!
+
 const Parking = styled.div`
   position: relative;
   width: 100%;
