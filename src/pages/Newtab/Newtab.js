@@ -3,8 +3,6 @@ import styled, { css } from 'styled-components';
 import AllCookies from '../../components/AllCookies';
 import Directory from '../../components/Directory';
 import theme from '../../assets/themes';
-//import { useSetRecoilState } from 'recoil';
-//import { CookieState } from '../../states/atom';
 import Switch from '../../components/Switch';
 import Header from '../../components/Header';
 import HomeBoard from '../../components/HomeBoard';
@@ -14,6 +12,7 @@ import HomeBoard from '../../components/HomeBoard';
 export default () => {
   const [isSelected, setIsSelected] = useState('cookie');
   const [isSearched, setIsSearched] = useState(false);
+  const [isToggled, setIsToggled] = useState(false);
 
   // const setCookieState = useSetRecoilState(CookieState);
   const handleTab = tab => {
@@ -21,24 +20,17 @@ export default () => {
     else setIsSelected('directory');
   };
   const onToggleSwitch = e => {
-    if (e.target.value) {
-      // true 면
-      // setCookieState 에 안본 쿠키들만 골라서 받아오기
-    } else {
-      // false 면
-      // setCookieState 에 전체 쿠키 받아오기
-    }
-    // or useRef 사용하여 .isChecked props 사용하기
+    if (e.target.value) setIsToggled(true);
+    else setIsToggled(false);
   };
+
   useEffect(() => {
     console.log('rendered!');
-    // 최초에 AllCookies 데이터 받아오기
-    // setCookieState();
   }, []);
 
   return (
     <div className="container">
-      <Header setIsSelected={setIsSelected} setIsSearched={setIsSearched} />
+      <Header setIsSelected={setIsSelected} isSearched={isSearched} setIsSearched={setIsSearched} />
       <HomeBoard setIsSearched={setIsSearched} isSearched={isSearched} />
       <Contents isSearched={isSearched}>
         <ContentsHeader selected>
@@ -59,13 +51,13 @@ export default () => {
                   </span>
                 </div>
               ) : (
-                // 버튼 마크업 필요
-                <div className="">새 디렉토리 만들기</div>
+                <div className="dirbtn">
+                  <div className="dirbtn__desc">+ 새 디렉토리 만들기</div>
+                </div>
               ))}
           </div>
         </ContentsHeader>
-        {/* allcookie와 directory의 컴포넌트에 props로 issearched 넘기고 그에 따른 로직 구현 및 검색결과 게수 노출 필요 */}
-        {isSelected === 'cookie' ? <AllCookies /> : <Directory />}
+        {isSelected === 'cookie' ? <AllCookies isSearched={isSearched} isToggled={isToggled} /> : <Directory isSearched={isSearched} />}
       </Contents>
     </div>
   );
@@ -102,6 +94,18 @@ const ContentsHeader = styled.div`
       font-size: 2rem;
       color: #404040;
       margin-left: 0.8rem;
+    }
+  }
+  .dirbtn {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &__desc {
+      margin-left: 1.7rem;
+      color: ${theme.colors.orange};
+      font-size: 2.4rem;
+      font-weight: 500;
     }
   }
 `;
