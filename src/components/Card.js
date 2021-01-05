@@ -6,7 +6,7 @@ import CardHover from './CardHover';
 import { listSelectState } from '../states/atom';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
-const ParkingView = ({}) => {
+const ParkingView = ({cookies}) => {
   const [listSelect, setListSelect] = useRecoilState(listSelectState);
 
   setTimeout(() => {
@@ -14,7 +14,7 @@ const ParkingView = ({}) => {
   }, 1000); // 서버랑 통신하는 코드 (채린 생각)
   return (
     <Parking listSelect={listSelect}>
-      <div className="parking">{/*디렉토리 이름*/}</div>
+      <div className="parking--title">{cookies.directory}</div>
     </Parking>
   );
 };
@@ -29,8 +29,7 @@ const ParkingView = ({}) => {
 // 최종결론-> parking을 따로빼지 말고 하단container랑 합치고, 계속 서버는 받는 걸로. 타임 설정, 인터랙션? 등은 CSS로 구현 가능한 범위로 판단!
 
 const Parking = styled.div`
-  .parking {
-    display: ${props => (props.listSelect ? 'box' : 'none')};
+    display: box;
     position: absolute;
     top: 0px;
     left: 0px;
@@ -40,7 +39,6 @@ const Parking = styled.div`
     border-radius: 1.2rem;
     z-index: 10;
     background: rgba(0, 0, 0, 0.3);
-  }
   .parking--title {
     font-family: Spoqa Han Sans Neo;
     font-style: normal;
@@ -55,15 +53,15 @@ const Parking = styled.div`
   }
 `;
 
-export default ({ cookies, keys }) => {
+export default ({ cookies, idx }) => {
   const [cardHover, setCardHover] = useState(false);
   const listSelect = useRecoilValue(listSelectState);
 
   return (
     <Container onMouseEnter={() => setCardHover(true)} onMouseLeave={() => setCardHover(false)}>
-      {cardHover && !listSelect && <CardHover cookies={cookies} keys={keys} />}
+      {cardHover && !listSelect && <CardHover cookies={cookies} idx={idx} />}
       <Contents thumbnail={cookies.thumbnail}>
-        <div className="thumbnail">{cardHover && <ParkingView />}</div>
+        <div className="thumbnail">{cardHover && listSelect && <ParkingView cookies={cookies} />}</div>
         <div className="title">{cookies.title}</div>
         <div className="content">{cookies.content}</div>
         <div className="profile">
