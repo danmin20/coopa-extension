@@ -3,8 +3,8 @@ import styled, { css } from 'styled-components';
 import Glass from '../assets/img/glass.svg';
 import theme from '../assets/themes';
 import useInput from '../hooks/useInput';
-import {useSetRecoilState} from 'recoil';
-import {SearchState} from '../states/atom';
+import { useSetRecoilState } from 'recoil';
+import { SearchState } from '../states/atom';
 
 export default ({ isSearched, setIsSearched }) => {
   const searchText = useInput('');
@@ -41,6 +41,7 @@ const HomeBoard = styled.div`
       box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.12);
       padding-top: 4rem;
       padding-bottom: 9.2rem;
+      // Todo : scroll 시 homeboard & header fix
     `}
   display: flex;
   justify-content: center;
