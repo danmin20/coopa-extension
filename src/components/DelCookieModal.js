@@ -2,16 +2,17 @@ import styled from 'styled-components';
 import React, {useState} from 'react';
 
 export default () => {
-    const [isClick, setIsClick] = useState(false);
+    const [isClose, setIsClose] = useState(false);
     const [isDelHover, setIsDelHover] = useState(false);
     const [isCancleHover, setIsCancleHover] = useState(false);
 
     const handleClick = () => {
-        setIsClick(true);
+        setIsClose(true);
     }
 
     const handleDelClick = () => {
-        // 디렉토리 삭제
+        // 디렉토리 삭제 추가하기
+        setIsClose(true);
     }
 
     const handleDelMouseMove = () => {
@@ -33,8 +34,8 @@ export default () => {
     
     return(
         <>
-            <Wrap onClick={handleClick} isClick={isClick} />
-            <ModalWrap isClick={isClick}>
+            <Wrap onClick={handleClick} isClose={isClose} />
+            <ModalWrap isClose={isClose}>
                 <Text>쿠키 삭제</Text>
                 <SmallText>이 쿠키를 정말 삭제하시겠어요?</SmallText>
                 <BtnWrap>
@@ -68,7 +69,7 @@ const Wrap = styled.div`
     top:0%;
     left:0%;
     background: rgba(0, 0, 0, 0.5);
-    display: ${props=>props.isClick ? 'none' : 'box'};
+    display: ${props=>props.isClose ? 'none' : 'box'};
     flex-direction: column;
 `;
 
@@ -83,7 +84,7 @@ const ModalWrap = styled.div`
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    display: ${props=>props.isClick ? 'none' : 'flex'};
+    display: ${props=>props.isClose ? 'none' : 'flex'};
     flex-direction: column;
 `;
 
