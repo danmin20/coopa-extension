@@ -2,8 +2,7 @@ import axios from 'axios';
 
 const baseURL = 'https://www.cookieparking.com';
 
-// token LocalStorage에서 받아오는지? (그러면 headers param 없애기)
-const postDir = (headers, body) => {
+const postDir = async (headers, body) => {
   try {
     const { data } = axios({
       baseURL,
@@ -20,7 +19,7 @@ const postDir = (headers, body) => {
   }
 };
 
-const updateDir = (headers, body, id) => {
+const updateDir = async (headers, body, id) => {
   try {
     const { data } = axios({
       baseURL,
@@ -37,9 +36,9 @@ const updateDir = (headers, body, id) => {
   }
 };
 
-const getDirAll = headers => {
+const getDirAll = async (headers) => {
   try {
-    const { data } = axios({
+    const data = axios({
       baseURL,
       url: `/directories`,
       method: 'get',
@@ -53,7 +52,7 @@ const getDirAll = headers => {
   }
 };
 
-const getDirById = (headers, id) => {
+const getDirById = async (headers, id) => {
   try {
     const { data } = axios({
       baseURL,
@@ -69,9 +68,9 @@ const getDirById = (headers, id) => {
   }
 };
 
-const getDirSearch = (headers, word) => {
+const getDirSearch = async (headers, word) => {
   try {
-    const { data } = axios({
+    const data = axios({
       baseURL,
       url: `/directories/search?word=${word}`,
       method: 'get',
@@ -85,7 +84,7 @@ const getDirSearch = (headers, word) => {
   }
 };
 
-const deleteDir = (headers, id) => {
+const deleteDir = async (headers, id) => {
   try {
     const { data } = axios({
       baseURL,
@@ -101,7 +100,7 @@ const deleteDir = (headers, id) => {
   }
 };
 
-const addCookieToDir = (headers, body) => {
+const addCookieToDir = async (headers, body) => {
   try {
     const { data } = axios({
       baseURL,
@@ -118,6 +117,8 @@ const addCookieToDir = (headers, body) => {
   }
 };
 
-export default () => {
-  postDir, updateDir, getDirAll, getDirById, getDirSearch, deleteDir, addCookieToDir;
+const dirApi = {
+  postDir, updateDir, getDirAll, getDirById, getDirSearch, deleteDir, addCookieToDir
 };
+
+export default dirApi;
