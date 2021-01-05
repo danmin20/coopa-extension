@@ -6,7 +6,7 @@ import useInput from '../hooks/useInput';
 import { useSetRecoilState } from 'recoil';
 import { SearchState } from '../states/atom';
 
-export default ({ isSearched, setIsSearched }) => {
+export default ({ isSearched, setIsSearched, scrollTop }) => {
   const searchText = useInput('');
   const setSearchState = useSetRecoilState(SearchState);
 
@@ -21,7 +21,7 @@ export default ({ isSearched, setIsSearched }) => {
   };
 
   return (
-    <HomeBoard isSearched={isSearched}>
+    <HomeBoard isSearched={isSearched} scrollTop={scrollTop}>
       <div className="search-bar">
         <img className="search-bar__icon" src={Glass} />
         <input onKeyPress={onKeyPress} value={searchText.value} onChange={searchText.onChange} className="search-bar__input" type="text" placeholder="내가 추가한 쿠키를 검색해 보세요!" />
@@ -43,6 +43,16 @@ const HomeBoard = styled.div`
       padding-bottom: 9.2rem;
       // Todo : scroll 시 homeboard & header fix
     `}
+  /* ${props =>
+    props.isSearched &&
+    props.scrollTop !== 0 &&
+    css`
+      position: fixed;
+      z-index: 3;
+      padding-top: 4rem;
+      padding-bottom: 4rem;
+      box-shawdow: 0px 0px 25px rgba(0, 0, 0, 0.12);
+    `} */
   display: flex;
   justify-content: center;
   align-items: center;
