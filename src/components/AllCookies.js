@@ -9,7 +9,7 @@ export default () => {
   return (
     <Container>
       {cookies.map((cookie, idx) => (
-        <Card cookies={cookie} key={idx} />
+        <Card cookies={cookie} key={idx} idx={idx} />
       ))}
     </Container>
   );
@@ -18,7 +18,8 @@ export default () => {
 const Container = styled.div`
   max-width: 100vw;
   margin-top: 5.2rem;
+  margin-bottom: 3.5rem;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(35rem, auto));
-  grid-gap: 2.8rem;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 3.2rem;
 `;

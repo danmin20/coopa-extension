@@ -1,30 +1,25 @@
 import React, { useState, useEffect } from 'react';
-import Logo from '../../assets/img/logo_main.svg';
-import Profile from '../../assets/img/profile.svg';
-import Glass from '../../assets/img/glass.svg';
 import styled, { css } from 'styled-components';
-import useInput from '../../hooks/useInput';
 import AllCookies from '../../components/AllCookies';
 import Directory from '../../components/Directory';
 import theme from '../../assets/themes';
-import { useSetRecoilState } from 'recoil';
-import { CookieState } from '../../states/atom';
+//import { useSetRecoilState } from 'recoil';
+//import { CookieState } from '../../states/atom';
 import Switch from '../../components/Switch';
+import Header from '../../components/Header';
+import HomeBoard from '../../components/HomeBoard';
+// import DelCookieModal from '../../components/DelCookieModal';
+// import DirFixModal from '../../components/DirFixModal';
 
 export default () => {
   const [isSelected, setIsSelected] = useState('cookie');
+  const [isSearched, setIsSearched] = useState(false);
+
   // const setCookieState = useSetRecoilState(CookieState);
   const handleTab = tab => {
     if (tab === 'cookie') setIsSelected('cookie');
     else setIsSelected('directory');
   };
-  const handleRefresh = () => {
-    console.log('mainLogo clicked');
-    setIsSelected('cookie');
-    // (1) AllCookies tab으로 이동
-    // (2) 새로 데이터 받아오기(리렌더링)
-  };
-  const searchText = useInput('');
   const onToggleSwitch = e => {
     if (e.target.value) {
       // true 면
@@ -43,112 +38,51 @@ export default () => {
 
   return (
     <div className="container">
-      <Header>
-        <div className="main-logo" onClick={handleRefresh}>
-          <img className="main-logo__img" src={Logo} />
-        </div>
-        <a className="profile" href="#">
-          <img className="profile__img" src={Profile} /> {/* Todo : mypage link 걸기 */}
-        </a>
-      </Header>
-      <HomeBoard>
-        <div className="search-bar">
-          <img className="search-bar__icon" src={Glass} />
-          <input value={searchText.value} onChange={searchText.onChange} className="search-bar__input" type="text" placeholder="내가 추가한 쿠키를 검색해 보세요!" />
-        </div>
-      </HomeBoard>
-      <Contents>
+      <Header setIsSelected={setIsSelected} setIsSearched={setIsSearched} />
+      <HomeBoard setIsSearched={setIsSearched} isSearched={isSearched} />
+      <Contents isSearched={isSearched}>
         <ContentsHeader selected>
           <TabBtn isSelected={isSelected === 'cookie'} onClick={() => handleTab('cookie')}>
             All cookies
           </TabBtn>
-          <TabBtn style={{ marginLeft: '9.5rem' }} isSelected={isSelected === 'directory'} onClick={() => handleTab('directory')}>
+          <TabBtn style={{ marginLeft: '2rem' }} isSelected={isSelected === 'directory'} onClick={() => handleTab('directory')}>
             Directory
           </TabBtn>
-          <div className="empty"></div>
-          <div className="toggle">
-            <div className="toggle__help">?</div>
-            <div className="toggle__title">안 읽은 쿠키 모아보기</div>
-            <span style={{ marginLeft: '15px' }}>
-              <Switch onChange={onToggleSwitch} />
-            </span>
+          <div style={{ marginLeft: 'auto' }}>
+            {!isSearched &&
+              (isSelected === 'cookie' ? (
+                <div className="toggle">
+                  <div className="toggle__help">?</div>
+                  <div className="toggle__title">안 읽은 쿠키 모아보기</div>
+                  <span style={{ marginLeft: '15px' }}>
+                    <Switch onChange={onToggleSwitch} />
+                  </span>
+                </div>
+              ) : (
+                // 버튼 마크업 필요
+                <div className="">새 디렉토리 만들기</div>
+              ))}
           </div>
         </ContentsHeader>
-        {(() => {
-          if (isSelected === 'cookie') return <AllCookies />;
-          else return <Directory />;
-        })()}
+        {/* allcookie와 directory의 컴포넌트에 props로 issearched 넘기고 그에 따른 로직 구현 및 검색결과 게수 노출 필요 */}
+        {isSelected === 'cookie' ? <AllCookies /> : <Directory />}
       </Contents>
     </div>
   );
 };
 
-const Header = styled.div`
-  width: 100%;
-  height: 6.5rem;
-  background-color: ${theme.colors.black};
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  .main-logo {
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    margin-left: 2.2rem;
-  }
-  .profile {
-    margin-right: 2.2rem;
-  }
-`;
-
-const HomeBoard = styled.div`
-  width: 100%;
-  height: 28rem;
-  background-color: ${theme.colors.homeBoardGray};
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  .search-bar {
-    position: relative;
-    width: 65.6rem;
-    height: 7rem;
-    background-color: ${theme.colors.white};
-    border-radius: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    &__icon {
-      position: absolute;
-      left: 2.2rem;
-    }
-    &__input {
-      width: 40rem;
-      max-height: 100%;
-      border: none;
-      outline: none;
-      background-color: ${theme.colors.white};
-      text-align: center;
-      font-size: 2.6rem;
-      ::placeholder {
-        color: #818181;
-      }
-      :focus {
-        ::placeholder {
-          color: transparent;
-        }
-      }
-    }
-  }
-`;
-
 const Contents = styled.div`
   margin: 4.8rem 19.7rem 0;
+  ${props =>
+    props.isSearched &&
+    css`
+      margin-top: -7.5rem;
+    `}
 `;
 
 const ContentsHeader = styled.div`
   display: flex;
   .toggle {
-    margin-left: auto;
     display: flex;
     align-items: center;
     &__help {
@@ -184,6 +118,7 @@ const TabBtn = styled.div`
   font-size: 2.8rem;
   font-weight: 600;
   line-height: 4.2rem;
+  padding: 1.5rem;
   :hover {
     color: ${theme.colors.orange};
   }

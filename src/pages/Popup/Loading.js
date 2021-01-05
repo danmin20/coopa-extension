@@ -4,7 +4,7 @@ import logo from '../../assets/img/logo.svg';
 
 const Loading = () => {
   useEffect(()=>{
-    chrome.runtime.sendMessage({popupOpen: true});
+    chrome.runtime.sendMessage({ popupOpen: true });
   }, [])
   
   return (
