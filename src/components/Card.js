@@ -5,6 +5,8 @@ import theme from '../assets/themes';
 import CardHover from './CardHover';
 import { listSelectState } from '../states/atom';
 import { useRecoilState, useRecoilValue } from 'recoil';
+import deleteicon from '../assets/img/cookiehover_icn_delete.svg';
+import shereicon from '../assets/img/cookiehover_icn_share.svg';
 
 const ParkingView = ({ cookies, idx }) => {
   const [listSelect, setListSelect] = useRecoilState(listSelectState);
@@ -52,8 +54,15 @@ export default ({ cookies, idx }) => {
     <Container onMouseEnter={() => setCardHover(true)} onMouseLeave={() => setCardHover(false)}>
       {cardHover && !listSelect && <CardHover cookies={cookies} idx={idx} />}
       <Contents thumbnail={cookies.thumbnail}>
-        <div className="thumbnail">{cardHover && listSelect && <ParkingView cookies={cookies} />}</div>
+        <div className="thumbnail">
+          {cardHover && listSelect && <ParkingView cookies={cookies} />}
+          {cardHover && !listSelect && <DeleteIcon src={deleteicon} />}
+          {/* 웹 과제 노션 보면서 해보기,. */}
+          {cardHover && !listSelect && <ShereIcon src={shereicon} />}
+          {/* url 복사 */}
+        </div>
         {cardHover && <ThumbnailHover thumbnail={cookies.thumbnail}> </ThumbnailHover>}
+
         <div className="title">{cookies.title}</div>
         <div className="content">{cookies.content}</div>
         <div className="profile">
@@ -80,6 +89,24 @@ const Container = styled.div`
   }
 `;
 
+const DeleteIcon = styled.img`
+  width: 4.8rem;
+  height: 4.8rem;
+  z-index: 100;
+  position: absolute;
+  bottom: 10%;
+  right: 5%;
+`;
+
+const ShereIcon = styled.img`
+  width: 4.8rem;
+  height: 4.8rem;
+  z-index: 100;
+  position: absolute;
+  bottom: 10%;
+  right: 20%;
+`;
+
 const ThumbnailHover = styled.div`
   width: 100%;
   height: 0;
@@ -100,6 +127,7 @@ const Contents = styled.div`
   left: 0;
 
   .thumbnail {
+    position: relative;
     width: 100%;
     height: 0;
     padding-bottom: ${props => (!props.thumbnail ? 'calc((160 / 360) * 100%)' : 'calc((220 / 360) * 100%)')};
