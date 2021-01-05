@@ -8,6 +8,8 @@ import theme from '../../assets/themes';
 import Switch from '../../components/Switch';
 import Header from '../../components/Header';
 import HomeBoard from '../../components/HomeBoard';
+import DelCookieModal from '../../components/DelCookieModal';
+import DirFixModal from '../../components/DirFixModal';
 
 export default () => {
   const [isSelected, setIsSelected] = useState('cookie');
