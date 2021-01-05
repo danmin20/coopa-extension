@@ -4,7 +4,7 @@ const baseURL = 'https://www.cookieparking.com';
 
 const postDir = async (headers, body) => {
   try {
-    const { data } = axios({
+    const { data } = await axios({
       baseURL,
       url: '/directories',
       method: 'post',
@@ -21,7 +21,7 @@ const postDir = async (headers, body) => {
 
 const updateDir = async (headers, body, id) => {
   try {
-    const { data } = axios({
+    const { data } = await axios({
       baseURL,
       url: `/directories/${id}`,
       method: 'put',
@@ -38,7 +38,7 @@ const updateDir = async (headers, body, id) => {
 
 const getDirAll = async headers => {
   try {
-    const data = axios({
+    const { data } = await axios({
       baseURL,
       url: `/directories`,
       method: 'get',
@@ -54,7 +54,7 @@ const getDirAll = async headers => {
 
 const getDirById = async (headers, id) => {
   try {
-    const { data } = axios({
+    const { data } = await axios({
       baseURL,
       url: `/directories/${id}`,
       method: 'get',
@@ -70,7 +70,7 @@ const getDirById = async (headers, id) => {
 
 const getDirSearch = async (headers, word) => {
   try {
-    const data = axios({
+    const { data } = await axios({
       baseURL,
       url: `/directories/search?word=${word}`,
       method: 'get',
@@ -86,7 +86,7 @@ const getDirSearch = async (headers, word) => {
 
 const deleteDir = async (headers, id) => {
   try {
-    const { data } = axios({
+    const { data } = await axios({
       baseURL,
       url: `/directories/${id}`,
       method: 'delete',
@@ -102,7 +102,7 @@ const deleteDir = async (headers, id) => {
 
 const addCookieToDir = async (headers, body) => {
   try {
-    const { data } = axios({
+    const { data } = await axios({
       baseURL,
       url: `/directories/add/cookie`,
       method: 'post',

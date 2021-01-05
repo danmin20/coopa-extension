@@ -6,7 +6,7 @@ import theme from '../assets/themes';
 import { useSetRecoilState } from 'recoil';
 import { SearchState } from '../states/atom';
 
-export default ({ setIsSelected, isSearched, setIsSearched }) => {
+export default ({ setIsSelected, isSearched, setIsSearched, scrollTop }) => {
   const setSearchState = useSetRecoilState(SearchState);
   const handleRefresh = () => {
     // 메인 로고 클릭시 Allcookies 컴포넌트 렌더링
@@ -16,7 +16,7 @@ export default ({ setIsSelected, isSearched, setIsSearched }) => {
     setIsSearched(false);
   };
   return (
-    <Header isSearched={isSearched}>
+    <Header isSearched={isSearched} scrollTop={scrollTop}>
       <div className="main-logo" onClick={handleRefresh}>
         <img className="main-logo__img" src={Logo} />
       </div>
@@ -34,12 +34,15 @@ const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  ${props =>
+  /* ${props =>
     props.isSearched &&
+    props.scrollTop !== 0 &&
     css`
+      padding-top: 7.5rem;
+      padding-bottom: 3rem;
       position: fixed;
-      z-index: 2;
-    `}
+      z-index: 4;
+    `} */
   .main-logo {
     cursor: pointer;
     display: flex;

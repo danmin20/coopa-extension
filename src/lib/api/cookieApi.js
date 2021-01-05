@@ -36,7 +36,7 @@ const getCookies = async headers => {
   }
 };
 
-const getCookiesUnRead = headers => {
+const getCookiesUnRead = async headers => {
   try {
     const data = axios({
       baseURL,

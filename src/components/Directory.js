@@ -23,8 +23,7 @@ export default ({ isSearched }) => {
       } else {
         result = await dirApi.getDirAll(token);
       }
-      console.log(result);
-      setDirState(result.data.data);
+      setDirState(result.data);
       setLoading(false);
     })();
   }, [searchValue]);

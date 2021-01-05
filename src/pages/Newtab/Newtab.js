@@ -13,25 +13,24 @@ export default () => {
   const [isSelected, setIsSelected] = useState('cookie');
   const [isSearched, setIsSearched] = useState(false);
   const [isToggled, setIsToggled] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
-  // const setCookieState = useSetRecoilState(CookieState);
   const handleTab = tab => {
     if (tab === 'cookie') setIsSelected('cookie');
     else setIsSelected('directory');
   };
+
   const onToggleSwitch = e => {
     if (e.target.value) setIsToggled(true);
     else setIsToggled(false);
   };
 
-  useEffect(() => {
-    console.log('rendered!');
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <div className="container">
-      <Header setIsSelected={setIsSelected} isSearched={isSearched} setIsSearched={setIsSearched} />
-      <HomeBoard setIsSearched={setIsSearched} isSearched={isSearched} />
+      <Header setIsSelected={setIsSelected} isSearched={isSearched} setIsSearched={setIsSearched} scrollTop={scrollTop} />
+      <HomeBoard setIsSearched={setIsSearched} isSearched={isSearched} scrollTop={scrollTop} />
       <Contents isSearched={isSearched}>
         <ContentsHeader selected>
           <TabBtn isSelected={isSelected === 'cookie'} onClick={() => handleTab('cookie')}>
@@ -118,6 +117,11 @@ const TabBtn = styled.div`
     css`
       color: ${theme.colors.orange};
       border-bottom: 0.4rem solid ${theme.colors.orange};
+    `}
+  ${props =>
+    props.scrollTop &&
+    css`
+      display: none;
     `}
   font-size: 2.8rem;
   font-weight: 600;
