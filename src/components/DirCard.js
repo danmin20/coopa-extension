@@ -5,7 +5,7 @@ import cookieIcon from '../assets/img/cookie_icon.svg';
 import cookieIconW from '../assets/img/cookie_icon_white.svg';
 import updateDirIcon from '../assets/img/update_dir_icon.svg';
 
-export default () => {
+export default ({dir}) => {
   const [isHover, setIsHover] = useState(false);
   const handleBtnMouseOver = () => {
     setIsHover(true);
@@ -17,7 +17,7 @@ export default () => {
   return (
     <Container isHover={isHover} onMouseEnter={handleBtnMouseOver} onMouseLeave={handleBtnMouseLeave}>
       <div className="dir">
-        <div className="dir__title">캐릭터/일러스트레이션</div>
+        <div className="dir__title">{dir.name}</div>
         <div className="dir__num">
           <CookieIcon isHover={isHover} onMouseOver={handleBtnMouseOver} onMouseLeave={handleBtnMouseOver} />
           <div>37개</div>

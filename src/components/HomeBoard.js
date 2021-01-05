@@ -3,15 +3,20 @@ import styled, { css } from 'styled-components';
 import Glass from '../assets/img/glass.svg';
 import theme from '../assets/themes';
 import useInput from '../hooks/useInput';
+import { useSetRecoilState } from 'recoil';
+import { SearchState } from '../states/atom';
 
 export default ({ isSearched, setIsSearched }) => {
   const searchText = useInput('');
+  const setSearchState = useSetRecoilState(SearchState);
 
   const onKeyPress = e => {
     if (e.key === 'Enter') {
       console.log(e.key);
-      // 검색 실행 및 컴포넌트 전환
+      // 검색어 atom에 설정 및 컴포넌트 전환
+      setSearchState(searchText.value);
       setIsSearched(true);
+      searchText.setValue(''); // 검색 후 검색창에서 검색어 지우기
     }
   };
 
@@ -36,6 +41,7 @@ const HomeBoard = styled.div`
       box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.12);
       padding-top: 4rem;
       padding-bottom: 9.2rem;
+      // Todo : scroll 시 homeboard & header fix
     `}
   display: flex;
   justify-content: center;

@@ -2,11 +2,12 @@ import axios from 'axios';
 
 const baseURL = 'https://www.cookieparking.com';
 
+// 문서에 url cookies 로 바뀔 예정이라고 되어 있어서 수정함
 const postCookie = async (headers, body) => {
     try {
       const { data } = await axios({
         baseURL,
-        url: '/cookie',
+        url: '/cookies',
         method: 'post',
         headers: headers,
         data: body
@@ -19,12 +20,11 @@ const postCookie = async (headers, body) => {
     }
 };
 
-
-const getCookie = async (headers) => {
+const getCookies = (headers) => {
     try {
       const { data } = await axios({
         baseURL,
-        url: '/cookie',
+        url: '/cookies',
         method: 'get',
         headers: headers,
       });
@@ -36,9 +36,25 @@ const getCookie = async (headers) => {
     }
 };
 
+const getCookiesUnRead =(headers)=>{
+  try {
+    const data = axios({
+      baseURL,
+      url: '/cookies/unread',
+      method: 'get',
+      headers,
+    });
+    console.log('[SUCCESS] GET COOKIES UNREAD', data);
+    return data;
+  } catch (e) {
+    console.error('[FAIL] GET COOKIES UNREAD', error);
+    return e;
+  }
+}
+
 
 const cookieAPI = {
-    postCookie, getCookie,
+    postCookie, getCookies, getCookiesUnRead,
 }
 
 export default cookieAPI;
