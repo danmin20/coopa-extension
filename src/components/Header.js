@@ -6,7 +6,7 @@ import theme from '../assets/themes';
 import { useSetRecoilState } from 'recoil';
 import { SearchState, SelectState } from '../states/atom';
 
-export default ({ isSearched, setIsSearched }) => {
+export default ({ setIsSelected, isSearched, setIsSearched, scrollTop }) => {
   const setSelectState = useSetRecoilState(SelectState);
   const setSearchState = useSetRecoilState(SearchState);
   const handleRefresh = () => {
@@ -17,7 +17,7 @@ export default ({ isSearched, setIsSearched }) => {
     setIsSearched(false);
   };
   return (
-    <Header isSearched={isSearched}>
+    <Header isSearched={isSearched} scrollTop={scrollTop}>
       <div className="main-logo" onClick={handleRefresh}>
         <img className="main-logo__img" src={Logo} />
       </div>
@@ -35,6 +35,15 @@ const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  /* ${props =>
+    props.isSearched &&
+    props.scrollTop !== 0 &&
+    css`
+      padding-top: 7.5rem;
+      padding-bottom: 3rem;
+      position: fixed;
+      z-index: 4;
+    `} */
   .main-logo {
     cursor: pointer;
     display: flex;

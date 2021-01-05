@@ -17,6 +17,7 @@ export default () => {
   const [DeleteClick, setDeleteClick] = useRecoilState(DeleteClickState);
   const [isSearched, setIsSearched] = useState(false);
   const [isToggled, setIsToggled] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const [isOpenCreateDir, setIsOpenCreateDir] = useState(false); // 새 디렉토리 만들기 모달
 
   const handleTab = tab => {
@@ -34,10 +35,12 @@ export default () => {
     else setIsToggled(false);
   };
 
+  useEffect(() => {}, []);
+
   return (
     <div className="container">
-      <Header isSearched={isSearched} setIsSearched={setIsSearched} />
-      <HomeBoard setIsSearched={setIsSearched} isSearched={isSearched} />
+      <Header setIsSelected={setIsSelected} isSearched={isSearched} setIsSearched={setIsSearched} scrollTop={scrollTop} />
+      <HomeBoard setIsSearched={setIsSearched} isSearched={isSearched} scrollTop={scrollTop} />
       <Contents isSearched={isSearched}>
         <ContentsHeader selected>
           <TabBtn selectState={selectState === 'cookie'} onClick={() => handleTab('cookie')}>
@@ -127,6 +130,11 @@ const TabBtn = styled.div`
     css`
       color: ${theme.colors.orange};
       border-bottom: 0.4rem solid ${theme.colors.orange};
+    `}
+  ${props =>
+    props.scrollTop &&
+    css`
+      display: none;
     `}
   font-size: 2.8rem;
   font-weight: 600;
