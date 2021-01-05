@@ -20,14 +20,13 @@ const postCookie = async (headers, body) => {
     }
 };
 
-
 const getCookies = (headers) => {
     try {
-      const { data } = axios({
+      const { data } = await axios({
         baseURL,
         url: '/cookies',
         method: 'get',
-        headers,
+        headers: headers,
       });
       console.log('[SUCCESS] GET COOKIES', data);
       return data;

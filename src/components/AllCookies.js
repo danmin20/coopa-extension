@@ -61,6 +61,6 @@ const Container = styled.div`
   margin-top: 5.2rem;
   margin-bottom: 3.5rem;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(36rem, auto));
+  grid-template-columns: repeat(4, 1fr);
   grid-gap: 3.2rem;
 `;

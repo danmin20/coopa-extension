@@ -16,13 +16,12 @@ const List = ({ item, idx }) => {
     setListSelect(true);
     cookies[idx].directory = item;
   };
+
   return (
-    <>
-      <ListItem onMouseOver={() => setItemHover(true)} onMouseLeave={() => setItemHover(false)} onClick={ListItemClick}>
-        {item}
-        <ListItemBtn itemHover={itemHover} />
-      </ListItem>
-    </>
+    <ListItem onMouseOver={() => setItemHover(true)} onMouseLeave={() => setItemHover(false)} onClick={ListItemClick}>
+      {item}
+      <ListItemBtn itemHover={itemHover} />
+    </ListItem>
   );
 };
 
@@ -50,14 +49,13 @@ const ListItem = styled.div`
 
 const ListItemBtn = styled.div`
   display: ${props => (props.itemHover ? 'box' : 'none')};
-
   width: 1.4rem;
   height: 1.4rem;
   border-radius: 50%;
   background: #ff7034;
 `;
 
-export default ({ cookies, keys }) => {
+export default ({ cookies, idx }) => {
   const items = ['디자인', '마케팅', '프로그래밍', '기획', '쿠키파킹', '사랑해'];
 
   const [drop, setDrop] = useState(false);
@@ -71,26 +69,22 @@ export default ({ cookies, keys }) => {
         }}
       >
         <div className="dir-sort">{cookies.directory}</div>
-        <button className="dir-btn">
-          <img src={dropdwnImg} alt="" />
-        </button>
+        <img src={dropdwnImg} style={{ marginLeft: '1.3rem' }} />
       </Directory>
       {drop && (
         <ListWrap>
-          <SearchBar>
-            <img className="searchBar-icon" src={seachImg} alt="" />
-            <input className="searchBar-input"></input>
-          </SearchBar>
           <DirList>
             <div className="list-div">
               <div className="list-sort">모든 디렉토리</div>
               {items.map(item => (
-                <List item={item} idx={keys} />
+                <List item={item} idx={idx} />
               ))}
+              <div className="list-gradientBox"></div>
             </div>
           </DirList>
           <BottonWrap>
-            <button className="addBtn">+ 새 디렉토리 만들기</button>
+            <input class="addInput" placeholder="새 디렉토리 명을 입력하세요" />
+            <button className="addBtn">저장</button>
           </BottonWrap>
         </ListWrap>
       )}
@@ -104,11 +98,12 @@ const HoverPage = styled.div`
   top: 0rem;
   position: absolute;
   z-index: 10;
+  width: 100%;
+  padding: 1.5rem;
 `;
 const Directory = styled.div`
-  width: 32.4rem;
+  width: 100%;
   height: 5.7rem;
-  margin: 1.5rem;
   margin-bottom: 0;
   background: rgba(255, 255, 255, 0.95);
   box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.35);
@@ -129,64 +124,21 @@ const Directory = styled.div`
     letter-spacing: -0.02em;
     color: #333333;
   }
-  .dir-btn {
-    position: absolute;
-    right: 4rem;
-    border: none;
-    width: 1.2rem;
-    height: 1.2rem;
-    background: transparent;
-    &:focus {
-      outline: none;
-      margin: 0;
-    }
-  }
 `;
 
 const ListWrap = styled.div`
-  width: 32.7rem;
+  width: 100%;
   height: 37rem;
   border-radius: 1.2rem;
-  margin: 1.6rem;
+  margin-top: 1.6rem;
   padding-top: 1.9rem;
   background: #ffffff;
   box-shadow: 0px 0.2rem 2rem rgba(0, 0, 0, 0.2);
 `;
 
-const SearchBar = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 29.5rem;
-  height: 4.3rem;
-  margin: 0;
-  background: #f3f3f3;
-  border-radius: 0.8rem;
-  flex-direction: row;
-  margin: 0;
-  margin-left: 1.8rem;
-  .searchBar-icon {
-    position: relative;
-    width: 1.8rem;
-    height: 1.8rem;
-    margin: 0;
-  }
-  .searchBar-input {
-    border: none;
-    width: 26rem;
-    height: 4rem;
-    background: #f3f3f3;
-    text-align: center;
-    &:focus {
-      outline: none;
-      margin: 0;
-      background: #f3f3f3;
-    }
-  }
-`;
 const DirList = styled.div`
   margin-top: 1.2rem;
-  max-height: 22.2rem;
+  max-height: 25.9rem;
   max-width: 26.8rem;
   padding-left: 1.8rem;
   .list-sort {
@@ -217,9 +169,18 @@ const DirList = styled.div`
     max-height: 25.9rem;
     overflow: auto;
   }
+  .list-gradientBox {
+    position: absolute;
+    top: 33.2rem;
+    width: 268px;
+    height: 56px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #ffffff 71.87%);
+  }
 `;
 const BottonWrap = styled.div`
   padding: 1.8rem;
+  display: flex;
+  flex-direction: row;
   .addBtn {
     display: flex;
     justify-content: center;
@@ -243,6 +204,21 @@ const BottonWrap = styled.div`
       background: #ff7034;
       border: none;
     }
+    &:focus {
+      outline: none;
+    }
+  }
+  .addInput {
+    width: 20.4rem;
+    height: 4.6rem;
+    background: #f3f3f3;
+    border-radius: 0.8rem;
+    margin-right: 0.8rem;
+    font-family: Spoqa Han Sans Neo;
+    font-weight: bold;
+    font-size: 1.4rem;
+    text-align: center;
+    color: #b7b7b7;
     &:focus {
       outline: none;
     }
