@@ -17,7 +17,7 @@ export default ({ setIsSelected, isSearched, setIsSearched, scrollTop }) => {
     setIsSearched(false);
   };
   return (
-    <Header isSearched={isSearched} scrollTop={scrollTop}>
+    <Header isSearched={isSearched}>
       <div className="main-logo" onClick={handleRefresh}>
         <img className="main-logo__img" src={Logo} />
       </div>
@@ -35,15 +35,6 @@ const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* ${props =>
-    props.isSearched &&
-    props.scrollTop !== 0 &&
-    css`
-      padding-top: 7.5rem;
-      padding-bottom: 3rem;
-      position: fixed;
-      z-index: 4;
-    `} */
   .main-logo {
     cursor: pointer;
     display: flex;

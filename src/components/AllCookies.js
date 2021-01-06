@@ -26,7 +26,6 @@ export default ({ isSearched, isToggled }) => {
       } else {
         if (isToggled) {
           result = await cookieApi.getCookiesUnRead(token);
-          setCookieState(result.data.cookies);
         } else {
           result = await cookieApi.getCookies(token);
           setCookieState(result.data.cookies);
@@ -34,7 +33,7 @@ export default ({ isSearched, isToggled }) => {
       }
     })();
     setLoading(false);
-  }, [searchValue, isToggled]);
+  }, [searchValue]);
 
   return (
     <>

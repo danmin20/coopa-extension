@@ -39,8 +39,8 @@ export default () => {
 
   return (
     <div className="container">
-      <Header setIsSelected={setIsSelected} isSearched={isSearched} setIsSearched={setIsSearched} scrollTop={scrollTop} />
-      <HomeBoard setIsSearched={setIsSearched} isSearched={isSearched} scrollTop={scrollTop} />
+      <Header isSearched={isSearched} setIsSearched={setIsSearched} />
+      <HomeBoard setIsSearched={setIsSearched} isSearched={isSearched} />
       <Contents isSearched={isSearched}>
         <ContentsHeader selected>
           <TabBtn selectState={selectState === 'cookie'} onClick={() => handleTab('cookie')}>
@@ -130,11 +130,6 @@ const TabBtn = styled.div`
     css`
       color: ${theme.colors.orange};
       border-bottom: 0.4rem solid ${theme.colors.orange};
-    `}
-  ${props =>
-    props.scrollTop &&
-    css`
-      display: none;
     `}
   font-size: 2.8rem;
   font-weight: 600;
