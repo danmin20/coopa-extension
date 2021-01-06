@@ -27,7 +27,7 @@ export default () => {
         <TextTwo>파킹했습니다!</TextTwo>
       </LogoWrap>
       <Btn isHover={isHover} onMouseMove={handleBtnMouseOver} onMouseLeave={handleBtnMouseLeave} onClick={handleBtnClick}>
-        Open Cookie Parking
+        홈으로 가기
       </Btn>
     </Wrap>
   );
@@ -37,7 +37,6 @@ const Wrap = styled.div`
   width: 36.1rem;
   height: 35.1rem;
   border-radius: 1.2rem;
-  border: 1px solid black;
   background-color: #ffffff;
   margin: 0;
   padding: 0;
@@ -84,13 +83,14 @@ const Btn = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  border-radius: 1.2rem;
+  border: 0.2rem solid #FF7134;
+  border-radius: 1rem;
   width: 32.2rem;
   height: 5.2rem;
-  background-color: ${props => (props.isHover ? '#FF7034' : '#ffffff')};
-  color: ${props => (props.isHover ? '#ffffff' : '#000000')};
+  background-color: ${props => (props.isHover ? '#FF7134' : '#ffffff')};
+  color: ${props => (props.isHover ? '#FFFFFF' : '#FF7134')};
   font-size: 1.6rem;
-  font-weight: ${props => (props.isHover ? '700' : '500')};
-  box-shadow: 0rem 0rem 1.2rem rgba(0, 0, 0, 0.13);
+  font-weight: 500;
+  box-shadow: ${props => props.isHover ? '0rem 0rem 1.2rem rgba(0, 0, 0, 0.13)' : 'none'};
   margin-top: 4.8rem;
 `;

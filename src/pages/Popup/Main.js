@@ -82,7 +82,7 @@ export default () => {
           </BtnOneWrap>
         </BtnOne>
         <BtnTwo onMouseOver={handleBtnTwoMouseOver} onMouseLeave={handleBtnTwoMouseLeave} onClick={handleBtnTwoClick} isHover={isBtnTwoHover}>
-          쿠키파킹으로 이동하기
+          홈으로 가기 
         </BtnTwo>
       </BtnWrap>
     </Wrap>
@@ -93,7 +93,6 @@ const Wrap = styled.div`
   width: 36.1rem;
   height: 35.1rem;
   border-radius: 1.2rem;
-  border: 1px solid black;
   background-color: #ffffff;
   margin: 0;
   padding: 0;
@@ -134,7 +133,7 @@ const BtnOne = styled.div`
   border-radius: 1.2rem;
   width: 32.2rem;
   height: 5.2rem;
-  background-color: ${props => (props.isHover ? '#FF7034' : '#ffffff')};
+  background-color: ${props => (props.isHover ? '#FF7134' : '#ffffff')};
   box-shadow: 0rem 0rem 1.2rem rgba(0, 0, 0, 0.13);
   margin-top: 1.6rem;
 `;
@@ -152,7 +151,7 @@ const BtnOneText = styled.div`
   font-weight: 500;
   font-size: 1.6rem;
   color: ${props => (props.isHover ? '#ffffff' : '#000000')};
-  font-weight: ${props => (props.isHover ? '700' : '500')};
+  font-weight: 500;
 `;
 
 const BtnOneArrow = styled.img`
@@ -176,13 +175,14 @@ const BtnTwo = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  border-radius: 1.2rem;
+  border: 0.2rem solid #FF7134;
+  border-radius: 1rem;
   width: 32.2rem;
   height: 5.2rem;
-  background-color: ${props => (props.isHover ? '#FF7034' : '#ffffff')};
-  color: ${props => (props.isHover ? '#ffffff' : '#000000')};
+  background-color: ${props => (props.isHover ? '#FF7134' : '#ffffff')};
+  color: ${props => (props.isHover ? '#FFFFFF' : '#FF7134')};
   font-size: 1.6rem;
-  font-weight: ${props => (props.isHover ? '700' : '500')};
-  box-shadow: 0rem 0rem 1.2rem rgba(0, 0, 0, 0.13);
+  font-weight: 500;
+  box-shadow: ${props => props.isHover ? '0rem 0rem 1.2rem rgba(0, 0, 0, 0.13)' : 'none'};
   margin-top: 1.6rem;
 `;
