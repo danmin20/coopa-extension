@@ -27,11 +27,9 @@ export default () => {
   };
 
   const onToggleSwitch = e => {
-    if (e.target.value) setIsToggled(true);
+    if (e.target.checked) setIsToggled(true);
     else setIsToggled(false);
   };
-
-  useEffect(() => {}, []);
 
   return (
     <div className="container">

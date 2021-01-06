@@ -54,7 +54,7 @@ const getCookiesSearch = async (headers, word) => {
 
 const getCookiesUnRead = async headers => {
   try {
-    const data = axios({
+    const { data } = await axios({
       baseURL,
       url: '/cookies/unread',
       method: 'get',
