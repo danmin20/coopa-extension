@@ -129,11 +129,6 @@ const TabBtn = styled.div`
       color: ${theme.colors.orange};
       border-bottom: 0.4rem solid ${theme.colors.orange};
     `}
-  ${props =>
-    props.scrollTop &&
-    css`
-      display: none;
-    `}
   font-size: 2.8rem;
   font-weight: 600;
   line-height: 4.2rem;

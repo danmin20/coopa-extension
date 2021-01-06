@@ -17,7 +17,7 @@ export default ({ setIsSelected, isSearched, setIsSearched, scrollTop }) => {
     setIsSearched(false);
   };
   return (
-    <Header isSearched={isSearched} scrollTop={scrollTop}>
+    <Header isSearched={isSearched}>
       <div className="main-logo" onClick={handleRefresh}>
         <img className="main-logo__img" src={Logo} />
       </div>
