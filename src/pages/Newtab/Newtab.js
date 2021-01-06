@@ -6,43 +6,46 @@ import theme from '../../assets/themes';
 import Switch from '../../components/Switch';
 import Header from '../../components/Header';
 import HomeBoard from '../../components/HomeBoard';
-// import DelCookieModal from '../../components/DelCookieModal';
-// import DirFixModal from '../../components/DirFixModal';
+import { useRecoilState } from 'recoil';
+import { SelectState } from '../../states/atom';
+import DirCreateModal from '../../components/DirCreateModal';
 
 export default () => {
-  const [isSelected, setIsSelected] = useState('cookie');
+  const [selectState, setSelectState] = useRecoilState(SelectState);
   const [isSearched, setIsSearched] = useState(false);
   const [isToggled, setIsToggled] = useState(false);
+  const [isOpenCreateDir, setIsOpenCreateDir] = useState(false); // 새 디렉토리 만들기 모달
 
-  // const setCookieState = useSetRecoilState(CookieState);
   const handleTab = tab => {
-    if (tab === 'cookie') setIsSelected('cookie');
-    else setIsSelected('directory');
+    if (tab === 'cookie') setSelectState('cookie');
+    else setSelectState('directory');
   };
+
+  const handleCreateDir = async () => {
+    // modal open
+    setIsOpenCreateDir(true);
+  };
+
   const onToggleSwitch = e => {
-    if (e.target.value) setIsToggled(true);
+    if (e.target.checked) setIsToggled(true);
     else setIsToggled(false);
   };
 
-  useEffect(() => {
-    console.log('rendered!');
-  }, []);
-
   return (
     <div className="container">
-      <Header setIsSelected={setIsSelected} isSearched={isSearched} setIsSearched={setIsSearched} />
+      <Header isSearched={isSearched} setIsSearched={setIsSearched} />
       <HomeBoard setIsSearched={setIsSearched} isSearched={isSearched} />
       <Contents isSearched={isSearched}>
         <ContentsHeader selected>
-          <TabBtn isSelected={isSelected === 'cookie'} onClick={() => handleTab('cookie')}>
-            All cookies
+          <TabBtn selectState={selectState === 'cookie'} onClick={() => handleTab('cookie')}>
+            {isSearched ? 'Cookies' : 'All cookies'}
           </TabBtn>
-          <TabBtn style={{ marginLeft: '2rem' }} isSelected={isSelected === 'directory'} onClick={() => handleTab('directory')}>
+          <TabBtn style={{ marginLeft: '2rem' }} selectState={selectState === 'directory'} onClick={() => handleTab('directory')}>
             Directory
           </TabBtn>
           <div style={{ marginLeft: 'auto' }}>
             {!isSearched &&
-              (isSelected === 'cookie' ? (
+              (selectState === 'cookie' ? (
                 <div className="toggle">
                   <div className="toggle__help">?</div>
                   <div className="toggle__title">안 읽은 쿠키 모아보기</div>
@@ -51,13 +54,14 @@ export default () => {
                   </span>
                 </div>
               ) : (
-                <div className="dirbtn">
+                <div className="dirbtn" onClick={handleCreateDir}>
                   <div className="dirbtn__desc">+ 새 디렉토리 만들기</div>
                 </div>
               ))}
           </div>
         </ContentsHeader>
-        {isSelected === 'cookie' ? <AllCookies isSearched={isSearched} isToggled={isToggled} /> : <Directory isSearched={isSearched} />}
+        {selectState === 'cookie' ? <AllCookies isSearched={isSearched} isToggled={isToggled} /> : <Directory isSearched={isSearched} />}
+        {isOpenCreateDir && <DirCreateModal setIsOpenCreateDir={setIsOpenCreateDir} />}
       </Contents>
     </div>
   );
@@ -114,7 +118,7 @@ const TabBtn = styled.div`
   cursor: pointer;
   color: ${theme.colors.lightGray};
   ${props =>
-    props.isSelected &&
+    props.selectState &&
     css`
       color: ${theme.colors.orange};
       border-bottom: 0.4rem solid ${theme.colors.orange};

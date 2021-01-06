@@ -1,23 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-const msg = '쿠키를 삭제했어요';
-
-export default props => {
+export default ({ msg }) => {
   const [isFlex, setIsFlex] = useState(true);
 
   useEffect(() => {
+    console.log('토스트 open');
     setInterval(() => {
       setIsFlex(false);
     }, 2000);
   }, []);
 
-  return (
-    <Wrap isFlex={isFlex}>
-      {/* props.msg */}
-      {msg}
-    </Wrap>
-  );
+  return <Wrap isFlex={isFlex}>{msg}</Wrap>;
 };
 
 const Wrap = styled.div`

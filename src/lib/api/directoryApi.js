@@ -4,7 +4,7 @@ const baseURL = 'https://www.cookieparking.com';
 
 const postDir = async (headers, body) => {
   try {
-    const { data } = axios({
+    const { data } = await axios({
       baseURL,
       url: '/directories',
       method: 'post',
@@ -14,14 +14,14 @@ const postDir = async (headers, body) => {
     console.log('[SUCCESS] POST DIRECTORIES', data);
     return data;
   } catch (e) {
-    console.error('[FAIL] POST DIRECTORIES', error);
+    console.error('[FAIL] POST DIRECTORIES', e);
     return e;
   }
 };
 
 const updateDir = async (headers, body, id) => {
   try {
-    const { data } = axios({
+    const { data } = await axios({
       baseURL,
       url: `/directories/${id}`,
       method: 'put',
@@ -31,14 +31,14 @@ const updateDir = async (headers, body, id) => {
     console.log('[SUCCESS] UPDATE DIRECTORIES', data);
     return data;
   } catch (e) {
-    console.error('[FAIL] UPDATE DIRECTORIES', error);
+    console.error('[FAIL] UPDATE DIRECTORIES', e);
     return e;
   }
 };
 
 const getDirAll = async headers => {
   try {
-    const data = axios({
+    const { data } = await axios({
       baseURL,
       url: `/directories`,
       method: 'get',
@@ -47,14 +47,14 @@ const getDirAll = async headers => {
     console.log('[SUCCESS] GET ALL DIRECTORIES', data);
     return data;
   } catch (e) {
-    console.error('[FAIL] GET ALL DIRECTORIES', error);
+    console.error('[FAIL] GET ALL DIRECTORIES', e);
     return e;
   }
 };
 
 const getDirById = async (headers, id) => {
   try {
-    const { data } = axios({
+    const { data } = await axios({
       baseURL,
       url: `/directories/${id}`,
       method: 'get',
@@ -63,14 +63,14 @@ const getDirById = async (headers, id) => {
     console.log('[SUCCESS] GET DIRECTORIES', data);
     return data;
   } catch (e) {
-    console.error('[FAIL] GET DIRECTORIES', error);
+    console.error('[FAIL] GET DIRECTORIES', e);
     return e;
   }
 };
 
 const getDirSearch = async (headers, word) => {
   try {
-    const data = axios({
+    const { data } = await axios({
       baseURL,
       url: `/directories/search?word=${word}`,
       method: 'get',
@@ -79,14 +79,14 @@ const getDirSearch = async (headers, word) => {
     console.log('[SUCCESS] GET SEARCH DIRECTORIES', data);
     return data;
   } catch (e) {
-    console.error('[FAIL] GET SEARCH DIRECTORIES', error);
+    console.error('[FAIL] GET SEARCH DIRECTORIES', e);
     return e;
   }
 };
 
 const deleteDir = async (headers, id) => {
   try {
-    const { data } = axios({
+    const { data } = await axios({
       baseURL,
       url: `/directories/${id}`,
       method: 'delete',
@@ -95,14 +95,14 @@ const deleteDir = async (headers, id) => {
     console.log('[SUCCESS] DELETE DIRECTORIES', data);
     return data;
   } catch (e) {
-    console.error('[FAIL] DELETE DIRECTORIES', error);
+    console.error('[FAIL] DELETE DIRECTORIES', e);
     return e;
   }
 };
 
 const addCookieToDir = async (headers, body) => {
   try {
-    const { data } = axios({
+    const { data } = await axios({
       baseURL,
       url: `/directories/add/cookie`,
       method: 'post',
@@ -112,7 +112,7 @@ const addCookieToDir = async (headers, body) => {
     console.log('[SUCCESS] ADD COOKIE TO DIRECTORIES', data);
     return data;
   } catch (e) {
-    console.error('[FAIL] ADD COOKIE TO DIRECTORIES', error);
+    console.error('[FAIL] ADD COOKIE TO DIRECTORIES', e);
     return e;
   }
 };

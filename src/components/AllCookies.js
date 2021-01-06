@@ -8,7 +8,7 @@ import cookieApi from '../lib/api/cookieApi';
 
 // 로그인 구현되면 지우기
 const token = {
-  'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4'
+  'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsInVzZXJFbWFpbCI6InJ1cnVAZW1haWwuY29tIiwiaWF0IjoxNjA5Nzc1MDYyfQ.hkdbXr68HQ-667AmfXzIrWIuJMRM03hbQ_eBwrqJZVA'
 };
 
 export default ({ isSearched, isToggled }) => {
@@ -16,43 +16,38 @@ export default ({ isSearched, isToggled }) => {
   const [cookieState, setCookieState] = useRecoilState(CookieState);
   const searchValue = useRecoilValue(SearchState);
 
-  // useEffect(() => {
-  //   (async () => {
-  //     let result = [];
-  //     if (isSearched) {
-  //        result = await cookieApi.getCookieSearch(token, searchValue);
-  //     } else {
-  //       if (isToggled) {
-  //         result = await cookieApi.getCookiesUnRead(token);
-  //       } else {
-  //         result = await cookieApi.getCookies(token, searchValue);
-  //       }
-  //     }
-  //     console.log(result);
-  //     setCookieState(result.data.data);
-  //     setLoading(false);
-  //   })();
-  // }, [searchValue]);
+  useEffect(() => {
+    (async () => {
+      let result = [];
+      if (isSearched) {
+        result = await cookieApi.getCookiesSearch(token, searchValue);
+        console.log('검색 결과', result);
+        setCookieState(result.data);
+      } else {
+        if (isToggled) {
+          result = await cookieApi.getCookiesUnRead(token);
+          setCookieState(result.data.cookies);
+        } else {
+          result = await cookieApi.getCookies(token);
+          setCookieState(result.data.cookies);
+        }
+      }
+    })();
+    setLoading(false);
+  }, [searchValue, isToggled]);
 
-  const cookies = useRecoilValue(CookieState);
   return (
-    // 서버 api 완성되면 연동
-    // <>
-    //   {loading ? (
-    //     <Loading />
-    //   ) : (
-    //     <Container>
-    //       {cookieState.map(cookie => (
-    //         <Card cookie={cookie} key={cookie.id} />
-    //       ))}
-    //     </Container>
-    //   )}
-    // </>
-    <Container>
-      {cookies.map((cookie, idx) => (
-        <Card cookies={cookie} key={idx} idx={idx} />
-      ))}
-    </Container>
+    <>
+      {loading ? (
+        <Loading />
+      ) : (
+        <Container>
+          {cookieState.map(cookie => (
+            <Card cookies={cookie} idx={cookie.id} />
+          ))}
+        </Container>
+      )}
+    </>
   );
 };
 

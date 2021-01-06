@@ -61,12 +61,11 @@ export default ({ cookies, idx }) => {
           {/* url 복사 */}
         </div>
         {cardHover && <ThumbnailHover thumbnail={cookies.thumbnail}> </ThumbnailHover>}
-
         <div className="title">{cookies.title}</div>
         <div className="content">{cookies.content}</div>
         <div className="profile">
-          <img className="profile__og" src={cookies.og} />
-          <div className="profile__author">{cookies.author}</div>
+          <img className="profile__favicon" src={cookies.favicon} />
+          <div className="profile__author">{cookies.provider}</div>
         </div>
       </Contents>
     </Container>
@@ -170,6 +169,12 @@ const Contents = styled.div`
       margin-left: 1rem;
       font-size: 1.6rem;
       color: #999999;
+    }
+    &__favicon {
+      width: 4.2rem;
+      height: 4.2rem;
+      border-radius: 0.8rem;
+      object-fit: cover;
     }
   }
 `;
