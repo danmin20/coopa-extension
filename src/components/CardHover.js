@@ -5,7 +5,7 @@ import { listSelectState } from '../states/atom';
 import { CookieState } from '../states/atom';
 import { useRecoilState } from 'recoil';
 
-const List = ({ item, idx }) => {
+const List = ({ item, idx, setParkingState }) => {
   const [itemHover, setItemHover] = useState(false);
   const [listSelect, setListSelect] = useRecoilState(listSelectState);
   const [cookies, setCookies] = useRecoilState(CookieState);
@@ -13,7 +13,7 @@ const List = ({ item, idx }) => {
   const ListItemClick = () => {
     console.log(item + ' :click');
     console.log(cookies[idx]);
-    setListSelect(true);
+    setParkingState(true);
     cookies[idx].directory = item;
   };
 
@@ -55,7 +55,7 @@ const ListItemBtn = styled.div`
   background: #ff7034;
 `;
 
-export default ({ cookies, idx }) => {
+export default ({ cookies, idx, setParkingState }) => {
   const items = ['디자인', '마케팅', '프로그래밍', '기획', '쿠키파킹', '사랑해'];
 
   const [drop, setDrop] = useState(false);
@@ -77,9 +77,8 @@ export default ({ cookies, idx }) => {
             <div className="list-div">
               <div className="list-sort">모든 디렉토리</div>
               {items.map(item => (
-                <List item={item} idx={idx} />
+                <List item={item} idx={idx} setParkingState={setParkingState} />
               ))}
-              <div className="list-gradientBox"></div>
             </div>
           </DirList>
           <BottonWrap>
@@ -139,7 +138,7 @@ const ListWrap = styled.div`
 const DirList = styled.div`
   margin-top: 1.2rem;
   max-height: 25.9rem;
-  max-width: 26.8rem;
+  max-width: 100%;
   padding-left: 1.8rem;
   .list-sort {
     margin: 1.4rem;
@@ -165,16 +164,9 @@ const DirList = styled.div`
     ::-webkit-scrollbar-thumb:hover {
       background: #f1f1f1;
     }
-    width: 28.8rem;
+    width: 95%;
     max-height: 25.9rem;
     overflow: auto;
-  }
-  .list-gradientBox {
-    position: absolute;
-    top: 33.2rem;
-    width: 268px;
-    height: 56px;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #ffffff 71.87%);
   }
 `;
 const BottonWrap = styled.div`

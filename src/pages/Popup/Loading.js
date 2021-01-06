@@ -23,7 +23,6 @@ const Wrap = styled.div`
   width: 36.1rem;
   height: 24rem;
   border-radius: 1.2rem;
-  border: 1px solid black;
   background-color: #ffffff;
   margin: 0;
   padding: 0;
