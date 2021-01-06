@@ -36,6 +36,22 @@ const getCookies = async headers => {
   }
 };
 
+const getCookiesSearch = async (headers, word) => {
+  try {
+    const { data } = await axios({
+      baseURL,
+      url: `/cookies/search?word=${word}`,
+      method: 'get',
+      headers
+    });
+    console.log('[SUCCESS] GET SEARCH COOKIES', data);
+    return data;
+  } catch (e) {
+    console.error('[FAIL] GET SEARCH COOKIES', error);
+    return e;
+  }
+};
+
 const getCookiesUnRead = async headers => {
   try {
     const data = axios({
@@ -55,6 +71,7 @@ const getCookiesUnRead = async headers => {
 const cookieAPI = {
   postCookie,
   getCookies,
+  getCookiesSearch,
   getCookiesUnRead
 };
 

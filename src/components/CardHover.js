@@ -82,7 +82,7 @@ export default ({ cookies, idx, setParkingState }) => {
             </div>
           </DirList>
           <BottonWrap>
-            <input class="addInput" placeholder="새 디렉토리 명을 입력하세요" />
+            <input className="addInput" placeholder="새 디렉토리 명을 입력하세요" />
             <button className="addBtn">저장</button>
           </BottonWrap>
         </ListWrap>

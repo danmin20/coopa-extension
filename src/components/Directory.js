@@ -19,14 +19,18 @@ export default ({ isSearched }) => {
     (async () => {
       let result = [];
       if (isSearched) {
+        // 검색한 디렉토리 조회
         result = await dirApi.getDirSearch(token, searchValue);
       } else {
+        // 전체 디렉토리 조회
         result = await dirApi.getDirAll(token);
       }
+      console.log(result);
       setDirState(result.data);
       setLoading(false);
     })();
   }, [searchValue]);
+
   return (
     <>
       {loading ? (
