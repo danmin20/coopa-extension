@@ -21,6 +21,7 @@ export default ({ msg }) => {
 };
 
 const Wrap = styled.div`
+  position: fixed;
   width: 38rem;
   height: 6.8rem;
   background: rgba(0, 0, 0, 0.6);
@@ -36,6 +37,7 @@ const Wrap = styled.div`
   align-items: center;
   justify-content: center;
   opacity: 0;
+  z-index: 100;
 
   animation: fadeout 2s;
   @keyframes fadeout {

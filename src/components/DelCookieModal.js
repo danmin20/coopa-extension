@@ -4,6 +4,7 @@ import { useRecoilValue, useRecoilState } from 'recoil';
 import { DirState, SelectState, DeleteCookieClickState, CookieState } from '../states/atom';
 import dirApi from '../lib/api/directoryApi';
 import cookieAPI from '../lib/api/cookieApi';
+import ToastMsg from '../components/ToastMsg';
 
 const token = {
   'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4'
@@ -17,6 +18,7 @@ export default ({ setIsDelOpen, id }) => {
   const [isCancleHover, setIsCancleHover] = useState(false);
   const [DeleteCookieClick, setDeleteCookieClick] = useRecoilState(DeleteCookieClickState);
   const [allCookie, setAllCookie] = useRecoilState(CookieState);
+  const [isToastOpen, setIsToastOpen] = useState(false);
 
   const handleClick = () => {
     setIsClose(true);
@@ -38,6 +40,7 @@ export default ({ setIsDelOpen, id }) => {
     // api call
     await dirApi.deleteDir(token, id);
     setIsClose(true);
+    setIsToastOpen(true);
   };
 
   const handleDelMouseMove = () => {
@@ -79,6 +82,7 @@ export default ({ setIsDelOpen, id }) => {
           </Btn>
         </BtnWrap>
       </ModalWrap>
+      {isToastOpen && <ToastMsg msg="쿠키가 삭제되었어요!" />}
     </>
   );
 };

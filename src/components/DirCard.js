@@ -6,6 +6,7 @@ import cookieIconW from '../assets/img/cookie_icon_white.svg';
 import updateDirIcon from '../assets/img/update_dir_icon.svg';
 import DirFixModal from '../components/DirFixModal';
 import DelCookieModal from '../components/DelCookieModal';
+import ToastMsg from '../components/ToastMsg';
 
 export default ({ dir }) => {
   const [isHover, setIsHover] = useState(false);
