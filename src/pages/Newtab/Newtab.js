@@ -35,8 +35,6 @@ export default () => {
     else setIsToggled(false);
   };
 
-  useEffect(() => {}, []);
-
   return (
     <div className="container">
       <Header isSearched={isSearched} setIsSearched={setIsSearched} />
