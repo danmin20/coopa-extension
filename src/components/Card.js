@@ -59,13 +59,13 @@ export default ({ cookies, idx }) => {
   return (
     <Container onMouseEnter={() => setCardHover(true)} onMouseLeave={() => setCardHover(false)}>
       {cardHover && !listSelect && <CardHover cookies={cookies} idx={idx} />}
-      <Contents thumbnail={cookies.thumbnail}>
-        <div className="thumbnail">{cardHover && listSelect && <ParkingView cookies={cookies} />}</div>
+      <Contents>
+        <Thumbnail thumbnail={cookies.thumbnail}>{cardHover && listSelect && <ParkingView cookies={cookies} />}</Thumbnail>
         <div className="title">{cookies.title}</div>
         <div className="content">{cookies.content}</div>
         <div className="profile">
-          <img className="profile__og" src={cookies.og} />
-          <div className="profile__author">{cookies.author}</div>
+          <img className="profile__favicon" src={cookies.favicon} />
+          <div className="profile__author">{cookies.provider}</div>
         </div>
       </Contents>
     </Container>
@@ -87,6 +87,14 @@ const Container = styled.div`
   }
 `;
 
+const Thumbnail = styled.div`
+  width: 100%;
+  height: 0;
+  padding-bottom: ${props => (!props.thumbnail ? 'calc((160 / 360) * 100%)' : 'calc((220 / 360) * 100%)')};
+  background: url(${props => (!props.thumbnail ? defaultImg : props.thumbnail)}) center center / cover no-repeat;
+  border-radius: 1.2rem;
+`;
+
 const Contents = styled.div`
   display: flex;
   flex-direction: column;
@@ -96,13 +104,13 @@ const Contents = styled.div`
   top: 0;
   left: 0;
 
-  .thumbnail {
+  /* .thumbnail {
     width: 100%;
     height: 0;
     padding-bottom: ${props => (!props.thumbnail ? 'calc((160 / 360) * 100%)' : 'calc((220 / 360) * 100%)')};
     background: url(${props => (!props.thumbnail ? defaultImg : props.thumbnail)}) center center / cover no-repeat;
     border-radius: 1.2rem;
-  }
+  } */
 
   .title {
     font-size: 2.4rem;
@@ -140,6 +148,12 @@ const Contents = styled.div`
       margin-left: 1rem;
       font-size: 1.6rem;
       color: #999999;
+    }
+    &__favicon {
+      width: 4.2rem;
+      height: 4.2rem;
+      border-radius: 0.8rem;
+      object-fit: cover;
     }
   }
 `;
