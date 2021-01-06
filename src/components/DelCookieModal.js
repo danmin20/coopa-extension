@@ -69,7 +69,7 @@ export default ({ setIsDelOpen, id }) => {
       <Wrap onClick={handleClick} isClose={isClose} />
       <ModalWrap isClose={isClose}>
         <Text>{selectState === 'cookie' ? '쿠키 삭제' : '디렉토리 삭제'}</Text>
-        <SmallText>이 {selectState === 'cookie' ? '쿠키' : '디렉토리'}를 정말 삭제하시겠어요?</SmallText>
+        <SmallText>이 {selectState === 'cookie' ? '이 쿠키를 정말 삭제하시겠어요?' : '포함된 모든 쿠키가 영구 삭제됩니다. 삭제하시겠어요?'}</SmallText>
         <BtnWrap>
           <Btn onClick={handleClick} isHover={isCancleHover} onMouseMove={handleCancleMouseMove} onMouseLeave={handleCancleMouseLeave}>
             취소

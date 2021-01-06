@@ -25,15 +25,16 @@ export default ({ dir }) => {
   return (
     <Container isHover={isHover} onMouseEnter={handleBtnMouseOver} onMouseLeave={handleBtnMouseLeave}>
       <div className="dir">
-        <div className="dir__title">{dir.name}</div>
+        <div className="dir__title">{dir.directory.name}</div>
         <div className="dir__num">
           <CookieIcon isHover={isHover} onMouseOver={handleBtnMouseOver} onMouseLeave={handleBtnMouseOver} />
-          <div>{dir.cookieCnt}개</div>
+          <div>{dir.directory.cookieCnt}개</div>
         </div>
       </div>
       <UpdateIcon src={updateDirIcon} onMouseOver={handleBtnMouseOver} onMouseLeave={handleBtnMouseOver} isHover={isHover} onClick={handleClickUpdateIcon} />
       {isOpen && <DirFixModal setIsOpen={setIsOpen} setIsDelOpen={setIsDelOpen} dir={dir} />}
-      {isDelOpen && <DelCookieModal isDelOpen={isDelOpen} setIsDelOpen={setIsDelOpen} id={dir.id} />}
+      {isDelOpen && <DelCookieModal isDelOpen={isDelOpen} setIsDelOpen={setIsDelOpen} id={dir.directory.id} />}
+      {delToast && <ToastMsg msg="쿠키가 삭제되었어요!" />}
     </Container>
   );
 };
