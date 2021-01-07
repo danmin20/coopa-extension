@@ -3,14 +3,17 @@ import styled from 'styled-components';
 import defaultImg from '../assets/img/img_default.svg';
 import theme from '../assets/themes';
 import CardHover from './CardHover';
-import { listSelectState } from '../states/atom';
+import { listSelectState, ShareClickState, CookieState, DeleteClickState } from '../states/atom';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import deleteicon from '../assets/img/cookiehover_icn_delete.svg';
 import shereicon from '../assets/img/cookiehover_icn_share.svg';
 import { useEffect } from 'react';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+import cookieAPI from '../lib/api/cookieApi';
 
-
-// !안채린 깃 마스터 고지가 앞이다!
+const token = {
+  'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4'
+};
 
 const Parking = styled.div`
   position: relative;
@@ -40,6 +43,25 @@ export default ({ cookies, idx }) => {
   const [cardHover, setCardHover] = useState(false);
   const [parkingState, setParkingState] = useState(false);
   const listSelect = useRecoilValue(listSelectState);
+  const [ShareClick, setShareClick] = useRecoilState(ShareClickState);
+  const [DeleteClick, setDeleteClick] = useRecoilState(DeleteClickState);
+  const [allCookie, setAllCookie] = useRecoilState(CookieState);
+
+  const onCopy = e => {
+    ({ copied: true });
+  };
+
+  const handleCopy = () => {
+    setShareClick(true);
+  };
+
+  const handleDelClick = async () => {
+    const newCookie = allCookie.filter(c => c.id !== cookies.id);
+    setAllCookie(newCookie);
+
+    await cookieAPI.deleteCookies(token, cookies.id);
+    setDeleteClick(true);
+  };
 
   useEffect(() => {
     setTimeout(() => {
@@ -52,13 +74,18 @@ export default ({ cookies, idx }) => {
       {cardHover && !parkingState && <CardHover cookies={cookies} idx={idx} setParkingState={setParkingState} />}
       <Contents thumbnail={cookies.thumbnail}>
         <div className="thumbnail">
-          {parkingState && <Parking listSelect={listSelect} thumbnail={cookies.thumbnail}>
-            <div className="parking--title">{cookies.directory}</div>
-          </Parking>}
-          {cardHover && !parkingState && <DeleteIcon src={deleteicon} />}
+          {parkingState && (
+            <Parking listSelect={listSelect} thumbnail={cookies.thumbnail}>
+              <div className="parking--title">{cookies.directory}</div>
+            </Parking>
+          )}
+          {cardHover && !parkingState && <DeleteIcon src={deleteicon} onClick={handleDelClick} />}
           {/* 웹 과제 노션 보면서 해보기,. */}
-          {cardHover && !parkingState && <ShereIcon src={shereicon} />}
-          {/* url 복사 */}
+          {cardHover && !parkingState && (
+            <CopyToClipboard text={cookies.link} onCopy={onCopy}>
+              <ShereIcon src={shereicon} onClick={handleCopy} />
+            </CopyToClipboard>
+          )}
         </div>
         {cardHover && <ThumbnailHover thumbnail={cookies.thumbnail}> </ThumbnailHover>}
 
@@ -132,9 +159,8 @@ const Contents = styled.div`
     padding-bottom: ${props => (!props.thumbnail ? 'calc((160 / 360) * 100%)' : 'calc((220 / 360) * 100%)')};
     background: url(${props => (!props.thumbnail ? defaultImg : props.thumbnail)}) center center / cover no-repeat;
     border-radius: 1.2rem;
-  } */
-
-  .title {
+  }
+  */ .title {
     font-size: 2.4rem;
     font-weight: 500;
     margin-top: 2.8rem;

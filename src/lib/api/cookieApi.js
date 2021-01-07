@@ -68,11 +68,28 @@ const getCookiesUnRead = async headers => {
   }
 };
 
+const deleteCookies = async (headers, id) => {
+  try {
+    const { data } = await axios({
+      baseURL,
+      url: `/cookies/${id}`,
+      method: 'delete',
+      headers
+    });
+    console.log('[SUCCESS] DELETE COOKIES', data);
+    return data;
+  } catch (e) {
+    console.error('[FAIL] DELETE COOKIES', error);
+    return e;
+  }
+};
+
 const cookieAPI = {
   postCookie,
   getCookies,
   getCookiesSearch,
-  getCookiesUnRead
+  getCookiesUnRead,
+  deleteCookies
 };
 
 export default cookieAPI;
