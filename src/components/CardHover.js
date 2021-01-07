@@ -7,29 +7,27 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { DirState, SearchState } from '../states/atom';
 import dirApi from '../lib/api/directoryApi';
 
+const token = {
+  'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4'
+};
 
 const List = ({ dir, cookies, setCookieState, setParkingState }) => {
   const [itemHover, setItemHover] = useState(false);
 
-
-  const ListItemClick = async (e) => {
+  const ListItemClick = async e => {
     e.stopPropagation();
     const body = {
       directoryId: dir.id,
       cookieId: cookies.id
-    }
-    console.log(body);
+    };
     const result = await dirApi.addCookieToDir(token, body);
-    console.log(result);
+    console.log('api 호출 결과', result);
     setCookieState(dir.id);
     setParkingState(true);
-  }
+  };
 
   return (
-    <ListItem
-      onMouseOver={() => setItemHover(true)}
-      onMouseLeave={() => setItemHover(false)}
-      onClick={ListItemClick}>
+    <ListItem onMouseOver={() => setItemHover(true)} onMouseLeave={() => setItemHover(false)} onClick={ListItemClick}>
       {dir.name}
       <ListItemBtn itemHover={itemHover} />
     </ListItem>
@@ -65,10 +63,6 @@ const ListItemBtn = styled.div`
   border-radius: 50%;
   background: #ff7034;
 `;
-const token = {
-  'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4'
-};
-
 
 export default ({ cookies, idx, setParkingState }) => {
   const items = ['디자인', '마케팅', '프로그래밍', '기획', '쿠키파킹', '사랑해'];
@@ -94,7 +88,7 @@ export default ({ cookies, idx, setParkingState }) => {
           drop ? setDrop(false) : setDrop(true);
         }}
       >
-        <div className="dir-sort">{cookies.directory}</div>
+        <div className="dir-sort">{cookies.directory ? cookies.directory.name : '정해진 디렉토리가 없습니다'}</div>
         <img src={dropdwnImg} style={{ marginLeft: '1.3rem' }} />
       </Directory>
       {drop && (

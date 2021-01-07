@@ -15,7 +15,6 @@ const token = {
   'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4'
 };
 
-
 export default ({ cookies, idx }) => {
   const [cardHover, setCardHover] = useState(false);
   const [parkingState, setParkingState] = useState(false);
@@ -47,10 +46,7 @@ export default ({ cookies, idx }) => {
   }, [parkingState]);
 
   return (
-    <Container
-      onMouseOver={() => setCardHover(true)}
-      onMouseLeave={() => setCardHover(false)}
-      onClick={() => window.open(cookies.link)}>
+    <Container onMouseOver={() => setCardHover(true)} onMouseLeave={() => setCardHover(false)} onClick={() => window.open(cookies.link)}>
       {cardHover && !parkingState && <CardHover cookies={cookies} idx={idx} setParkingState={setParkingState} />}
       <Contents thumbnail={cookies.thumbnail}>
         <div className="thumbnail">

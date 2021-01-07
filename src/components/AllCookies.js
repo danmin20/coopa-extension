@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Card from './Card';
 import Loading from './Loading';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { CookieState, SearchState } from '../states/atom';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { CookieState, SearchState, DirState } from '../states/atom';
 import cookieApi from '../lib/api/cookieApi';
-
+import dirApi from '../lib/api/directoryApi';
 // 로그인 구현되면 지우기
 const token = {
   'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4'
@@ -14,6 +14,7 @@ const token = {
 export default ({ isSearched, isToggled }) => {
   const [loading, setLoading] = useState(true);
   const [cookieState, setCookieState] = useRecoilState(CookieState);
+  const setDirState = useSetRecoilState(DirState);
   const searchValue = useRecoilValue(SearchState);
 
   useEffect(() => {
@@ -32,6 +33,8 @@ export default ({ isSearched, isToggled }) => {
           setCookieState(result.data.cookies);
         }
       }
+      const dirRes = await dirApi.getDirAll(token);
+      setDirState(dirRes.data);
     })();
     setLoading(false);
   }, [searchValue, isToggled]);
@@ -41,12 +44,12 @@ export default ({ isSearched, isToggled }) => {
       {loading ? (
         <Loading />
       ) : (
-          <Container>
-            {cookieState.map(cookie => (
-              <Card cookies={cookie} idx={cookie.id} />
-            ))}
-          </Container>
-        )}
+        <Container>
+          {cookieState.map(cookie => (
+            <Card cookies={cookie} idx={cookie.id} />
+          ))}
+        </Container>
+      )}
     </>
   );
 };
