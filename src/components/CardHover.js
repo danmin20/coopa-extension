@@ -23,7 +23,7 @@ const List = ({ dir, cookies, setParkingState }) => {
       c.id === cookies.id ?
         {
           ...c,
-          directory : {
+          directory: {
             name: dir.name,
             id: dir.id
           }
@@ -90,17 +90,25 @@ export default ({ cookies, idx, setParkingState }) => {
   const items = ['디자인', '마케팅', '프로그래밍', '기획', '쿠키파킹', '사랑해'];
   const [drop, setDrop] = useState(false);
   const [dirState, setDirState] = useRecoilState(DirState);
+  const [text, setText] = useState("");
 
-  useEffect(() => {
-    (async () => {
-      console.log("...");
-      // let result = [];
-      // result = await dirApi.getDirAll(token);
-      // console.log(result.data);
-      // console.log(cookies);
-      // setDirState(result.data);
-    })();
-  }, [drop]);
+
+  const addDirHandler = (e) => {
+    e.stopPropagation();
+    console.log(text);
+    const body = {
+      name: text,
+      description: "설명없음"
+    }
+    const result = dirApi.postDir(token, body);
+    console.log(result);
+    //dir id를 알면 사용자에게 바로 알도록 update
+    //setDirState(dirState.concat())
+  }
+
+  const changeHandler = (e) => {
+    setText(e.target.value);
+  }
 
   return (
     <HoverPage>
@@ -124,8 +132,14 @@ export default ({ cookies, idx, setParkingState }) => {
             </div>
           </DirList>
           <BottonWrap>
-            <input className="addInput" placeholder="새 디렉토리 명을 입력하세요" />
-            <button className="addBtn">저장</button>
+            <input
+              className="addInput"
+              placeholder="새 디렉토리 명을 입력하세요"
+              onClick={e => e.stopPropagation()}
+              onChange={changeHandler} />
+            <button
+              className="addBtn"
+              onClick={addDirHandler}>저장</button>
           </BottonWrap>
         </ListWrap>
       )}

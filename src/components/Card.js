@@ -52,7 +52,7 @@ export default ({ cookies, idx }) => {
         <div className="thumbnail">
           {parkingState && (
             <Parking listSelect={listSelect} thumbnail={cookies.thumbnail}>
-              <div className="parking--title">{cookies.directory}</div>
+              <div className="parking--title">{cookies.directory.name}</div>
             </Parking>
           )}
           {cardHover && !parkingState && <DeleteIcon src={deleteicon} onClick={handleDelClick} />}
