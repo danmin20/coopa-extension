@@ -8,7 +8,7 @@ import cookieApi from '../lib/api/cookieApi';
 
 // 로그인 구현되면 지우기
 const token = {
-  'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsInVzZXJFbWFpbCI6InJ1cnVAZW1haWwuY29tIiwiaWF0IjoxNjA5Nzc1MDYyfQ.hkdbXr68HQ-667AmfXzIrWIuJMRM03hbQ_eBwrqJZVA'
+  'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4'
 };
 
 export default ({ isSearched, isToggled }) => {

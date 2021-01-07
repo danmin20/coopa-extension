@@ -47,7 +47,10 @@ export default ({ cookies, idx }) => {
   }, [parkingState]);
 
   return (
-    <Container onMouseEnter={() => setCardHover(true)} onMouseLeave={() => setCardHover(false)}>
+    <Container
+      onMouseOver={() => setCardHover(true)}
+      onMouseLeave={() => setCardHover(false)}
+      onClick={() => window.open(cookies.link)}>
       {cardHover && !parkingState && <CardHover cookies={cookies} idx={idx} setParkingState={setParkingState} />}
       <Contents thumbnail={cookies.thumbnail}>
         <div className="thumbnail">

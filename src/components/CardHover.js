@@ -12,11 +12,13 @@ const List = ({ dir, cookies, setCookieState, setParkingState }) => {
   const [itemHover, setItemHover] = useState(false);
 
 
-  const ListItemClick = async () => {
+  const ListItemClick = async (e) => {
+    e.stopPropagation();
     const body = {
       directoryId: dir.id,
       cookieId: cookies.id
     }
+    console.log(body);
     const result = await dirApi.addCookieToDir(token, body);
     console.log(result);
     setCookieState(dir.id);
@@ -67,6 +69,7 @@ const token = {
   'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4'
 };
 
+
 export default ({ cookies, idx, setParkingState }) => {
   const items = ['디자인', '마케팅', '프로그래밍', '기획', '쿠키파킹', '사랑해'];
   const [drop, setDrop] = useState(false);
@@ -77,10 +80,11 @@ export default ({ cookies, idx, setParkingState }) => {
     (async () => {
       let result = [];
       result = await dirApi.getDirAll(token);
-      console.log(result.data);
+      // console.log(result.data);
+      // console.log(cookies);
       setDirState(result.data);
     })();
-  }, []);
+  }, [drop]);
 
   return (
     <HoverPage>
@@ -90,7 +94,7 @@ export default ({ cookies, idx, setParkingState }) => {
           drop ? setDrop(false) : setDrop(true);
         }}
       >
-        <div className="dir-sort">{cookieState}</div>
+        <div className="dir-sort">{cookies.directory}</div>
         <img src={dropdwnImg} style={{ marginLeft: '1.3rem' }} />
       </Directory>
       {drop && (
