@@ -102,7 +102,7 @@ export default ({ cookies, idx, setParkingState }) => {
     }
     const result = dirApi.postDir(token, body);
     console.log(result);
-    //dir id를 알면 사용자에게 바로 알도록 update
+    //dir id를 알면 사용자에게 바로 알도록
     //setDirState(dirState.concat())
   }
 
