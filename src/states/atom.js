@@ -32,6 +32,11 @@ export const DirState = atom({
   deafult: []
 });
 
+export const WebClipperDirState = atom({
+  key: 'WebClipperDirState',
+  default: []
+})
+
 export const SearchState = atom({
   key: 'SearchState',
   default: ''
