@@ -12,7 +12,9 @@ const token = {
 };
 
 export default ({ isSearched, isToggled }) => {
-  const [cookies, setCookies] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [cookieState, setCookieState] = useRecoilState(CookieState);
+  const searchValue = useRecoilValue(SearchState);
 
   useEffect(() => {
     (async () => {
@@ -39,12 +41,12 @@ export default ({ isSearched, isToggled }) => {
       {loading ? (
         <Loading />
       ) : (
-        <Container>
-          {cookieState.map(cookie => (
-            <Card cookies={cookie} idx={cookie.id} />
-          ))}
-        </Container>
-      )}
+          <Container>
+            {cookieState.map(cookie => (
+              <Card cookies={cookie} idx={cookie.id} />
+            ))}
+          </Container>
+        )}
     </>
   );
 };

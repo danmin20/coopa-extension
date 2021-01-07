@@ -6,7 +6,6 @@ import { CookieState } from '../states/atom';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { DirState, SearchState } from '../states/atom';
 import dirApi from '../lib/api/directoryApi';
-import cookieAPI from '../lib/api/cookieApi';
 
 
 const List = ({ dir, cookies, setCookieState, setParkingState }) => {
@@ -78,10 +77,10 @@ export default ({ cookies, idx, setParkingState }) => {
     (async () => {
       let result = [];
       result = await dirApi.getDirAll(token);
-      console.log(result);
-      setDirState(result.data.data);
+      console.log(result.data);
+      setDirState(result.data);
     })();
-  }, [drop]);
+  }, []);
 
   return (
     <HoverPage>

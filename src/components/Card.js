@@ -15,29 +15,6 @@ const token = {
   'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4'
 };
 
-const Parking = styled.div`
-  position: relative;
-  width: 100%;
-  height: 0;
-  padding-bottom: ${props => (!props.thumbnail ? 'calc((160 / 360) * 100%)' : 'calc((220 / 360) * 100%)')};
-  border-radius: 1.2rem;
-  z-index: 10;
-  background: rgba(0, 0, 0, 0.3);
-
-  .parking--title {
-    font-size: 1.8rem;
-    line-height: 2.2rem;
-    letter-spacing: -0.02em;
-    color: #333333;
-    font-weight: 500;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #fff;
-    font-weight: 700;
-  }
-`;
 
 export default ({ cookies, idx }) => {
   const [cardHover, setCardHover] = useState(false);
@@ -203,5 +180,28 @@ const Contents = styled.div`
       border-radius: 0.8rem;
       object-fit: cover;
     }
+  }
+`;
+const Parking = styled.div`
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: ${props => (!props.thumbnail ? 'calc((160 / 360) * 100%)' : 'calc((220 / 360) * 100%)')};
+  border-radius: 1.2rem;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.3);
+
+  .parking--title {
+    font-size: 1.8rem;
+    line-height: 2.2rem;
+    letter-spacing: -0.02em;
+    color: #333333;
+    font-weight: 500;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-weight: 700;
   }
 `;
