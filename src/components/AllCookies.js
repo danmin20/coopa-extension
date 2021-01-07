@@ -44,12 +44,12 @@ export default ({ isSearched, isToggled }) => {
       {loading ? (
         <Loading />
       ) : (
-        <Container>
-          {cookieState.map(cookie => (
-            <Card cookies={cookie} idx={cookie.id} />
-          ))}
-        </Container>
-      )}
+          <Container>
+            {cookieState.map(cookie => (
+              <Card cookies={cookie} idx={cookie.id} />
+            ))}
+          </Container>
+        )}
     </>
   );
 };

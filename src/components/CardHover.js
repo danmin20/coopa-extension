@@ -11,18 +11,39 @@ const token = {
   'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4'
 };
 
-const List = ({ dir, cookies, setCookieState, setParkingState }) => {
+const List = ({ dir, cookies, setParkingState }) => {
   const [itemHover, setItemHover] = useState(false);
+  const [cookieState, setCookieState] = useRecoilState(CookieState);
 
   const ListItemClick = async e => {
     e.stopPropagation();
+
+    console.log(cookieState);
+    const newCookie = cookieState.map((c, idx) => {
+      let array = [];
+      console.log(c);
+      if (idx === cookies.id) {
+        c.directory = {
+          name: dir.name,
+          id: dir.id
+        };
+      }
+    });
+    setCookieState(newCookie);
+    // setCookieState({
+    //   ...cookieState,
+    //   directory: {
+    //     name: dir.name,
+    //     id: dir.id
+    //   }
+    // })
     const body = {
       directoryId: dir.id,
       cookieId: cookies.id
     };
     const result = await dirApi.addCookieToDir(token, body);
     console.log('api 호출 결과', result);
-    setCookieState(dir.id);
+    console.log(cookieState[cookies.id]);
     setParkingState(true);
   };
 
@@ -68,15 +89,15 @@ export default ({ cookies, idx, setParkingState }) => {
   const items = ['디자인', '마케팅', '프로그래밍', '기획', '쿠키파킹', '사랑해'];
   const [drop, setDrop] = useState(false);
   const [dirState, setDirState] = useRecoilState(DirState);
-  const [cookieState, setCookieState] = useState(cookies.directoryId);
 
   useEffect(() => {
     (async () => {
-      let result = [];
-      result = await dirApi.getDirAll(token);
+      console.log("...");
+      // let result = [];
+      // result = await dirApi.getDirAll(token);
       // console.log(result.data);
       // console.log(cookies);
-      setDirState(result.data);
+      // setDirState(result.data);
     })();
   }, [drop]);
 
@@ -97,7 +118,7 @@ export default ({ cookies, idx, setParkingState }) => {
             <div className="list-div">
               <div className="list-sort">모든 디렉토리</div>
               {dirState.map(dir => (
-                <List dir={dir} key={dir.id} cookies={cookies} setCookieState={setCookieState} setParkingState={setParkingState} />
+                <List dir={dir} key={dir.id} cookies={cookies} setParkingState={setParkingState} />
               ))}
             </div>
           </DirList>
