@@ -18,17 +18,18 @@ const List = ({ dir, cookies, setParkingState }) => {
   const ListItemClick = async e => {
     e.stopPropagation();
 
-    console.log(cookieState);
-    const newCookie = cookieState.map((c, idx) => {
-      let array = [];
-      console.log(c);
-      if (idx === cookies.id) {
-        c.directory = {
-          name: dir.name,
-          id: dir.id
-        };
-      }
-    });
+    // console.log(cookieState);
+    const newCookie = cookieState.map((c, idx) => (
+      c.id === cookies.id ?
+        {
+          ...c,
+          directory : {
+            name: dir.name,
+            id: dir.id
+          }
+        } :
+        c
+    ));
     setCookieState(newCookie);
     // setCookieState({
     //   ...cookieState,
