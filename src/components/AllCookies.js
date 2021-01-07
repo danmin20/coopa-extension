@@ -12,9 +12,7 @@ const token = {
 };
 
 export default ({ isSearched, isToggled }) => {
-  const [loading, setLoading] = useState(true);
-  const [cookieState, setCookieState] = useRecoilState(CookieState);
-  const searchValue = useRecoilValue(SearchState);
+  const [cookies, setCookies] = useState([]);
 
   useEffect(() => {
     (async () => {
