@@ -42,10 +42,6 @@ export default ({ cookies, idx }) => {
     await cookieAPI.deleteCookies(token, cookies.id);
     setDeleteCookieClick(true);
   };
- */
-  const handleDelClick = () => {
-    setIsDelOpen(true);
-  };
 
   const handleCookieClick = async () => {
     window.open(cookies.link);
