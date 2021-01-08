@@ -29,7 +29,8 @@ export default ({ cookies, idx }) => {
     ({ copied: true });
   };
 
-  const handleCopy = () => {
+  const handleCopy = (e) => {
+    e.stopPropagation();
     setShareClick(true);
   };
 
@@ -41,7 +42,8 @@ export default ({ cookies, idx }) => {
     setDeleteCookieClick(true);
   };
  */
-  const handleDelClick = () => {
+  const handleDelClick = (e) => {
+    e.stopPropagation();
     setIsDelOpen(true);
   };
 
@@ -72,7 +74,7 @@ export default ({ cookies, idx }) => {
             </Parking>
           )}
           {cardHover && !parkingState && <DeleteIcon src={deleteicon} onClick={handleDelClick} />}
-          {isDelOpen && <DelCookieModal id={cookies.id} />}
+          {isDelOpen && <DelCookieModal id={cookies.id} setIsDelOpen={setIsDelOpen}/>}
           {cardHover && !parkingState && (
             <CopyToClipboard text={cookies.link} onCopy={onCopy}>
               <ShereIcon src={shereicon} onClick={handleCopy} />
