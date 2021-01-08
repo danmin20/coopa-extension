@@ -7,13 +7,17 @@ import Switch from '../../components/Switch';
 import Header from '../../components/Header';
 import HomeBoard from '../../components/HomeBoard';
 import { useRecoilState } from 'recoil';
-import { SelectState } from '../../states/atom';
+import { SelectState, ShareClickState, DeleteClickState } from '../../states/atom';
 import DirCreateModal from '../../components/DirCreateModal';
+import ToastMsg from '../../components/ToastMsg';
 
 export default () => {
   const [selectState, setSelectState] = useRecoilState(SelectState);
+  const [ShareClick, setShareClick] = useRecoilState(ShareClickState);
+  const [DeleteClick, setDeleteClick] = useRecoilState(DeleteClickState);
   const [isSearched, setIsSearched] = useState(false);
   const [isToggled, setIsToggled] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const [isOpenCreateDir, setIsOpenCreateDir] = useState(false); // 새 디렉토리 만들기 모달
 
   const handleTab = tab => {
@@ -63,6 +67,8 @@ export default () => {
         {selectState === 'cookie' ? <AllCookies isSearched={isSearched} isToggled={isToggled} /> : <Directory isSearched={isSearched} />}
         {isOpenCreateDir && <DirCreateModal setIsOpenCreateDir={setIsOpenCreateDir} />}
       </Contents>
+      {ShareClick && <ToastMsg msg={'링크가 복사되었어요!'} />}
+      {DeleteClick && <ToastMsg msg={'쿠키를 삭제했어요!'} />}
     </div>
   );
 };

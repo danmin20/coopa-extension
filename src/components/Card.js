@@ -1,64 +1,77 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useState, useEffect } from 'react';
+import styled, { keyframes } from 'styled-components';
 import defaultImg from '../assets/img/img_default.svg';
 import theme from '../assets/themes';
 import CardHover from './CardHover';
-import { listSelectState } from '../states/atom';
+import { listSelectState, ShareClickState, CookieState, DeleteClickState } from '../states/atom';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import deleteicon from '../assets/img/cookiehover_icn_delete.svg';
 import shereicon from '../assets/img/cookiehover_icn_share.svg';
-import { useEffect } from 'react';
+import logo from '../assets/img/logo_white.svg';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+import cookieAPI from '../lib/api/cookieApi';
 
-
-// !안채린 깃 마스터 고지가 앞이다!
-
-const Parking = styled.div`
-  position: relative;
-  width: 100%;
-  height: 0;
-  padding-bottom: ${props => (!props.thumbnail ? 'calc((160 / 360) * 100%)' : 'calc((220 / 360) * 100%)')};
-  border-radius: 1.2rem;
-  z-index: 10;
-  background: rgba(0, 0, 0, 0.3);
-
-  .parking--title {
-    font-size: 1.8rem;
-    line-height: 2.2rem;
-    letter-spacing: -0.02em;
-    color: #333333;
-    font-weight: 500;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #fff;
-    font-weight: 700;
-  }
-`;
+const token = {
+  'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4'
+};
 
 export default ({ cookies, idx }) => {
   const [cardHover, setCardHover] = useState(false);
   const [parkingState, setParkingState] = useState(false);
   const listSelect = useRecoilValue(listSelectState);
+  const [ShareClick, setShareClick] = useRecoilState(ShareClickState);
+  const [DeleteClick, setDeleteClick] = useRecoilState(DeleteClickState);
+  const [allCookie, setAllCookie] = useRecoilState(CookieState);
+
+  const onCopy = e => {
+    ({ copied: true });
+  };
+
+  const handleCopy = () => {
+    setShareClick(true);
+  };
+
+  const handleDelClick = async () => {
+    const newCookie = allCookie.filter(c => c.id !== cookies.id);
+    setAllCookie(newCookie);
+
+    await cookieAPI.deleteCookies(token, cookies.id);
+    setDeleteClick(true);
+  };
+
+  const handleCookieClick = async () => {
+    window.open(cookies.link);
+    // 읽은 쿠키 표시
+    await cookieAPI.postCookieRead(token, cookies.id);
+  };
 
   useEffect(() => {
     setTimeout(() => {
       setParkingState(false);
-    }, 1000);
+    }, 1500);
   }, [parkingState]);
 
   return (
-    <Container onMouseEnter={() => setCardHover(true)} onMouseLeave={() => setCardHover(false)}>
+    <Container onMouseOver={() => setCardHover(true)} onMouseLeave={() => setCardHover(false)} onClick={handleCookieClick}>
       {cardHover && !parkingState && <CardHover cookies={cookies} idx={idx} setParkingState={setParkingState} />}
       <Contents thumbnail={cookies.thumbnail}>
         <div className="thumbnail">
-          {parkingState && <Parking listSelect={listSelect} thumbnail={cookies.thumbnail}>
-            <div className="parking--title">{cookies.directory}</div>
-          </Parking>}
-          {cardHover && !parkingState && <DeleteIcon src={deleteicon} />}
+          {parkingState && (
+            <Parking listSelect={listSelect} thumbnail={cookies.thumbnail}>
+              <div className="parking--title">{cookies.directory.name}</div>
+              <ParkingLogoWrap>
+                <ParkingLogo src={logo} />
+                <ParkingText>파킹했습니다!</ParkingText>
+              </ParkingLogoWrap>
+            </Parking>
+          )}
+          {cardHover && !parkingState && <DeleteIcon src={deleteicon} onClick={handleDelClick} />}
           {/* 웹 과제 노션 보면서 해보기,. */}
-          {cardHover && !parkingState && <ShereIcon src={shereicon} />}
-          {/* url 복사 */}
+          {cardHover && !parkingState && (
+            <CopyToClipboard text={cookies.link} onCopy={onCopy}>
+              <ShereIcon src={shereicon} onClick={handleCopy} />
+            </CopyToClipboard>
+          )}
         </div>
         {cardHover && <ThumbnailHover thumbnail={cookies.thumbnail}> </ThumbnailHover>}
         <div className="title">{cookies.title}</div>
@@ -132,8 +145,7 @@ const Contents = styled.div`
     background: url(${props => (!props.thumbnail ? defaultImg : props.thumbnail)}) center center / cover no-repeat;
     border-radius: 1.2rem;
   }
-
-  .title {
+  */ .title {
     font-size: 2.4rem;
     font-weight: 500;
     margin-top: 2.8rem;
@@ -177,4 +189,84 @@ const Contents = styled.div`
       object-fit: cover;
     }
   }
+`;
+
+const fadeout = keyframes`
+  0% {
+    opacity: 1;
+  }
+  30%{
+    opacity: 1;
+  }
+  70%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 0;
+  }
+`;
+
+const fadein = keyframes`
+  0% {
+    opacity: 0;
+  }
+  50%{
+    opacity: 0;
+  }
+  70%{
+    opacity: 1;
+  }
+  100%{
+    opacity: 1;
+  }
+`;
+
+const Parking = styled.div`
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: ${props => (!props.thumbnail ? 'calc((160 / 360) * 100%)' : 'calc((220 / 360) * 100%)')};
+  border-radius: 1.2rem;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.3);
+
+  .parking--title {
+    font-size: 1.8rem;
+    line-height: 2.2rem;
+    letter-spacing: -0.02em;
+    color: #333333;
+    font-weight: 500;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-weight: 700;
+    animation: ${fadeout} 1.5s infinite;
+  }
+`;
+
+const ParkingLogoWrap = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  animation: ${fadein} 1.5s infinite;
+`;
+
+const ParkingLogo = styled.img`
+  width: 5.532rem;
+  height: 6.8rem;
+  margin-bottom: 1.3rem;
+`;
+
+const ParkingText = styled.div`
+  font-size: 2rem;
+  line-height: 2.4rem;
+  font-weight: 500;
+  color: white;
 `;

@@ -47,6 +47,15 @@ export const SelectState = atom({
   default: 'cookie'
 });
 
+export const ShareClickState = atom({
+  key: 'ShareClickState',
+  default: false
+});
+
+export const DeleteClickState = atom({
+  key: 'DeleteClickState',
+  default: false
+});
 
 export const LoginState = atom({
   key: 'LoginState',

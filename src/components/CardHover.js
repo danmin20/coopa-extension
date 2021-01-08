@@ -1,25 +1,56 @@
 import styled from 'styled-components';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import dropdwnImg from '../assets/img/dropdown.svg';
 import { listSelectState } from '../states/atom';
 import { CookieState } from '../states/atom';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { DirState, SearchState } from '../states/atom';
+import dirApi from '../lib/api/directoryApi';
 
-const List = ({ item, idx, setParkingState }) => {
+const token = {
+  'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4'
+};
+
+const List = ({ dir, cookies, setParkingState }) => {
   const [itemHover, setItemHover] = useState(false);
-  const [listSelect, setListSelect] = useRecoilState(listSelectState);
-  const [cookies, setCookies] = useRecoilState(CookieState);
+  const [cookieState, setCookieState] = useRecoilState(CookieState);
 
-  const ListItemClick = () => {
-    console.log(item + ' :click');
-    console.log(cookies[idx]);
+  const ListItemClick = async e => {
+    e.stopPropagation();
+
+    // console.log(cookieState);
+    const newCookie = cookieState.map((c, idx) => (
+      c.id === cookies.id ?
+        {
+          ...c,
+          directory: {
+            name: dir.name,
+            id: dir.id
+          }
+        } :
+        c
+    ));
+    setCookieState(newCookie);
+    // setCookieState({
+    //   ...cookieState,
+    //   directory: {
+    //     name: dir.name,
+    //     id: dir.id
+    //   }
+    // })
+    const body = {
+      directoryId: dir.id,
+      cookieId: cookies.id
+    };
+    const result = await dirApi.addCookieToDir(token, body);
+    console.log('api 호출 결과', result);
+    console.log(cookieState[cookies.id]);
     setParkingState(true);
-    cookies[idx].directory = item;
   };
 
   return (
     <ListItem onMouseOver={() => setItemHover(true)} onMouseLeave={() => setItemHover(false)} onClick={ListItemClick}>
-      {item}
+      {dir.name}
       <ListItemBtn itemHover={itemHover} />
     </ListItem>
   );
@@ -57,8 +88,27 @@ const ListItemBtn = styled.div`
 
 export default ({ cookies, idx, setParkingState }) => {
   const items = ['디자인', '마케팅', '프로그래밍', '기획', '쿠키파킹', '사랑해'];
-
   const [drop, setDrop] = useState(false);
+  const [dirState, setDirState] = useRecoilState(DirState);
+  const [text, setText] = useState("");
+
+
+  const addDirHandler = (e) => {
+    e.stopPropagation();
+    console.log(text);
+    const body = {
+      name: text,
+      description: "설명없음"
+    }
+    const result = dirApi.postDir(token, body);
+    console.log(result);
+    //dir id를 알면 사용자에게 바로 알도록
+    //setDirState(dirState.concat())
+  }
+
+  const changeHandler = (e) => {
+    setText(e.target.value);
+  }
 
   return (
     <HoverPage>
@@ -68,7 +118,7 @@ export default ({ cookies, idx, setParkingState }) => {
           drop ? setDrop(false) : setDrop(true);
         }}
       >
-        <div className="dir-sort">{cookies.directory}</div>
+        <div className="dir-sort">{cookies.directory ? cookies.directory.name : '정해진 디렉토리가 없습니다'}</div>
         <img src={dropdwnImg} style={{ marginLeft: '1.3rem' }} />
       </Directory>
       {drop && (
@@ -76,14 +126,20 @@ export default ({ cookies, idx, setParkingState }) => {
           <DirList>
             <div className="list-div">
               <div className="list-sort">모든 디렉토리</div>
-              {items.map(item => (
-                <List item={item} idx={idx} setParkingState={setParkingState} />
+              {dirState.map(dir => (
+                <List dir={dir} key={dir.id} cookies={cookies} setParkingState={setParkingState} />
               ))}
             </div>
           </DirList>
           <BottonWrap>
-            <input className="addInput" placeholder="새 디렉토리 명을 입력하세요" />
-            <button className="addBtn">저장</button>
+            <input
+              className="addInput"
+              placeholder="새 디렉토리 명을 입력하세요"
+              onClick={e => e.stopPropagation()}
+              onChange={changeHandler} />
+            <button
+              className="addBtn"
+              onClick={addDirHandler}>저장</button>
           </BottonWrap>
         </ListWrap>
       )}
@@ -137,7 +193,7 @@ const ListWrap = styled.div`
 
 const DirList = styled.div`
   margin-top: 1.2rem;
-  max-height: 25.9rem;
+  min-height: 25.9rem;
   max-width: 100%;
   padding-left: 1.8rem;
   .list-sort {

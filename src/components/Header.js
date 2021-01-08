@@ -6,7 +6,7 @@ import theme from '../assets/themes';
 import { useSetRecoilState } from 'recoil';
 import { SearchState, SelectState } from '../states/atom';
 
-export default ({ isSearched, setIsSearched }) => {
+export default ({ setIsSelected, isSearched, setIsSearched, scrollTop }) => {
   const setSelectState = useSetRecoilState(SelectState);
   const setSearchState = useSetRecoilState(SearchState);
   const handleRefresh = () => {

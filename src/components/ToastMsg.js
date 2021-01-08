@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { ShareClickState, DeleteClickState } from '../states/atom';
+import { useRecoilState } from 'recoil';
 
 export default ({ msg }) => {
   const [isFlex, setIsFlex] = useState(true);
+  const [ShareClick, setShareClick] = useRecoilState(ShareClickState);
+  const [DeleteClick, setDeleteClick] = useRecoilState(DeleteClickState);
 
   useEffect(() => {
     console.log('토스트 open');
     setInterval(() => {
       setIsFlex(false);
+      setShareClick(false);
+      setDeleteClick(false);
     }, 2000);
   }, []);
 
