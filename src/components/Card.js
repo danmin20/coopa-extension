@@ -76,7 +76,6 @@ export default ({ cookies, idx }) => {
           )}
         </div>
         {cardHover && <ThumbnailHover thumbnail={cookies.thumbnail}> </ThumbnailHover>}
-
         <div className="title">{cookies.title}</div>
         <div className="content">{cookies.content}</div>
         <div className="profile">

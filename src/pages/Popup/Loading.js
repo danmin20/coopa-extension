@@ -20,7 +20,7 @@ const Loading = () => {
 export default Loading;
 
 const Wrap = styled.div`
-  width: 36.1rem;
+  width: 36rem;
   height: 24rem;
   border-radius: 1.2rem;
   background-color: #ffffff;
