@@ -71,7 +71,7 @@ export default () => {
       {/* <button onClick={onClick}>click</button> */}
       <LogoWrap>
         <LogoImg src={logo} />
-        <Text>파킹했습니다!</Text>
+        <Text>파킹했어요!</Text>
       </LogoWrap>
       <BtnWrap>
         <BtnOne onMouseOver={handleBtnOneMouseOver} onMouseLeave={handleBtnOneMouseLeave} isHover={isBtnOneHover} onClick={handleBtnOneClick}>

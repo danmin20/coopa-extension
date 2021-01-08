@@ -29,8 +29,8 @@ export default () => {
     <Wrap>
       <LogoWrap>
         <LogoImg src={logo} />
-        <Text>{ isLogin ? '유저 인터페이스' : '환영합니다' }</Text>
-        <TextTwo>{ isLogin? '파킹했습니다!' : '쿠키를 모으러 가볼까요?' }</TextTwo>
+        <Text>{ isLogin ? '유저 인터페이스' : '반가워요!' }</Text>
+        <TextTwo>{ isLogin? '파킹했어요!' : '쿠키를 모으러 가볼까요?' }</TextTwo>
       </LogoWrap>
       <Btn isHover={isHover} onMouseMove={handleBtnMouseOver} onMouseLeave={handleBtnMouseLeave} onClick={ isLogin? handleBtnClick : handleLogin}>
         { isLogin? '홈으로 가기' : '로그인하기' }
@@ -38,7 +38,7 @@ export default () => {
     </Wrap>
   );
 };
-
+ 
 const Wrap = styled.div`
   width: 36rem;
   height: 35.1rem;
