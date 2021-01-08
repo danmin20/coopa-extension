@@ -39,14 +39,23 @@ export default ({ cookies, idx }) => {
     setDeleteClick(true);
   };
 
+  const handleCookieClick = async () => {
+    window.open(cookies.link);
+    // 읽은 쿠키 표시
+    const body = {
+      isView: true
+    };
+    await cookieAPI.postCookieView(token, body, cookies.id);
+  };
+
   useEffect(() => {
     setTimeout(() => {
-        setParkingState(false);
-    },1500)
+      setParkingState(false);
+    }, 1500);
   }, [parkingState]);
 
   return (
-    <Container onMouseOver={() => setCardHover(true)} onMouseLeave={() => setCardHover(false)} onClick={() => window.open(cookies.link)}>
+    <Container onMouseOver={() => setCardHover(true)} onMouseLeave={() => setCardHover(false)} onClick={handleCookieClick}>
       {cardHover && !parkingState && <CardHover cookies={cookies} idx={idx} setParkingState={setParkingState} />}
       <Contents thumbnail={cookies.thumbnail}>
         <div className="thumbnail">
@@ -54,7 +63,7 @@ export default ({ cookies, idx }) => {
             <Parking listSelect={listSelect} thumbnail={cookies.thumbnail}>
               <div className="parking--title">{cookies.directory.name}</div>
               <ParkingLogoWrap>
-                <ParkingLogo src={logo}/>
+                <ParkingLogo src={logo} />
                 <ParkingText>파킹했습니다!</ParkingText>
               </ParkingLogoWrap>
             </Parking>
