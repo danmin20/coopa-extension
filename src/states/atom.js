@@ -52,7 +52,7 @@ export const ShareClickState = atom({
   default: false
 });
 
-export const DeleteClickState = atom({
+export const DeleteCookieClickState = atom({
   key: 'DeleteClickState',
   default: false
 });
