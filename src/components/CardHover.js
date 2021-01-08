@@ -138,7 +138,7 @@ export default ({ cookies, idx, setParkingState }) => {
             <div className="list-div">
               <div className="list-sort">모든 디렉토리</div>
               {dirState.map(dir => (
-                <List dir={dir.directory} key={dir.id} cookies={cookies} setParkingState={setParkingState} />
+                <List dir={dir.directory} key={dir.directory.id} cookies={cookies} setParkingState={setParkingState} />
               ))}
             </div>
           </DirList>
