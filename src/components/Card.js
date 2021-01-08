@@ -29,11 +29,13 @@ export default ({ cookies, idx }) => {
     ({ copied: true });
   };
 
-  const handleCopy = () => {
+  const handleCopy = (e) => {
+    e.stopPropagation();
     setShareClick(true);
   };
 
-  /*   const handleDelClick = async () => {
+  const handleDelClick = async (e) => {
+    e.stopPropagation();
     const newCookie = allCookie.filter(c => c.id !== cookies.id);
     setAllCookie(newCookie);
 
