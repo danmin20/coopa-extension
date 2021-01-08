@@ -2,14 +2,16 @@
 
 import '../../assets/img/icon-34.png';
 import '../../assets/img/icon-128.png';
+import favicon from  '../../assets/img/favicon.svg';
 import axios from 'axios';
 import cookieAPI from '../../lib/api/cookieApi';
 
 console.log('This is the background page.');
 console.log('Put the background scripts here.');
 
-
-const token = { 'x-access-token': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsInVzZXJFbWFpbCI6InJ1cnVAZW1haWwuY29tIiwiaWF0IjoxNjA5Nzc1MDYyfQ.hkdbXr68HQ-667AmfXzIrWIuJMRM03hbQ_eBwrqJZVA" };
+const token = {
+  'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4'
+};
 
 // let data = {
 //   type: '',
@@ -22,6 +24,9 @@ const token = { 'x-access-token': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2Vy
 //   "favicon": ''
 // };
 
+chrome.browserAction.setIcon({
+  path: {'32':favicon}
+});
 
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
   let data = {
@@ -32,6 +37,7 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
     "favicon": '',
     "provider": '',
   };
+
   if (message.popupOpen) {
     chrome.tabs.query({ active: true, lastFocusedWindow: true }, tabs => {
       const url = tabs[0].url;
@@ -49,8 +55,10 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
         console.log(data);
         console.log(data.thumbnail);
         console.log(data.favicon);
-        cookieAPI.postCookie(token, data);
-        // console.log(res);
+        const Response = cookieAPI.postCookie(token, data);
+          Response.then(function(response) {
+            chrome.storage.sync.set({ cookieId: response.data.cookieId});
+          })
       });
     });
   }
@@ -79,7 +87,7 @@ const findOgTag = (html, ogTag, data) => {
       switch (ogTag) {
         case 'image':
           data.thumbnail = html.substring(start + 9, end);
-          if(data.thumbnail[0] == '/' && data.thumbnail[1] == '/'){
+          if (data.thumbnail[0] == '/' && data.thumbnail[1] == '/') {
             data.thumbnail = 'http:' + data.thumbnail;
           }
           break;
@@ -115,7 +123,7 @@ const findAuthor = (html, data) => {
 
 const findFavicon = (html, url, data) => {
   let location = html.indexOf(`<link rel="shortcut icon`);
-  if(location == -1){
+  if (location == -1) {
     location = html.indexOf(`<link rel="apple-touch-icon`);
   }
   if (location != -1) {
@@ -126,7 +134,7 @@ const findFavicon = (html, url, data) => {
       if (favicon_url[0] == '/' && favicon_url[1] != '/') {
         favicon_url = sliceURL(url) + favicon_url;
       }
-      if (favicon_url[0] == '/' && favicon_url[1] == '/'){
+      if (favicon_url[0] == '/' && favicon_url[1] == '/') {
         favicon_url = 'http:' + favicon_url;
       }
       data.favicon = favicon_url;

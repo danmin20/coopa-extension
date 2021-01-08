@@ -4,14 +4,22 @@ import theme from '../assets/themes';
 import cookieIcon from '../assets/img/cookie_icon.svg';
 import cookieIconW from '../assets/img/cookie_icon_white.svg';
 import updateDirIcon from '../assets/img/update_dir_icon.svg';
+import DirFixModal from '../components/DirFixModal';
+import DelCookieModal from '../components/DelCookieModal';
 
 export default ({ dir }) => {
   const [isHover, setIsHover] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [isDelOpen, setIsDelOpen] = useState(false);
+
   const handleBtnMouseOver = () => {
     setIsHover(true);
   };
   const handleBtnMouseLeave = () => {
     setIsHover(false);
+  };
+  const handleClickUpdateIcon = () => {
+    setIsOpen(true);
   };
 
   return (
@@ -20,10 +28,12 @@ export default ({ dir }) => {
         <div className="dir__title">{dir.name}</div>
         <div className="dir__num">
           <CookieIcon isHover={isHover} onMouseOver={handleBtnMouseOver} onMouseLeave={handleBtnMouseOver} />
-          <div>37개</div>
+          <div>{dir.cookieCnt}개</div>
         </div>
       </div>
-      <UpdateIcon src={updateDirIcon} onMouseOver={handleBtnMouseOver} onMouseLeave={handleBtnMouseOver} isHover={isHover} />
+      <UpdateIcon src={updateDirIcon} onMouseOver={handleBtnMouseOver} onMouseLeave={handleBtnMouseOver} isHover={isHover} onClick={handleClickUpdateIcon} />
+      {isOpen && <DirFixModal setIsOpen={setIsOpen} setIsDelOpen={setIsDelOpen} dir={dir} />}
+      {isDelOpen && <DelCookieModal isDelOpen={isDelOpen} setIsDelOpen={setIsDelOpen} id={dir.id} />}
     </Container>
   );
 };
@@ -95,5 +105,3 @@ const UpdateIcon = styled.img`
   width: 3rem;
   height: 3rem;
 `;
-
-// ToDo: 새 디렉토리 만들기 버튼 추가

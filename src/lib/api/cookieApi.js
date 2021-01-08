@@ -36,9 +36,25 @@ const getCookies = async headers => {
   }
 };
 
-const getCookiesUnRead = headers => {
+const getCookiesSearch = async (headers, word) => {
   try {
-    const data = axios({
+    const { data } = await axios({
+      baseURL,
+      url: `/cookies/search?word=${word}`,
+      method: 'get',
+      headers
+    });
+    console.log('[SUCCESS] GET SEARCH COOKIES', data);
+    return data;
+  } catch (e) {
+    console.error('[FAIL] GET SEARCH COOKIES', error);
+    return e;
+  }
+};
+
+const getCookiesUnRead = async headers => {
+  try {
+    const { data } = await axios({
       baseURL,
       url: '/cookies/unread',
       method: 'get',
@@ -52,10 +68,43 @@ const getCookiesUnRead = headers => {
   }
 };
 
+const deleteCookies = async (headers, id) => {
+  try {
+    const { data } = await axios({
+      baseURL,
+      url: `/cookies/${id}`,
+      method: 'delete',
+      headers
+    });
+    console.log('[SUCCESS] DELETE COOKIES', data);
+    return data;
+  } catch (e) {
+    console.error('[FAIL] DELETE COOKIES', error);
+    return e;
+  }
+};
+const postCookieRead = async (headers, id) => {
+  try {
+    const { data } = await axios({
+      baseURL,
+      url: `cookies/${id}/read`,
+      method: 'post',
+      headers
+    });
+    console.log('[SUCCESS] POST COOKIES READ', data);
+  } catch (e) {
+    console.error('[FAIL] POST COOKIES READ', error);
+    return e;
+  }
+};
+
 const cookieAPI = {
+  postCookieRead,
   postCookie,
   getCookies,
-  getCookiesUnRead
+  getCookiesSearch,
+  getCookiesUnRead,
+  deleteCookies
 };
 
 export default cookieAPI;

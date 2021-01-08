@@ -1,51 +1,34 @@
 import styled from 'styled-components';
 import React, { useState, useEffect } from 'react';
-import { useRecoilValue, useRecoilState } from 'recoil';
-import { DirState, SelectState, DeleteCookieClickState, CookieState } from '../states/atom';
+import useInput from '../hooks/useInput';
 import dirApi from '../lib/api/directoryApi';
-import cookieAPI from '../lib/api/cookieApi';
-
+import { useRecoilState } from 'recoil';
+import { DirState } from '../states/atom';
 const token = {
   'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4'
 };
 
-export default ({ setIsDelOpen, id }) => {
+export default ({ setIsOpenCreateDir }) => {
   const [dirState, setDirState] = useRecoilState(DirState);
-  const selectState = useRecoilValue(SelectState);
-  const [isClose, setIsClose] = useState(false);
-  const [isDelHover, setIsDelHover] = useState(false);
   const [isCancleHover, setIsCancleHover] = useState(false);
-  const [DeleteCookieClick, setDeleteCookieClick] = useRecoilState(DeleteCookieClickState);
-  const [allCookie, setAllCookie] = useRecoilState(CookieState);
+  const [isFixHover, setIsFixHover] = useState(false);
+  const [isClose, setIsClose] = useState(false);
+  const modalInput = useInput('');
 
   const handleClick = () => {
     setIsClose(true);
   };
 
-  const handleCookieDelClick = async () => {
-    const newCookie = allCookie.filter(c => c.id !== cookies.id);
-    setAllCookie(newCookie);
-
-    await cookieAPI.deleteCookies(token, cookies.id);
-    setDeleteCookieClick(true);
-    setIsClose(true);
-  };
-
-  const handleDelClick = async () => {
-    // for optimistic ui
-    const newDirList = dirState.filter(dir => dir.id !== id);
+  const handleFixClick = async () => {
+    const body = {
+      name: modalInput.value,
+      description: '설명은 없어질 예정',
+      cookieCnt: 0
+    };
+    const newDirList = dirState.concat(body);
     setDirState(newDirList);
-    // api call
-    await dirApi.deleteDir(token, id);
+    await dirApi.postDir(token, body);
     setIsClose(true);
-  };
-
-  const handleDelMouseMove = () => {
-    setIsDelHover(true);
-  };
-
-  const handleDelMouseLeave = () => {
-    setIsDelHover(false);
   };
 
   const handleCancleMouseMove = () => {
@@ -56,26 +39,36 @@ export default ({ setIsDelOpen, id }) => {
     setIsCancleHover(false);
   };
 
+  const handleFixMouseMove = () => {
+    setIsFixHover(true);
+  };
+
+  const handleFixMouseLeave = () => {
+    setIsFixHover(false);
+  };
+
   useEffect(() => {
-    // 모달이 닫힐 때 마다 모달 open state를 변경해주기 위함
-    // isClose && setIsDelOpen(false);
-    return () => {
-      setIsDelOpen(false);
-    };
+    isClose && setIsOpenCreateDir(false);
   }, [isClose]);
 
   return (
     <>
       <Wrap onClick={handleClick} isClose={isClose} />
       <ModalWrap isClose={isClose}>
-        <Text>{selectState === 'cookie' ? '쿠키 삭제' : '디렉토리 삭제'}</Text>
-        <SmallText>이 {selectState === 'cookie' ? '쿠키' : '디렉토리'}를 정말 삭제하시겠어요?</SmallText>
+        <Text>디렉토리 만들기</Text>
+        <DetailWrap>
+          <SmallText>디렉토리 이름</SmallText>
+          <SmallText>{modalInput.value.length}/40</SmallText>
+        </DetailWrap>
+        <InputBox value={modalInput.value} type="text" onChange={modalInput.onChange} />
         <BtnWrap>
-          <Btn onClick={handleClick} isHover={isCancleHover} onMouseMove={handleCancleMouseMove} onMouseLeave={handleCancleMouseLeave}>
+          <Space width={'28.6rem'} />
+          <Btn isHover={isCancleHover} onClick={handleClick} onMouseLeave={handleCancleMouseLeave} onMouseMove={handleCancleMouseMove}>
             취소
           </Btn>
-          <Btn onClick={selectState === 'cookie' ? handleCookieDelClick : handleDelClick} isHover={isDelHover} onMouseMove={handleDelMouseMove} onMouseLeave={handleDelMouseLeave}>
-            삭제
+          <Space width={'1.5rem'} />
+          <Btn isHover={isFixHover} onClick={handleFixClick} onMouseLeave={handleFixMouseLeave} onMouseMove={handleFixMouseMove}>
+            수정
           </Btn>
         </BtnWrap>
       </ModalWrap>
@@ -96,8 +89,8 @@ const Wrap = styled.div`
 `;
 
 const ModalWrap = styled.div`
-  width: 55rem;
-  height: 24.9rem;
+  width: 65rem;
+  height: 31.5rem;
   padding: 4.2rem 3.8rem;
   position: fixed;
   z-index: 300;
@@ -115,26 +108,45 @@ const Text = styled.div`
   font-weight: 500;
   line-height: 3.6rem;
   color: #333333;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+`;
+
+const DetailWrap = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 `;
 
 const SmallText = styled.div`
-  font-size: 2rem;
-  font-weight: normal;
+  font-size: 1.6rem;
+  font-weight: 400;
   line-height: 3.6rem;
   color: #333333;
-  margin-bottom: 3.1rem;
+  margin-bottom: 0.6rem;
+`;
+
+const InputBox = styled.input`
+  width: 57.3rem;
+  height: 5.2rem;
+  padding: 0.8rem 2.3rem;
+  border: 0.1rem solid #333333;
+  border-radius: 1.2rem;
+  font-size: 2rem;
+  font-weight: 400;
+  outline: none;
+  margin-bottom: 3.4rem;
+  color: #333333;
 `;
 
 const BtnWrap = styled.div`
-  width: 47.2rem;
+  cursor: pointer;
+  width: 57.2rem;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
 `;
 
 const Btn = styled.div`
-  cursor: pointer;
   width: 9.8rem;
   height: 5.2rem;
   background: ${props => (props.isHover ? '#FF7134' : '#F3F3F4')};
@@ -147,5 +159,10 @@ const Btn = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: 1.5rem;
 `;
+
+const Space = styled.div`
+  width: ${props => props.width};
+`;
+
+// 디렉토리 만들기 모달 -> 디렉토리가 생성되었습니다.

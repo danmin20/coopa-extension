@@ -1,17 +1,20 @@
 import React from 'react';
 import { useRecoilState } from 'recoil';
-import { ClipperPageNumState } from '../../states/atom';
+import { ClipperPageNumState, LoginState } from '../../states/atom';
 import Finish from './Finish';
 import Main from './Main';
 import Directory from './Directory';
-import Login from './Login';
+import MainNotLogin from './MainNotLogin';
+// import Login from './Login';
+
 
 export default () => {
   const [pageNum, setPageNum] = useRecoilState(ClipperPageNumState);
+  const [isLogin, setIsLogin] = useRecoilState(LoginState);
 
   switch (pageNum) {
     case 0:
-      return <Main />;
+      return (isLogin ? <Main /> : <MainNotLogin/>);
     case 1:
       return <Directory />;
     case 2:
