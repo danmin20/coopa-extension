@@ -34,14 +34,18 @@ export default ({ cookies, idx }) => {
     setShareClick(true);
   };
 
+  // const handleDelClick = async (e) => {
+  //   e.stopPropagation();
+  //   const newCookie = allCookie.filter(c => c.id !== cookies.id);
+  //   setAllCookie(newCookie);
+
+  //   await cookieAPI.deleteCookies(token, cookies.id);
+  //   setDeleteCookieClick(true);
+  // };
   const handleDelClick = async (e) => {
     e.stopPropagation();
-    const newCookie = allCookie.filter(c => c.id !== cookies.id);
-    setAllCookie(newCookie);
-
-    await cookieAPI.deleteCookies(token, cookies.id);
-    setDeleteCookieClick(true);
-  };
+    setIsDelOpen(true);
+  }
 
   const handleCookieClick = async () => {
     window.open(cookies.link);
