@@ -61,3 +61,8 @@ export const LoginState = atom({
   key: 'LoginState',
   default: true
 })
+
+export const DelToastState = atom({
+  key: 'DelToastState',
+  default: false
+});

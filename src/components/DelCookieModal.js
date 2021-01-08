@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import React, { useState, useEffect } from 'react';
 import { useRecoilValue, useRecoilState } from 'recoil';
-import { DirState, SelectState, DeleteCookieClickState, CookieState } from '../states/atom';
+import { DirState, SelectState, DeleteCookieClickState, CookieState,DelToastState } from '../states/atom';
 import dirApi from '../lib/api/directoryApi';
 import cookieAPI from '../lib/api/cookieApi';
 import ToastMsg from '../components/ToastMsg';
@@ -11,8 +11,9 @@ const token = {
 };
 
 export default ({ setIsDelOpen, id }) => {
-  const [dirState, setDirState] = useRecoilState(DirState);
   const selectState = useRecoilValue(SelectState);
+  const setDelToastState = useSetRecoilState(DelToastState);
+  const [dirState, setDirState] = useRecoilState(DirState);
   const [isClose, setIsClose] = useState(false);
   const [isDelHover, setIsDelHover] = useState(false);
   const [isCancleHover, setIsCancleHover] = useState(false);
@@ -40,7 +41,7 @@ export default ({ setIsDelOpen, id }) => {
     // api call
     await dirApi.deleteDir(token, id);
     setIsClose(true);
-    setIsToastOpen(true);
+    setDelToastState(true);
   };
 
   const handleDelMouseMove = () => {
@@ -82,7 +83,6 @@ export default ({ setIsDelOpen, id }) => {
           </Btn>
         </BtnWrap>
       </ModalWrap>
-      {isToastOpen && <ToastMsg msg="쿠키가 삭제되었어요!" />}
     </>
   );
 };

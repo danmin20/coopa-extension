@@ -25,10 +25,10 @@ export default ({ isSearched }) => {
         // 전체 디렉토리 조회
         result = await dirApi.getDirAll(token);
       }
-      console.log(result);
       setDirState(result.data);
       setLoading(false);
     })();
+    console.log('리렌더링된 후 dirState', dirState);
   }, [searchValue]);
 
   return (

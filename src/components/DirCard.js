@@ -7,11 +7,15 @@ import updateDirIcon from '../assets/img/update_dir_icon.svg';
 import DirFixModal from '../components/DirFixModal';
 import DelCookieModal from '../components/DelCookieModal';
 import ToastMsg from '../components/ToastMsg';
+import { DelToastState } from '../states/atom';
+import { useRecoilValue } from 'recoil';
 
 export default ({ dir }) => {
   const [isHover, setIsHover] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isDelOpen, setIsDelOpen] = useState(false);
+  // toast에서 no-op 문제가 발생한다! 왜그럴까..?
+  const delToast = useRecoilValue(DelToastState);
 
   const handleBtnMouseOver = () => {
     setIsHover(true);

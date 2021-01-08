@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { ShareClickState, DeleteCookieClickState } from '../states/atom';
-import { useRecoilState } from 'recoil';
+import { ShareClickState, DeleteCookieClickState,DelToastState } from '../states/atom';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 
 export default ({ msg }) => {
   const [isFlex, setIsFlex] = useState(true);
+  const setDelToastState = useSetRecoilState(DelToastState);
   const [ShareClick, setShareClick] = useRecoilState(ShareClickState);
   const [DeleteCookieClick, setDeleteCookieClick] = useRecoilState(DeleteCookieClickState);
 
   useEffect(() => {
-    console.log('토스트 open');
     setInterval(() => {
       setIsFlex(false);
       setShareClick(false);
       setDeleteCookieClick(false);
+      setDelToastState(false);
     }, 2000);
   }, []);
 
@@ -24,7 +25,7 @@ const Wrap = styled.div`
   position: fixed;
   width: 38rem;
   height: 6.8rem;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.3);
   border-radius: 1.2rem;
   color: white;
   font-size: 2rem;
