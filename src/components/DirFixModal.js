@@ -2,9 +2,8 @@ import styled from 'styled-components';
 import React, { useState, useEffect } from 'react';
 import useInput from '../hooks/useInput';
 import dirApi from '../lib/api/directoryApi';
-import { DirState } from '../states/atom';
-import { useRecoilState } from 'recoil';
-import DelCookieModal from './DelCookieModal';
+import { DirState, updateDirClickState } from '../states/atom';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 const token = {
   'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4'
 };
@@ -15,6 +14,7 @@ export default ({ setIsOpen, setIsDelOpen, dir }) => {
   const [isCancleHover, setIsCancleHover] = useState(false);
   const [isFixHover, setIsFixHover] = useState(false);
   const [isClose, setIsClose] = useState(false);
+  const setUpdateDirClick = useSetRecoilState(updateDirClickState);
   const modalInput = useInput(dir.directory.name);
 
   const handleClick = () => {
@@ -45,6 +45,7 @@ export default ({ setIsOpen, setIsDelOpen, dir }) => {
         : directory
     );
     setDirState(newDirList);
+    setUpdateDirClick(true);
     setIsClose(true);
   };
 

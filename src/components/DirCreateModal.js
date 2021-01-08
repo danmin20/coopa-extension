@@ -2,14 +2,15 @@ import styled from 'styled-components';
 import React, { useState, useEffect } from 'react';
 import useInput from '../hooks/useInput';
 import dirApi from '../lib/api/directoryApi';
-import { useRecoilState } from 'recoil';
-import { DirState } from '../states/atom';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { DirState, createDirClickState } from '../states/atom';
 const token = {
   'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4'
 };
 
 export default ({ setIsOpenCreateDir }) => {
   const [dirState, setDirState] = useRecoilState(DirState);
+  const setCreateDirClick = useSetRecoilState(createDirClickState);
   const [isCancleHover, setIsCancleHover] = useState(false);
   const [isFixHover, setIsFixHover] = useState(false);
   const [isClose, setIsClose] = useState(false);
@@ -35,6 +36,7 @@ export default ({ setIsOpenCreateDir }) => {
     };
     const newDirList = dirState.concat(body);
     setDirState(newDirList);
+    setCreateDirClick(true);
     setIsClose(true);
   };
 
@@ -75,7 +77,7 @@ export default ({ setIsOpenCreateDir }) => {
           </Btn>
           <Space width={'1.5rem'} />
           <Btn isHover={isFixHover} onClick={handleFixClick} onMouseLeave={handleFixMouseLeave} onMouseMove={handleFixMouseMove}>
-            수정
+            생성
           </Btn>
         </BtnWrap>
       </ModalWrap>

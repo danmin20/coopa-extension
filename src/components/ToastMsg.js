@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { ShareClickState, DeleteCookieClickState,DelToastState } from '../states/atom';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { ShareClickState, DeleteCookieClickState, DelToastState, createDirClickState, updateDirClickState } from '../states/atom';
+import { useSetRecoilState } from 'recoil';
 
 export default ({ msg }) => {
   const [isFlex, setIsFlex] = useState(true);
   const setDelToastState = useSetRecoilState(DelToastState);
-  const [ShareClick, setShareClick] = useRecoilState(ShareClickState);
-  const [DeleteCookieClick, setDeleteCookieClick] = useRecoilState(DeleteCookieClickState);
+  const setShareClick = useSetRecoilState(ShareClickState);
+  const setDeleteCookieClick = useSetRecoilState(DeleteCookieClickState);
+  const setCreateDirClick = useSetRecoilState(createDirClickState);
+  const setUpdateDirClick = useSetRecoilState(updateDirClickState);
 
   useEffect(() => {
     setInterval(() => {
@@ -15,6 +17,8 @@ export default ({ msg }) => {
       setShareClick(false);
       setDeleteCookieClick(false);
       setDelToastState(false);
+      setCreateDirClick(false);
+      setUpdateDirClick(false);
     }, 2000);
   }, []);
 
@@ -25,7 +29,8 @@ const Wrap = styled.div`
   position: fixed;
   width: 38rem;
   height: 6.8rem;
-  background: rgba(0, 0, 0, 0.3);
+  /* background: rgba(0, 0, 0, 0.3); */
+  background: #222222;
   border-radius: 1.2rem;
   color: white;
   font-size: 2rem;
@@ -39,8 +44,8 @@ const Wrap = styled.div`
   justify-content: center;
   opacity: 0;
   z-index: 100;
-
   animation: fadeout 2s;
+  animation-fill-mode: forwards;
   @keyframes fadeout {
     from {
       opacity: 1;

@@ -15,7 +15,7 @@ export default ({ isSearched, isToggled }) => {
   const [loading, setLoading] = useState(true);
   const [cookieState, setCookieState] = useRecoilState(CookieState);
   const setDirState = useSetRecoilState(DirState);
-  const searchValue = useRecoilValue(SearchState);
+  const searchValue = SearchState;
 
   useEffect(() => {
     (async () => {
