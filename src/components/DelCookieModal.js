@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import React, { useState, useEffect } from 'react';
-import { useRecoilValue, useRecoilState } from 'recoil';
-import { DirState, SelectState, DeleteCookieClickState, CookieState,DelToastState } from '../states/atom';
+import { useRecoilValue, useSetRecoilState, useRecoilState } from 'recoil';
+import { DirState, SelectState, DeleteCookieClickState, CookieState, DelToastState } from '../states/atom';
 import dirApi from '../lib/api/directoryApi';
 import cookieAPI from '../lib/api/cookieApi';
 import ToastMsg from '../components/ToastMsg';
@@ -17,9 +17,8 @@ export default ({ setIsDelOpen, id }) => {
   const [isClose, setIsClose] = useState(false);
   const [isDelHover, setIsDelHover] = useState(false);
   const [isCancleHover, setIsCancleHover] = useState(false);
-  const [DeleteCookieClick, setDeleteCookieClick] = useRecoilState(DeleteCookieClickState);
+  const setDeleteCookieClick = useSetRecoilState(DeleteCookieClickState);
   const [allCookie, setAllCookie] = useRecoilState(CookieState);
-  const [isToastOpen, setIsToastOpen] = useState(false);
 
   const handleClick = () => {
     setIsClose(true);
@@ -35,11 +34,9 @@ export default ({ setIsDelOpen, id }) => {
   };
 
   const handleDelClick = async () => {
-    // for optimistic ui
-    const newDirList = dirState.filter(dir => dir.id !== id);
-    setDirState(newDirList);
-    // api call
     await dirApi.deleteDir(token, id);
+    const newDirList = dirState.filter(dir => dir.directory.id !== id);
+    setDirState(newDirList);
     setIsClose(true);
     setDelToastState(true);
   };
@@ -61,8 +58,6 @@ export default ({ setIsDelOpen, id }) => {
   };
 
   useEffect(() => {
-    // 모달이 닫힐 때 마다 모달 open state를 변경해주기 위함
-    // isClose && setIsDelOpen(false);
     return () => {
       setIsDelOpen(false);
     };

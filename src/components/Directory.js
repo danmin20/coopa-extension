@@ -28,7 +28,6 @@ export default ({ isSearched }) => {
       setDirState(result.data);
       setLoading(false);
     })();
-    console.log('리렌더링된 후 dirState', dirState);
   }, [searchValue]);
 
   return (
@@ -37,8 +36,8 @@ export default ({ isSearched }) => {
         <Loading />
       ) : (
         <Container>
-          {dirState.map(dir => (
-            <DirCard dir={dir} key={dir.id} />
+          {dirState.map((dir, index) => (
+            <DirCard dir={dir} key={index} />
           ))}
         </Container>
       )}

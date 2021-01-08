@@ -4,25 +4,23 @@ import defaultImg from '../assets/img/img_default.svg';
 import theme from '../assets/themes';
 import CardHover from './CardHover';
 import { listSelectState, ShareClickState, CookieState } from '../states/atom';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import deleteicon from '../assets/img/cookiehover_icn_delete.svg';
 import shereicon from '../assets/img/cookiehover_icn_share.svg';
 import logo from '../assets/img/logo_white.svg';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import DelCookieModal from '../components/DelCookieModal';
+import cookieApi from '../lib/api/cookieApi';
 
-/* const token = {
+const token = {
   'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4'
 };
- */
 
 export default ({ cookies, idx }) => {
   const [cardHover, setCardHover] = useState(false);
   const [parkingState, setParkingState] = useState(false);
   const listSelect = useRecoilValue(listSelectState);
-  const [ShareClick, setShareClick] = useRecoilState(ShareClickState);
-  //const [DeleteCookieClick, setDeleteCookieClick] = useRecoilState(DeleteCookieClickState);
-  const [allCookie, setAllCookie] = useRecoilState(CookieState);
+  const setShareClick = useSetRecoilState(ShareClickState);
   const [isDelOpen, setIsDelOpen] = useState(false);
 
   const onCopy = e => {
@@ -33,14 +31,6 @@ export default ({ cookies, idx }) => {
     setShareClick(true);
   };
 
-  /*   const handleDelClick = async () => {
-    const newCookie = allCookie.filter(c => c.id !== cookies.id);
-    setAllCookie(newCookie);
-
-    await cookieAPI.deleteCookies(token, cookies.id);
-    setDeleteCookieClick(true);
-  };
- */
   const handleDelClick = () => {
     setIsDelOpen(true);
   };
@@ -48,7 +38,7 @@ export default ({ cookies, idx }) => {
   const handleCookieClick = async () => {
     window.open(cookies.link);
     // 읽은 쿠키 표시
-    await cookieAPI.postCookieRead(token, cookies.id);
+    await cookieApi.postCookieRead(token, cookies.id);
   };
 
   useEffect(() => {

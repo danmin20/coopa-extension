@@ -15,7 +15,7 @@ export default ({ setIsOpen, setIsDelOpen, dir }) => {
   const [isCancleHover, setIsCancleHover] = useState(false);
   const [isFixHover, setIsFixHover] = useState(false);
   const [isClose, setIsClose] = useState(false);
-  const modalInput = useInput(dir.name);
+  const modalInput = useInput(dir.directory.name);
 
   const handleClick = () => {
     setIsClose(true);
@@ -28,14 +28,23 @@ export default ({ setIsOpen, setIsDelOpen, dir }) => {
   };
 
   const handleFixClick = async () => {
-    // 디렉토리 수정 추가하기
     const body = {
       name: modalInput.value,
       description: '설명은 없어질 예정'
     };
-    const newDirList = dirState.map(directory => (directory.id === dir.id ? { ...directory, name: modalInput.value } : directory));
+    await dirApi.updateDir(token, body, dir.directory.id);
+    const newDirList = dirState.map(directory =>
+      directory.directory.id === dir.directory.id
+        ? {
+            directory: {
+              ...directory.directory,
+              name: modalInput.value
+            },
+            thumbnail: directory.thumbnail
+          }
+        : directory
+    );
     setDirState(newDirList);
-    await dirApi.updateDir(token, body, dir.id);
     setIsClose(true);
   };
 

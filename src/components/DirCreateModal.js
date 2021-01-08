@@ -20,14 +20,21 @@ export default ({ setIsOpenCreateDir }) => {
   };
 
   const handleFixClick = async () => {
-    const body = {
+    let body = {
       name: modalInput.value,
-      description: '설명은 없어질 예정',
-      cookieCnt: 0
+      description: '설명은 없어질 예정'
+    };
+    const res = await dirApi.postDir(token, body);
+    body = {
+      directory: {
+        cookieCnt: 0,
+        id: res.data.directoryId,
+        name: modalInput.value
+      },
+      thumbnail: null
     };
     const newDirList = dirState.concat(body);
     setDirState(newDirList);
-    await dirApi.postDir(token, body);
     setIsClose(true);
   };
 

@@ -14,7 +14,6 @@ export default ({ dir }) => {
   const [isHover, setIsHover] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isDelOpen, setIsDelOpen] = useState(false);
-  // toast에서 no-op 문제가 발생한다! 왜그럴까..?
   const delToast = useRecoilValue(DelToastState);
 
   const handleBtnMouseOver = () => {

@@ -22,7 +22,6 @@ export default ({ isSearched, isToggled }) => {
       let result = [];
       if (isSearched) {
         result = await cookieApi.getCookiesSearch(token, searchValue);
-        console.log('검색 결과', result);
         setCookieState(result.data);
       } else {
         if (isToggled) {
@@ -44,12 +43,12 @@ export default ({ isSearched, isToggled }) => {
       {loading ? (
         <Loading />
       ) : (
-          <Container>
-            {cookieState.map(cookie => (
-              <Card cookies={cookie} idx={cookie.id} />
-            ))}
-          </Container>
-        )}
+        <Container>
+          {cookieState.map((cookie, index) => (
+            <Card cookies={cookie} key={index} idx={cookie.id} />
+          ))}
+        </Container>
+      )}
     </>
   );
 };
