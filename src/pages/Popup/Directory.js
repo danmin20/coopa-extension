@@ -1,23 +1,44 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { atom, useRecoilState } from 'recoil';
 import { useState } from 'react';
 import back_arrow from '../../assets/img/back_arrow.svg'; 
 import useInput from '../../hooks/useInput';
-import { ClipperPageNumState } from '../../states/atom';
+import { ClipperPageNumState, WebClipperDirState } from '../../states/atom';
+import dirApi from '../../lib/api/directoryApi';
+import Loading from '../../components/Loading';
 
 // 나중에 api 연결
-const item = ['디자인', '마케팅', '프로그래밍', '기획', '쿠키파킹','디자인', '마케팅', '프로그래밍', '기획', '쿠키파킹'];
+const token = {
+  'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4'
+};
 
-// 스크롤바 뿌옇게 되는거 방지??? 어떻게 하지...
 
 export default () => {
   const [pageNum, setPageNum] = useRecoilState(ClipperPageNumState);
+  const [dirState, setDirState] = useRecoilState(WebClipperDirState);
   const [isHover, setIsHover] = useState(false);
-  const searchText = useInput('');
+  const [loading, setLoading] = useState(true);
+  const InputText = useInput('');
+  
+  useEffect(()=>{
+    const result = dirApi.getDirAll(token);
+      result.then(function(dir){
+        // console.log(dir);
+        setDirState(dir.data.data);
+        setLoading(false);
+      })
+  }, [])
 
   const handleBtnClick = () => {
-   //디렉토리 저장 추가
+    const data = {
+      name: InputText.value,
+      description: "디버그 마스터 봉채륀~"
+    };
+    const newDirList = dirState.concat(data);
+    setDirState(newDirList);
+    dirApi.postDir(token, data);
+    InputText.setValue('');
   };
 
   const handleBackArrClick = () => {
@@ -32,16 +53,23 @@ export default () => {
     setIsHover(false);
   };
 
+  const handleClick = (e) => {
+  } 
+
   return (
-    <Wrap>
+    <>
+    { loading ?
+    <Loading />
+    :
+    (<Wrap>
       <HeadhWrap>
         <BackBtn onClick={handleBackArrClick}>
           <BackArrow src={back_arrow} />
         </BackBtn>
       </HeadhWrap>
       <DirList>
-        {item.map((item, idx) => (
-          <ReturnDirItems item={item} idx={idx}/>
+        {dirState.map((dir) => (
+          <ReturnDirItems item={dir.directory.name} idx={dir.directory.id}/>
         ))}
         <Space />
       </DirList>
@@ -49,19 +77,21 @@ export default () => {
       <BottomWrap>
         <SearchInput
           placeholder={"새 디렉토리 명을 입력하세요"} 
-          value={searchText.value} 
-          onChange={searchText.onChange} 
+          value={InputText.value} 
+          onChange={InputText.onChange} 
         />
         <AddBtn isHover={isHover} onMouseOver={handleBtnMouseOver} onMouseLeave={handleBtnMouseLeave} onClick={handleBtnClick}>
           저장
         </AddBtn>
       </BottomWrap>
-    </Wrap>
+    </Wrap>)
+        }
+    </>
   );
 };
 
 const Wrap = styled.div`
-  width: 36.1rem;
+  width: 36rem;
   height: 35.1rem;
   border-radius: 1.2rem;
   background-color: #ffffff;
@@ -192,9 +222,9 @@ const SearchInput = styled.input`
 `;
 
 const AddBtn = styled.div`
-  width: 7.6rem;
+  width: 7.2rem;
   height: 4.6rem;
-  border: ${props => (props.isHover ? 'none' : '0.2rem solid #FF7134')};
+  border: 0.2rem solid #FF7134;
   border-radius: 0.8rem;
   display: flex;
   flex-direction: row;
@@ -206,6 +236,7 @@ const AddBtn = styled.div`
   background-color: ${props => (props.isHover ? '#FF7134' : '#ffffff')};
   box-shadow: ${props => (props.isHover ? '0rem 0rem 1.2rem rgba(0, 0, 0, 0.13)' : 'none')};
   margin-left: 1rem;
+  transition-duration: 0.5s;
 `;
 
 const Space = styled.div`
@@ -217,8 +248,20 @@ const ReturnDirItems = ({item, idx}) => {
   const [isHover, setIsHover] = useState(false);
   const [pageNum, setPageNum] = useRecoilState(ClipperPageNumState);
 
-  const handleDirClick = () => {
-    setPageNum(2);
+  const handleDirClick = (e) => {
+    // 디렉토리에 데이터 넣기
+    chrome.storage.sync.get("cookieId", function(storage) {
+      let data = {
+        directoryId: e.target.id,
+        cookieId: storage.cookieId
+      }
+      const Response = dirApi.addCookieToDir(token, data);
+        Response.then(function(response){
+          // console.log(response);
+          setPageNum(2);
+        })
+    });
+    
   };
 
   const handleMouseMove = () => {
@@ -236,6 +279,7 @@ const ReturnDirItems = ({item, idx}) => {
       onMouseLeave={handleMouseLeave}
       isHover={isHover}
       key={idx}
+      id={idx}
     >
       <DirItem>
         {item}

@@ -38,7 +38,7 @@ const updateDir = async (headers, body, id) => {
 
 const getDirAll = async headers => {
   try {
-    const { data } = await axios({
+    const data = await axios({
       baseURL,
       url: `/directories`,
       method: 'get',
@@ -70,7 +70,7 @@ const getDirById = async (headers, id) => {
 
 const getDirSearch = async (headers, word) => {
   try {
-    const { data } = await axios({
+    const data = await axios({
       baseURL,
       url: `/directories/search?word=${word}`,
       method: 'get',
