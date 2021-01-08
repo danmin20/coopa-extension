@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import React, { useState, useEffect } from 'react';
 import { useRecoilValue, useRecoilState } from 'recoil';
-import { DirState, SelectState } from '../states/atom';
+import { DirState, SelectState, DeleteCookieClickState, CookieState } from '../states/atom';
 import dirApi from '../lib/api/directoryApi';
+import cookieAPI from '../lib/api/cookieApi';
 
 const token = {
   'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4'
@@ -14,8 +15,19 @@ export default ({ setIsDelOpen, id }) => {
   const [isClose, setIsClose] = useState(false);
   const [isDelHover, setIsDelHover] = useState(false);
   const [isCancleHover, setIsCancleHover] = useState(false);
+  const [DeleteCookieClick, setDeleteCookieClick] = useRecoilState(DeleteCookieClickState);
+  const [allCookie, setAllCookie] = useRecoilState(CookieState);
 
   const handleClick = () => {
+    setIsClose(true);
+  };
+
+  const handleCookieDelClick = async () => {
+    const newCookie = allCookie.filter(c => c.id !== cookies.id);
+    setAllCookie(newCookie);
+
+    await cookieAPI.deleteCookies(token, cookies.id);
+    setDeleteCookieClick(true);
     setIsClose(true);
   };
 
@@ -62,7 +74,7 @@ export default ({ setIsDelOpen, id }) => {
           <Btn onClick={handleClick} isHover={isCancleHover} onMouseMove={handleCancleMouseMove} onMouseLeave={handleCancleMouseLeave}>
             취소
           </Btn>
-          <Btn onClick={handleDelClick} isHover={isDelHover} onMouseMove={handleDelMouseMove} onMouseLeave={handleDelMouseLeave}>
+          <Btn onClick={selectState === 'cookie' ? handleCookieDelClick : handleDelClick} isHover={isDelHover} onMouseMove={handleDelMouseMove} onMouseLeave={handleDelMouseLeave}>
             삭제
           </Btn>
         </BtnWrap>

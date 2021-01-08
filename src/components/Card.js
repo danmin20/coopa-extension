@@ -3,17 +3,18 @@ import styled from 'styled-components';
 import defaultImg from '../assets/img/img_default.svg';
 import theme from '../assets/themes';
 import CardHover from './CardHover';
-import { listSelectState, ShareClickState, CookieState, DeleteClickState } from '../states/atom';
+import { listSelectState, ShareClickState, CookieState } from '../states/atom';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import deleteicon from '../assets/img/cookiehover_icn_delete.svg';
 import shereicon from '../assets/img/cookiehover_icn_share.svg';
 import { useEffect } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import cookieAPI from '../lib/api/cookieApi';
+import DelCookieModal from '../components/DelCookieModal';
 
-const token = {
+/* const token = {
   'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4'
 };
+ */
 
 const Parking = styled.div`
   position: relative;
@@ -44,8 +45,9 @@ export default ({ cookies, idx }) => {
   const [parkingState, setParkingState] = useState(false);
   const listSelect = useRecoilValue(listSelectState);
   const [ShareClick, setShareClick] = useRecoilState(ShareClickState);
-  const [DeleteClick, setDeleteClick] = useRecoilState(DeleteClickState);
+  //const [DeleteCookieClick, setDeleteCookieClick] = useRecoilState(DeleteCookieClickState);
   const [allCookie, setAllCookie] = useRecoilState(CookieState);
+  const [isDelOpen, setIsDelOpen] = useState(false);
 
   const onCopy = e => {
     ({ copied: true });
@@ -55,12 +57,16 @@ export default ({ cookies, idx }) => {
     setShareClick(true);
   };
 
-  const handleDelClick = async () => {
+  /*   const handleDelClick = async () => {
     const newCookie = allCookie.filter(c => c.id !== cookies.id);
     setAllCookie(newCookie);
 
     await cookieAPI.deleteCookies(token, cookies.id);
-    setDeleteClick(true);
+    setDeleteCookieClick(true);
+  };
+ */
+  const handleDelClick = () => {
+    setIsDelOpen(true);
   };
 
   useEffect(() => {
@@ -80,7 +86,7 @@ export default ({ cookies, idx }) => {
             </Parking>
           )}
           {cardHover && !parkingState && <DeleteIcon src={deleteicon} onClick={handleDelClick} />}
-          {/* 웹 과제 노션 보면서 해보기,. */}
+          {isDelOpen && <DelCookieModal id={cookies.id} />}
           {cardHover && !parkingState && (
             <CopyToClipboard text={cookies.link} onCopy={onCopy}>
               <ShereIcon src={shereicon} onClick={handleCopy} />
