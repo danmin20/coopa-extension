@@ -42,10 +42,7 @@ export default ({ cookies, idx }) => {
   const handleCookieClick = async () => {
     window.open(cookies.link);
     // 읽은 쿠키 표시
-    const body = {
-      isView: true
-    };
-    await cookieAPI.postCookieView(token, body, cookies.id);
+    await cookieAPI.postCookieRead(token, cookies.id);
   };
 
   useEffect(() => {

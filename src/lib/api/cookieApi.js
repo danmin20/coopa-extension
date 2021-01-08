@@ -83,23 +83,23 @@ const deleteCookies = async (headers, id) => {
     return e;
   }
 };
-const postCookieView = async (headers, body, id) => {
+const postCookieRead = async (headers, id) => {
   try {
     const { data } = await axios({
       baseURL,
-      url: `cookies/${id}/view`,
+      url: `cookies/${id}/read`,
       method: 'post',
       headers
     });
-    console.log('[SUCCESS] POST COOKIES VIEW', data);
+    console.log('[SUCCESS] POST COOKIES READ', data);
   } catch (e) {
-    console.error('[FAIL] POST COOKIES VIEW', error);
+    console.error('[FAIL] POST COOKIES READ', error);
     return e;
   }
 };
 
 const cookieAPI = {
-  postCookieView,
+  postCookieRead,
   postCookie,
   getCookies,
   getCookiesSearch,
