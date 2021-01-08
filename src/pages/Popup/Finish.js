@@ -99,4 +99,5 @@ const Btn = styled.div`
   font-weight: 500;
   box-shadow: ${props => props.isHover ? '0rem 0rem 1.2rem rgba(0, 0, 0, 0.13)' : 'none'};
   margin-top: 4.8rem;
+  transition-duration: 0.5s;
 `;

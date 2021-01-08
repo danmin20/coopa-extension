@@ -222,9 +222,9 @@ const SearchInput = styled.input`
 `;
 
 const AddBtn = styled.div`
-  width: 7.6rem;
+  width: 7.2rem;
   height: 4.6rem;
-  border: ${props => (props.isHover ? 'none' : '0.2rem solid #FF7134')};
+  border: 0.2rem solid #FF7134;
   border-radius: 0.8rem;
   display: flex;
   flex-direction: row;
@@ -236,6 +236,7 @@ const AddBtn = styled.div`
   background-color: ${props => (props.isHover ? '#FF7134' : '#ffffff')};
   box-shadow: ${props => (props.isHover ? '0rem 0rem 1.2rem rgba(0, 0, 0, 0.13)' : 'none')};
   margin-left: 1rem;
+  transition-duration: 0.5s;
 `;
 
 const Space = styled.div`

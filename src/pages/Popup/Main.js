@@ -136,6 +136,7 @@ const BtnOne = styled.div`
   background-color: ${props => (props.isHover ? '#FF7134' : '#ffffff')};
   box-shadow: 0rem 0rem 1.2rem rgba(0, 0, 0, 0.13);
   margin-top: 1.6rem;
+  transition-duration: 0.5s;
 `;
 
 const BtnOneWrap = styled.div`
@@ -152,6 +153,7 @@ const BtnOneText = styled.div`
   font-size: 1.6rem;
   color: ${props => (props.isHover ? '#ffffff' : '#000000')};
   font-weight: 500;
+  transition-duration: 0.5s;
 `;
 
 const BtnOneArrow = styled.img`
@@ -185,4 +187,5 @@ const BtnTwo = styled.div`
   font-weight: 500;
   box-shadow: ${props => props.isHover ? '0rem 0rem 1.2rem rgba(0, 0, 0, 0.13)' : 'none'};
   margin-top: 1.6rem;
+  transition-duration: 0.5s;
 `;
