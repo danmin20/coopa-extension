@@ -59,7 +59,7 @@ export default () => {
   useEffect(() => {
     setInterval(() => {
       setIsLoading(false);
-    }, 2000);
+    }, 1000);
   }, []);
 
   if (isLoading & !isclickNextPage) {
@@ -71,7 +71,7 @@ export default () => {
       {/* <button onClick={onClick}>click</button> */}
       <LogoWrap>
         <LogoImg src={logo} />
-        <Text>파킹했습니다!</Text>
+        <Text>파킹했어요!</Text>
       </LogoWrap>
       <BtnWrap>
         <BtnOne onMouseOver={handleBtnOneMouseOver} onMouseLeave={handleBtnOneMouseLeave} isHover={isBtnOneHover} onClick={handleBtnOneClick}>
@@ -90,7 +90,7 @@ export default () => {
 };
 
 const Wrap = styled.div`
-  width: 36.1rem;
+  width: 36rem;
   height: 35.1rem;
   border-radius: 1.2rem;
   background-color: #ffffff;
@@ -136,6 +136,7 @@ const BtnOne = styled.div`
   background-color: ${props => (props.isHover ? '#FF7134' : '#ffffff')};
   box-shadow: 0rem 0rem 1.2rem rgba(0, 0, 0, 0.13);
   margin-top: 1.6rem;
+  transition-duration: 0.5s;
 `;
 
 const BtnOneWrap = styled.div`
@@ -152,6 +153,7 @@ const BtnOneText = styled.div`
   font-size: 1.6rem;
   color: ${props => (props.isHover ? '#ffffff' : '#000000')};
   font-weight: 500;
+  transition-duration: 0.5s;
 `;
 
 const BtnOneArrow = styled.img`
@@ -185,4 +187,5 @@ const BtnTwo = styled.div`
   font-weight: 500;
   box-shadow: ${props => props.isHover ? '0rem 0rem 1.2rem rgba(0, 0, 0, 0.13)' : 'none'};
   margin-top: 1.6rem;
+  transition-duration: 0.5s;
 `;
