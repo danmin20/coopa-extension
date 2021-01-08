@@ -46,3 +46,9 @@ export const SelectState = atom({
   key: 'SelectState',
   default: 'cookie'
 });
+
+
+export const LoginState = atom({
+  key: 'LoginState',
+  default: true
+})
