@@ -35,9 +35,27 @@ export default () => {
       name: InputText.value,
       description: "디버그 마스터 봉채륀~"
     };
-    const newDirList = dirState.concat(data);
-    setDirState(newDirList);
-    dirApi.postDir(token, data);
+
+    console.log(dirState);
+    
+    const response = dirApi.postDir(token, data);
+      response.then((res) => {
+        const newDir = {
+          directory: {
+            cookieCnt: 0,
+            createAt: 'unknown',
+            description: '디버그 마스터 봉채륀~',
+            id: res.data.directoryId,
+            name: InputText.value,
+            updateAt: 'unknown',
+            userId: 1
+          },
+          thumbnail: null
+        }
+        const newDirList = dirState.concat(newDir);
+        setDirState(newDirList);
+      })
+
     InputText.setValue('');
   };
 
