@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useState, useEffect } from 'react';
+import styled, { keyframes } from 'styled-components';
 import defaultImg from '../assets/img/img_default.svg';
 import theme from '../assets/themes';
 import CardHover from './CardHover';
@@ -7,7 +7,7 @@ import { listSelectState, ShareClickState, CookieState, DeleteClickState } from 
 import { useRecoilState, useRecoilValue } from 'recoil';
 import deleteicon from '../assets/img/cookiehover_icn_delete.svg';
 import shereicon from '../assets/img/cookiehover_icn_share.svg';
-import { useEffect } from 'react';
+import logo from '../assets/img/logo_white.svg';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import cookieAPI from '../lib/api/cookieApi';
 
@@ -41,8 +41,8 @@ export default ({ cookies, idx }) => {
 
   useEffect(() => {
     setTimeout(() => {
-      setParkingState(false);
-    }, 1000);
+        setParkingState(false);
+    },1500)
   }, [parkingState]);
 
   return (
@@ -53,6 +53,10 @@ export default ({ cookies, idx }) => {
           {parkingState && (
             <Parking listSelect={listSelect} thumbnail={cookies.thumbnail}>
               <div className="parking--title">{cookies.directory.name}</div>
+              <ParkingLogoWrap>
+                <ParkingLogo src={logo}/>
+                <ParkingText>파킹했습니다!</ParkingText>
+              </ParkingLogoWrap>
             </Parking>
           )}
           {cardHover && !parkingState && <DeleteIcon src={deleteicon} onClick={handleDelClick} />}
@@ -181,6 +185,37 @@ const Contents = styled.div`
     }
   }
 `;
+
+const fadeout = keyframes`
+  0% {
+    opacity: 1;
+  }
+  30%{
+    opacity: 1;
+  }
+  70%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 0;
+  }
+`;
+
+const fadein = keyframes`
+  0% {
+    opacity: 0;
+  }
+  50%{
+    opacity: 0;
+  }
+  70%{
+    opacity: 1;
+  }
+  100%{
+    opacity: 1;
+  }
+`;
+
 const Parking = styled.div`
   position: relative;
   width: 100%;
@@ -202,5 +237,31 @@ const Parking = styled.div`
     transform: translate(-50%, -50%);
     color: #fff;
     font-weight: 700;
+    animation: ${fadeout} 1.5s infinite;
   }
+`;
+
+const ParkingLogoWrap = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  animation: ${fadein} 1.5s infinite;
+`;
+
+const ParkingLogo = styled.img`
+  width: 5.532rem;
+  height: 6.8rem;
+  margin-bottom: 1.3rem;
+`;
+
+const ParkingText = styled.div`
+  font-size: 2rem;
+  line-height: 2.4rem;
+  font-weight: 500;
+  color: white;
 `;
