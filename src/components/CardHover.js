@@ -20,17 +20,17 @@ const List = ({ dir, cookies, setParkingState }) => {
     e.stopPropagation();
 
     // console.log(cookieState);
-    const newCookie = cookieState.map((c, idx) => (
-      c.id === cookies.id ?
-        {
-          ...c,
-          directory: {
-            name: dir.name,
-            id: dir.id
+    const newCookie = cookieState.map((c, idx) =>
+      c.id === cookies.id
+        ? {
+            ...c,
+            directory: {
+              name: dir.name,
+              id: dir.id
+            }
           }
-        } :
-        c
-    ));
+        : c
+    );
     setCookieState(newCookie);
     // setCookieState({
     //   ...cookieState,
@@ -91,17 +91,16 @@ export default ({ cookies, idx, setParkingState }) => {
   const items = ['디자인', '마케팅', '프로그래밍', '기획', '쿠키파킹', '사랑해'];
   const [drop, setDrop] = useState(false);
   const [dirState, setDirState] = useRecoilState(DirState);
-  const inputText = useInput("");
+  const inputText = useInput('');
 
-
-  const addDirHandler = (e) => {
+  const addDirHandler = e => {
     e.stopPropagation();
     const body = {
       name: inputText.value,
-      description: "설명없음"
-    }
+      description: '설명없음'
+    };
     const response = dirApi.postDir(token, body);
-    response.then((res) => {
+    response.then(res => {
       const newDir = {
         directory: {
           cookieCnt: 0,
@@ -113,13 +112,12 @@ export default ({ cookies, idx, setParkingState }) => {
           userId: 1
         },
         thumbnail: null
-      }
+      };
       const newDirList = dirState.concat(newDir);
       setDirState(newDirList);
-      inputText.setValue("");
-    })
-
-  }
+      inputText.setValue('');
+    });
+  };
 
   return (
     <HoverPage>
@@ -143,16 +141,10 @@ export default ({ cookies, idx, setParkingState }) => {
             </div>
           </DirList>
           <BottonWrap>
-            <input
-              className="addInput"
-              placeholder="새 디렉토리 명을 입력하세요"
-              onClick={e => e.stopPropagation()}
-              onChange={inputText.onChange}
-              value={inputText.value}
-            />
-            <button
-              className="addBtn"
-              onClick={addDirHandler}>저장</button>
+            <input className="addInput" placeholder="새 디렉토리 명을 입력하세요" onClick={e => e.stopPropagation()} onChange={inputText.onChange} value={inputText.value} />
+            <button className="addBtn" onClick={addDirHandler}>
+              저장
+            </button>
           </BottonWrap>
         </ListWrap>
       )}

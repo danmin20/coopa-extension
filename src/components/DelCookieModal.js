@@ -18,12 +18,12 @@ export default ({ setIsDelOpen, id }) => {
   const [DeleteCookieClick, setDeleteCookieClick] = useRecoilState(DeleteCookieClickState);
   const [allCookie, setAllCookie] = useRecoilState(CookieState);
 
-  const handleClick = (e) => {
+  const handleClick = e => {
     e.stopPropagation();
     setIsClose(true);
   };
 
-  const handleCookieDelClick = async (e) => {
+  const handleCookieDelClick = async e => {
     e.stopPropagation();
     const newCookie = allCookie.filter(c => c.id !== id);
     setAllCookie(newCookie);
@@ -33,7 +33,7 @@ export default ({ setIsDelOpen, id }) => {
     setIsClose(true);
   };
 
-  const handleDelClick = async (e) => {
+  const handleDelClick = async e => {
     // for optimistic ui
     e.stopPropagation();
     const newDirList = dirState.filter(dir => dir.id !== id);

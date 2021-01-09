@@ -13,7 +13,6 @@ const token = {
   'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4'
 };
 
-
 export default () => {
   const [pageNum, setPageNum] = useRecoilState(ClipperPageNumState);
   const [dirState, setDirState] = useRecoilState(WebClipperDirState);
@@ -23,20 +22,20 @@ export default () => {
 
   useEffect(() => {
     const result = dirApi.getDirAll(token);
-      result.then(function(dir){
-        setDirState(dir.data);
-        setLoading(false);
-      })
-  }, [])
+    result.then(function (dir) {
+      setDirState(dir.data);
+      setLoading(false);
+    });
+  }, []);
 
   const handleBtnClick = () => {
     const data = {
       name: InputText.value,
-      description: "디버그 마스터 봉채륀~"
+      description: '디버그 마스터 봉채륀~'
     };
 
     const response = dirApi.postDir(token, data);
-    response.then((res) => {
+    response.then(res => {
       const newDir = {
         directory: {
           cookieCnt: 0,
@@ -48,10 +47,10 @@ export default () => {
           userId: 1
         },
         thumbnail: null
-      }
+      };
       const newDirList = dirState.concat(newDir);
       setDirState(newDirList);
-    })
+    });
 
     InputText.setValue('');
   };
@@ -68,39 +67,34 @@ export default () => {
     setIsHover(false);
   };
 
-  const handleClick = (e) => {
-  }
+  const handleClick = e => {};
 
   return (
     <>
-      { loading ?
+      {loading ? (
         <Loading />
-        :
-        (<Wrap>
+      ) : (
+        <Wrap>
           <HeadhWrap>
             <BackBtn onClick={handleBackArrClick}>
               <BackArrow src={back_arrow} />
             </BackBtn>
           </HeadhWrap>
           <DirList>
-            {dirState.map((dir) => (
+            {dirState.map(dir => (
               <ReturnDirItems item={dir.directory.name} idx={dir.directory.id} />
             ))}
             <Space />
           </DirList>
           <Blur />
           <BottomWrap>
-            <SearchInput
-              placeholder={"새 디렉토리 명을 입력하세요"}
-              value={InputText.value}
-              onChange={InputText.onChange}
-            />
+            <SearchInput placeholder={'새 디렉토리 명을 입력하세요'} value={InputText.value} onChange={InputText.onChange} />
             <AddBtn isHover={isHover} onMouseOver={handleBtnMouseOver} onMouseLeave={handleBtnMouseLeave} onClick={handleBtnClick}>
               저장
-        </AddBtn>
+            </AddBtn>
           </BottomWrap>
-        </Wrap>)
-      }
+        </Wrap>
+      )}
     </>
   );
 };
@@ -135,8 +129,7 @@ const BackBtn = styled.div`
   margin-left: 1.2rem;
 `;
 
-const BackArrow = styled.img`
-`;
+const BackArrow = styled.img``;
 
 const DirItemWrap = styled.div`
   width: 28rem;
@@ -144,8 +137,8 @@ const DirItemWrap = styled.div`
   padding-left: 1.2rem;
   padding-right: 1.6rem;
   border-radius: 0.8rem;
-  background: ${props => props.isHover ? '#F3F3F3' : 'white'};
-  display:flex;
+  background: ${props => (props.isHover ? '#F3F3F3' : 'white')};
+  display: flex;
   align-items: center;
   justify-content: space-between;
 `;
@@ -154,7 +147,7 @@ const DirItem = styled.div`
   font-size: 2rem;
   font-weight: 500;
   line-height: 2.4rem;
-  display:flex;
+  display: flex;
   align-items: center;
   justify-content: space-between;
 `;
@@ -163,8 +156,8 @@ const DirItemHoverCircle = styled.div`
   width: 1.4rem;
   height: 1.4rem;
   border-radius: 50%;
-  background: #FF7134;
-  display: ${props => props.isHover ? 'box' : 'none'};
+  background: #ff7134;
+  display: ${props => (props.isHover ? 'box' : 'none')};
 `;
 
 const DirList = styled.div`
@@ -228,8 +221,8 @@ const SearchInput = styled.input`
   outline: none;
   padding: 0 1.5rem;
   margin-left: 1.5rem;
-  &::-webkit-input-placeholder{
-    color: #B7B7B7;
+  &::-webkit-input-placeholder {
+    color: #b7b7b7;
     font-size: 1.5rem;
     line-height: 1.8rem;
     font-weight: 500;
@@ -239,7 +232,7 @@ const SearchInput = styled.input`
 const AddBtn = styled.div`
   width: 7.2rem;
   height: 4.6rem;
-  border: 0.2rem solid #FF7134;
+  border: 0.2rem solid #ff7134;
   border-radius: 0.8rem;
   display: flex;
   flex-direction: row;
@@ -263,43 +256,33 @@ const ReturnDirItems = ({ item, idx }) => {
   const [isHover, setIsHover] = useState(false);
   const [pageNum, setPageNum] = useRecoilState(ClipperPageNumState);
 
-  const handleDirClick = (e) => {
+  const handleDirClick = e => {
     // 디렉토리에 데이터 넣기
-    chrome.storage.sync.get("cookieId", function (storage) {
+    chrome.storage.sync.get('cookieId', function (storage) {
       let data = {
         directoryId: Number(e.target.id),
         cookieId: storage.cookieId
-      }
+      };
       console.log(data);
       const Response = dirApi.addCookieToDir(token, data);
-        Response.then(function(response){
-          setPageNum(2);
-        })
+      Response.then(function (response) {
+        setPageNum(2);
+      });
     });
-
   };
 
   const handleMouseMove = () => {
     setIsHover(true);
-  }
+  };
 
   const handleMouseLeave = () => {
     setIsHover(false);
-  }
+  };
 
   return (
-    <DirItemWrap
-      onClick={handleDirClick}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      isHover={isHover}
-      key={idx}
-      id={idx}
-    >
-      <DirItem>
-        {item}
-      </DirItem>
+    <DirItemWrap onClick={handleDirClick} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} isHover={isHover} key={idx} id={idx}>
+      <DirItem>{item}</DirItem>
       <DirItemHoverCircle isHover={isHover} />
     </DirItemWrap>
-  )
-}
+  );
+};

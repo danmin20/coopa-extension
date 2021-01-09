@@ -41,8 +41,8 @@ export default ({ cookies, idx }) => {
   //   await cookieAPI.deleteCookies(token, cookies.id);
   //   setDeleteCookieClick(true);
   // };
-  
-  const handleDelClick = async (e) => {
+
+  const handleDelClick = async e => {
     e.stopPropagation();
     setIsDelOpen(true);
   };
@@ -74,7 +74,7 @@ export default ({ cookies, idx }) => {
             </Parking>
           )}
           {cardHover && !parkingState && <DeleteIcon src={deleteicon} onClick={handleDelClick} />}
-          {isDelOpen && <DelCookieModal id={cookies.id} setIsDelOpen={setIsDelOpen}/>}
+          {isDelOpen && <DelCookieModal id={cookies.id} setIsDelOpen={setIsDelOpen} />}
           {cardHover && !parkingState && (
             <CopyToClipboard text={cookies.link} onCopy={onCopy}>
               <ShereIcon src={shereicon} onClick={handleCopy} />

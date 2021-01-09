@@ -35,7 +35,7 @@ export const DirState = atom({
 export const WebClipperDirState = atom({
   key: 'WebClipperDirState',
   default: []
-})
+});
 
 export const SearchState = atom({
   key: 'SearchState',
@@ -60,4 +60,4 @@ export const DeleteCookieClickState = atom({
 export const LoginState = atom({
   key: 'LoginState',
   default: true
-})
+});

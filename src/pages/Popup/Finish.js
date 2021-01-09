@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {LoginState} from '../../states/atom';
+import { LoginState } from '../../states/atom';
 import { useRecoilState } from 'recoil';
 import { useState } from 'react';
 import logo from '../../assets/img/logo.svg';
@@ -21,24 +21,22 @@ export default () => {
     window.open('newtab.html', '_blank');
   };
 
-  const handleLogin = () => {
-
-  }
+  const handleLogin = () => {};
 
   return (
     <Wrap>
       <LogoWrap>
         <LogoImg src={logo} />
-        <Text>{ isLogin ? '유저 인터페이스' : '반가워요!' }</Text>
-        <TextTwo>{ isLogin? '파킹했어요!' : '쿠키를 모으러 가볼까요?' }</TextTwo>
+        <Text>{isLogin ? '유저 인터페이스' : '반가워요!'}</Text>
+        <TextTwo>{isLogin ? '파킹했어요!' : '쿠키를 모으러 가볼까요?'}</TextTwo>
       </LogoWrap>
-      <Btn isHover={isHover} onMouseMove={handleBtnMouseOver} onMouseLeave={handleBtnMouseLeave} onClick={ isLogin? handleBtnClick : handleLogin}>
-        { isLogin? '홈으로 가기' : '로그인하기' }
+      <Btn isHover={isHover} onMouseMove={handleBtnMouseOver} onMouseLeave={handleBtnMouseLeave} onClick={isLogin ? handleBtnClick : handleLogin}>
+        {isLogin ? '홈으로 가기' : '로그인하기'}
       </Btn>
     </Wrap>
   );
 };
- 
+
 const Wrap = styled.div`
   width: 36rem;
   height: 35.1rem;
@@ -89,7 +87,7 @@ const Btn = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  border: 0.2rem solid #FF7134;
+  border: 0.2rem solid #ff7134;
   border-radius: 1rem;
   width: 32.2rem;
   height: 5.2rem;
@@ -97,7 +95,7 @@ const Btn = styled.div`
   color: ${props => (props.isHover ? '#FFFFFF' : '#FF7134')};
   font-size: 1.6rem;
   font-weight: 500;
-  box-shadow: ${props => props.isHover ? '0rem 0rem 1.2rem rgba(0, 0, 0, 0.13)' : 'none'};
+  box-shadow: ${props => (props.isHover ? '0rem 0rem 1.2rem rgba(0, 0, 0, 0.13)' : 'none')};
   margin-top: 4.8rem;
   transition-duration: 0.5s;
 `;
