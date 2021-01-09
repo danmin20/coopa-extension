@@ -6,6 +6,7 @@ import { CookieState } from '../states/atom';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { DirState, SearchState } from '../states/atom';
 import dirApi from '../lib/api/directoryApi';
+import useInput from '../hooks/useInput';
 
 const token = {
   'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4'
@@ -90,24 +91,34 @@ export default ({ cookies, idx, setParkingState }) => {
   const items = ['디자인', '마케팅', '프로그래밍', '기획', '쿠키파킹', '사랑해'];
   const [drop, setDrop] = useState(false);
   const [dirState, setDirState] = useRecoilState(DirState);
-  const [text, setText] = useState("");
+  const inputText = useInput("");
 
 
   const addDirHandler = (e) => {
     e.stopPropagation();
-    console.log(text);
     const body = {
-      name: text,
+      name: inputText.value,
       description: "설명없음"
     }
-    const result = dirApi.postDir(token, body);
-    console.log(result);
-    //dir id를 알면 사용자에게 바로 알도록
-    //setDirState(dirState.concat())
-  }
+    const response = dirApi.postDir(token, body);
+    response.then((res) => {
+      const newDir = {
+        directory: {
+          cookieCnt: 0,
+          createAt: 'unknown',
+          description: '디버그 마스터 봉채륀~',
+          id: res.data.directoryId,
+          name: inputText.value,
+          updateAt: 'unknown',
+          userId: 1
+        },
+        thumbnail: null
+      }
+      const newDirList = dirState.concat(newDir);
+      setDirState(newDirList);
+      inputText.setValue("");
+    })
 
-  const changeHandler = (e) => {
-    setText(e.target.value);
   }
 
   return (
@@ -136,7 +147,9 @@ export default ({ cookies, idx, setParkingState }) => {
               className="addInput"
               placeholder="새 디렉토리 명을 입력하세요"
               onClick={e => e.stopPropagation()}
-              onChange={changeHandler} />
+              onChange={inputText.onChange}
+              value={inputText.value}
+            />
             <button
               className="addBtn"
               onClick={addDirHandler}>저장</button>

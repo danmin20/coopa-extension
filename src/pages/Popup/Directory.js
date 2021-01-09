@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { atom, useRecoilState } from 'recoil';
 import { useState } from 'react';
-import back_arrow from '../../assets/img/back_arrow.svg'; 
+import back_arrow from '../../assets/img/back_arrow.svg';
 import useInput from '../../hooks/useInput';
 import { ClipperPageNumState, WebClipperDirState } from '../../states/atom';
 import dirApi from '../../lib/api/directoryApi';
@@ -20,11 +20,10 @@ export default () => {
   const [isHover, setIsHover] = useState(false);
   const [loading, setLoading] = useState(true);
   const InputText = useInput('');
-  
-  useEffect(()=>{
+
+  useEffect(() => {
     const result = dirApi.getDirAll(token);
       result.then(function(dir){
-        console.log(dir);
         setDirState(dir.data);
         setLoading(false);
       })
@@ -35,24 +34,24 @@ export default () => {
       name: InputText.value,
       description: "디버그 마스터 봉채륀~"
     };
-    
+
     const response = dirApi.postDir(token, data);
-      response.then((res) => {
-        const newDir = {
-          directory: {
-            cookieCnt: 0,
-            createAt: 'unknown',
-            description: '디버그 마스터 봉채륀~',
-            id: res.data.directoryId,
-            name: InputText.value,
-            updateAt: 'unknown',
-            userId: 1
-          },
-          thumbnail: null
-        }
-        const newDirList = dirState.concat(newDir);
-        setDirState(newDirList);
-      })
+    response.then((res) => {
+      const newDir = {
+        directory: {
+          cookieCnt: 0,
+          createAt: 'unknown',
+          description: '디버그 마스터 봉채륀~',
+          id: res.data.directoryId,
+          name: InputText.value,
+          updateAt: 'unknown',
+          userId: 1
+        },
+        thumbnail: null
+      }
+      const newDirList = dirState.concat(newDir);
+      setDirState(newDirList);
+    })
 
     InputText.setValue('');
   };
@@ -70,38 +69,38 @@ export default () => {
   };
 
   const handleClick = (e) => {
-  } 
+  }
 
   return (
     <>
-    { loading ?
-    <Loading />
-    :
-    (<Wrap>
-      <HeadhWrap>
-        <BackBtn onClick={handleBackArrClick}>
-          <BackArrow src={back_arrow} />
-        </BackBtn>
-      </HeadhWrap>
-      <DirList>
-        {dirState.map((dir) => (
-          <ReturnDirItems item={dir.directory.name} idx={dir.directory.id}/>
-        ))}
-        <Space />
-      </DirList>
-      <Blur/>
-      <BottomWrap>
-        <SearchInput
-          placeholder={"새 디렉토리 명을 입력하세요"} 
-          value={InputText.value} 
-          onChange={InputText.onChange} 
-        />
-        <AddBtn isHover={isHover} onMouseOver={handleBtnMouseOver} onMouseLeave={handleBtnMouseLeave} onClick={handleBtnClick}>
-          저장
+      { loading ?
+        <Loading />
+        :
+        (<Wrap>
+          <HeadhWrap>
+            <BackBtn onClick={handleBackArrClick}>
+              <BackArrow src={back_arrow} />
+            </BackBtn>
+          </HeadhWrap>
+          <DirList>
+            {dirState.map((dir) => (
+              <ReturnDirItems item={dir.directory.name} idx={dir.directory.id} />
+            ))}
+            <Space />
+          </DirList>
+          <Blur />
+          <BottomWrap>
+            <SearchInput
+              placeholder={"새 디렉토리 명을 입력하세요"}
+              value={InputText.value}
+              onChange={InputText.onChange}
+            />
+            <AddBtn isHover={isHover} onMouseOver={handleBtnMouseOver} onMouseLeave={handleBtnMouseLeave} onClick={handleBtnClick}>
+              저장
         </AddBtn>
-      </BottomWrap>
-    </Wrap>)
-        }
+          </BottomWrap>
+        </Wrap>)
+      }
     </>
   );
 };
@@ -260,13 +259,13 @@ const Space = styled.div`
   height: 1rem;
 `;
 
-const ReturnDirItems = ({item, idx}) => {
+const ReturnDirItems = ({ item, idx }) => {
   const [isHover, setIsHover] = useState(false);
   const [pageNum, setPageNum] = useRecoilState(ClipperPageNumState);
 
   const handleDirClick = (e) => {
     // 디렉토리에 데이터 넣기
-    chrome.storage.sync.get("cookieId", function(storage) {
+    chrome.storage.sync.get("cookieId", function (storage) {
       let data = {
         directoryId: Number(e.target.id),
         cookieId: storage.cookieId
@@ -274,11 +273,10 @@ const ReturnDirItems = ({item, idx}) => {
       console.log(data);
       const Response = dirApi.addCookieToDir(token, data);
         Response.then(function(response){
-          console.log(response);
           setPageNum(2);
         })
     });
-    
+
   };
 
   const handleMouseMove = () => {
@@ -289,7 +287,7 @@ const ReturnDirItems = ({item, idx}) => {
     setIsHover(false);
   }
 
-  return(
+  return (
     <DirItemWrap
       onClick={handleDirClick}
       onMouseMove={handleMouseMove}
