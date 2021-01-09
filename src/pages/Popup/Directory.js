@@ -23,11 +23,10 @@ export default () => {
 
   useEffect(() => {
     const result = dirApi.getDirAll(token);
-    result.then(function (dir) {
-      // console.log(dir);
-      setDirState(dir.data);
-      setLoading(false);
-    })
+      result.then(function(dir){
+        setDirState(dir.data);
+        setLoading(false);
+      })
   }, [])
 
   const handleBtnClick = () => {
@@ -35,8 +34,6 @@ export default () => {
       name: InputText.value,
       description: "디버그 마스터 봉채륀~"
     };
-
-    console.log(dirState);
 
     const response = dirApi.postDir(token, data);
     response.then((res) => {
@@ -275,10 +272,9 @@ const ReturnDirItems = ({ item, idx }) => {
       }
       console.log(data);
       const Response = dirApi.addCookieToDir(token, data);
-      Response.then(function (response) {
-        // console.log(response);
-        setPageNum(2);
-      })
+        Response.then(function(response){
+          setPageNum(2);
+        })
     });
 
   };

@@ -34,8 +34,8 @@ export default ({ setIsDelOpen, id }) => {
   };
 
   const handleDelClick = async (e) => {
-    e.stopPropagation();
     // for optimistic ui
+    e.stopPropagation();
     const newDirList = dirState.filter(dir => dir.id !== id);
     setDirState(newDirList);
     // api call
