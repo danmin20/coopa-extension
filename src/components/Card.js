@@ -10,11 +10,11 @@ import shereicon from '../assets/img/cookiehover_icn_share.svg';
 import logo from '../assets/img/logo_white.svg';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import DelCookieModal from '../components/DelCookieModal';
+import cookieAPI from '../lib/api/cookieApi';
 
-/* const token = {
+const token = {
   'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4'
 };
- */
 
 export default ({ cookies, idx }) => {
   const [cardHover, setCardHover] = useState(false);
@@ -29,21 +29,23 @@ export default ({ cookies, idx }) => {
     ({ copied: true });
   };
 
-  const handleCopy = () => {
+  const handleCopy = (e) => {
+    e.stopPropagation();
     setShareClick(true);
   };
 
-  /*   const handleDelClick = async () => {
-    const newCookie = allCookie.filter(c => c.id !== cookies.id);
-    setAllCookie(newCookie);
+  // const handleDelClick = async (e) => {
+  //   e.stopPropagation();
+  //   const newCookie = allCookie.filter(c => c.id !== cookies.id);
+  //   setAllCookie(newCookie);
 
-    await cookieAPI.deleteCookies(token, cookies.id);
-    setDeleteCookieClick(true);
-  };
- */
-  const handleDelClick = () => {
+  //   await cookieAPI.deleteCookies(token, cookies.id);
+  //   setDeleteCookieClick(true);
+  // };
+  const handleDelClick = async (e) => {
+    e.stopPropagation();
     setIsDelOpen(true);
-  };
+  }
 
   const handleCookieClick = async () => {
     window.open(cookies.link);
@@ -72,7 +74,7 @@ export default ({ cookies, idx }) => {
             </Parking>
           )}
           {cardHover && !parkingState && <DeleteIcon src={deleteicon} onClick={handleDelClick} />}
-          {isDelOpen && <DelCookieModal id={cookies.id} />}
+          {isDelOpen && <DelCookieModal id={cookies.id} setIsDelOpen={setIsDelOpen} />}
           {cardHover && !parkingState && (
             <CopyToClipboard text={cookies.link} onCopy={onCopy}>
               <ShereIcon src={shereicon} onClick={handleCopy} />
