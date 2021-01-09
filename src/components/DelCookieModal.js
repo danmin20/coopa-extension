@@ -1,43 +1,49 @@
 import styled from 'styled-components';
 import React, { useState, useEffect } from 'react';
-import { useRecoilValue, useRecoilState } from 'recoil';
-import { DirState, SelectState, DeleteCookieClickState, CookieState } from '../states/atom';
+import { useRecoilValue, useSetRecoilState, useRecoilState } from 'recoil';
+import { DirState, SelectState, DeleteCookieClickState, CookieState, DelToastState } from '../states/atom';
 import dirApi from '../lib/api/directoryApi';
 import cookieAPI from '../lib/api/cookieApi';
+import ToastMsg from '../components/ToastMsg';
 
 const token = {
   'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4'
 };
 
 export default ({ setIsDelOpen, id }) => {
-  const [dirState, setDirState] = useRecoilState(DirState);
   const selectState = useRecoilValue(SelectState);
+  const setDelToastState = useSetRecoilState(DelToastState);
+  const [dirState, setDirState] = useRecoilState(DirState);
   const [isClose, setIsClose] = useState(false);
   const [isDelHover, setIsDelHover] = useState(false);
   const [isCancleHover, setIsCancleHover] = useState(false);
-  const [DeleteCookieClick, setDeleteCookieClick] = useRecoilState(DeleteCookieClickState);
+  const setDeleteCookieClick = useSetRecoilState(DeleteCookieClickState);
   const [allCookie, setAllCookie] = useRecoilState(CookieState);
 
-  const handleClick = () => {
+  const handleClick = e => {
+    e.stopPropagation();
     setIsClose(true);
   };
 
-  const handleCookieDelClick = async () => {
-    const newCookie = allCookie.filter(c => c.id !== cookies.id);
+  const handleCookieDelClick = async e => {
+    e.stopPropagation();
+    const newCookie = allCookie.filter(c => c.id !== id);
     setAllCookie(newCookie);
 
-    await cookieAPI.deleteCookies(token, cookies.id);
+    await cookieAPI.deleteCookies(token, id);
     setDeleteCookieClick(true);
     setIsClose(true);
   };
 
-  const handleDelClick = async () => {
+  const handleDelClick = async e => {
     // for optimistic ui
-    const newDirList = dirState.filter(dir => dir.id !== id);
-    setDirState(newDirList);
+    e.stopPropagation();
     // api call
     await dirApi.deleteDir(token, id);
+    const newDirList = dirState.filter(dir => dir.directory.id !== id);
+    setDirState(newDirList);
     setIsClose(true);
+    setDelToastState(true);
   };
 
   const handleDelMouseMove = () => {
@@ -57,8 +63,6 @@ export default ({ setIsDelOpen, id }) => {
   };
 
   useEffect(() => {
-    // 모달이 닫힐 때 마다 모달 open state를 변경해주기 위함
-    // isClose && setIsDelOpen(false);
     return () => {
       setIsDelOpen(false);
     };
@@ -69,7 +73,7 @@ export default ({ setIsDelOpen, id }) => {
       <Wrap onClick={handleClick} isClose={isClose} />
       <ModalWrap isClose={isClose}>
         <Text>{selectState === 'cookie' ? '쿠키 삭제' : '디렉토리 삭제'}</Text>
-        <SmallText>이 {selectState === 'cookie' ? '쿠키' : '디렉토리'}를 정말 삭제하시겠어요?</SmallText>
+        <SmallText>이 {selectState === 'cookie' ? '이 쿠키를 정말 삭제하시겠어요?' : '포함된 모든 쿠키가 영구 삭제됩니다. 삭제하시겠어요?'}</SmallText>
         <BtnWrap>
           <Btn onClick={handleClick} isHover={isCancleHover} onMouseMove={handleCancleMouseMove} onMouseLeave={handleCancleMouseLeave}>
             취소

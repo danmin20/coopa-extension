@@ -6,6 +6,7 @@ import { CookieState } from '../states/atom';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { DirState, SearchState } from '../states/atom';
 import dirApi from '../lib/api/directoryApi';
+import useInput from '../hooks/useInput';
 
 const token = {
   'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4'
@@ -19,17 +20,17 @@ const List = ({ dir, cookies, setParkingState }) => {
     e.stopPropagation();
 
     // console.log(cookieState);
-    const newCookie = cookieState.map((c, idx) => (
-      c.id === cookies.id ?
-        {
-          ...c,
-          directory: {
-            name: dir.name,
-            id: dir.id
+    const newCookie = cookieState.map((c, idx) =>
+      c.id === cookies.id
+        ? {
+            ...c,
+            directory: {
+              name: dir.name,
+              id: dir.id
+            }
           }
-        } :
-        c
-    ));
+        : c
+    );
     setCookieState(newCookie);
     // setCookieState({
     //   ...cookieState,
@@ -43,7 +44,6 @@ const List = ({ dir, cookies, setParkingState }) => {
       cookieId: cookies.id
     };
     const result = await dirApi.addCookieToDir(token, body);
-    console.log('api 호출 결과', result);
     console.log(cookieState[cookies.id]);
     setParkingState(true);
   };
@@ -90,25 +90,33 @@ export default ({ cookies, idx, setParkingState }) => {
   const items = ['디자인', '마케팅', '프로그래밍', '기획', '쿠키파킹', '사랑해'];
   const [drop, setDrop] = useState(false);
   const [dirState, setDirState] = useRecoilState(DirState);
-  const [text, setText] = useState("");
+  const inputText = useInput('');
 
-
-  const addDirHandler = (e) => {
+  const addDirHandler = e => {
     e.stopPropagation();
-    console.log(text);
     const body = {
-      name: text,
-      description: "설명없음"
-    }
-    const result = dirApi.postDir(token, body);
-    console.log(result);
-    //dir id를 알면 사용자에게 바로 알도록
-    //setDirState(dirState.concat())
-  }
-
-  const changeHandler = (e) => {
-    setText(e.target.value);
-  }
+      name: inputText.value,
+      description: '설명없음'
+    };
+    const response = dirApi.postDir(token, body);
+    response.then(res => {
+      const newDir = {
+        directory: {
+          cookieCnt: 0,
+          createAt: 'unknown',
+          description: '디버그 마스터 봉채륀~',
+          id: res.data.directoryId,
+          name: inputText.value,
+          updateAt: 'unknown',
+          userId: 1
+        },
+        thumbnail: null
+      };
+      const newDirList = dirState.concat(newDir);
+      setDirState(newDirList);
+      inputText.setValue('');
+    });
+  };
 
   return (
     <HoverPage>
@@ -127,19 +135,15 @@ export default ({ cookies, idx, setParkingState }) => {
             <div className="list-div">
               <div className="list-sort">모든 디렉토리</div>
               {dirState.map(dir => (
-                <List dir={dir} key={dir.id} cookies={cookies} setParkingState={setParkingState} />
+                <List dir={dir.directory} key={dir.directory.id} cookies={cookies} setParkingState={setParkingState} />
               ))}
             </div>
           </DirList>
           <BottonWrap>
-            <input
-              className="addInput"
-              placeholder="새 디렉토리 명을 입력하세요"
-              onClick={e => e.stopPropagation()}
-              onChange={changeHandler} />
-            <button
-              className="addBtn"
-              onClick={addDirHandler}>저장</button>
+            <input className="addInput" placeholder="새 디렉토리 명을 입력하세요" onClick={e => e.stopPropagation()} onChange={inputText.onChange} value={inputText.value} />
+            <button className="addBtn" onClick={addDirHandler}>
+              저장
+            </button>
           </BottonWrap>
         </ListWrap>
       )}

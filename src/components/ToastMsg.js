@@ -1,19 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { ShareClickState, DeleteCookieClickState } from '../states/atom';
-import { useRecoilState } from 'recoil';
+import { ShareClickState, DeleteCookieClickState, DelToastState, createDirClickState, updateDirClickState } from '../states/atom';
+import { useSetRecoilState } from 'recoil';
 
 export default ({ msg }) => {
   const [isFlex, setIsFlex] = useState(true);
-  const [ShareClick, setShareClick] = useRecoilState(ShareClickState);
-  const [DeleteCookieClick, setDeleteCookieClick] = useRecoilState(DeleteCookieClickState);
+  const setDelToastState = useSetRecoilState(DelToastState);
+  const setShareClick = useSetRecoilState(ShareClickState);
+  const setDeleteCookieClick = useSetRecoilState(DeleteCookieClickState);
+  const setCreateDirClick = useSetRecoilState(createDirClickState);
+  const setUpdateDirClick = useSetRecoilState(updateDirClickState);
 
   useEffect(() => {
-    console.log('토스트 open');
     setInterval(() => {
       setIsFlex(false);
       setShareClick(false);
       setDeleteCookieClick(false);
+      setDelToastState(false);
+      setCreateDirClick(false);
+      setUpdateDirClick(false);
     }, 2000);
   }, []);
 
@@ -21,9 +26,11 @@ export default ({ msg }) => {
 };
 
 const Wrap = styled.div`
+  position: fixed;
   width: 38rem;
   height: 6.8rem;
-  background: rgba(0, 0, 0, 0.6);
+  /* background: rgba(0, 0, 0, 0.3); */
+  background: #222222;
   border-radius: 1.2rem;
   color: white;
   font-size: 2rem;
@@ -36,8 +43,9 @@ const Wrap = styled.div`
   align-items: center;
   justify-content: center;
   opacity: 0;
-
+  z-index: 100;
   animation: fadeout 2s;
+  animation-fill-mode: forwards;
   @keyframes fadeout {
     from {
       opacity: 1;

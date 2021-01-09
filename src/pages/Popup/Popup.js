@@ -7,14 +7,13 @@ import Directory from './Directory';
 import MainNotLogin from './MainNotLogin';
 // import Login from './Login';
 
-
 export default () => {
   const [pageNum, setPageNum] = useRecoilState(ClipperPageNumState);
   const [isLogin, setIsLogin] = useRecoilState(LoginState);
 
   switch (pageNum) {
     case 0:
-      return (isLogin ? <Main /> : <MainNotLogin/>);
+      return isLogin ? <Main /> : <MainNotLogin />;
     case 1:
       return <Directory />;
     case 2:

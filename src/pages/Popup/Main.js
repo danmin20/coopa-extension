@@ -82,7 +82,7 @@ export default () => {
           </BtnOneWrap>
         </BtnOne>
         <BtnTwo onMouseOver={handleBtnTwoMouseOver} onMouseLeave={handleBtnTwoMouseLeave} onClick={handleBtnTwoClick} isHover={isBtnTwoHover}>
-          홈으로 가기 
+          홈으로 가기
         </BtnTwo>
       </BtnWrap>
     </Wrap>
@@ -177,7 +177,7 @@ const BtnTwo = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  border: 0.2rem solid #FF7134;
+  border: 0.2rem solid #ff7134;
   border-radius: 1rem;
   width: 32.2rem;
   height: 5.2rem;
@@ -185,7 +185,7 @@ const BtnTwo = styled.div`
   color: ${props => (props.isHover ? '#FFFFFF' : '#FF7134')};
   font-size: 1.6rem;
   font-weight: 500;
-  box-shadow: ${props => props.isHover ? '0rem 0rem 1.2rem rgba(0, 0, 0, 0.13)' : 'none'};
+  box-shadow: ${props => (props.isHover ? '0rem 0rem 1.2rem rgba(0, 0, 0, 0.13)' : 'none')};
   margin-top: 1.6rem;
   transition-duration: 0.5s;
 `;

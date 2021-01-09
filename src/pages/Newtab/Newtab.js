@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import AllCookies from '../../components/AllCookies';
 import Directory from '../../components/Directory';
@@ -6,15 +6,16 @@ import theme from '../../assets/themes';
 import Switch from '../../components/Switch';
 import Header from '../../components/Header';
 import HomeBoard from '../../components/HomeBoard';
-import { useRecoilState } from 'recoil';
-import { SelectState, ShareClickState, DeleteCookieClickState } from '../../states/atom';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { SelectState, ShareClickState, DeleteCookieClickState, createDirClickState } from '../../states/atom';
 import DirCreateModal from '../../components/DirCreateModal';
 import ToastMsg from '../../components/ToastMsg';
 
 export default () => {
   const [selectState, setSelectState] = useRecoilState(SelectState);
-  const [ShareClick, setShareClick] = useRecoilState(ShareClickState);
-  const [DeleteCookieClick, setDeleteCookieClick] = useRecoilState(DeleteCookieClickState);
+  const ShareClick = useRecoilValue(ShareClickState);
+  const createDirClick = useRecoilValue(createDirClickState);
+  const DeleteCookieClick = useRecoilValue(DeleteCookieClickState);
   const [isSearched, setIsSearched] = useState(false);
   const [isToggled, setIsToggled] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -26,7 +27,6 @@ export default () => {
   };
 
   const handleCreateDir = async () => {
-    // modal open
     setIsOpenCreateDir(true);
   };
 
@@ -66,9 +66,10 @@ export default () => {
         </ContentsHeader>
         {selectState === 'cookie' ? <AllCookies isSearched={isSearched} isToggled={isToggled} /> : <Directory isSearched={isSearched} />}
         {isOpenCreateDir && <DirCreateModal setIsOpenCreateDir={setIsOpenCreateDir} />}
+        {createDirClick && <ToastMsg msg="디렉토리를 생성했어요!" />}
       </Contents>
-      {ShareClick && <ToastMsg msg={'링크가 복사되었어요!'} />}
-      {DeleteCookieClick && <ToastMsg msg={'쿠키를 삭제했어요!'} />}
+      {ShareClick && <ToastMsg msg="링크가 복사되었어요!" />}
+      {DeleteCookieClick && <ToastMsg msg="쿠키를 삭제했어요!" />}
     </div>
   );
 };

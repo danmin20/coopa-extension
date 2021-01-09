@@ -6,11 +6,16 @@ import cookieIconW from '../assets/img/cookie_icon_white.svg';
 import updateDirIcon from '../assets/img/update_dir_icon.svg';
 import DirFixModal from '../components/DirFixModal';
 import DelCookieModal from '../components/DelCookieModal';
+import ToastMsg from '../components/ToastMsg';
+import { DelToastState, updateDirClickState } from '../states/atom';
+import { useRecoilValue } from 'recoil';
 
 export default ({ dir }) => {
   const [isHover, setIsHover] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isDelOpen, setIsDelOpen] = useState(false);
+  const delToast = useRecoilValue(DelToastState);
+  const updateDirClick = useRecoilValue(updateDirClickState);
 
   const handleBtnMouseOver = () => {
     setIsHover(true);
@@ -24,16 +29,20 @@ export default ({ dir }) => {
 
   return (
     <Container isHover={isHover} onMouseEnter={handleBtnMouseOver} onMouseLeave={handleBtnMouseLeave}>
-      <div className="dir">
-        <div className="dir__title">{dir.name}</div>
-        <div className="dir__num">
-          <CookieIcon isHover={isHover} onMouseOver={handleBtnMouseOver} onMouseLeave={handleBtnMouseOver} />
-          <div>{dir.cookieCnt}개</div>
+      <DirectoryCard thumbnail={dir.thumbnail}>
+        <div className="content">
+          <div className="content__title">{dir.directory.name}</div>
+          <div className="content__num">
+            <CookieIcon isHover={isHover} onMouseOver={handleBtnMouseOver} onMouseLeave={handleBtnMouseOver} />
+            <div>{dir.directory.cookieCnt}개</div>
+          </div>
         </div>
-      </div>
+      </DirectoryCard>
       <UpdateIcon src={updateDirIcon} onMouseOver={handleBtnMouseOver} onMouseLeave={handleBtnMouseOver} isHover={isHover} onClick={handleClickUpdateIcon} />
       {isOpen && <DirFixModal setIsOpen={setIsOpen} setIsDelOpen={setIsDelOpen} dir={dir} />}
-      {isDelOpen && <DelCookieModal isDelOpen={isDelOpen} setIsDelOpen={setIsDelOpen} id={dir.id} />}
+      {updateDirClick && <ToastMsg msg="디렉토리를 수정했어요!" />}
+      {isDelOpen && <DelCookieModal isDelOpen={isDelOpen} setIsDelOpen={setIsDelOpen} id={dir.directory.id} />}
+      {delToast && <ToastMsg msg="쿠키가 삭제되었어요!" />}
     </Container>
   );
 };
@@ -47,60 +56,68 @@ const CookieIcon = styled.div`
 
 const Container = styled.div`
   cursor: pointer;
-  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 0;
   padding-top: calc(160 / 360 * 100%);
-  background-color: ${theme.colors.lightGray};
+  background-color: #f3f3f3;
   border-radius: 1.2rem;
   color: ${theme.colors.black};
   ${props =>
     props.isHover &&
     css`
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(0, 0, 0, 0.7);
       color: ${theme.colors.white};
     `}
-  .dir {
+`;
+
+const DirectoryCard = styled.div`
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 0;
+  padding-bottom: calc(160 / 360 * 100%);
+  border-radius: 1.2rem;
+  ::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    background: url(${props => props.thumbnail}) center center/ cover no-repeat;
+    border-radius: 1.2rem;
+    opacity: 0.85;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+  }
+  .content {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    font-weight: 500;
     &__title {
       white-space: pre;
       font-size: 2.4rem;
-      font-weight: 500;
     }
     &__num {
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 1.8rem;
-      font-weight: 500;
-    }
-  }
-  .update-icon {
-    cursor: pointer;
-    position: absolute;
-    bottom: 2rem;
-    right: 2rem;
-    width: 3rem;
-    height: 3rem;
-    background: url(${updateDirIcon}) center center / cover no-repeat;
-    display: none;
-    :hover {
-      display: block;
-      z-index: 100;
     }
   }
 `;
 
 const UpdateIcon = styled.img`
-  display: ${props => (props.isHover ? 'box' : 'none')};
-  position: absolute;
-  bottom: 2rem;
+  display: ${props => (props.isHover ? 'block' : 'none')};
+  position: relative;
+  bottom: 4rem;
   right: 2rem;
   width: 3rem;
   height: 3rem;

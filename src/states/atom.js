@@ -1,10 +1,13 @@
 import { atom } from 'recoil';
-// import Img from '../assets/img/img_sample.svg';
-// import AuthorImg from '../assets/img/img_author.svg';
 
 export const CookieState = atom({
   key: 'CookieState',
   default: []
+});
+
+export const DirState = atom({
+  key: 'DirState',
+  deafult: []
 });
 
 export const ClipperPageNumState = atom({
@@ -27,15 +30,10 @@ export const isCheckedState = atom({
   default: false
 });
 
-export const DirState = atom({
-  key: 'DirState',
-  deafult: []
-});
-
 export const WebClipperDirState = atom({
   key: 'WebClipperDirState',
   default: []
-})
+});
 
 export const SearchState = atom({
   key: 'SearchState',
@@ -60,4 +58,19 @@ export const DeleteCookieClickState = atom({
 export const LoginState = atom({
   key: 'LoginState',
   default: true
-})
+});
+
+export const DelToastState = atom({
+  key: 'DelToastState',
+  default: false
+});
+
+export const createDirClickState = atom({
+  key: 'CreateDirClickState',
+  default: false
+});
+
+export const updateDirClickState = atom({
+  key: 'UpdateDirClickState',
+  default: false
+});

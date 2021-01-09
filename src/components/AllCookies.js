@@ -8,21 +8,20 @@ import cookieApi from '../lib/api/cookieApi';
 import dirApi from '../lib/api/directoryApi';
 // 로그인 구현되면 지우기
 const token = {
-  'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsInVzZXJFbWFpbCI6InJ1cnVAZW1haWwuY29tIiwiaWF0IjoxNjA5Nzc1MDYyfQ.hkdbXr68HQ-667AmfXzIrWIuJMRM03hbQ_eBwrqJZVA'
+  'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4'
 };
 
 export default ({ isSearched, isToggled }) => {
   const [loading, setLoading] = useState(true);
   const [cookieState, setCookieState] = useRecoilState(CookieState);
   const setDirState = useSetRecoilState(DirState);
-  const searchValue = useRecoilValue(SearchState);
+  const searchValue = SearchState;
 
   useEffect(() => {
     (async () => {
       let result = [];
       if (isSearched) {
         result = await cookieApi.getCookiesSearch(token, searchValue);
-        console.log('검색 결과', result);
         setCookieState(result.data);
       } else {
         if (isToggled) {
@@ -44,12 +43,12 @@ export default ({ isSearched, isToggled }) => {
       {loading ? (
         <Loading />
       ) : (
-          <Container>
-            {cookieState.map(cookie => (
-              <Card cookies={cookie} idx={cookie.id} />
-            ))}
-          </Container>
-        )}
+        <Container>
+          {cookieState.map((cookie, index) => (
+            <Card cookies={cookie} key={index} idx={cookie.id} />
+          ))}
+        </Container>
+      )}
     </>
   );
 };

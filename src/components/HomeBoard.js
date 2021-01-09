@@ -12,8 +12,6 @@ export default ({ isSearched, setIsSearched }) => {
 
   const onKeyPress = e => {
     if (e.key === 'Enter') {
-      console.log(e.key);
-      // 검색어 atom에 설정 및 컴포넌트 전환
       setSearchState(searchText.value);
       setIsSearched(true);
       searchText.setValue(''); // 검색 후 검색창에서 검색어 지우기
