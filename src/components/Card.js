@@ -29,7 +29,7 @@ export default ({ cookies, idx }) => {
     ({ copied: true });
   };
 
-  const handleCopy = (e) => {
+  const handleCopy = e => {
     e.stopPropagation();
     setShareClick(true);
   };
@@ -45,7 +45,7 @@ export default ({ cookies, idx }) => {
   const handleDelClick = async (e) => {
     e.stopPropagation();
     setIsDelOpen(true);
-  }
+  };
 
   const handleCookieClick = async () => {
     window.open(cookies.link);
