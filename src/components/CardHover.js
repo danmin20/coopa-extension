@@ -44,7 +44,6 @@ const List = ({ dir, cookies, setParkingState }) => {
       cookieId: cookies.id
     };
     const result = await dirApi.addCookieToDir(token, body);
-    console.log('api 호출 결과', result);
     console.log(cookieState[cookies.id]);
     setParkingState(true);
   };

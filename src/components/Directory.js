@@ -25,7 +25,6 @@ export default ({ isSearched }) => {
         // 전체 디렉토리 조회
         result = await dirApi.getDirAll(token);
       }
-      console.log(result);
       setDirState(result.data);
       setLoading(false);
     })();
@@ -37,8 +36,8 @@ export default ({ isSearched }) => {
         <Loading />
       ) : (
         <Container>
-          {dirState.map(dir => (
-            <DirCard dir={dir} key={dir.id} />
+          {dirState.map((dir, index) => (
+            <DirCard dir={dir} key={index} />
           ))}
         </Container>
       )}

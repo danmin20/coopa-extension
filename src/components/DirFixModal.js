@@ -2,9 +2,8 @@ import styled from 'styled-components';
 import React, { useState, useEffect } from 'react';
 import useInput from '../hooks/useInput';
 import dirApi from '../lib/api/directoryApi';
-import { DirState } from '../states/atom';
-import { useRecoilState } from 'recoil';
-import DelCookieModal from './DelCookieModal';
+import { DirState, updateDirClickState } from '../states/atom';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 const token = {
   'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4'
 };
@@ -15,7 +14,8 @@ export default ({ setIsOpen, setIsDelOpen, dir }) => {
   const [isCancleHover, setIsCancleHover] = useState(false);
   const [isFixHover, setIsFixHover] = useState(false);
   const [isClose, setIsClose] = useState(false);
-  const modalInput = useInput(dir.name);
+  const setUpdateDirClick = useSetRecoilState(updateDirClickState);
+  const modalInput = useInput(dir.directory.name);
 
   const handleClick = () => {
     setIsClose(true);
@@ -28,14 +28,24 @@ export default ({ setIsOpen, setIsDelOpen, dir }) => {
   };
 
   const handleFixClick = async () => {
-    // 디렉토리 수정 추가하기
     const body = {
       name: modalInput.value,
       description: '설명은 없어질 예정'
     };
-    const newDirList = dirState.map(directory => (directory.id === dir.id ? { ...directory, name: modalInput.value } : directory));
+    await dirApi.updateDir(token, body, dir.directory.id);
+    const newDirList = dirState.map(directory =>
+      directory.directory.id === dir.directory.id
+        ? {
+            directory: {
+              ...directory.directory,
+              name: modalInput.value
+            },
+            thumbnail: directory.thumbnail
+          }
+        : directory
+    );
     setDirState(newDirList);
-    await dirApi.updateDir(token, body, dir.id);
+    setUpdateDirClick(true);
     setIsClose(true);
   };
 

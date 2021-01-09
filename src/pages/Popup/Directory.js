@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { atom, useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { useState } from 'react';
 import back_arrow from '../../assets/img/back_arrow.svg';
 import useInput from '../../hooks/useInput';
@@ -14,7 +14,7 @@ const token = {
 };
 
 export default () => {
-  const [pageNum, setPageNum] = useRecoilState(ClipperPageNumState);
+  const setPageNum = useSetRecoilState(ClipperPageNumState);
   const [dirState, setDirState] = useRecoilState(WebClipperDirState);
   const [isHover, setIsHover] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -23,7 +23,7 @@ export default () => {
   useEffect(() => {
     const result = dirApi.getDirAll(token);
     result.then(function (dir) {
-      setDirState(dir.data);
+      setDirState(dir.data.data);
       setLoading(false);
     });
   }, []);
@@ -34,6 +34,8 @@ export default () => {
       description: '디버그 마스터 봉채륀~'
     };
 
+    console.log(dirState);
+    
     const response = dirApi.postDir(token, data);
     response.then(res => {
       const newDir = {
@@ -81,8 +83,8 @@ export default () => {
             </BackBtn>
           </HeadhWrap>
           <DirList>
-            {dirState.map(dir => (
-              <ReturnDirItems item={dir.directory.name} idx={dir.directory.id} />
+            {dirState.map((dir, index) => (
+              <ReturnDirItems item={dir.directory.name} key={index} idx={dir.directory.id} />
             ))}
             <Space />
           </DirList>
@@ -263,7 +265,6 @@ const ReturnDirItems = ({ item, idx }) => {
         directoryId: Number(e.target.id),
         cookieId: storage.cookieId
       };
-      console.log(data);
       const Response = dirApi.addCookieToDir(token, data);
       Response.then(function (response) {
         setPageNum(2);

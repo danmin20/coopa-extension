@@ -4,7 +4,7 @@ import defaultImg from '../assets/img/img_default.svg';
 import theme from '../assets/themes';
 import CardHover from './CardHover';
 import { listSelectState, ShareClickState, CookieState } from '../states/atom';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import deleteicon from '../assets/img/cookiehover_icn_delete.svg';
 import shereicon from '../assets/img/cookiehover_icn_share.svg';
 import logo from '../assets/img/logo_white.svg';
@@ -20,9 +20,7 @@ export default ({ cookies, idx }) => {
   const [cardHover, setCardHover] = useState(false);
   const [parkingState, setParkingState] = useState(false);
   const listSelect = useRecoilValue(listSelectState);
-  const [ShareClick, setShareClick] = useRecoilState(ShareClickState);
-  //const [DeleteCookieClick, setDeleteCookieClick] = useRecoilState(DeleteCookieClickState);
-  const [allCookie, setAllCookie] = useRecoilState(CookieState);
+  const setShareClick = useSetRecoilState(ShareClickState);
   const [isDelOpen, setIsDelOpen] = useState(false);
 
   const onCopy = e => {
@@ -50,7 +48,7 @@ export default ({ cookies, idx }) => {
   const handleCookieClick = async () => {
     window.open(cookies.link);
     // 읽은 쿠키 표시
-    await cookieAPI.postCookieRead(token, cookies.id);
+    await cookieApi.postCookieRead(token, cookies.id);
   };
 
   useEffect(() => {

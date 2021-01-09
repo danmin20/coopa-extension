@@ -15,14 +15,13 @@ export default ({ isSearched, isToggled }) => {
   const [loading, setLoading] = useState(true);
   const [cookieState, setCookieState] = useRecoilState(CookieState);
   const setDirState = useSetRecoilState(DirState);
-  const searchValue = useRecoilValue(SearchState);
+  const searchValue = SearchState;
 
   useEffect(() => {
     (async () => {
       let result = [];
       if (isSearched) {
         result = await cookieApi.getCookiesSearch(token, searchValue);
-        console.log('검색 결과', result);
         setCookieState(result.data);
       } else {
         if (isToggled) {
@@ -45,8 +44,8 @@ export default ({ isSearched, isToggled }) => {
         <Loading />
       ) : (
         <Container>
-          {cookieState.map(cookie => (
-            <Card cookies={cookie} idx={cookie.id} />
+          {cookieState.map((cookie, index) => (
+            <Card cookies={cookie} key={index} idx={cookie.id} />
           ))}
         </Container>
       )}
