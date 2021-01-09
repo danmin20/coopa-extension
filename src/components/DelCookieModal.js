@@ -38,8 +38,6 @@ export default ({ setIsDelOpen, id }) => {
   const handleDelClick = async e => {
     // for optimistic ui
     e.stopPropagation();
-    const newDirList = dirState.filter(dir => dir.id !== id);
-    setDirState(newDirList);
     // api call
     await dirApi.deleteDir(token, id);
     const newDirList = dirState.filter(dir => dir.directory.id !== id);
