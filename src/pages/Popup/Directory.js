@@ -35,7 +35,7 @@ export default () => {
     };
 
     console.log(dirState);
-
+    
     const response = dirApi.postDir(token, data);
     response.then(res => {
       const newDir = {
@@ -262,12 +262,11 @@ const ReturnDirItems = ({ item, idx }) => {
     // 디렉토리에 데이터 넣기
     chrome.storage.sync.get('cookieId', function (storage) {
       let data = {
-        directoryId: e.target.id,
+        directoryId: Number(e.target.id),
         cookieId: storage.cookieId
       };
       const Response = dirApi.addCookieToDir(token, data);
       Response.then(function (response) {
-        // console.log(response);
         setPageNum(2);
       });
     });

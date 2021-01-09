@@ -20,20 +20,27 @@ export default ({ setIsDelOpen, id }) => {
   const setDeleteCookieClick = useSetRecoilState(DeleteCookieClickState);
   const [allCookie, setAllCookie] = useRecoilState(CookieState);
 
-  const handleClick = () => {
+  const handleClick = e => {
+    e.stopPropagation();
     setIsClose(true);
   };
 
-  const handleCookieDelClick = async () => {
-    const newCookie = allCookie.filter(c => c.id !== cookies.id);
+  const handleCookieDelClick = async e => {
+    e.stopPropagation();
+    const newCookie = allCookie.filter(c => c.id !== id);
     setAllCookie(newCookie);
 
-    await cookieAPI.deleteCookies(token, cookies.id);
+    await cookieAPI.deleteCookies(token, id);
     setDeleteCookieClick(true);
     setIsClose(true);
   };
 
-  const handleDelClick = async () => {
+  const handleDelClick = async e => {
+    // for optimistic ui
+    e.stopPropagation();
+    const newDirList = dirState.filter(dir => dir.id !== id);
+    setDirState(newDirList);
+    // api call
     await dirApi.deleteDir(token, id);
     const newDirList = dirState.filter(dir => dir.directory.id !== id);
     setDirState(newDirList);
