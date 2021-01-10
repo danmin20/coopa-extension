@@ -28,16 +28,22 @@ export default ({ dir }) => {
     setIsOpen(true);
   };
 
-  useEffect(function(){
-    setIsHover(false);
-  }, [DirCardHover])
+  useEffect(
+    function () {
+      setIsHover(false);
+    },
+    [DirCardHover]
+  );
 
-  useEffect(function(){
-    setDirCardHover(false);
-  }, [isHover])
+  useEffect(
+    function () {
+      setDirCardHover(false);
+    },
+    [isHover]
+  );
 
   const handleDirClick = param => {
-    window.open(`https://cookieparking.netlify.app/directory/${param}/${param}`, '_self');
+    window.open(`https://cookieparking.netlify.app/directory/${param}`, '_self');
   };
 
   return (
