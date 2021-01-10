@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
-import Glass from '../assets/img/glass.svg';
+import homebrdIconSearch from '../assets/img/homebrd_icn_search.svg';
 import theme from '../assets/themes';
 import useInput from '../hooks/useInput';
 import { useSetRecoilState } from 'recoil';
@@ -21,7 +21,7 @@ export default ({ isSearched, setIsSearched }) => {
   return (
     <HomeBoard isSearched={isSearched}>
       <div className="search-bar">
-        <img className="search-bar__icon" src={Glass} />
+        <img className="search-bar__icon" src={homebrdIconSearch} />
         <input onKeyPress={onKeyPress} value={searchText.value} onChange={searchText.onChange} className="search-bar__input" type="text" placeholder="내가 추가한 쿠키를 검색해 보세요!" />
       </div>
     </HomeBoard>
