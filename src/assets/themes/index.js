@@ -12,7 +12,7 @@ const theme = extendTheme({
   fonts: {},
   styles: {
     global: {
-      html: { fontSize: '10px' }
+      html: { fontSize: '7px' }
     }
   },
   breakpoints: [],
