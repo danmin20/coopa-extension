@@ -97,6 +97,8 @@ const Contents = styled.div`
 
 const ContentsHeader = styled.div`
   display: flex;
+  align-items: center;
+  margin-top: 3rem;
   padding: 0 19.7rem;
   position: relative;
   z-index: 50;
@@ -146,6 +148,7 @@ const ContentsHeader = styled.div`
 const TabBtn = styled.div`
   cursor: pointer;
   color: ${theme.colors.lightGray};
+  border-bottom: 0.4rem solid ${theme.colors.white};
   ${props =>
     props.selectState &&
     css`
