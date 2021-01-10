@@ -10,6 +10,7 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { SelectState, ShareClickState, DeleteCookieClickState, createDirClickState } from '../../states/atom';
 import DirCreateModal from '../../components/DirCreateModal';
 import ToastMsg from '../../components/ToastMsg';
+import helpPopup from '../../assets/img/cookies_img_help.svg';
 
 export default () => {
   const [selectState, setSelectState] = useRecoilState(SelectState);
@@ -20,16 +21,21 @@ export default () => {
   const [isToggled, setIsToggled] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpenCreateDir, setIsOpenCreateDir] = useState(false); // 새 디렉토리 만들기 모달
+  const [isHover, setIsHover] = useState(false);
 
   const handleTab = tab => {
     if (tab === 'cookie') setSelectState('cookie');
     else setSelectState('directory');
   };
-
+  const handleMouseEnter = () => {
+    setIsHover(true);
+  };
+  const handleMouseLeave = () => {
+    setIsHover(false);
+  };
   const handleCreateDir = async () => {
     setIsOpenCreateDir(true);
   };
-
   const onToggleSwitch = e => {
     if (e.target.checked) setIsToggled(true);
     else setIsToggled(false);
@@ -47,11 +53,14 @@ export default () => {
           <TabBtn style={{ marginLeft: '2rem' }} selectState={selectState === 'directory'} onClick={() => handleTab('directory')}>
             Directory
           </TabBtn>
+          <PopupHelp isHover={isHover} src={helpPopup} alt="help-popup"></PopupHelp>
           <div style={{ marginLeft: 'auto' }}>
             {!isSearched &&
               (selectState === 'cookie' ? (
                 <div className="toggle">
-                  <div className="toggle__help">?</div>
+                  <div className="toggle__help" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+                    ?
+                  </div>
                   <div className="toggle__title">안 읽은 쿠키 모아보기</div>
                   <span style={{ marginLeft: '15px' }}>
                     <Switch onChange={onToggleSwitch} />
@@ -74,6 +83,13 @@ export default () => {
   );
 };
 
+const PopupHelp = styled.img`
+  display: ${props => (props.isHover ? 'block' : 'none')};
+  position: absolute;
+  top: -150%;
+  right: 6.35%;
+`;
+
 const Contents = styled.div`
   margin: 4.8rem 19.7rem 0;
   ${props =>
@@ -85,6 +101,7 @@ const Contents = styled.div`
 
 const ContentsHeader = styled.div`
   display: flex;
+  position: relative;
   .toggle {
     display: flex;
     align-items: center;

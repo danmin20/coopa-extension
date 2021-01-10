@@ -15,12 +15,13 @@ export default ({ isSearched, isToggled }) => {
   const [loading, setLoading] = useState(true);
   const [cookieState, setCookieState] = useRecoilState(CookieState);
   const setDirState = useSetRecoilState(DirState);
-  const searchValue = SearchState;
+  const searchValue = useRecoilValue(SearchState);
 
   useEffect(() => {
     (async () => {
       let result = [];
       if (isSearched) {
+        console.log('Allcookies 검색 결과');
         result = await cookieApi.getCookiesSearch(token, searchValue);
         setCookieState(result.data);
       } else {

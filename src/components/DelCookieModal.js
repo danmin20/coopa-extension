@@ -4,7 +4,6 @@ import { useRecoilValue, useSetRecoilState, useRecoilState } from 'recoil';
 import { DirState, SelectState, DeleteCookieClickState, CookieState, DelToastState } from '../states/atom';
 import dirApi from '../lib/api/directoryApi';
 import cookieAPI from '../lib/api/cookieApi';
-import ToastMsg from '../components/ToastMsg';
 
 const token = {
   'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4'
@@ -36,7 +35,6 @@ export default ({ setIsDelOpen, id }) => {
   };
 
   const handleDelClick = async e => {
-    // for optimistic ui
     e.stopPropagation();
     // api call
     await dirApi.deleteDir(token, id);
