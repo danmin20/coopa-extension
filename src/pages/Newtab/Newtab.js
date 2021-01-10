@@ -87,8 +87,8 @@ export default () => {
 const PopupHelp = styled.img`
   display: ${props => (props.isHover ? 'block' : 'none')};
   position: absolute;
-  top: -150%;
-  right: 6.35%;
+  top: -10rem;
+  right: 33.75rem;
 `;
 
 const Contents = styled.div`
@@ -114,6 +114,7 @@ const ContentsHeader = styled.div`
     align-items: center;
     &__help {
       cursor: pointer;
+      font-family: 'Poppins', sans-serif;
       width: 2.8rem;
       height: 2.8rem;
       background: ${({ theme }) => theme.colors.gray_4};
