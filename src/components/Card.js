@@ -180,8 +180,8 @@ const Contents = styled.div`
       color: ${({ theme }) => theme.colors.gray_5};
     }
     &__favicon {
-      width: 4.2rem;
-      height: 4.2rem;
+      width: 3rem;
+      height: 3rem;
       border-radius: 0.8rem;
       object-fit: cover;
     }

@@ -277,7 +277,8 @@ const BottonWrap = styled.div`
     margin-right: 0.8rem;
     font-family: Spoqa Han Sans Neo;
     font-weight: bold;
-    font-size: 1.4rem;
+    font-size: 1.7rem;
+    text-align: center;
     color: #b7b7b7;
     &:focus {
       outline: none;
