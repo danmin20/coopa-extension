@@ -31,15 +31,17 @@ export default ({ isSearched, setIsSearched }) => {
 const HomeBoard = styled.div`
   width: 100%;
   padding: 11rem 0;
+  margin-top: 6.5rem;
   background-color: ${theme.colors.homeBoardGray};
   ${props =>
     props.isSearched &&
     css`
+      position: fixed;
+      z-index: 100;
+      top: 0;
       background-color: ${theme.colors.white};
-      box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.12);
-      padding-top: 4rem;
-      padding-bottom: 9.2rem;
-      // Todo : scroll 시 homeboard & header fix
+      /* box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.12); */
+      padding: 4rem 0;
     `}
   display: flex;
   justify-content: center;

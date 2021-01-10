@@ -29,6 +29,9 @@ export default ({ setIsSelected, isSearched, setIsSearched, scrollTop }) => {
 };
 
 const Header = styled.div`
+  position: fixed;
+  z-index: 100;
+  top: 0;
   width: 100%;
   height: 6.5rem;
   background-color: ${theme.colors.black};

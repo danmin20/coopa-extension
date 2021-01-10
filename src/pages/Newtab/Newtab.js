@@ -45,34 +45,35 @@ export default () => {
     <div className="container">
       <Header isSearched={isSearched} setIsSearched={setIsSearched} />
       <HomeBoard setIsSearched={setIsSearched} isSearched={isSearched} />
-      <Contents isSearched={isSearched}>
-        <ContentsHeader selected>
-          <TabBtn selectState={selectState === 'cookie'} onClick={() => handleTab('cookie')}>
-            {isSearched ? 'Cookies' : 'All cookies'}
-          </TabBtn>
-          <TabBtn style={{ marginLeft: '2rem' }} selectState={selectState === 'directory'} onClick={() => handleTab('directory')}>
-            Directory
-          </TabBtn>
-          <PopupHelp isHover={isHover} src={helpPopup} alt="help-popup"></PopupHelp>
-          <div style={{ marginLeft: 'auto' }}>
-            {!isSearched &&
-              (selectState === 'cookie' ? (
-                <div className="toggle">
-                  <div className="toggle__help" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-                    ?
-                  </div>
-                  <div className="toggle__title">안 읽은 쿠키 모아보기</div>
-                  <span style={{ marginLeft: '15px' }}>
-                    <Switch onChange={onToggleSwitch} />
-                  </span>
+      {isSearched && <Shadow />}
+      <ContentsHeader isSearched={isSearched} selected>
+        <TabBtn selectState={selectState === 'cookie'} onClick={() => handleTab('cookie')}>
+          {isSearched ? 'Cookies' : 'All cookies'}
+        </TabBtn>
+        <TabBtn style={{ marginLeft: '2rem' }} selectState={selectState === 'directory'} onClick={() => handleTab('directory')}>
+          Directory
+        </TabBtn>
+        <PopupHelp isHover={isHover} src={helpPopup} alt="help-popup"></PopupHelp>
+        <div style={{ marginLeft: 'auto' }}>
+          {!isSearched &&
+            (selectState === 'cookie' ? (
+              <div className="toggle">
+                <div className="toggle__help" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+                  ?
                 </div>
-              ) : (
-                <div className="dirbtn" onClick={handleCreateDir}>
-                  <div className="dirbtn__desc">+ 새 디렉토리 만들기</div>
-                </div>
-              ))}
-          </div>
-        </ContentsHeader>
+                <div className="toggle__title">안 읽은 쿠키 모아보기</div>
+                <span style={{ marginLeft: '15px' }}>
+                  <Switch onChange={onToggleSwitch} />
+                </span>
+              </div>
+            ) : (
+              <div className="dirbtn" onClick={handleCreateDir}>
+                <div className="dirbtn__desc">+ 새 디렉토리 만들기</div>
+              </div>
+            ))}
+        </div>
+      </ContentsHeader>
+      <Contents>
         {selectState === 'cookie' ? <AllCookies isSearched={isSearched} isToggled={isToggled} /> : <Directory isSearched={isSearched} />}
         {isOpenCreateDir && <DirCreateModal setIsOpenCreateDir={setIsOpenCreateDir} />}
         {createDirClick && <ToastMsg msg="디렉토리를 생성했어요!" />}
@@ -91,17 +92,21 @@ const PopupHelp = styled.img`
 `;
 
 const Contents = styled.div`
-  margin: 4.8rem 19.7rem 0;
-  ${props =>
-    props.isSearched &&
-    css`
-      margin-top: -7.5rem;
-    `}
+  margin: 0 19.7rem;
 `;
 
 const ContentsHeader = styled.div`
   display: flex;
+  padding: 0 19.7rem;
   position: relative;
+  z-index: 50;
+  background-color: white;
+  ${props =>
+    props.isSearched &&
+    css`
+      margin-top: 20rem;
+      box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.12);
+    `}
   .toggle {
     display: flex;
     align-items: center;
@@ -154,4 +159,13 @@ const TabBtn = styled.div`
   :hover {
     color: ${theme.colors.orange};
   }
+`;
+
+const Shadow = styled.div`
+  position: fixed;
+  top: 0;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.12);
+  height: 21.6rem;
+  width: 100%;
+  z-index: 1;
 `;

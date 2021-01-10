@@ -49,6 +49,6 @@ const Container = styled.div`
   max-width: 100vw;
   margin-top: 4.7rem;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 3.2rem;
+  grid-template-columns: repeat(auto-fill, minmax(23rem, auto));
+  grid-gap: 2.3rem;
 `;
