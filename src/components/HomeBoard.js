@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
 import homebrdIconSearch from '../assets/img/homebrd_icn_search.svg';
-import theme from '../assets/themes';
 import useInput from '../hooks/useInput';
 import { useSetRecoilState } from 'recoil';
 import { SearchState } from '../states/atom';

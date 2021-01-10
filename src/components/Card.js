@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 import defaultImg from '../assets/img/img_default.svg';
-import theme from '../assets/themes';
 import CardHover from './CardHover';
 import { listSelectState, ShareClickState, CookieState } from '../states/atom';
 import { useRecoilValue, useSetRecoilState } from 'recoil';

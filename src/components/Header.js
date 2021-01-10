@@ -2,11 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import Logo from '../assets/img/logo_main.svg';
 import Profile from '../assets/img/profile.svg';
-import theme from '../assets/themes';
 import { useSetRecoilState } from 'recoil';
 import { SearchState, SelectState } from '../states/atom';
 
-export default ({ setIsSelected, isSearched, setIsSearched, scrollTop }) => {
+export default ({ isSearched, setIsSearched }) => {
   const setSelectState = useSetRecoilState(SelectState);
   const setSearchState = useSetRecoilState(SearchState);
   const handleRefresh = () => {

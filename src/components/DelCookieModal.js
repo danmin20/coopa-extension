@@ -98,6 +98,7 @@ const Wrap = styled.div`
 `;
 
 const ModalWrap = styled.div`
+  box-sizing: border-box;
   width: 55rem;
   height: 24.9rem;
   padding: 4.2rem 3.8rem;

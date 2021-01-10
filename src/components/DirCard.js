@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
-import theme from '../assets/themes';
 import cookieIcon from '../assets/img/cookie_icon.svg';
 import cookieIconW from '../assets/img/cookie_icon_white.svg';
 import updateDirIcon from '../assets/img/update_dir_icon.svg';
@@ -48,20 +47,22 @@ export default ({ dir }) => {
   };
 
   return (
-    <Container thumbnail={dir.thumbnail} isHover={isHover} onMouseEnter={handleBtnMouseOver} onMouseLeave={handleBtnMouseLeave}>
-      <div className="content">
-        <div className="content__title">{dir.directory.name}</div>
-        <div className="content__num">
-          <CookieIcon isHover={isHover} onMouseOver={handleBtnMouseOver} onMouseLeave={handleBtnMouseOver} />
-          <div>{dir.directory.cookieCnt}개</div>
+    <>
+      <Container thumbnail={dir.thumbnail} isHover={isHover} onMouseEnter={handleBtnMouseOver} onMouseLeave={handleBtnMouseLeave}>
+        <div className="content">
+          <div className="content__title">{dir.directory.name}</div>
+          <div className="content__num">
+            <CookieIcon isHover={isHover} onMouseOver={handleBtnMouseOver} onMouseLeave={handleBtnMouseOver} />
+            <div>{dir.directory.cookieCnt}개</div>
+          </div>
         </div>
-      </div>
-      <UpdateIcon src={updateDirIcon} onMouseOver={handleBtnMouseOver} onMouseLeave={handleBtnMouseOver} isHover={isHover} onClick={handleClickUpdateIcon} />
+        <UpdateIcon src={updateDirIcon} onMouseOver={handleBtnMouseOver} onMouseLeave={handleBtnMouseOver} isHover={isHover} onClick={handleClickUpdateIcon} />
+      </Container>
       {isOpen && <DirFixModal setIsOpen={setIsOpen} setIsDelOpen={setIsDelOpen} dir={dir} />}
-      {updateDirClick && <ToastMsg msg="디렉토리를 수정했어요!" />}
       {isDelOpen && <DelCookieModal isDelOpen={isDelOpen} setIsDelOpen={setIsDelOpen} id={dir.directory.id} />}
+      {updateDirClick && <ToastMsg msg="디렉토리를 수정했어요!" />}
       {delToast && <ToastMsg msg="쿠키가 삭제되었어요!" />}
-    </Container>
+    </>
   );
 };
 
