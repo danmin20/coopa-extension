@@ -35,11 +35,18 @@ export default ({ isSearched }) => {
       {loading ? (
         <Loading />
       ) : (
-        <Container>
-          {dirState.map((dir, index) => (
-            <DirCard dir={dir} key={index} />
-          ))}
-        </Container>
+        <>
+          {isSearched && (
+            <DirNum>
+              <span>&nbsp;{dirState.length}개의</span> 디랙토리
+            </DirNum>
+          )}
+          <Container>
+            {dirState.map((dir, index) => (
+              <DirCard dir={dir} key={index} />
+            ))}
+          </Container>
+        </>
       )}
     </>
   );
@@ -51,4 +58,15 @@ const Container = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(32rem, auto));
   grid-gap: 3.2rem;
+`;
+
+const DirNum = styled.div`
+  margin-top: 5rem;
+  font-size: 2.8rem;
+  line-height: 2.6rem;
+  color: ${({ theme }) => theme.colors.gray_5};
+  span {
+    font-weight: 500;
+    color: ${({ theme }) => theme.colors.cookieOrange};
+  }
 `;

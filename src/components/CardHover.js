@@ -165,8 +165,8 @@ const Directory = styled.div`
   height: 5.7rem;
   margin-bottom: 0;
   background: rgba(255, 255, 255, 0.95);
-  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.35);
-  border-radius: 10px;
+  box-shadow: 0rem 0rem 3rem rgba(0, 0, 0, 0.35);
+  border-radius: 1rem;
   display: flex;
   flex-direction: row;
   align-items: center;
