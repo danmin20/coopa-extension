@@ -74,3 +74,8 @@ export const updateDirClickState = atom({
   key: 'UpdateDirClickState',
   default: false
 });
+
+export const DirCardHoverState = atom({
+  key: 'DirCardHoverState',
+  default: false
+})
