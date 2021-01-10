@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 import theme from '../assets/themes';
 import cookieIcon from '../assets/img/cookie_icon.svg';
@@ -7,10 +7,11 @@ import updateDirIcon from '../assets/img/update_dir_icon.svg';
 import DirFixModal from '../components/DirFixModal';
 import DelCookieModal from '../components/DelCookieModal';
 import ToastMsg from '../components/ToastMsg';
-import { DelToastState, updateDirClickState } from '../states/atom';
-import { useRecoilValue } from 'recoil';
+import { DelToastState, updateDirClickState, DirCardHoverState } from '../states/atom';
+import { useRecoilValue, useRecoilState } from 'recoil';
 
 export default ({ dir }) => {
+  const [DirCardHover, setDirCardHover] = useRecoilState(DirCardHoverState);
   const [isHover, setIsHover] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isDelOpen, setIsDelOpen] = useState(false);
@@ -26,6 +27,14 @@ export default ({ dir }) => {
   const handleClickUpdateIcon = () => {
     setIsOpen(true);
   };
+
+  useEffect(function(){
+    setIsHover(false);
+  }, [DirCardHover])
+
+  useEffect(function(){
+    setDirCardHover(false);
+  }, [isHover])
 
   return (
     <Container isHover={isHover} onMouseEnter={handleBtnMouseOver} onMouseLeave={handleBtnMouseLeave}>

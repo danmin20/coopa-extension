@@ -68,8 +68,7 @@ export default () => {
   const handleBtnMouseLeave = () => {
     setIsHover(false);
   };
-
-  const handleClick = e => {};
+  
 
   return (
     <>
