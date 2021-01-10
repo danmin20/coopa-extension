@@ -101,7 +101,7 @@ const Container = styled.div`
 const DeleteIcon = styled.img`
   width: 4.8rem;
   height: 4.8rem;
-  z-index: 100;
+  z-index: 10;
   position: absolute;
   bottom: 10%;
   right: 5%;
@@ -110,7 +110,7 @@ const DeleteIcon = styled.img`
 const ShereIcon = styled.img`
   width: 4.8rem;
   height: 4.8rem;
-  z-index: 100;
+  z-index: 10;
   position: absolute;
   bottom: 10%;
   right: 20%;
@@ -143,7 +143,7 @@ const Contents = styled.div`
     background: url(${props => (!props.thumbnail ? defaultImg : props.thumbnail)}) center center / cover no-repeat;
     border-radius: 1.2rem;
   }
-  */ .title {
+  .title {
     font-size: 2.4rem;
     font-weight: 500;
     margin-top: 2.8rem;

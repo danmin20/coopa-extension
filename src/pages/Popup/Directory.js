@@ -23,7 +23,7 @@ export default () => {
   useEffect(() => {
     const result = dirApi.getDirAll(token);
     result.then(function (dir) {
-      setDirState(dir.data.data);
+      setDirState(dir.data);
       setLoading(false);
     });
   }, []);
@@ -35,7 +35,7 @@ export default () => {
     };
 
     console.log(dirState);
-    
+
     const response = dirApi.postDir(token, data);
     response.then(res => {
       const newDir = {
