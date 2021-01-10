@@ -23,7 +23,7 @@ const Wrap = styled.div`
   width: 36rem;
   height: 24rem;
   border-radius: 1.2rem;
-  background-color: #ffffff;
+  background-color: ${({ theme }) => theme.colors.white};
   margin: 0;
   padding: 0;
   display: flex;

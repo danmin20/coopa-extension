@@ -30,7 +30,7 @@ const Wrap = styled.div`
   height: 35.1rem;
   border-radius: 1.2rem;
   border: 1px solid black;
-  background-color: #ffffff;
+  background-color: ${({ theme }) => theme.colors.white};
   margin: 0;
   padding: 0;
   display: flex;

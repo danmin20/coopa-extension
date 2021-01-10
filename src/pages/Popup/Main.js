@@ -93,7 +93,7 @@ const Wrap = styled.div`
   width: 36rem;
   height: 35.1rem;
   border-radius: 1.2rem;
-  background-color: #ffffff;
+  background-color: ${({ theme }) => theme.colors.white};
   margin: 0;
   padding: 0;
   display: flex;
@@ -151,7 +151,7 @@ const BtnOneWrap = styled.div`
 const BtnOneText = styled.div`
   font-weight: 500;
   font-size: 1.6rem;
-  color: ${props => (props.isHover ? '#ffffff' : '#000000')};
+  color: ${props => (props.isHover ? ({ theme }) => theme.colors.white : ({ theme }) => theme.colors.black_2)};
   font-weight: 500;
   transition-duration: 0.2s;
 `;
@@ -177,12 +177,12 @@ const BtnTwo = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  border: 0.2rem solid #ff7134;
+  border: 0.2rem solid ${({ theme }) => theme.colors.cookieOrange};
   border-radius: 1rem;
   width: 32.2rem;
   height: 5.2rem;
-  background-color: ${props => (props.isHover ? '#FF7134' : '#ffffff')};
-  color: ${props => (props.isHover ? '#FFFFFF' : '#FF7134')};
+  color: ${props => (props.isHover ? ({ theme }) => theme.colors.white : ({ theme }) => theme.colors.cookieOrange)};
+  background-color: ${props => (props.isHover ? ({ theme }) => theme.colors.cookieOrange : ({ theme }) => theme.colors.white)};
   font-size: 1.6rem;
   font-weight: 500;
   box-shadow: ${props => (props.isHover ? '0rem 0rem 1.2rem rgba(0, 0, 0, 0.13)' : 'none')};

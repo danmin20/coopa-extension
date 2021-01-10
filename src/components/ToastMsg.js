@@ -30,9 +30,9 @@ const Wrap = styled.div`
   width: 38rem;
   height: 6.8rem;
   /* background: rgba(0, 0, 0, 0.3); */
-  background: #222222;
+  background: ${({ theme }) => theme.colors.black_2};
   border-radius: 1.2rem;
-  color: white;
+  color: ${({ theme }) => theme.colors.white};
   font-size: 2rem;
   font-weight: 500;
   position: fixed;

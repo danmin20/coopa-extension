@@ -89,8 +89,8 @@ const Container = styled.div`
   width: 100%;
   height: 0;
   padding-top: calc(477 / 360 * 100%);
-  background-color: ${theme.colors.white};
-  border-bottom: 0.1rem solid #b2b2b2;
+  background-color: ${({ theme }) => theme.colors.white};
+  border-bottom: 0.1rem solid ${({ theme }) => theme.colors.gray_4};
   :hover {
     .title {
       text-decoration: underline;
@@ -167,7 +167,7 @@ const Contents = styled.div`
     overflow: hidden;
     word-wrap: normal;
     word-break: break-all;
-    color: #999999;
+    color: ${({ theme }) => theme.colors.black_1};
   }
 
   .profile {
@@ -178,7 +178,7 @@ const Contents = styled.div`
     &__author {
       margin-left: 1rem;
       font-size: 1.6rem;
-      color: #999999;
+      color: ${({ theme }) => theme.colors.gray_5};
     }
     &__favicon {
       width: 4.2rem;
@@ -232,13 +232,13 @@ const Parking = styled.div`
     font-size: 1.8rem;
     line-height: 2.2rem;
     letter-spacing: -0.02em;
-    color: #333333;
+    color: ${({ theme }) => theme.colors.black_1};
     font-weight: 500;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: #fff;
+    color: ${({ theme }) => theme.colors.white};
     font-weight: 700;
     animation: ${fadeout} 1.5s infinite;
   }
@@ -266,5 +266,5 @@ const ParkingText = styled.div`
   font-size: 2rem;
   line-height: 2.4rem;
   font-weight: 500;
-  color: white;
+  color: ${({ theme }) => theme.colors.white};
 `;

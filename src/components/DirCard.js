@@ -24,8 +24,9 @@ export default ({ dir }) => {
   const handleBtnMouseLeave = () => {
     setIsHover(false);
   };
-  const handleClickUpdateIcon = () => {
+  const handleClickUpdateIcon = e => {
     setIsOpen(true);
+    e.stopPropagation();
   };
 
   useEffect(
@@ -81,14 +82,14 @@ const Container = styled.div`
   width: 100%;
   height: 0;
   padding-top: calc(160 / 360 * 100%);
-  background-color: #f3f3f3;
+  background-color: ${({ theme }) => theme.colors.gray_2};
   border-radius: 1.2rem;
-  color: ${theme.colors.black};
+  color: ${({ theme }) => theme.colors.black_2};
   ${props =>
     props.isHover &&
     css`
       background: rgba(0, 0, 0, 0.7);
-      color: ${theme.colors.white};
+      color: ${({ theme }) => theme.colors.white};
     `}
 `;
 

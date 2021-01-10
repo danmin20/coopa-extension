@@ -104,7 +104,7 @@ const Wrap = styled.div`
   width: 36rem;
   height: 35.1rem;
   border-radius: 1.2rem;
-  background-color: #ffffff;
+  background-color: ${({ theme }) => theme.colors.white};
   margin: 0;
   padding: 0;
   display: flex;
@@ -138,7 +138,7 @@ const DirItemWrap = styled.div`
   padding-left: 1.2rem;
   padding-right: 1.6rem;
   border-radius: 0.8rem;
-  background: ${props => (props.isHover ? '#F3F3F3' : 'white')};
+  background: ${props => (props.isHover ? ({ theme }) => theme.colors.gray_2 : ({ theme }) => theme.colors.white)};
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -200,7 +200,7 @@ const BottomWrap = styled.div`
   bottom: 7.85%;
   width: 36.1rem;
   height: 8.9rem;
-  background-color: white;
+  background-color: ${({ theme }) => theme.colors.white};
   /* background: linear-gradient(to top, white); */
   display: flex;
   flex-direction: row;
@@ -212,7 +212,7 @@ const SearchInput = styled.input`
   width: 21.4rem;
   height: 4.6rem;
   border-radius: 0.8rem;
-  background-color: #f3f3f3;
+  background-color: ${({ theme }) => theme.colors.gray_2};
   color: #111111;
   font-size: 1.7rem;
   line-height: 2.04rem;
@@ -233,7 +233,7 @@ const SearchInput = styled.input`
 const AddBtn = styled.div`
   width: 7.2rem;
   height: 4.6rem;
-  border: 0.2rem solid #ff7134;
+  border: 0.2rem solid ${({ theme }) => theme.colors.cookieOrange};
   border-radius: 0.8rem;
   display: flex;
   flex-direction: row;
@@ -241,8 +241,8 @@ const AddBtn = styled.div`
   justify-content: center;
   font-size: 1.6rem;
   font-weight: 500;
-  color: ${props => (props.isHover ? '#ffffff' : '#FF7134')};
-  background-color: ${props => (props.isHover ? '#FF7134' : '#ffffff')};
+  color: ${props => (props.isHover ? ({ theme }) => theme.colors.white : ({ theme }) => theme.colors.cookieOrange)};
+  background-color: ${props => (props.isHover ? ({ theme }) => theme.colors.cookieOrange : ({ theme }) => theme.colors.white)};
   box-shadow: ${props => (props.isHover ? '0rem 0rem 1.2rem rgba(0, 0, 0, 0.13)' : 'none')};
   margin-left: 1rem;
   transition-duration: 0.5s;
