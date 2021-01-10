@@ -27,8 +27,12 @@ export default ({ dir }) => {
     setIsOpen(true);
   };
 
+  const handleDirClick = param => {
+    window.open(`https://cookieparking.netlify.app/directory/${param}/${param}`, '_self');
+  };
+
   return (
-    <Container isHover={isHover} onMouseEnter={handleBtnMouseOver} onMouseLeave={handleBtnMouseLeave}>
+    <Container onClick={() => handleDirClick(dir.directory.id)} isHover={isHover} onMouseEnter={handleBtnMouseOver} onMouseLeave={handleBtnMouseLeave}>
       <DirectoryCard thumbnail={dir.thumbnail}>
         <div className="content">
           <div className="content__title">{dir.directory.name}</div>
