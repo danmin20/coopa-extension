@@ -84,9 +84,9 @@ export default ({ setIsOpen, setIsDelOpen, dir }) => {
         <Text>디렉토리 수정하기</Text>
         <DetailWrap>
           <SmallText>디렉토리 이름</SmallText>
-          <SmallText>{modalInput.value.length}/40</SmallText>
+          <SmallText>{modalInput.value.length}/20</SmallText>
         </DetailWrap>
-        <InputBox value={modalInput.value} type="text" onChange={modalInput.onChange} />
+        <InputBox value={modalInput.value} type="text" maxLength={20} onChange={modalInput.onChange} />
         <BtnWrap>
           <Btn isHover={isDelHover} onClick={handleDelClick} onMouseLeave={handleDelMouseLeave} onMouseMove={handleDelMouseMove}>
             삭제
