@@ -35,7 +35,7 @@ export default ({ dir }) => {
     <Container onClick={() => handleDirClick(dir.directory.id)} isHover={isHover} onMouseEnter={handleBtnMouseOver} onMouseLeave={handleBtnMouseLeave}>
       <DirectoryCard thumbnail={dir.thumbnail}>
         <div className="content">
-          <div className="content__title">{dir.directory.name}</div>
+          <div className="content__title">{dir.directory.name.length < 13 ? dir.directory.name : dir.directory.name.slice(0, 12) + '...'}</div>
           <div className="content__num">
             <CookieIcon isHover={isHover} onMouseOver={handleBtnMouseOver} onMouseLeave={handleBtnMouseOver} />
             <div>{dir.directory.cookieCnt}개</div>
@@ -108,6 +108,10 @@ const DirectoryCard = styled.div`
     &__title {
       white-space: pre;
       font-size: 2.4rem;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 1;
+      text-overflow: ellipsis;
     }
     &__num {
       display: flex;

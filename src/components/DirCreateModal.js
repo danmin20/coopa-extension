@@ -67,9 +67,9 @@ export default ({ setIsOpenCreateDir }) => {
         <Text>디렉토리 만들기</Text>
         <DetailWrap>
           <SmallText>디렉토리 이름</SmallText>
-          <SmallText>{modalInput.value.length}/40</SmallText>
+          <SmallText>{modalInput.value.length}/20</SmallText>
         </DetailWrap>
-        <InputBox value={modalInput.value} type="text" onChange={modalInput.onChange} />
+        <InputBox value={modalInput.value} maxLength={20} type="text" onChange={modalInput.onChange} />
         <BtnWrap>
           <Space width={'28.6rem'} />
           <Btn isHover={isCancleHover} onClick={handleClick} onMouseLeave={handleCancleMouseLeave} onMouseMove={handleCancleMouseMove}>
