@@ -153,7 +153,7 @@ const BtnOneText = styled.div`
   font-size: 1.6rem;
   color: ${props => (props.isHover ? '#ffffff' : '#000000')};
   font-weight: 500;
-  transition-duration: 0.5s;
+  transition-duration: 0.2s;
 `;
 
 const BtnOneArrow = styled.img`
