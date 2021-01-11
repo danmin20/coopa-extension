@@ -44,12 +44,12 @@ export default ({ dir }) => {
   );
 
   const handleDirClick = param => {
-    window.open(`https://cookieparking.netlify.app/directory/${param}`, '_self');
+    window.open(`https://www.cookieparking.com/directory/${param}`, '_self');
   };
 
   return (
     <>
-      <Container thumbnail={dir.thumbnail} isHover={isHover} onMouseEnter={handleBtnMouseOver} onMouseLeave={handleBtnMouseLeave}>
+      <Container onClick={() => handleDirClick(dir.directory.id)} thumbnail={dir.thumbnail} isHover={isHover} onMouseEnter={handleBtnMouseOver} onMouseLeave={handleBtnMouseLeave}>
         <div className="content">
           <div className="content__title">{dir.directory.name.length < 13 ? dir.directory.name : dir.directory.name.slice(0, 12) + '...'}</div>
           <div className="content__num">

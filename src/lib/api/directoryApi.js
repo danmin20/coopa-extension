@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = 'https://www.cookieparking.com';
+const baseURL = 'https://www.cookieparking.com/api';
 
 const postDir = async (headers, body) => {
   try {
