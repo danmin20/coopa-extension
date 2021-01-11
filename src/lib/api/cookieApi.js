@@ -15,7 +15,7 @@ const postCookie = async (headers, body) => {
     console.log('[SUCCESS] POST COOKIES', data);
     return data;
   } catch (e) {
-    console.error('[FAIL] POST COOKIES', error);
+    console.error('[FAIL] POST COOKIES', e);
     return e;
   }
 };
@@ -31,7 +31,7 @@ const getCookies = async headers => {
     console.log('[SUCCESS] GET COOKIES', data);
     return data;
   } catch (e) {
-    console.error('[FAIL] GET COOKIES', error);
+    console.error('[FAIL] GET COOKIES', e);
     return e;
   }
 };
@@ -47,7 +47,7 @@ const getCookiesSearch = async (headers, word) => {
     console.log('[SUCCESS] GET SEARCH COOKIES', data);
     return data;
   } catch (e) {
-    console.error('[FAIL] GET SEARCH COOKIES', error);
+    console.error('[FAIL] GET SEARCH COOKIES', e);
     return e;
   }
 };
@@ -63,7 +63,7 @@ const getCookiesUnRead = async headers => {
     console.log('[SUCCESS] GET COOKIES UNREAD', data);
     return data;
   } catch (e) {
-    console.error('[FAIL] GET COOKIES UNREAD', error);
+    console.error('[FAIL] GET COOKIES UNREAD', e);
     return e;
   }
 };
@@ -79,10 +79,11 @@ const deleteCookies = async (headers, id) => {
     console.log('[SUCCESS] DELETE COOKIES', data);
     return data;
   } catch (e) {
-    console.error('[FAIL] DELETE COOKIES', error);
+    console.error('[FAIL] DELETE COOKIES', e);
     return e;
   }
 };
+
 const postCookieRead = async (headers, id) => {
   try {
     const { data } = await axios({
@@ -93,7 +94,7 @@ const postCookieRead = async (headers, id) => {
     });
     console.log('[SUCCESS] POST COOKIES READ', data);
   } catch (e) {
-    console.error('[FAIL] POST COOKIES READ', error);
+    console.error('[FAIL] POST COOKIES READ', e);
     return e;
   }
 };

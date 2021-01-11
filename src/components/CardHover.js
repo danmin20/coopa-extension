@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import dropdwnImg from '../assets/img/dropdown.svg';
 import { CookieState } from '../states/atom';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { DirState, SearchState } from '../states/atom';
+import { useRecoilState } from 'recoil';
+import { DirState } from '../states/atom';
 import dirApi from '../lib/api/directoryApi';
 import useInput from '../hooks/useInput';
 
@@ -18,26 +18,18 @@ const List = ({ dir, cookies, setParkingState }) => {
   const ListItemClick = async e => {
     e.stopPropagation();
 
-    // console.log(cookieState);
     const newCookie = cookieState.map((c, idx) =>
       c.id === cookies.id
         ? {
-          ...c,
-          directory: {
-            name: dir.name,
-            id: dir.id
+            ...c,
+            directory: {
+              name: dir.name,
+              id: dir.id
+            }
           }
-        }
         : c
     );
     setCookieState(newCookie);
-    // setCookieState({
-    //   ...cookieState,
-    //   directory: {
-    //     name: dir.name,
-    //     id: dir.id
-    //   }
-    // })
     const body = {
       directoryId: dir.id,
       cookieId: cookies.id
@@ -49,7 +41,7 @@ const List = ({ dir, cookies, setParkingState }) => {
 
   return (
     <ListItem onMouseOver={() => setItemHover(true)} onMouseLeave={() => setItemHover(false)} onClick={ListItemClick}>
-      <div class='item'>{dir.name}</div>
+      <div className="item">{dir.name}</div>
       <ListItemBtn itemHover={itemHover} />
     </ListItem>
   );
@@ -74,7 +66,7 @@ const ListItem = styled.div`
     background: ${({ theme }) => theme.colors.gray_2};
     border-radius: 0.8rem;
   }
-  .item{
+  .item {
     display: block;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -90,8 +82,7 @@ const ListItemBtn = styled.div`
   background: ${({ theme }) => theme.colors.cookieOrange};
 `;
 
-export default ({ cookies, idx, setParkingState }) => {
-  // const items = ['디자인', '마케팅', '프로그래밍', '기획', '쿠키파킹', '사랑해'];
+export default ({ cookies, setParkingState }) => {
   const [drop, setDrop] = useState(false);
   const [dirState, setDirState] = useRecoilState(DirState);
   const inputText = useInput('');
@@ -137,20 +128,13 @@ export default ({ cookies, idx, setParkingState }) => {
         <ListWrap>
           <DirList>
             <div className="list-div">
-              {/* <div className="list-sort">모든 디렉토리</div> */}
               {dirState.map(dir => (
                 <List dir={dir.directory} key={dir.directory.id} cookies={cookies} setParkingState={setParkingState} />
               ))}
             </div>
           </DirList>
           <BottonWrap>
-            <input
-              className="addInput"
-              placeholder="새 디렉토리 명을 입력하세요"
-              onClick={e => e.stopPropagation()}
-              onChange={inputText.onChange}
-              value={inputText.value}
-              maxLength={20} />
+            <input className="addInput" placeholder="새 디렉토리 명을 입력하세요" onClick={e => e.stopPropagation()} onChange={inputText.onChange} value={inputText.value} maxLength={20} />
             <button className="addBtn" onClick={addDirHandler}>
               저장
             </button>
@@ -282,10 +266,9 @@ const BottonWrap = styled.div`
     color: #b7b7b7;
     &:focus {
       outline: none;
-      ::placeholder{
-        color:transparent;
+      ::placeholder {
+        color: transparent;
       }
     }
-
   }
 `;
