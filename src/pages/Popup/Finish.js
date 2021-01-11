@@ -83,6 +83,7 @@ const LogoImg = styled.img`
 `;
 
 const Btn = styled.div`
+  cursor: pointer;
   display: flex;
   flex-direction: row;
   align-items: center;

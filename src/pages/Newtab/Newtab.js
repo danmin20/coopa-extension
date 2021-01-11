@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import AllCookies from '../../components/AllCookies';
 import Directory from '../../components/Directory';
-import theme from '../../assets/themes';
 import Switch from '../../components/Switch';
 import Header from '../../components/Header';
 import HomeBoard from '../../components/HomeBoard';
@@ -19,7 +18,6 @@ export default () => {
   const DeleteCookieClick = useRecoilValue(DeleteCookieClickState);
   const [isSearched, setIsSearched] = useState(false);
   const [isToggled, setIsToggled] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isOpenCreateDir, setIsOpenCreateDir] = useState(false); // 새 디렉토리 만들기 모달
   const [isHover, setIsHover] = useState(false);
 
@@ -127,6 +125,7 @@ const ContentsHeader = styled.div`
       font-weight: 500;
     }
     &__title {
+      width: 17.5rem;
       font-size: 2rem;
       color: ${({ theme }) => theme.colors.gray_5};
       margin-left: 0.8rem;
@@ -138,6 +137,7 @@ const ContentsHeader = styled.div`
     justify-content: center;
     align-items: center;
     &__desc {
+      width: 20rem;
       margin-left: 1.7rem;
       color: ${({ theme }) => theme.colors.cookieOrange};
       font-size: 2.4rem;
@@ -147,7 +147,10 @@ const ContentsHeader = styled.div`
 `;
 
 const TabBtn = styled.div`
+  text-align: center;
   cursor: pointer;
+  box-sizing: border-box;
+  min-width: 18.5rem;
   font-family: 'Poppins', sans-serif;
   color: ${({ theme }) => theme.colors.gray_4};
   border-bottom: 0.4rem solid ${({ theme }) => theme.colors.white};
