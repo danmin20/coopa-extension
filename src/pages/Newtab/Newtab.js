@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import AllCookies from '../../components/AllCookies';
 import Directory from '../../components/Directory';
@@ -39,6 +39,13 @@ export default () => {
     else setIsToggled(false);
   };
 
+  useEffect(() => {
+    chrome.storage.sync.get('defaultnewtab', storage => {
+      if (storage.defaultnewtab) {
+        chrome.tabs.update({ url: 'chrome-search://local-ntp/local-ntp.html' });
+      }
+    });
+  }, []);
   return (
     <div className="container">
       <Header isSearched={isSearched} setIsSearched={setIsSearched} />
@@ -153,12 +160,12 @@ const TabBtn = styled.div`
   min-width: 18.5rem;
   font-family: 'Poppins', sans-serif;
   color: ${({ theme }) => theme.colors.gray_4};
-  border-bottom: 0.4rem solid ${({ theme }) => theme.colors.white};
+  border-bottom: 4px solid ${({ theme }) => theme.colors.white};
   ${props =>
     props.selectState &&
     css`
       color: ${({ theme }) => theme.colors.cookieOrange};
-      border-bottom: 0.4rem solid ${({ theme }) => theme.colors.cookieOrange};
+      border-bottom: 4px solid ${({ theme }) => theme.colors.cookieOrange};
     `}
   font-size: 2.8rem;
   font-weight: 600;

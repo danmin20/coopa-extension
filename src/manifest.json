@@ -1,5 +1,6 @@
 {
     "name": "Cookie Parking Chrome Extention",
+    "options_page": "options.html",
     "background": {
         "page": "background.html"
     },
