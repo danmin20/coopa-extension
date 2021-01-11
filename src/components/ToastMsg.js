@@ -12,7 +12,7 @@ export default ({ msg }) => {
   const setUpdateDirClick = useSetRecoilState(updateDirClickState);
 
   useEffect(() => {
-    setInterval(() => {
+    setTimeout(() => {
       setIsFlex(false);
       setShareClick(false);
       setDeleteCookieClick(false);

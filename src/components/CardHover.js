@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import React, { useState, useEffect } from 'react';
 import dropdwnImg from '../assets/img/dropdown.svg';
-import { listSelectState } from '../states/atom';
 import { CookieState } from '../states/atom';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { DirState, SearchState } from '../states/atom';
@@ -23,12 +22,12 @@ const List = ({ dir, cookies, setParkingState }) => {
     const newCookie = cookieState.map((c, idx) =>
       c.id === cookies.id
         ? {
-            ...c,
-            directory: {
-              name: dir.name,
-              id: dir.id
-            }
+          ...c,
+          directory: {
+            name: dir.name,
+            id: dir.id
           }
+        }
         : c
     );
     setCookieState(newCookie);
@@ -125,14 +124,14 @@ export default ({ cookies, idx, setParkingState }) => {
           drop ? setDrop(false) : setDrop(true);
         }}
       >
-        <div className="dir-sort">{cookies.directory ? cookies.directory.name : '정해진 디렉토리가 없습니다'}</div>
+        <div className="dir-sort">{cookies.directory ? cookies.directory.name : 'All Cookies'}</div>
         <img src={dropdwnImg} style={{ marginLeft: '1.3rem' }} />
       </Directory>
       {drop && (
         <ListWrap>
           <DirList>
             <div className="list-div">
-              <div className="list-sort">모든 디렉토리</div>
+              {/* <div className="list-sort">모든 디렉토리</div> */}
               {dirState.map(dir => (
                 <List dir={dir.directory} key={dir.directory.id} cookies={cookies} setParkingState={setParkingState} />
               ))}
@@ -228,6 +227,7 @@ const BottonWrap = styled.div`
   justify-content: center;
   flex-direction: row;
   .addBtn {
+    cursor: pointer;
     display: flex;
     justify-content: center;
     font-family: Spoqa Han Sans Neo;
@@ -243,7 +243,7 @@ const BottonWrap = styled.div`
     width: calc(80 / 292 * 100%);
     height: 4.6rem;
     color: ${({ theme }) => theme.colors.cookieOrange};
-    background: white;
+    background: ${({ theme }) => theme.colors.white};
     border-radius: 1rem;
     &:hover {
       color: ${({ theme }) => theme.colors.white};
@@ -268,6 +268,10 @@ const BottonWrap = styled.div`
     color: #b7b7b7;
     &:focus {
       outline: none;
+      ::placeholder{
+        color:transparent;
+      }
     }
+
   }
 `;
