@@ -27,7 +27,8 @@ var options = {
   entry: {
     newtab: path.join(__dirname, 'src', 'pages', 'Newtab', 'index.js'),
     popup: path.join(__dirname, 'src', 'pages', 'Popup', 'index.js'),
-    background: path.join(__dirname, 'src', 'pages', 'Background', 'index.js')
+    background: path.join(__dirname, 'src', 'pages', 'Background', 'index.js'),
+    options: path.join(__dirname, 'src', 'pages', 'Options', 'index.js')
   },
   output: {
     path: path.resolve(__dirname, 'build'),
@@ -130,6 +131,12 @@ var options = {
       template: path.join(__dirname, 'src', 'pages', 'Background', 'index.html'),
       filename: 'background.html',
       chunks: ['background'],
+      cache: false
+    }),
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname, 'src', 'pages', 'Options', 'index.html'),
+      filename: 'options.html',
+      chunks: ['options'],
       cache: false
     })
   ],
