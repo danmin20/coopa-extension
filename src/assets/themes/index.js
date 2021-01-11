@@ -8,7 +8,6 @@ const colors = {
   gray_4: '#c2c2c2',
   gray_5: '#999999',
   gray_6: '#555555',
-  homeBoardGray: '#eaeaea',
   black: '#000000',
   black_1: '#333333',
   black_2: '#222222',

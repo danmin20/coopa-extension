@@ -33,7 +33,7 @@ const Header = styled.div`
   top: 0;
   width: 100%;
   height: 6.5rem;
-  background-color: ${({ theme }) => theme.colors.black};
+  background-color: ${({ theme }) => theme.colors.white};
   display: flex;
   justify-content: space-between;
   align-items: center;

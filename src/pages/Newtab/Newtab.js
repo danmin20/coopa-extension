@@ -73,13 +73,15 @@ export default () => {
               </div>
             ) : (
               <div className="dirbtn" onClick={handleCreateDir}>
-                <div className="dirbtn__desc">+ 새 디렉토리 만들기</div>
+                <div className="dirbtn__desc">
+                  <span style={{ fontSize: '4rem', marginRight: '1.7rem' }}>+</span> 새 디렉토리 만들기
+                </div>
               </div>
             ))}
         </div>
       </ContentsHeader>
       <Contents>
-        {selectState === 'cookie' ? <AllCookies isSearched={isSearched} isToggled={isToggled} /> : <Directory isSearched={isSearched} />}
+        {selectState === 'cookie' ? <AllCookies isSearched={isSearched} isToggled={isToggled} /> : <Directory isSearched={isSearched} handleCreateDir={handleCreateDir} />}
         {isOpenCreateDir && <DirCreateModal setIsOpenCreateDir={setIsOpenCreateDir} />}
         {createDirClick && <ToastMsg msg="디렉토리를 생성했어요!" />}
       </Contents>
@@ -92,8 +94,10 @@ export default () => {
 const PopupHelp = styled.img`
   display: ${props => (props.isHover ? 'block' : 'none')};
   position: absolute;
+  width: 54.8rem;
+  height: 11.2rem;
   top: -10rem;
-  right: 33.75rem;
+  right: 34rem;
 `;
 
 const Contents = styled.div`
@@ -140,11 +144,14 @@ const ContentsHeader = styled.div`
   }
   .dirbtn {
     cursor: pointer;
+    min-width: 24rem;
     display: flex;
     justify-content: center;
     align-items: center;
     &__desc {
-      width: 20rem;
+      /* width: 20rem; */
+      display: flex;
+      align-items: center;
       margin-left: 1.7rem;
       color: ${({ theme }) => theme.colors.cookieOrange};
       font-size: 2.4rem;
