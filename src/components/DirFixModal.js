@@ -18,19 +18,19 @@ export default ({ setIsOpen, setIsDelOpen, dir }) => {
   const modalInput = useInput(dir.directory.name);
   const [DirCardHover, setDirCardHover] = useRecoilState(DirCardHoverState);
 
-  const handleClick = (e) => {
+  const handleClick = e => {
     e.stopPropagation();
     setIsClose(true);
   };
 
-  const handleDelClick = (e) => {
+  const handleDelClick = e => {
     // 디렉토리 삭제 모달 띄우기
     e.stopPropagation();
     setIsClose(true);
     setIsDelOpen(true);
   };
 
-  const handleFixClick = async (e) => {
+  const handleFixClick = async e => {
     e.stopPropagation();
     const body = {
       name: modalInput.value,
@@ -78,9 +78,9 @@ export default ({ setIsOpen, setIsDelOpen, dir }) => {
     setIsFixHover(false);
   };
 
-  const handleModalClick = (e) => {
+  const handleModalClick = e => {
     e.stopPropagation();
-  }
+  };
 
   useEffect(() => {
     isClose && setIsOpen(false);

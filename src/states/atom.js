@@ -78,4 +78,4 @@ export const updateDirClickState = atom({
 export const DirCardHoverState = atom({
   key: 'DirCardHoverState',
   default: false
-})
+});
