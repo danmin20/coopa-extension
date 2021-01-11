@@ -82,5 +82,5 @@ export const DirCardHoverState = atom({
 
 export const NewTabToggleState = atom({
   key: 'NewTabToggleState',
-  default: false
+  default: true
 });

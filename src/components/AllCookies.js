@@ -6,6 +6,7 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { CookieState, SearchState, DirState } from '../states/atom';
 import cookieApi from '../lib/api/cookieApi';
 import dirApi from '../lib/api/directoryApi';
+import meerkat from '../assets/img/meerkat_empty.svg';
 // 로그인 구현되면 지우기
 const token = {
   'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4'
@@ -48,18 +49,49 @@ export default ({ isSearched, isToggled }) => {
           {isSearched && (
             <CookieNum>
               <span>&nbsp;{cookieState.length}개의</span> 쿠키
+              {cookieState.length == 0 && (
+                <div className="emptyview">
+                  <img className="emptyview__img" src={meerkat} />
+                  <div className="emptyview__desc">검색된 쿠키가 없어요!</div>
+                </div>
+              )}
             </CookieNum>
           )}
-          <Container>
-            {cookieState.map((cookie, index) => (
-              <Card cookies={cookie} key={index} idx={cookie.id} />
-            ))}
-          </Container>
+          {cookieState.length == 0 ? (
+            <EmptyView className="emptyview">
+              <img className="empty-img" src={meerkat} />
+              <div className="empty-desc">아직 저장한 쿠키가 없어요!</div>
+            </EmptyView>
+          ) : (
+            <Container>
+              {cookieState.map((cookie, index) => (
+                <Card cookies={cookie} key={index} idx={cookie.id} />
+              ))}
+            </Container>
+          )}
         </>
       )}
     </>
   );
 };
+const EmptyView = styled.div`
+  margin-top: 17.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: ${({ theme }) => theme.colors.gray_5};
+  .empty-img {
+    width: 18.2rem;
+    height: 15.4rem;
+  }
+  .empty-desc {
+    margin-top: 3.6rem;
+    font-size: 3rem;
+    font-weight: 500;
+    line-height: 3.6rem;
+  }
+`;
 
 const Container = styled.div`
   max-width: 100vw;
@@ -78,5 +110,23 @@ const CookieNum = styled.div`
   span {
     font-weight: 500;
     color: ${({ theme }) => theme.colors.cookieOrange};
+  }
+  .emptyview {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 17.9rem;
+    color: ${({ theme }) => theme.colors.gray_5};
+    &__img {
+      width: 20rem;
+      height: 17rem;
+    }
+    &__desc {
+      margin-top: 3.6rem;
+      font-size: 3.6rem;
+      font-weight: 500;
+      line-height: 4.3rem;
+    }
   }
 `;
