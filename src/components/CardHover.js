@@ -186,9 +186,10 @@ const Directory = styled.div`
     font-weight: bold;
     font-size: 1.8rem;
     line-height: 2.2rem;
-    display: flex;
-    align-items: center;
-    text-align: center;
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
     letter-spacing: -0.02em;
     color: ${({ theme }) => theme.colors.black_1};
   }
