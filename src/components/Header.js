@@ -18,10 +18,10 @@ export default ({ isSearched, setIsSearched }) => {
   return (
     <Header isSearched={isSearched}>
       <div className="main-logo" onClick={handleRefresh}>
-        <img className="main-logo__img" src={Logo} />
+        <img style={{ width: '20.2rem', height: '3.8rem' }} className="main-logo__img" src={Logo} />
       </div>
       <a className="profile" href="#">
-        <img className="profile__img" src={Profile} /> {/* Todo : mypage link 걸기 */}
+        <img style={{ width: '3.6rem', height: '3.6rem' }} className="profile__img" src={Profile} /> {/* Todo : mypage link 걸기 */}
       </a>
     </Header>
   );
