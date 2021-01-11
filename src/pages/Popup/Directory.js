@@ -68,34 +68,33 @@ export default () => {
   const handleBtnMouseLeave = () => {
     setIsHover(false);
   };
-  
 
   return (
     <>
       {loading ? (
         <Loading />
       ) : (
-          <Wrap>
-            <HeadhWrap>
-              <BackBtn onClick={handleBackArrClick}>
-                <BackArrow src={back_arrow} />
-              </BackBtn>
-            </HeadhWrap>
-            <DirList>
-              {dirState.map((dir, index) => (
-                <ReturnDirItems item={dir.directory.name} key={index} idx={dir.directory.id} />
-              ))}
-              <Space />
-            </DirList>
-            <Blur />
-            <BottomWrap>
-              <SearchInput placeholder={'새 디렉토리 명을 입력하세요'} value={InputText.value} onChange={InputText.onChange} />
-              <AddBtn isHover={isHover} onMouseOver={handleBtnMouseOver} onMouseLeave={handleBtnMouseLeave} onClick={handleBtnClick}>
-                저장
+        <Wrap>
+          <HeadhWrap>
+            <BackBtn onClick={handleBackArrClick}>
+              <BackArrow src={back_arrow} />
+            </BackBtn>
+          </HeadhWrap>
+          <DirList>
+            {dirState.map((dir, index) => (
+              <ReturnDirItems item={dir.directory.name} key={index} idx={dir.directory.id} />
+            ))}
+            <Space />
+          </DirList>
+          <Blur />
+          <BottomWrap>
+            <SearchInput placeholder={'새 디렉토리 명을 입력하세요'} value={InputText.value} onChange={InputText.onChange} />
+            <AddBtn isHover={isHover} onMouseOver={handleBtnMouseOver} onMouseLeave={handleBtnMouseLeave} onClick={handleBtnClick}>
+              저장
             </AddBtn>
-            </BottomWrap>
-          </Wrap>
-        )}
+          </BottomWrap>
+        </Wrap>
+      )}
     </>
   );
 };

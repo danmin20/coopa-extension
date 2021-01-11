@@ -23,12 +23,12 @@ const List = ({ dir, cookies, setParkingState }) => {
     const newCookie = cookieState.map((c, idx) =>
       c.id === cookies.id
         ? {
-          ...c,
-          directory: {
-            name: dir.name,
-            id: dir.id
+            ...c,
+            directory: {
+              name: dir.name,
+              id: dir.id
+            }
           }
-        }
         : c
     );
     setCookieState(newCookie);
@@ -222,9 +222,9 @@ const DirList = styled.div`
 `;
 const BottonWrap = styled.div`
   padding: 1.5rem;
-  padding-top:0;
+  padding-top: 0;
   display: flex;
-  align-items:center;
+  align-items: center;
   justify-content: center;
   flex-direction: row;
   .addBtn {
@@ -240,7 +240,7 @@ const BottonWrap = styled.div`
     letter-spacing: -0.02em;
 
     border: 2px solid ${({ theme }) => theme.colors.cookieOrange};
-    width: calc(80/292*100%);
+    width: calc(80 / 292 * 100%);
     height: 4.6rem;
     color: ${({ theme }) => theme.colors.cookieOrange};
     background: white;
@@ -255,12 +255,12 @@ const BottonWrap = styled.div`
     }
   }
   .addInput {
-    width: calc(204/292*100%);
+    width: calc(204 / 292 * 100%);
     height: 4.6rem;
     background: ${({ theme }) => theme.colors.gray_2};
     border-radius: 0.8rem;
-    border:none;
-    margin-right:0.8rem;
+    border: none;
+    margin-right: 0.8rem;
     font-family: Spoqa Han Sans Neo;
     font-weight: bold;
     font-size: 1.4rem;

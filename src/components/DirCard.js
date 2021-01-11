@@ -23,7 +23,7 @@ export default ({ dir }) => {
   const handleBtnMouseLeave = () => {
     setIsHover(false);
   };
-  const handleClickUpdateIcon = (e) => {
+  const handleClickUpdateIcon = e => {
     e.stopPropagation();
     setIsOpen(true);
     e.stopPropagation();
