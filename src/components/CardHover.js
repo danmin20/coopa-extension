@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import React, { useState, useEffect } from 'react';
 import dropdwnImg from '../assets/img/dropdown.svg';
-import { listSelectState } from '../states/atom';
 import { CookieState } from '../states/atom';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { DirState, SearchState } from '../states/atom';
@@ -23,12 +22,12 @@ const List = ({ dir, cookies, setParkingState }) => {
     const newCookie = cookieState.map((c, idx) =>
       c.id === cookies.id
         ? {
-            ...c,
-            directory: {
-              name: dir.name,
-              id: dir.id
-            }
+          ...c,
+          directory: {
+            name: dir.name,
+            id: dir.id
           }
+        }
         : c
     );
     setCookieState(newCookie);
@@ -50,7 +49,7 @@ const List = ({ dir, cookies, setParkingState }) => {
 
   return (
     <ListItem onMouseOver={() => setItemHover(true)} onMouseLeave={() => setItemHover(false)} onClick={ListItemClick}>
-      {dir.name}
+      <div class='item'>{dir.name}</div>
       <ListItemBtn itemHover={itemHover} />
     </ListItem>
   );
@@ -74,6 +73,12 @@ const ListItem = styled.div`
   &:hover {
     background: ${({ theme }) => theme.colors.gray_2};
     border-radius: 0.8rem;
+  }
+  .item{
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 `;
 
@@ -125,21 +130,27 @@ export default ({ cookies, idx, setParkingState }) => {
           drop ? setDrop(false) : setDrop(true);
         }}
       >
-        <div className="dir-sort">{cookies.directory ? cookies.directory.name : '정해진 디렉토리가 없습니다'}</div>
+        <div className="dir-sort">{cookies.directory ? cookies.directory.name : 'All Cookies'}</div>
         <img src={dropdwnImg} style={{ marginLeft: '1.3rem' }} />
       </Directory>
       {drop && (
         <ListWrap>
           <DirList>
             <div className="list-div">
-              <div className="list-sort">모든 디렉토리</div>
+              {/* <div className="list-sort">모든 디렉토리</div> */}
               {dirState.map(dir => (
                 <List dir={dir.directory} key={dir.directory.id} cookies={cookies} setParkingState={setParkingState} />
               ))}
             </div>
           </DirList>
           <BottonWrap>
-            <input className="addInput" placeholder="새 디렉토리 명을 입력하세요" onClick={e => e.stopPropagation()} onChange={inputText.onChange} value={inputText.value} />
+            <input
+              className="addInput"
+              placeholder="새 디렉토리 명을 입력하세요"
+              onClick={e => e.stopPropagation()}
+              onChange={inputText.onChange}
+              value={inputText.value}
+              maxLength={20} />
             <button className="addBtn" onClick={addDirHandler}>
               저장
             </button>
@@ -175,9 +186,10 @@ const Directory = styled.div`
     font-weight: bold;
     font-size: 1.8rem;
     line-height: 2.2rem;
-    display: flex;
-    align-items: center;
-    text-align: center;
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
     letter-spacing: -0.02em;
     color: ${({ theme }) => theme.colors.black_1};
   }
@@ -228,6 +240,7 @@ const BottonWrap = styled.div`
   justify-content: center;
   flex-direction: row;
   .addBtn {
+    cursor: pointer;
     display: flex;
     justify-content: center;
     font-family: Spoqa Han Sans Neo;
@@ -243,7 +256,7 @@ const BottonWrap = styled.div`
     width: calc(80 / 292 * 100%);
     height: 4.6rem;
     color: ${({ theme }) => theme.colors.cookieOrange};
-    background: white;
+    background: ${({ theme }) => theme.colors.white};
     border-radius: 1rem;
     &:hover {
       color: ${({ theme }) => theme.colors.white};
@@ -257,6 +270,7 @@ const BottonWrap = styled.div`
   .addInput {
     width: calc(204 / 292 * 100%);
     height: 4.6rem;
+    padding-left: 1rem;
     background: ${({ theme }) => theme.colors.gray_2};
     border-radius: 0.8rem;
     border: none;
@@ -264,10 +278,13 @@ const BottonWrap = styled.div`
     font-family: Spoqa Han Sans Neo;
     font-weight: bold;
     font-size: 1.4rem;
-    text-align: center;
     color: #b7b7b7;
     &:focus {
       outline: none;
+      ::placeholder{
+        color:transparent;
+      }
     }
+
   }
 `;

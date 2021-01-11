@@ -69,6 +69,7 @@ export default () => {
     setIsHover(false);
   };
 
+
   return (
     <>
       {loading ? (
@@ -88,7 +89,7 @@ export default () => {
           </DirList>
           <Blur />
           <BottomWrap>
-            <SearchInput placeholder={'새 디렉토리 명을 입력하세요'} value={InputText.value} onChange={InputText.onChange} />
+            <SearchInput maxLength={20} placeholder={'새 디렉토리 명을 입력하세요'} value={InputText.value} onChange={InputText.onChange} />
             <AddBtn isHover={isHover} onMouseOver={handleBtnMouseOver} onMouseLeave={handleBtnMouseLeave} onClick={handleBtnClick}>
               저장
             </AddBtn>
@@ -121,6 +122,7 @@ const HeadhWrap = styled.div`
 `;
 
 const BackBtn = styled.div`
+  cursor: pointer;
   width: 4.2rem;
   height: 4.2rem;
   display: flex;
@@ -132,6 +134,7 @@ const BackBtn = styled.div`
 const BackArrow = styled.img``;
 
 const DirItemWrap = styled.div`
+  cursor: pointer;
   width: 28rem;
   height: 4rem;
   padding-left: 1.2rem;
@@ -144,12 +147,14 @@ const DirItemWrap = styled.div`
 `;
 
 const DirItem = styled.div`
+  width: 25rem;
   font-size: 2rem;
   font-weight: 500;
   line-height: 2.4rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 `;
 
 const DirItemHoverCircle = styled.div`
@@ -227,9 +232,15 @@ const SearchInput = styled.input`
     line-height: 1.8rem;
     font-weight: 500;
   }
+  :focus {
+    ::placeholder {
+      color: transparent;
+    }
+  }
 `;
 
 const AddBtn = styled.div`
+  cursor: pointer;
   width: 7.2rem;
   height: 4.6rem;
   border: 0.2rem solid ${({ theme }) => theme.colors.cookieOrange};
@@ -260,7 +271,7 @@ const ReturnDirItems = ({ item, idx }) => {
     // 디렉토리에 데이터 넣기
     chrome.storage.sync.get('cookieId', function (storage) {
       let data = {
-        directoryId: Number(e.target.id),
+        directoryId: idx,
         cookieId: storage.cookieId
       };
       const Response = dirApi.addCookieToDir(token, data);
@@ -279,7 +290,7 @@ const ReturnDirItems = ({ item, idx }) => {
   };
 
   return (
-    <DirItemWrap onClick={handleDirClick} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} isHover={isHover} key={idx} id={idx}>
+    <DirItemWrap onClick={handleDirClick} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} isHover={isHover} key={idx}>
       <DirItem>{item}</DirItem>
       <DirItemHoverCircle isHover={isHover} />
     </DirItemWrap>

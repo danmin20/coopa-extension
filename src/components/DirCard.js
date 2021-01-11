@@ -62,7 +62,7 @@ export default ({ dir }) => {
       {isOpen && <DirFixModal setIsOpen={setIsOpen} setIsDelOpen={setIsDelOpen} dir={dir} />}
       {isDelOpen && <DelCookieModal isDelOpen={isDelOpen} setIsDelOpen={setIsDelOpen} id={dir.directory.id} />}
       {updateDirClick && <ToastMsg msg="디렉토리를 수정했어요!" />}
-      {delToast && <ToastMsg msg="쿠키가 삭제되었어요!" />}
+      {delToast && <ToastMsg msg="디렉토리를 삭제했어요!" />}
     </>
   );
 };
