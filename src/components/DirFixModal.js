@@ -18,17 +18,20 @@ export default ({ setIsOpen, setIsDelOpen, dir }) => {
   const modalInput = useInput(dir.directory.name);
   const [DirCardHover, setDirCardHover] = useRecoilState(DirCardHoverState);
 
-  const handleClick = () => {
+  const handleClick = (e) => {
+    e.stopPropagation();
     setIsClose(true);
   };
 
-  const handleDelClick = () => {
+  const handleDelClick = (e) => {
     // 디렉토리 삭제 모달 띄우기
+    e.stopPropagation();
     setIsClose(true);
     setIsDelOpen(true);
   };
 
-  const handleFixClick = async () => {
+  const handleFixClick = async (e) => {
+    e.stopPropagation();
     const body = {
       name: modalInput.value,
       description: '설명은 없어질 예정'
@@ -75,6 +78,10 @@ export default ({ setIsOpen, setIsDelOpen, dir }) => {
     setIsFixHover(false);
   };
 
+  const handleModalClick = (e) => {
+    e.stopPropagation();
+  }
+
   useEffect(() => {
     isClose && setIsOpen(false);
   }, [isClose]);
@@ -82,7 +89,7 @@ export default ({ setIsOpen, setIsDelOpen, dir }) => {
   return (
     <>
       <Wrap onClick={handleClick} isClose={isClose} />
-      <ModalWrap isClose={isClose}>
+      <ModalWrap isClose={isClose} onClick={handleModalClick}>
         <Text>디렉토리 수정하기</Text>
         <DetailWrap>
           <SmallText>디렉토리 이름</SmallText>
