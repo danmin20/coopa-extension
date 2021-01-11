@@ -71,12 +71,10 @@ export default ({ setIsOpenCreateDir }) => {
         </DetailWrap>
         <InputBox value={modalInput.value} maxLength={20} type="text" onChange={modalInput.onChange} />
         <BtnWrap>
-          <Space width={'28.6rem'} />
           <Btn isHover={isCancleHover} onClick={handleClick} onMouseLeave={handleCancleMouseLeave} onMouseMove={handleCancleMouseMove}>
             취소
           </Btn>
-          <Space width={'1.5rem'} />
-          <Btn isHover={isFixHover} onClick={handleFixClick} onMouseLeave={handleFixMouseLeave} onMouseMove={handleFixMouseMove}>
+          <Btn style={{ marginLeft: '1.5rem' }} isHover={isFixHover} onClick={handleFixClick} onMouseLeave={handleFixMouseLeave} onMouseMove={handleFixMouseMove}>
             생성
           </Btn>
         </BtnWrap>
@@ -95,15 +93,17 @@ const Wrap = styled.div`
   background: rgba(0, 0, 0, 0.5);
   display: ${props => (props.isClose ? 'none' : 'box')};
   flex-direction: column;
+  color: ${({ theme }) => theme.colors.black_1};
 `;
 
 const ModalWrap = styled.div`
+  box-sizing: border-box;
   width: 65rem;
   height: 31.5rem;
   padding: 4.2rem 3.8rem;
   position: fixed;
   z-index: 300;
-  background: #ffffff;
+  background: ${({ theme }) => theme.colors.white};
   border-radius: 1.4rem;
   left: 50%;
   top: 50%;
@@ -116,7 +116,7 @@ const Text = styled.div`
   font-size: 2.8rem;
   font-weight: 500;
   line-height: 3.6rem;
-  color: #333333;
+  color: ${({ theme }) => theme.colors.black_1};
   margin-bottom: 1.5rem;
 `;
 
@@ -130,32 +130,31 @@ const SmallText = styled.div`
   font-size: 1.6rem;
   font-weight: 400;
   line-height: 3.6rem;
-  color: #333333;
+  color: ${({ theme }) => theme.colors.black_1};
   margin-bottom: 0.6rem;
 `;
 
 const InputBox = styled.input`
+  box-sizing: border-box;
   width: 57.3rem;
   height: 5.2rem;
   padding: 0.8rem 2.3rem;
-  border: 0.1rem solid #333333;
+  border: 0.1rem solid ${({ theme }) => theme.colors.black_1};
   border-radius: 1.2rem;
   font-size: 2rem;
   font-weight: 400;
   outline: none;
   margin-bottom: 3.4rem;
-  color: #333333;
+  color: ${({ theme }) => theme.colors.black_1};
 `;
 
 const BtnWrap = styled.div`
-  cursor: pointer;
-  width: 57.2rem;
   display: flex;
-  flex-direction: row;
   justify-content: flex-end;
 `;
 
 const Btn = styled.div`
+  cursor: pointer;
   width: 9.8rem;
   height: 5.2rem;
   background: ${props => (props.isHover ? '#FF7134' : '#F3F3F4')};
@@ -169,9 +168,3 @@ const Btn = styled.div`
   align-items: center;
   justify-content: center;
 `;
-
-const Space = styled.div`
-  width: ${props => props.width};
-`;
-
-// 디렉토리 만들기 모달 -> 디렉토리가 생성되었습니다.

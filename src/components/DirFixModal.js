@@ -127,6 +127,7 @@ const Wrap = styled.div`
 `;
 
 const ModalWrap = styled.div`
+  box-sizing: border-box;
   width: 65rem;
   height: 31.5rem;
   padding: 4.2rem 3.8rem;
@@ -145,7 +146,7 @@ const Text = styled.div`
   font-size: 2.8rem;
   font-weight: 500;
   line-height: 3.6rem;
-  color: #333333;
+  color: ${({ theme }) => theme.colors.black_1};
   margin-bottom: 1.5rem;
 `;
 
@@ -159,21 +160,22 @@ const SmallText = styled.div`
   font-size: 1.6rem;
   font-weight: 400;
   line-height: 3.6rem;
-  color: #333333;
+  color: ${({ theme }) => theme.colors.black_1};
   margin-bottom: 0.6rem;
 `;
 
 const InputBox = styled.input`
+  box-sizing: border-box;
   width: 57.3rem;
   height: 5.2rem;
   padding: 0.8rem 2.3rem;
-  border: 0.1rem solid #333333;
+  border: 0.1rem solid ${({ theme }) => theme.colors.black_1};
   border-radius: 1.2rem;
   font-size: 2rem;
   font-weight: 400;
   outline: none;
   margin-bottom: 3.4rem;
-  color: #333333;
+  color: ${({ theme }) => theme.colors.black_1};
 `;
 
 const BtnWrap = styled.div`
@@ -184,6 +186,7 @@ const BtnWrap = styled.div`
 `;
 
 const Btn = styled.div`
+  cursor: pointer;
   width: 9.8rem;
   height: 5.2rem;
   background: ${props => (props.isHover ? '#FF7134' : '#F3F3F4')};

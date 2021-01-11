@@ -71,9 +71,9 @@ const ListItem = styled.div`
   margin-right: 1.1rem;
   max-width: 26.8rem;
 
-  color: #333333;
+  color: ${({ theme }) => theme.colors.black_1};
   &:hover {
-    background: #f3f3f3;
+    background: ${({ theme }) => theme.colors.gray_2};
     border-radius: 0.8rem;
   }
 `;
@@ -83,11 +83,11 @@ const ListItemBtn = styled.div`
   width: 1.4rem;
   height: 1.4rem;
   border-radius: 50%;
-  background: #ff7034;
+  background: ${({ theme }) => theme.colors.cookieOrange};
 `;
 
 export default ({ cookies, idx, setParkingState }) => {
-  const items = ['디자인', '마케팅', '프로그래밍', '기획', '쿠키파킹', '사랑해'];
+  // const items = ['디자인', '마케팅', '프로그래밍', '기획', '쿠키파킹', '사랑해'];
   const [drop, setDrop] = useState(false);
   const [dirState, setDirState] = useRecoilState(DirState);
   const inputText = useInput('');
@@ -165,8 +165,8 @@ const Directory = styled.div`
   height: 5.7rem;
   margin-bottom: 0;
   background: rgba(255, 255, 255, 0.95);
-  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.35);
-  border-radius: 10px;
+  box-shadow: 0rem 0rem 3rem rgba(0, 0, 0, 0.35);
+  border-radius: 1rem;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -181,7 +181,7 @@ const Directory = styled.div`
     align-items: center;
     text-align: center;
     letter-spacing: -0.02em;
-    color: #333333;
+    color: ${({ theme }) => theme.colors.black_1};
   }
 `;
 
@@ -191,7 +191,7 @@ const ListWrap = styled.div`
   border-radius: 1.2rem;
   margin-top: 1.6rem;
   padding-top: 1.9rem;
-  background: #ffffff;
+  background: ${({ theme }) => theme.colors.white};
   box-shadow: 0px 0.2rem 2rem rgba(0, 0, 0, 0.2);
 `;
 
@@ -245,15 +245,15 @@ const BottonWrap = styled.div`
     text-align: center;
     letter-spacing: -0.02em;
 
-    border: 2px solid #ff7034;
+    border: 2px solid ${({ theme }) => theme.colors.cookieOrange};
     width: 7.6rem;
     height: 4.6rem;
-    color: #ff7034;
+    color: ${({ theme }) => theme.colors.cookieOrange};
     background: white;
     border-radius: 1rem;
     &:hover {
-      color: white;
-      background: #ff7034;
+      color: ${({ theme }) => theme.colors.white};
+      background: ${({ theme }) => theme.colors.cookieOrange};
       border: none;
     }
     &:focus {
@@ -263,7 +263,7 @@ const BottonWrap = styled.div`
   .addInput {
     width: 20.4rem;
     height: 4.6rem;
-    background: #f3f3f3;
+    background: ${({ theme }) => theme.colors.gray_2};
     border-radius: 0.8rem;
     margin-right: 0.8rem;
     font-family: Spoqa Han Sans Neo;
