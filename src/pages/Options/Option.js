@@ -8,6 +8,7 @@ import { useRecoilState } from 'recoil';
 export default () => {
   const [toggleState, setToggleState] = useRecoilState(NewTabToggleState);
   const handleToggle = e => {
+    console.log('토글 상태', e.target.checked);
     if (!e.target.checked) {
       chrome.storage.sync.set({ defaultnewtab: true });
     } else {
