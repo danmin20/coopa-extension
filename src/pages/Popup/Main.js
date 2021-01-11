@@ -78,7 +78,7 @@ export default () => {
           <BtnOneWrap>
             <BtnOneText isHover={isBtnOneHover}>디렉토리 선택</BtnOneText>
             <BtnOneArrow src={down_arrow} isHover={isBtnOneHover} />
-            <BtnOneArrowHover src={down_arrow_white} isHover={isBtnOneHover} />
+            {/* <BtnOneArrowHover src={down_arrow_white} isHover={isBtnOneHover} /> */}
           </BtnOneWrap>
         </BtnOne>
         <BtnTwo onMouseOver={handleBtnTwoMouseOver} onMouseLeave={handleBtnTwoMouseLeave} onClick={handleBtnTwoClick} isHover={isBtnTwoHover}>
@@ -133,13 +133,15 @@ const BtnOne = styled.div`
   border-radius: 1.2rem;
   width: 32.2rem;
   height: 5.2rem;
-  background-color: ${props => (props.isHover ? '#FF7134' : '#ffffff')};
+  /* background-color: ${props => (props.isHover ? '#FF7134' : '#ffffff')}; */
+  background: ${({ theme }) => theme.colors.white};
   box-shadow: 0rem 0rem 1.2rem rgba(0, 0, 0, 0.13);
   margin-top: 1.6rem;
   transition-duration: 0.5s;
 `;
 
 const BtnOneWrap = styled.div`
+  cursor: pointer;
   width: 28.9rem;
   height: 4.5rem;
   display: flex;
@@ -151,28 +153,29 @@ const BtnOneWrap = styled.div`
 const BtnOneText = styled.div`
   font-weight: 500;
   font-size: 1.6rem;
-  color: ${props => (props.isHover ? ({ theme }) => theme.colors.white : ({ theme }) => theme.colors.black_2)};
+  color: ${({ theme }) => theme.colors.black_2};
   font-weight: 500;
   transition-duration: 0.2s;
 `;
 
 const BtnOneArrow = styled.img`
-  display: ${props => (props.isHover ? 'none' : 'box')};
+  /* display: ${props => (props.isHover ? 'none' : 'box')}; */
   width: 1.6rem;
   height: 0.988rem;
   position: relative;
   right: -28%;
 `;
 
-const BtnOneArrowHover = styled.img`
-  display: ${props => (props.isHover ? 'box' : 'none')};
-  width: 1.6rem;
-  height: 0.988rem;
-  position: relative;
-  right: -28%;
-`;
+// const BtnOneArrowHover = styled.img`
+//   display: ${props => (props.isHover ? 'box' : 'none')};
+//   width: 1.6rem;
+//   height: 0.988rem;
+//   position: relative;
+//   right: -28%;
+// `;
 
 const BtnTwo = styled.div`
+  cursor: pointer;
   display: flex;
   flex-direction: row;
   align-items: center;
