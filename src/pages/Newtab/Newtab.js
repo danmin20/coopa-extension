@@ -60,7 +60,7 @@ export default () => {
                   ?
                 </div>
                 <div className="toggle__title">안 읽은 쿠키 모아보기</div>
-                <span style={{ marginLeft: '15px' }}>
+                <span style={{ marginLeft: '1.5rem' }}>
                   <Switch onChange={onToggleSwitch} />
                 </span>
               </div>
