@@ -153,17 +153,15 @@ export default ({ cookies, idx, setParkingState }) => {
 const HoverPage = styled.div`
   display: flex;
   flex-direction: column;
-  top: 0rem;
   position: absolute;
+  top: 0;
   z-index: 20;
   width: 100%;
-  padding: 1.5rem;
 `;
 const Directory = styled.div`
-  position:relative;
-  width: 100%;
-  padding: 1.9rem;
+  margin: 2rem;
   margin-bottom: 0;
+  padding: 1.9rem;
   background: rgba(255, 255, 255, 0.95);
   box-shadow: 0rem 0rem 3rem rgba(0, 0, 0, 0.35);
   border-radius: 1rem;
@@ -186,20 +184,14 @@ const Directory = styled.div`
 `;
 
 const ListWrap = styled.div`
-  width: 100%;
   border-radius: 1.2rem;
-  margin-top: 1.6rem;
-  padding-top: 1.9rem;
+  margin: 2rem;
   background: ${({ theme }) => theme.colors.white};
   box-shadow: 0px 0.2rem 2rem rgba(0, 0, 0, 0.2);
 `;
 
 const DirList = styled.div`
-  position: absolute;
-  top:calc(94/439*100%);
-  margin-top: 1.2rem;
-  width: calc(290/320*100%);
-  padding-left: 1.8rem;
+  padding: 1.5rem;
   .list-sort {
     margin: 1.4rem;
     font-family: Spoqa Han Sans Neo;
@@ -224,13 +216,13 @@ const DirList = styled.div`
     ::-webkit-scrollbar-thumb:hover {
       background: #f1f1f1;
     }
-    width: 95%;
     max-height: 26rem;
     overflow: auto;
   }
 `;
 const BottonWrap = styled.div`
-  padding: 1.8rem;
+  padding: 1.5rem;
+  padding-top:0;
   display: flex;
   align-items:center;
   justify-content: center;
@@ -248,7 +240,7 @@ const BottonWrap = styled.div`
     letter-spacing: -0.02em;
 
     border: 2px solid ${({ theme }) => theme.colors.cookieOrange};
-    width: 7.6rem;
+    width: calc(80/292*100%);
     height: 4.6rem;
     color: ${({ theme }) => theme.colors.cookieOrange};
     background: white;
@@ -263,10 +255,11 @@ const BottonWrap = styled.div`
     }
   }
   .addInput {
-    width: calc(204/320*100%);
+    width: calc(204/292*100%);
     height: 4.6rem;
     background: ${({ theme }) => theme.colors.gray_2};
     border-radius: 0.8rem;
+    border:none;
     margin-right:0.8rem;
     font-family: Spoqa Han Sans Neo;
     font-weight: bold;
