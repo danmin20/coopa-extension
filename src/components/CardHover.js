@@ -49,7 +49,7 @@ const List = ({ dir, cookies, setParkingState }) => {
 
   return (
     <ListItem onMouseOver={() => setItemHover(true)} onMouseLeave={() => setItemHover(false)} onClick={ListItemClick}>
-      {dir.name}
+      <div class='item'>{dir.name}</div>
       <ListItemBtn itemHover={itemHover} />
     </ListItem>
   );
@@ -73,6 +73,12 @@ const ListItem = styled.div`
   &:hover {
     background: ${({ theme }) => theme.colors.gray_2};
     border-radius: 0.8rem;
+  }
+  .item{
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 `;
 
@@ -138,7 +144,13 @@ export default ({ cookies, idx, setParkingState }) => {
             </div>
           </DirList>
           <BottonWrap>
-            <input className="addInput" placeholder="새 디렉토리 명을 입력하세요" onClick={e => e.stopPropagation()} onChange={inputText.onChange} value={inputText.value} />
+            <input
+              className="addInput"
+              placeholder="새 디렉토리 명을 입력하세요"
+              onClick={e => e.stopPropagation()}
+              onChange={inputText.onChange}
+              value={inputText.value}
+              maxLength={20} />
             <button className="addBtn" onClick={addDirHandler}>
               저장
             </button>
@@ -257,6 +269,7 @@ const BottonWrap = styled.div`
   .addInput {
     width: calc(204 / 292 * 100%);
     height: 4.6rem;
+    padding-left: 1rem;
     background: ${({ theme }) => theme.colors.gray_2};
     border-radius: 0.8rem;
     border: none;
@@ -264,7 +277,6 @@ const BottonWrap = styled.div`
     font-family: Spoqa Han Sans Neo;
     font-weight: bold;
     font-size: 1.4rem;
-    text-align: center;
     color: #b7b7b7;
     &:focus {
       outline: none;
