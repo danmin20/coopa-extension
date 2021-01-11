@@ -47,7 +47,8 @@ const HomeBoard = styled.div`
   align-items: center;
   .search-bar {
     position: relative;
-    width: 65.6rem;
+    /* width: 65.6rem; 10px일때 크기*/
+    width: 93rem;
     height: 7rem;
     background-color: ${({ theme }) => theme.colors.white};
     ${props =>
@@ -55,16 +56,21 @@ const HomeBoard = styled.div`
       css`
         background-color: ${({ theme }) => theme.colors.homeBoardGray};
       `}
-    border-radius: 1rem;
+    /* border-radius: 1rem; 10px일때 크기*/
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
     &__icon {
       position: absolute;
-      left: 2.2rem;
+      left: 4rem;
+      width: 2.8rem;
+      height: 2.8rem;
     }
     &__input {
-      width: 40rem;
+      /* width: 40rem; 10px일때 크기*/
+      margin-left: 6rem;
+      width: 80rem;
       max-height: 100%;
       border: none;
       outline: none;
@@ -73,10 +79,11 @@ const HomeBoard = styled.div`
         css`
           background-color: ${({ theme }) => theme.colors.homeBoardGray};
         `}
-      text-align: center;
+      /* text-align: center; */
       font-size: 2.6rem;
       ::placeholder {
         color: #818181;
+        text-align: center;
       }
       :focus {
         ::placeholder {
