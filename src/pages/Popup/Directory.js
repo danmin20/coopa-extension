@@ -69,6 +69,7 @@ export default () => {
     setIsHover(false);
   };
 
+
   return (
     <>
       {loading ? (
@@ -270,7 +271,7 @@ const ReturnDirItems = ({ item, idx }) => {
     // 디렉토리에 데이터 넣기
     chrome.storage.sync.get('cookieId', function (storage) {
       let data = {
-        directoryId: Number(e.target.id),
+        directoryId: idx,
         cookieId: storage.cookieId
       };
       const Response = dirApi.addCookieToDir(token, data);
@@ -289,7 +290,7 @@ const ReturnDirItems = ({ item, idx }) => {
   };
 
   return (
-    <DirItemWrap onClick={handleDirClick} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} isHover={isHover} key={idx} id={idx}>
+    <DirItemWrap onClick={handleDirClick} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} isHover={isHover} key={idx}>
       <DirItem>{item}</DirItem>
       <DirItemHoverCircle isHover={isHover} />
     </DirItemWrap>
