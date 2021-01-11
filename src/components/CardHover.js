@@ -23,12 +23,12 @@ const List = ({ dir, cookies, setParkingState }) => {
     const newCookie = cookieState.map((c, idx) =>
       c.id === cookies.id
         ? {
-            ...c,
-            directory: {
-              name: dir.name,
-              id: dir.id
-            }
+          ...c,
+          directory: {
+            name: dir.name,
+            id: dir.id
           }
+        }
         : c
     );
     setCookieState(newCookie);
@@ -68,7 +68,6 @@ const ListItem = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 0.7rem;
-  margin-right: 1.1rem;
   max-width: 26.8rem;
 
   color: ${({ theme }) => theme.colors.black_1};
@@ -156,13 +155,14 @@ const HoverPage = styled.div`
   flex-direction: column;
   top: 0rem;
   position: absolute;
-  z-index: 10;
+  z-index: 20;
   width: 100%;
   padding: 1.5rem;
 `;
 const Directory = styled.div`
+  position:relative;
   width: 100%;
-  height: 5.7rem;
+  padding: 1.9rem;
   margin-bottom: 0;
   background: rgba(255, 255, 255, 0.95);
   box-shadow: 0rem 0rem 3rem rgba(0, 0, 0, 0.35);
@@ -187,7 +187,6 @@ const Directory = styled.div`
 
 const ListWrap = styled.div`
   width: 100%;
-  height: 37rem;
   border-radius: 1.2rem;
   margin-top: 1.6rem;
   padding-top: 1.9rem;
@@ -196,9 +195,10 @@ const ListWrap = styled.div`
 `;
 
 const DirList = styled.div`
+  position: absolute;
+  top:calc(94/439*100%);
   margin-top: 1.2rem;
-  min-height: 25.9rem;
-  max-width: 100%;
+  width: calc(290/320*100%);
   padding-left: 1.8rem;
   .list-sort {
     margin: 1.4rem;
@@ -225,13 +225,15 @@ const DirList = styled.div`
       background: #f1f1f1;
     }
     width: 95%;
-    max-height: 25.9rem;
+    max-height: 26rem;
     overflow: auto;
   }
 `;
 const BottonWrap = styled.div`
   padding: 1.8rem;
   display: flex;
+  align-items:center;
+  justify-content: center;
   flex-direction: row;
   .addBtn {
     display: flex;
@@ -261,11 +263,11 @@ const BottonWrap = styled.div`
     }
   }
   .addInput {
-    width: 20.4rem;
+    width: calc(204/320*100%);
     height: 4.6rem;
     background: ${({ theme }) => theme.colors.gray_2};
     border-radius: 0.8rem;
-    margin-right: 0.8rem;
+    margin-right:0.8rem;
     font-family: Spoqa Han Sans Neo;
     font-weight: bold;
     font-size: 1.4rem;
