@@ -2,11 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import Logo from '../assets/img/logo_main.svg';
 import Profile from '../assets/img/profile.svg';
-import theme from '../assets/themes';
 import { useSetRecoilState } from 'recoil';
 import { SearchState, SelectState } from '../states/atom';
 
-export default ({ setIsSelected, isSearched, setIsSearched, scrollTop }) => {
+export default ({ isSearched, setIsSearched }) => {
   const setSelectState = useSetRecoilState(SelectState);
   const setSearchState = useSetRecoilState(SearchState);
   const handleRefresh = () => {
@@ -19,10 +18,10 @@ export default ({ setIsSelected, isSearched, setIsSearched, scrollTop }) => {
   return (
     <Header isSearched={isSearched}>
       <div className="main-logo" onClick={handleRefresh}>
-        <img className="main-logo__img" src={Logo} />
+        <img style={{ width: '20.2rem', height: '3.8rem' }} className="main-logo__img" src={Logo} />
       </div>
       <a className="profile" href="#">
-        <img className="profile__img" src={Profile} /> {/* Todo : mypage link 걸기 */}
+        <img style={{ width: '3.6rem', height: '3.6rem' }} className="profile__img" src={Profile} /> {/* Todo : mypage link 걸기 */}
       </a>
     </Header>
   );
@@ -34,7 +33,7 @@ const Header = styled.div`
   top: 0;
   width: 100%;
   height: 6.5rem;
-  background-color: ${theme.colors.black};
+  background-color: ${({ theme }) => theme.colors.black};
   display: flex;
   justify-content: space-between;
   align-items: center;

@@ -44,11 +44,18 @@ export default ({ isSearched, isToggled }) => {
       {loading ? (
         <Loading />
       ) : (
-        <Container>
-          {cookieState.map((cookie, index) => (
-            <Card cookies={cookie} key={index} idx={cookie.id} />
-          ))}
-        </Container>
+        <>
+          {isSearched && (
+            <CookieNum>
+              <span>&nbsp;{cookieState.length}개의</span> 쿠키
+            </CookieNum>
+          )}
+          <Container>
+            {cookieState.map((cookie, index) => (
+              <Card cookies={cookie} key={index} idx={cookie.id} />
+            ))}
+          </Container>
+        </>
       )}
     </>
   );
@@ -56,9 +63,20 @@ export default ({ isSearched, isToggled }) => {
 
 const Container = styled.div`
   max-width: 100vw;
-  margin-top: 5.2rem;
+  margin-top: 3.4rem;
   margin-bottom: 3.5rem;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(32rem, auto));
   grid-gap: 3.2rem;
+`;
+
+const CookieNum = styled.div`
+  margin-top: 5rem;
+  font-size: 2.8rem;
+  line-height: 2.6rem;
+  color: ${({ theme }) => theme.colors.gray_5};
+  span {
+    font-weight: 500;
+    color: ${({ theme }) => theme.colors.cookieOrange};
+  }
 `;

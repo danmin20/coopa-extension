@@ -1,7 +1,7 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Switch from '@material-ui/core/Switch';
-import { default as chakraTheme } from '../assets/themes';
+import { default as styledTheme } from '../assets/themes';
 
 export default withStyles(theme => ({
   root: {
@@ -14,7 +14,7 @@ export default withStyles(theme => ({
     '&$checked': {
       transform: 'translateX(20px)',
       '& + $track': {
-        backgroundColor: chakraTheme.colors.orange,
+        backgroundColor: styledTheme.colors.cookieOrange,
         opacity: 1,
         border: 'none'
       }
@@ -29,7 +29,7 @@ export default withStyles(theme => ({
   },
   track: {
     borderRadius: 39 / 2,
-    backgroundColor: '#dddddd',
+    backgroundColor: styledTheme.colors.gray_3,
     opacity: 1,
     transition: theme.transitions.create(['background-color', 'border'])
   },

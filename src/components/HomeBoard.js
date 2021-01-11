@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
 import homebrdIconSearch from '../assets/img/homebrd_icn_search.svg';
-import theme from '../assets/themes';
 import useInput from '../hooks/useInput';
 import { useSetRecoilState } from 'recoil';
 import { SearchState } from '../states/atom';
@@ -32,14 +31,14 @@ const HomeBoard = styled.div`
   width: 100%;
   padding: 11rem 0;
   margin-top: 6.5rem;
-  background-color: ${theme.colors.homeBoardGray};
+  background-color: ${({ theme }) => theme.colors.homeBoardGray};
   ${props =>
     props.isSearched &&
     css`
       position: fixed;
       z-index: 100;
       top: 0;
-      background-color: ${theme.colors.white};
+      background-color: ${({ theme }) => theme.colors.white};
       /* box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.12); */
       padding: 4rem 0;
     `}
@@ -50,11 +49,11 @@ const HomeBoard = styled.div`
     position: relative;
     width: 65.6rem;
     height: 7rem;
-    background-color: ${theme.colors.white};
+    background-color: ${({ theme }) => theme.colors.white};
     ${props =>
       props.isSearched &&
       css`
-        background-color: ${theme.colors.homeBoardGray};
+        background-color: ${({ theme }) => theme.colors.homeBoardGray};
       `}
     border-radius: 1rem;
     display: flex;
@@ -72,7 +71,7 @@ const HomeBoard = styled.div`
       ${props =>
         props.isSearched &&
         css`
-          background-color: ${theme.colors.homeBoardGray};
+          background-color: ${({ theme }) => theme.colors.homeBoardGray};
         `}
       text-align: center;
       font-size: 2.6rem;

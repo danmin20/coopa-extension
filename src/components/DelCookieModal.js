@@ -98,12 +98,13 @@ const Wrap = styled.div`
 `;
 
 const ModalWrap = styled.div`
+  box-sizing: border-box;
   width: 55rem;
   height: 24.9rem;
   padding: 4.2rem 3.8rem;
   position: fixed;
   z-index: 300;
-  background: #ffffff;
+  background: ${({ theme }) => theme.colors.white};
   border-radius: 1.4rem;
   left: 50%;
   top: 50%;
@@ -116,7 +117,7 @@ const Text = styled.div`
   font-size: 2.8rem;
   font-weight: 500;
   line-height: 3.6rem;
-  color: #333333;
+  color: ${({ theme }) => theme.colors.black_1};
   margin-bottom: 1rem;
 `;
 
@@ -124,7 +125,7 @@ const SmallText = styled.div`
   font-size: 2rem;
   font-weight: normal;
   line-height: 3.6rem;
-  color: #333333;
+  color: ${({ theme }) => theme.colors.black_1};
   margin-bottom: 3.1rem;
 `;
 
@@ -139,8 +140,8 @@ const Btn = styled.div`
   cursor: pointer;
   width: 9.8rem;
   height: 5.2rem;
-  background: ${props => (props.isHover ? '#FF7134' : '#F3F3F4')};
-  color: ${props => (props.isHover ? 'white' : '#404040')};
+  background: ${props => (props.isHover ? ({ theme }) => theme.colors.cookieOrange : ({ theme }) => theme.colors.gray_2)};
+  color: ${props => (props.isHover ? ({ theme }) => theme.colors.white : '#404040')};
   border-radius: 1rem;
   font-style: normal;
   font-weight: 500;

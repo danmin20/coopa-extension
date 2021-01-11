@@ -87,8 +87,8 @@ export default () => {
 const PopupHelp = styled.img`
   display: ${props => (props.isHover ? 'block' : 'none')};
   position: absolute;
-  top: -150%;
-  right: 6.35%;
+  top: -10rem;
+  right: 33.75rem;
 `;
 
 const Contents = styled.div`
@@ -102,7 +102,7 @@ const ContentsHeader = styled.div`
   padding: 0 19.7rem;
   position: relative;
   z-index: 50;
-  background-color: white;
+  background-color: ${({ theme }) => theme.colors.white};
   ${props =>
     props.isSearched &&
     css`
@@ -114,20 +114,21 @@ const ContentsHeader = styled.div`
     align-items: center;
     &__help {
       cursor: pointer;
+      font-family: 'Poppins', sans-serif;
       width: 2.8rem;
       height: 2.8rem;
-      background: ${theme.colors.mediumGray};
+      background: ${({ theme }) => theme.colors.gray_4};
       border-radius: 2.8rem;
       display: flex;
       justify-content: center;
       align-items: center;
-      color: ${theme.colors.white};
+      color: ${({ theme }) => theme.colors.white};
       font-size: 1.6rem;
       font-weight: 500;
     }
     &__title {
       font-size: 2rem;
-      color: #404040;
+      color: ${({ theme }) => theme.colors.gray_5};
       margin-left: 0.8rem;
     }
   }
@@ -138,7 +139,7 @@ const ContentsHeader = styled.div`
     align-items: center;
     &__desc {
       margin-left: 1.7rem;
-      color: ${theme.colors.orange};
+      color: ${({ theme }) => theme.colors.cookieOrange};
       font-size: 2.4rem;
       font-weight: 500;
     }
@@ -147,20 +148,21 @@ const ContentsHeader = styled.div`
 
 const TabBtn = styled.div`
   cursor: pointer;
-  color: ${theme.colors.lightGray};
-  border-bottom: 0.4rem solid ${theme.colors.white};
+  font-family: 'Poppins', sans-serif;
+  color: ${({ theme }) => theme.colors.gray_4};
+  border-bottom: 0.4rem solid ${({ theme }) => theme.colors.white};
   ${props =>
     props.selectState &&
     css`
-      color: ${theme.colors.orange};
-      border-bottom: 0.4rem solid ${theme.colors.orange};
+      color: ${({ theme }) => theme.colors.cookieOrange};
+      border-bottom: 0.4rem solid ${({ theme }) => theme.colors.cookieOrange};
     `}
   font-size: 2.8rem;
   font-weight: 600;
   line-height: 4.2rem;
   padding: 1.5rem;
   :hover {
-    color: ${theme.colors.orange};
+    color: ${({ theme }) => theme.colors.cookieOrange};
   }
 `;
 

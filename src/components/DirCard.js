@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
-import theme from '../assets/themes';
 import cookieIcon from '../assets/img/cookie_icon.svg';
 import cookieIconW from '../assets/img/cookie_icon_white.svg';
 import updateDirIcon from '../assets/img/update_dir_icon.svg';
@@ -24,8 +23,10 @@ export default ({ dir }) => {
   const handleBtnMouseLeave = () => {
     setIsHover(false);
   };
-  const handleClickUpdateIcon = () => {
+  const handleClickUpdateIcon = (e) => {
+    e.stopPropagation();
     setIsOpen(true);
+    e.stopPropagation();
   };
 
   useEffect(
@@ -47,22 +48,22 @@ export default ({ dir }) => {
   };
 
   return (
-    <Container onClick={() => handleDirClick(dir.directory.id)} isHover={isHover} onMouseEnter={handleBtnMouseOver} onMouseLeave={handleBtnMouseLeave}>
-      <DirectoryCard thumbnail={dir.thumbnail}>
+    <>
+      <Container thumbnail={dir.thumbnail} isHover={isHover} onMouseEnter={handleBtnMouseOver} onMouseLeave={handleBtnMouseLeave}>
         <div className="content">
-          <div className="content__title">{dir.directory.name.length < 13 ? dir.directory.name : dir.directory.name.slice(0, 12) + '...'}</div>
+          <div className="content__title">{dir.directory.name}</div>
           <div className="content__num">
             <CookieIcon isHover={isHover} onMouseOver={handleBtnMouseOver} onMouseLeave={handleBtnMouseOver} />
             <div>{dir.directory.cookieCnt}개</div>
           </div>
         </div>
-      </DirectoryCard>
-      <UpdateIcon src={updateDirIcon} onMouseOver={handleBtnMouseOver} onMouseLeave={handleBtnMouseOver} isHover={isHover} onClick={handleClickUpdateIcon} />
+        <UpdateIcon src={updateDirIcon} onMouseOver={handleBtnMouseOver} onMouseLeave={handleBtnMouseOver} isHover={isHover} onClick={handleClickUpdateIcon} />
+      </Container>
       {isOpen && <DirFixModal setIsOpen={setIsOpen} setIsDelOpen={setIsDelOpen} dir={dir} />}
-      {updateDirClick && <ToastMsg msg="디렉토리를 수정했어요!" />}
       {isDelOpen && <DelCookieModal isDelOpen={isDelOpen} setIsDelOpen={setIsDelOpen} id={dir.directory.id} />}
+      {updateDirClick && <ToastMsg msg="디렉토리를 수정했어요!" />}
       {delToast && <ToastMsg msg="쿠키가 삭제되었어요!" />}
-    </Container>
+    </>
   );
 };
 
@@ -75,51 +76,49 @@ const CookieIcon = styled.div`
 
 const Container = styled.div`
   cursor: pointer;
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 0;
   padding-top: calc(160 / 360 * 100%);
-  background-color: #f3f3f3;
+  background-color: ${({ theme }) => theme.colors.gray_2};
   border-radius: 1.2rem;
-  color: ${theme.colors.black};
+  color: ${({ theme }) => theme.colors.black_2};
+  z-index: 1;
   ${props =>
     props.isHover &&
     css`
       background: rgba(0, 0, 0, 0.7);
-      color: ${theme.colors.white};
+      color: ${({ theme }) => theme.colors.white};
     `}
-`;
-
-const DirectoryCard = styled.div`
-  position: relative;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  height: 0;
-  padding-bottom: calc(160 / 360 * 100%);
-  border-radius: 1.2rem;
-  ::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    background: url(${props => props.thumbnail}) center center/ cover no-repeat;
-    border-radius: 1.2rem;
-    opacity: 0.85;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: -1;
-  }
+  ${props =>
+    props.thumbnail !== null &&
+    css`
+      ::after {
+        content: '';
+        display: block;
+        position: absolute;
+        border-radius: 1.2rem;
+        top: 0;
+        left: 0;
+        background: url(${props => props.thumbnail}) center center / cover no-repeat;
+        width: 100%;
+        height: 100%;
+        opacity: 0.15;
+        z-index: -1;
+      }
+    `}
   .content {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    font-size: 2.4rem;
     font-weight: 500;
+    line-height: 3.6rem;
+    letter-spacing: -0.02em;
     &__title {
       white-space: pre;
       font-size: 2.4rem;
@@ -139,9 +138,9 @@ const DirectoryCard = styled.div`
 
 const UpdateIcon = styled.img`
   display: ${props => (props.isHover ? 'block' : 'none')};
-  position: relative;
-  bottom: 4rem;
+  position: absolute;
   right: 2rem;
+  bottom: 2rem;
   width: 3rem;
   height: 3rem;
 `;
