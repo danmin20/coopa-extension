@@ -21,12 +21,12 @@ const List = ({ dir, cookies, setParkingState }) => {
     const newCookie = cookieState.map((c, idx) =>
       c.id === cookies.id
         ? {
-            ...c,
-            directory: {
-              name: dir.name,
-              id: dir.id
-            }
+          ...c,
+          directory: {
+            name: dir.name,
+            id: dir.id
           }
+        }
         : c
     );
     setCookieState(newCookie);
@@ -266,5 +266,6 @@ const BottonWrap = styled.div`
         color: transparent;
       }
     }
+
   }
 `;
