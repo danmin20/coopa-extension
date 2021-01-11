@@ -51,7 +51,7 @@ export default ({ dir }) => {
     <>
       <Container thumbnail={dir.thumbnail} isHover={isHover} onMouseEnter={handleBtnMouseOver} onMouseLeave={handleBtnMouseLeave}>
         <div className="content">
-          <div className="content__title">{dir.directory.name}</div>
+          <div className="content__title">{dir.directory.name.length < 13 ? dir.directory.name : dir.directory.name.slice(0, 12) + '...'}</div>
           <div className="content__num">
             <CookieIcon isHover={isHover} onMouseOver={handleBtnMouseOver} onMouseLeave={handleBtnMouseOver} />
             <div>{dir.directory.cookieCnt}개</div>

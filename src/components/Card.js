@@ -143,8 +143,10 @@ const Contents = styled.div`
     border-radius: 1.2rem;
   }
   .title {
+    color: ${({ theme }) => theme.colors.black_1};
+    line-height: 3.6rem;
     font-size: 2.4rem;
-    font-weight: 500;
+    font-weight: bold;
     margin-top: 2.8rem;
     margin-left: 1rem;
     margin-bottom: 1.8rem;
@@ -157,6 +159,7 @@ const Contents = styled.div`
   }
 
   .content {
+    line-height: 2.6rem;
     font-size: 1.7rem;
     margin-left: 1rem;
     margin-bottom: 2.3rem;
@@ -166,7 +169,7 @@ const Contents = styled.div`
     overflow: hidden;
     word-wrap: normal;
     word-break: break-all;
-    color: ${({ theme }) => theme.colors.black_1};
+    color: ${({ theme }) => theme.colors.gray_5};
   }
 
   .profile {
