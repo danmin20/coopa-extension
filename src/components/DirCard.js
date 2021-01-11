@@ -72,6 +72,7 @@ const CookieIcon = styled.div`
   height: 2rem;
   margin-right: 0.7rem;
   background: url(${props => (props.isHover ? cookieIconW : cookieIcon)}) center center / cover no-repeat;
+  transition: all 0.5s;
 `;
 
 const Container = styled.div`
@@ -87,6 +88,7 @@ const Container = styled.div`
   border-radius: 1.2rem;
   color: ${({ theme }) => theme.colors.black_2};
   z-index: 1;
+  transition: all 0.5s;
   ${props =>
     props.isHover &&
     css`
@@ -119,7 +121,9 @@ const Container = styled.div`
     font-weight: 500;
     line-height: 3.6rem;
     letter-spacing: -0.02em;
+
     &__title {
+      text-align: center;
       white-space: pre;
       font-size: 2.4rem;
       display: -webkit-box;
