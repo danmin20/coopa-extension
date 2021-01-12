@@ -22,6 +22,7 @@ export default ({ isSearched, handleCreateDir }) => {
       if (isSearched) {
         // 검색한 디렉토리 조회
         result = await dirApi.getDirSearch(token, searchValue);
+        console.log('디렉토리', result);
       } else {
         // 전체 디렉토리 조회
         result = await dirApi.getDirAll(token);

@@ -35,7 +35,7 @@ const List = ({ dir, cookies, setParkingState }) => {
       cookieId: cookies.id
     };
     const result = await dirApi.addCookieToDir(token, body);
-    console.log(cookieState[cookies.id]);
+    console.log(result);
     setParkingState(true);
   };
 
@@ -96,15 +96,13 @@ export default ({ cookies, setParkingState }) => {
     const response = dirApi.postDir(token, body);
     response.then(res => {
       const newDir = {
-        directory: {
-          cookieCnt: 0,
-          createAt: 'unknown',
-          description: '디버그 마스터 봉채륀~',
-          id: res.data.directoryId,
-          name: inputText.value,
-          updateAt: 'unknown',
-          userId: 1
-        },
+        cookieCnt: 0,
+        createAt: 'unknown',
+        description: '디버그 마스터 봉채륀~',
+        id: res.data.directoryId,
+        name: inputText.value,
+        updateAt: 'unknown',
+        userId: 1,
         thumbnail: null
       };
       const newDirList = dirState.concat(newDir);
@@ -121,7 +119,7 @@ export default ({ cookies, setParkingState }) => {
           drop ? setDrop(false) : setDrop(true);
         }}
       >
-        <div className="dir-sort">{cookies.directory ? cookies.directory.name : 'All Cookies'}</div>
+        <div className="dir-sort">{cookies.directory ? cookies.name : 'All Cookies'}</div>
         <img src={dropdwnImg} style={{ marginLeft: '1.3rem' }} />
       </Directory>
       {drop && (
@@ -129,7 +127,7 @@ export default ({ cookies, setParkingState }) => {
           <DirList>
             <div className="list-div">
               {dirState.map(dir => (
-                <List dir={dir.directory} key={dir.directory.id} cookies={cookies} setParkingState={setParkingState} />
+                <List dir={dir} key={dir.id} cookies={cookies} setParkingState={setParkingState} />
               ))}
             </div>
           </DirList>

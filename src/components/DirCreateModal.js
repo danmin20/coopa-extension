@@ -27,11 +27,9 @@ export default ({ setIsOpenCreateDir }) => {
     };
     const res = await dirApi.postDir(token, body);
     body = {
-      directory: {
-        cookieCnt: 0,
-        id: res.data.directoryId,
-        name: modalInput.value
-      },
+      cookieCnt: 0,
+      id: res.data.directoryId,
+      name: modalInput.value,
       thumbnail: null
     };
     const newDirList = dirState.concat(body);

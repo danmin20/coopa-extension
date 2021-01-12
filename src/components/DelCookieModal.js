@@ -38,7 +38,7 @@ export default ({ setIsDelOpen, id }) => {
     e.stopPropagation();
     // api call
     await dirApi.deleteDir(token, id);
-    const newDirList = dirState.filter(dir => dir.directory.id !== id);
+    const newDirList = dirState.filter(dir => dir.id !== id);
     setDirState(newDirList);
     setIsClose(true);
     setDelToastState(true);
