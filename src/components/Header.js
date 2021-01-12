@@ -20,9 +20,9 @@ export default ({ isSearched, setIsSearched }) => {
       <div className="main-logo" onClick={handleRefresh}>
         <img style={{ width: '20.2rem', height: '3.8rem' }} className="main-logo__img" src={Logo} />
       </div>
-      <a className="profile" href="#">
-        <img style={{ width: '3.6rem', height: '3.6rem' }} className="profile__img" src={Profile} /> {/* Todo : mypage link 걸기 */}
-      </a>
+      <div className="profile" onClick={() => window.open('https://www.cookieparking.com/mypage', '_self')}>
+        <img style={{ width: '3.6rem', height: '3.6rem' }} className="profile__img" src={Profile} />
+      </div>
     </Header>
   );
 };
@@ -44,6 +44,7 @@ const Header = styled.div`
     margin-left: 2.2rem;
   }
   .profile {
+    cursor: pointer;
     margin-right: 2.2rem;
   }
 `;
