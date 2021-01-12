@@ -19,6 +19,21 @@ chrome.browserAction.setIcon({
   path: {'32':favicon}
 });
 
+
+// chrome.runtime.onMessageExternal.addListener(
+//   function(request, sender, sendResponse) {
+//     console.log(request.isLogin);
+//     console.log(request.userToken);
+//   });
+
+chrome.storage.sync.set({ isLogin: false });
+chrome.runtime.onMessageExternal.addListener(function(message, sender, sendResponse) {
+  console.log(message.isLogin);
+  console.log(message.userToken);
+  chrome.storage.sync.set({ isLogin: message.isLogin });
+  chrome.storage.sync.set({ userToken: message.userToken });
+});
+
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
   let data = {
     "title": '',
@@ -28,6 +43,7 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
     "favicon": '',
     "provider": '',
   };
+
 
   if (message.popupOpen) {
     chrome.tabs.query({ active: true, lastFocusedWindow: true }, tabs => {

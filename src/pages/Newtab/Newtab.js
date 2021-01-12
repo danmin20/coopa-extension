@@ -39,6 +39,13 @@ export default () => {
     else setIsToggled(false);
   };
 
+  chrome.storage.sync.get('isLogin', storage => {
+    if(!storage.isLogin){
+      console.log(storage.isLogin);
+      chrome.tabs.update({url: 'https://www.cookieparking.com'});
+    }
+  });
+
   useEffect(() => {
     chrome.storage.sync.get('defaultnewtab', storage => {
       if (storage.defaultnewtab) {
@@ -46,6 +53,7 @@ export default () => {
       }
     });
   }, []);
+  
   return (
     <div className="container">
       <Header isSearched={isSearched} setIsSearched={setIsSearched} />

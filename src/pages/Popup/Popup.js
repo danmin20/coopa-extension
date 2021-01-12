@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { ClipperPageNumState, LoginState } from '../../states/atom';
 import Finish from './Finish';
@@ -9,15 +9,16 @@ import MainNotLogin from './MainNotLogin';
 
 export default () => {
   const [pageNum, setPageNum] = useRecoilState(ClipperPageNumState);
-  const isLogin = JSON.parse(localStorage.getItem('isLogin'));
-  chrome.runtime.onMessageExternal.addListener(
-    function(request, sender, sendResponse) {
-      if (sender.url == blocklistedWebsite)
-        return;  // don't allow this web page access
-      if (request.isLogin)
-        // openUrl(request.openUrlInEditor);
-        console.log(request.isLogin);
+  const [isLogin, setIsLogin] = useRecoilState(LoginState);
+    
+  chrome.storage.sync.get('isLogin', function (storage) {
+      console.log(storage.isLogin);
+      setIsLogin(storage.isLogin);
+      console.log('after',isLogin);
   });
+    // console.log()
+
+  // const [isLogin, setIsLogin] = useRecoilState(LoginState);
 
 
   switch (pageNum) {

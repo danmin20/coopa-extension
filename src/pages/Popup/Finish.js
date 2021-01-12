@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { LoginState } from '../../states/atom';
 import { useRecoilState } from 'recoil';
@@ -8,8 +8,8 @@ import logo_notLogin from '../../assets/img/clipper_img_hello.svg';
 
 export default () => {
   const [isHover, setIsHover] = useState(false);
-  const isLogin = JSON.parse(localStorage.getItem('isLogin'));
-  // console.log(isLogin);
+  const [isLogin, setIsLogin] = useRecoilState(LoginState);
+  // const [isLogin, setIsLogin] = useRecoilState(LoginState);
 
   const handleBtnMouseOver = () => {
     setIsHover(true);
