@@ -34,9 +34,7 @@ const List = ({ dir, cookies, setParkingState }) => {
       directoryId: dir.id,
       cookieId: cookies.id
     };
-    const result = await dirApi.addCookieToDir(token, body);
-    console.log(result);
-    setParkingState(true);
+    dirApi.addCookieToDir(token, body).then(() => setParkingState(true));
   };
 
   return (
@@ -119,7 +117,7 @@ export default ({ cookies, setParkingState }) => {
           drop ? setDrop(false) : setDrop(true);
         }}
       >
-        <div className="dir-sort">{cookies.directory ? cookies.name : 'All Cookies'}</div>
+        <div className="dir-sort">{cookies.directoryInfo ? cookies.directoryInfo.name : 'All Cookies'}</div>
         <img src={dropdwnImg} style={{ marginLeft: '1.3rem' }} />
       </Directory>
       {drop && (
