@@ -44,6 +44,7 @@ const Header = styled.div`
     margin-left: 2.2rem;
   }
   .profile {
+    cursor: pointer;
     margin-right: 2.2rem;
   }
 `;
