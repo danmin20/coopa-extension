@@ -146,18 +146,19 @@ export default ({ cookies, setParkingState }) => {
           drop ? setDrop(false) : setDrop(true);
         }}
       >
-        <div className="dir-sort">{cookies.directoryInfo ? cookies.directoryInfo.name : 'All Cookies'}</div>
+        <div className="dir-sort">{cookies.directory ? cookies.directory.name : 'All Cookies'}</div>
         <img src={dropdwnImg} style={{ marginLeft: '1.3rem' }} />
       </Directory>
       {drop && (
         <ListWrap>
-          <DirList>
-            <div className="list-div">
-              {dirState.map(dir => (
-                <List dir={dir} key={dir.id} cookies={cookies} setParkingState={setParkingState} />
-              ))}
-            </div>
-          </DirList>
+          {dirState ?
+            (<DirList>
+              <div className="list-div">
+                {dirState.map(dir => (
+                  <List dir={dir} key={dir.id} cookies={cookies} setParkingState={setParkingState} />
+                ))}
+              </div>
+            </DirList>) : <EmptyDirView />}
           <BottonWrap>
             <input className="addInput" placeholder="새 디렉토리 명을 입력하세요" onClick={e => e.stopPropagation()} onChange={inputText.onChange} value={inputText.value} maxLength={20} />
             <button className="addBtn" onClick={addDirHandler}>
