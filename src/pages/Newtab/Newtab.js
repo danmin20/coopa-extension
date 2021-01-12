@@ -12,6 +12,7 @@ import ToastMsg from '../../components/ToastMsg';
 import helpPopup from '../../assets/img/cookies_img_help.svg';
 import helpIcon from '../../assets/img/icon_help.svg';
 import plusIcon from '../../assets/img/icon_plus.svg';
+import OnBoarding from '../../components/Onboarding';
 
 export default () => {
   const [selectState, setSelectState] = useRecoilState(SelectState);
