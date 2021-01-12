@@ -13,16 +13,7 @@ const token = {
   'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4'
 };
 
-// let data = {
-//   type: '',
-//   title: '',
-//   description: '',
-//   url: '',
-//   site_name: '',
-//   image: '',
-//   author: '',
-//   "favicon": ''
-// };
+localStorage.setItem('isLogin', false);
 
 chrome.browserAction.setIcon({
   path: {'32':favicon}

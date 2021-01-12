@@ -9,7 +9,16 @@ import MainNotLogin from './MainNotLogin';
 
 export default () => {
   const [pageNum, setPageNum] = useRecoilState(ClipperPageNumState);
-  const [isLogin, setIsLogin] = useRecoilState(LoginState);
+  const isLogin = JSON.parse(localStorage.getItem('isLogin'));
+  chrome.runtime.onMessageExternal.addListener(
+    function(request, sender, sendResponse) {
+      if (sender.url == blocklistedWebsite)
+        return;  // don't allow this web page access
+      if (request.isLogin)
+        // openUrl(request.openUrlInEditor);
+        console.log(request.isLogin);
+  });
+
 
   switch (pageNum) {
     case 0:

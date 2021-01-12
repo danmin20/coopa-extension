@@ -8,7 +8,8 @@ import logo_notLogin from '../../assets/img/clipper_img_hello.svg';
 
 export default () => {
   const [isHover, setIsHover] = useState(false);
-  const [isLogin, setIsLogin] = useRecoilState(LoginState);
+  const isLogin = JSON.parse(localStorage.getItem('isLogin'));
+  // console.log(isLogin);
 
   const handleBtnMouseOver = () => {
     setIsHover(true);
@@ -22,7 +23,9 @@ export default () => {
     window.open('newtab.html', '_blank');
   };
 
-  const handleLogin = () => {};
+  const handleLogin = () => {
+    window.open('https://www.cookieparking.com', '_blank');
+  };
 
   return (
     <Wrap>
@@ -39,7 +42,6 @@ export default () => {
 };
 
 const Wrap = styled.div`
-border: 1px solid black;
   width: 36rem;
   height: 35.1rem;
   background-color: ${({ theme }) => theme.colors.white};
