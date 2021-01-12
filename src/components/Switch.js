@@ -12,7 +12,7 @@ export default withStyles(theme => ({
   switchBase: {
     padding: 1,
     '&$checked': {
-      transform: 'translateX(1.5rem)',
+      transform: 'translateX(1.7rem)',
       '& + $track': {
         backgroundColor: styledTheme.colors.cookieOrange,
         opacity: 1,

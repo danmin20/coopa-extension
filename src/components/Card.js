@@ -55,7 +55,7 @@ export default ({ cookies, idx }) => {
         <div className="thumbnail">
           {parkingState && (
             <Parking listSelect={listSelect} thumbnail={cookies.thumbnail}>
-              <div className="parking--title">{cookies.name}</div>
+              <div className="parking--title">{cookies.directory.name}</div>
               <ParkingLogoWrap>
                 <ParkingLogo src={logo} />
                 <ParkingText>파킹했습니다!</ParkingText>

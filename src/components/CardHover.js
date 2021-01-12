@@ -6,10 +6,41 @@ import { useRecoilState } from 'recoil';
 import { DirState } from '../states/atom';
 import dirApi from '../lib/api/directoryApi';
 import useInput from '../hooks/useInput';
+import emptyMeercat from '../assets/img/meerkat_empty.svg';
 
 const token = {
   'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4'
 };
+
+const EmptyDirView = () => {
+  return (
+    <EmptyWrap>
+      <img className="meerkat" src={emptyMeercat} />
+      <div className="emptyDirDiv">새 디렉토리를 만들어보세요!</div>
+    </EmptyWrap>
+  );
+};
+
+const EmptyWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .meerkat {
+    width: calc(119 / 320 * 100%);
+    padding-top: calc(83 / 320 * 100%);
+  }
+  .emptyDirDiv {
+    padding-top: calc(24 / 320 * 100%);
+    padding-bottom: calc(83 / 320 * 100%);
+    font-family: Spoqa Han Sans Neo;
+    font-style: normal;
+    font-weight: 500;
+    font-size: calc(16 / 320 * 100%);
+    line-height: calc(19 / 320 * 100%);
+
+    color: ${({ theme }) => theme.colors.gray_5};
+  }
+`;
 
 const List = ({ dir, cookies, setParkingState }) => {
   const [itemHover, setItemHover] = useState(false);
@@ -117,18 +148,22 @@ export default ({ cookies, setParkingState }) => {
           drop ? setDrop(false) : setDrop(true);
         }}
       >
-        <div className="dir-sort">{cookies.directoryInfo ? cookies.directoryInfo.name : 'All Cookies'}</div>
+        <div className="dir-sort">{cookies.directory ? cookies.directory.name : 'All Cookies'}</div>
         <img src={dropdwnImg} style={{ marginLeft: '1.3rem' }} />
       </Directory>
       {drop && (
         <ListWrap>
-          <DirList>
-            <div className="list-div">
-              {dirState.map(dir => (
-                <List dir={dir} key={dir.id} cookies={cookies} setParkingState={setParkingState} />
-              ))}
-            </div>
-          </DirList>
+          {dirState ? (
+            <DirList>
+              <div className="list-div">
+                {dirState.map(dir => (
+                  <List dir={dir} key={dir.id} cookies={cookies} setParkingState={setParkingState} />
+                ))}
+              </div>
+            </DirList>
+          ) : (
+            <EmptyDirView />
+          )}
           <BottonWrap>
             <input className="addInput" placeholder="새 디렉토리 명을 입력하세요" onClick={e => e.stopPropagation()} onChange={inputText.onChange} value={inputText.value} maxLength={20} />
             <button className="addBtn" onClick={addDirHandler}>
