@@ -39,15 +39,12 @@ export default () => {
     const response = dirApi.postDir(token, data);
     response.then(res => {
       const newDir = {
-        directory: {
-          cookieCnt: 0,
-          createAt: 'unknown',
-          description: '디버그 마스터 봉채륀~',
-          id: res.data.directoryId,
-          name: InputText.value,
-          updateAt: 'unknown',
-          userId: 1
-        },
+        cookieCnt: 0,
+        createAt: 'unknown',
+        description: '디버그 마스터 봉채륀~',
+        id: res.data.directoryId,
+        name: InputText.value,
+        updateAt: 'unknown',
         thumbnail: null
       };
       const newDirList = dirState.concat(newDir);
@@ -69,7 +66,6 @@ export default () => {
     setIsHover(false);
   };
 
-
   return (
     <>
       {loading ? (
@@ -83,7 +79,7 @@ export default () => {
           </HeadhWrap>
           <DirList>
             {dirState.map((dir, index) => (
-              <ReturnDirItems item={dir.directory.name} key={index} idx={dir.directory.id} />
+              <ReturnDirItems item={dir.name} key={index} idx={dir.id} />
             ))}
             <Space />
           </DirList>

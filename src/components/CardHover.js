@@ -22,12 +22,12 @@ const List = ({ dir, cookies, setParkingState }) => {
     const newCookie = cookieState.map((c, idx) =>
       c.id === cookies.id
         ? {
-          ...c,
-          directory: {
-            name: dir.name,
-            id: dir.id
+            ...c,
+            directory: {
+              name: dir.name,
+              id: dir.id
+            }
           }
-        }
         : c
     );
     setCookieState(newCookie);
@@ -43,13 +43,13 @@ const List = ({ dir, cookies, setParkingState }) => {
       cookieId: cookies.id
     };
     const result = await dirApi.addCookieToDir(token, body);
-    console.log(cookieState[cookies.id]);
+    console.log(result);
     setParkingState(true);
   };
 
   return (
     <ListItem onMouseOver={() => setItemHover(true)} onMouseLeave={() => setItemHover(false)} onClick={ListItemClick}>
-      <div class='item'>{dir.name}</div>
+      <div className="item">{dir.name}</div>
       <ListItemBtn itemHover={itemHover} />
     </ListItem>
   );
@@ -74,7 +74,7 @@ const ListItem = styled.div`
     background: ${({ theme }) => theme.colors.gray_2};
     border-radius: 0.8rem;
   }
-  .item{
+  .item {
     display: block;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -105,15 +105,13 @@ export default ({ cookies, idx, setParkingState }) => {
     const response = dirApi.postDir(token, body);
     response.then(res => {
       const newDir = {
-        directory: {
-          cookieCnt: 0,
-          createAt: 'unknown',
-          description: '디버그 마스터 봉채륀~',
-          id: res.data.directoryId,
-          name: inputText.value,
-          updateAt: 'unknown',
-          userId: 1
-        },
+        cookieCnt: 0,
+        createAt: 'unknown',
+        description: '디버그 마스터 봉채륀~',
+        id: res.data.directoryId,
+        name: inputText.value,
+        updateAt: 'unknown',
+        userId: 1,
         thumbnail: null
       };
       const newDirList = dirState.concat(newDir);
@@ -130,7 +128,7 @@ export default ({ cookies, idx, setParkingState }) => {
           drop ? setDrop(false) : setDrop(true);
         }}
       >
-        <div className="dir-sort">{cookies.directory ? cookies.directory.name : 'All Cookies'}</div>
+        <div className="dir-sort">{cookies.directory ? cookies.name : 'All Cookies'}</div>
         <img src={dropdwnImg} style={{ marginLeft: '1.3rem' }} />
       </Directory>
       {drop && (
@@ -139,18 +137,12 @@ export default ({ cookies, idx, setParkingState }) => {
             <div className="list-div">
               {/* <div className="list-sort">모든 디렉토리</div> */}
               {dirState.map(dir => (
-                <List dir={dir.directory} key={dir.directory.id} cookies={cookies} setParkingState={setParkingState} />
+                <List dir={dir} key={dir.id} cookies={cookies} setParkingState={setParkingState} />
               ))}
             </div>
           </DirList>
           <BottonWrap>
-            <input
-              className="addInput"
-              placeholder="새 디렉토리 명을 입력하세요"
-              onClick={e => e.stopPropagation()}
-              onChange={inputText.onChange}
-              value={inputText.value}
-              maxLength={20} />
+            <input className="addInput" placeholder="새 디렉토리 명을 입력하세요" onClick={e => e.stopPropagation()} onChange={inputText.onChange} value={inputText.value} maxLength={20} />
             <button className="addBtn" onClick={addDirHandler}>
               저장
             </button>
@@ -282,10 +274,9 @@ const BottonWrap = styled.div`
     color: #b7b7b7;
     &:focus {
       outline: none;
-      ::placeholder{
-        color:transparent;
+      ::placeholder {
+        color: transparent;
       }
     }
-
   }
 `;

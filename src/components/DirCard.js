@@ -49,18 +49,18 @@ export default ({ dir }) => {
 
   return (
     <>
-      <Container onClick={() => handleDirClick(dir.directory.id)} thumbnail={dir.thumbnail} isHover={isHover} onMouseEnter={handleBtnMouseOver} onMouseLeave={handleBtnMouseLeave}>
+      <Container onClick={() => handleDirClick(dir.id)} thumbnail={dir.thumbnail} isHover={isHover} onMouseEnter={handleBtnMouseOver} onMouseLeave={handleBtnMouseLeave}>
         <div className="content">
-          <div className="content__title">{dir.directory.name.length < 13 ? dir.directory.name : dir.directory.name.slice(0, 12) + '...'}</div>
+          <div className="content__title">{dir.name.length < 13 ? dir.name : dir.name.slice(0, 12) + '...'}</div>
           <div className="content__num">
             <CookieIcon isHover={isHover} onMouseOver={handleBtnMouseOver} onMouseLeave={handleBtnMouseOver} />
-            <div>{dir.directory.cookieCnt}개</div>
+            <div>{dir.cookieCnt}개</div>
           </div>
         </div>
         <UpdateIcon src={updateDirIcon} onMouseOver={handleBtnMouseOver} onMouseLeave={handleBtnMouseOver} isHover={isHover} onClick={handleClickUpdateIcon} />
       </Container>
       {isOpen && <DirFixModal setIsOpen={setIsOpen} setIsDelOpen={setIsDelOpen} dir={dir} />}
-      {isDelOpen && <DelCookieModal isDelOpen={isDelOpen} setIsDelOpen={setIsDelOpen} id={dir.directory.id} />}
+      {isDelOpen && <DelCookieModal isDelOpen={isDelOpen} setIsDelOpen={setIsDelOpen} id={dir.id} />}
       {updateDirClick && <ToastMsg msg="디렉토리를 수정했어요!" />}
       {delToast && <ToastMsg msg="디렉토리를 삭제했어요!" />}
     </>
