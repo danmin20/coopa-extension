@@ -153,8 +153,8 @@ export default ({ cookies, setParkingState }) => {
       </Directory>
       {drop && (
         <ListWrap>
-          {dirState ? (
-            <DirList>
+          {dirState.length !== 0 ?
+            (<DirList>
               <div className="list-div">
                 {dirState.map(dir => (
                   <List dir={dir} key={dir.id} cookies={cookies} setParkingState={setParkingState} />
