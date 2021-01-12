@@ -83,7 +83,7 @@ export default () => {
           </HeadhWrap>
           <DirList>
             {dirState.map((dir, index) => (
-              <ReturnDirItems item={dir.directory.name} key={index} idx={dir.directory.id} />
+              <ReturnDirItems item={dir.name} key={index} idx={dir.id} />
             ))}
             <Space />
           </DirList>

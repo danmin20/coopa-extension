@@ -24,16 +24,14 @@ export default ({ isSearched, isToggled }) => {
       if (isSearched) {
         console.log('Allcookies 검색 결과');
         result = await cookieApi.getCookiesSearch(token, searchValue);
-        setCookieState(result.data);
       } else {
         if (isToggled) {
           result = await cookieApi.getCookiesUnRead(token);
-          setCookieState(result.data.cookies);
         } else {
           result = await cookieApi.getCookies(token);
-          setCookieState(result.data.cookies);
         }
       }
+      setCookieState(result.data);
       const dirRes = await dirApi.getDirAll(token);
       setDirState(dirRes.data);
     })();
