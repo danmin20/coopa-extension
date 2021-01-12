@@ -6,11 +6,40 @@ import { useRecoilState } from 'recoil';
 import { DirState } from '../states/atom';
 import dirApi from '../lib/api/directoryApi';
 import useInput from '../hooks/useInput';
+import emptyMeercat from '../assets/img/meerkat_empty.svg';
 
 const token = {
   'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4'
 };
+const EmptyDirView = () => {
+  return (
+    <EmptyWrap>
+      <img className='meerkat' src={emptyMeercat} />
+      <div className='emptyDirDiv'>새 디렉토리를 만들어보세요!</div>
+    </EmptyWrap>
+  );
+}
+const EmptyWrap = styled.div`
+  display: flex;
+  flex-direction:column;
+  align-items: center;
+  .meerkat{
+    width: calc(119/320*100%);
+    padding-top: calc(83/320*100%);
+  }
+  .emptyDirDiv{
+    padding-top: calc(24/320*100%);
+    padding-bottom: calc(83/320*100%);
+    font-family: Spoqa Han Sans Neo;
+    font-style: normal;
+    font-weight: 500;
+    font-size: calc(16/320*100%);
+    line-height: calc(19/320*100%);
 
+    color: ${({ theme }) => theme.colors.gray_5};
+
+  }
+`;
 const List = ({ dir, cookies, setParkingState }) => {
   const [itemHover, setItemHover] = useState(false);
   const [cookieState, setCookieState] = useRecoilState(CookieState);
@@ -41,7 +70,7 @@ const List = ({ dir, cookies, setParkingState }) => {
     <ListItem onMouseOver={() => setItemHover(true)} onMouseLeave={() => setItemHover(false)} onClick={ListItemClick}>
       <div className="item">{dir.name}</div>
       <ListItemBtn itemHover={itemHover} />
-    </ListItem>
+    </ListItem >
   );
 };
 
@@ -136,8 +165,9 @@ export default ({ cookies, setParkingState }) => {
             </button>
           </BottonWrap>
         </ListWrap>
-      )}
-    </HoverPage>
+      )
+      }
+    </HoverPage >
   );
 };
 
