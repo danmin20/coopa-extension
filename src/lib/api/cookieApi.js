@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = 'https://www.cookieparking.com/api';
+const baseURL = 'https://api.cookieparking.com/';
 
 // 문서에 url cookies 로 바뀔 예정이라고 되어 있어서 수정함
 const postCookie = async (headers, body) => {

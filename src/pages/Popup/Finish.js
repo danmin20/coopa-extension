@@ -4,6 +4,7 @@ import { LoginState } from '../../states/atom';
 import { useRecoilState } from 'recoil';
 import { useState } from 'react';
 import logo from '../../assets/img/logo.svg';
+import logo_notLogin from '../../assets/img/clipper_img_hello.svg';
 
 export default () => {
   const [isHover, setIsHover] = useState(false);
@@ -26,21 +27,21 @@ export default () => {
   return (
     <Wrap>
       <LogoWrap>
-        <LogoImg src={logo} />
+        <LogoImg src={isLogin ? logo : logo_notLogin} />
         <Text>{isLogin ? '유저 인터페이스' : '반가워요!'}</Text>
-        <TextTwo>{isLogin ? '파킹했어요!' : '쿠키를 모으러 가볼까요?'}</TextTwo>
+        <TextTwo>{isLogin ? '파킹했어요!' : ''}</TextTwo>
       </LogoWrap>
       <Btn isHover={isHover} onMouseMove={handleBtnMouseOver} onMouseLeave={handleBtnMouseLeave} onClick={isLogin ? handleBtnClick : handleLogin}>
-        {isLogin ? '홈으로 가기' : '로그인하기'}
+        {isLogin ? '홈으로 가기' : '쿠키를 모으러 가볼까요?'}
       </Btn>
     </Wrap>
   );
 };
 
 const Wrap = styled.div`
+border: 1px solid black;
   width: 36rem;
   height: 35.1rem;
-  border-radius: 1.2rem;
   background-color: ${({ theme }) => theme.colors.white};
   margin: 0;
   padding: 0;
@@ -78,8 +79,8 @@ const TextTwo = styled.div`
 `;
 
 const LogoImg = styled.img`
-  width: 7rem;
-  height: 8.605rem;
+  width: 10rem;
+  height: 10rem;
 `;
 
 const Btn = styled.div`
