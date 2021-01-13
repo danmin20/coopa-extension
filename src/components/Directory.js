@@ -40,7 +40,7 @@ export default ({ isSearched, handleCreateDir }) => {
         <>
           {isSearched && (
             <DirNum>
-              <span>&nbsp;{dirState.length}개의</span> 디랙토리
+              <span>&nbsp;{dirState.length}개의</span> 디렉토리
               {dirState.length == 0 && (
                 <div className="emptyview">
                   <img className="emptyview__img" src={meerkat} />
@@ -49,7 +49,7 @@ export default ({ isSearched, handleCreateDir }) => {
               )}
             </DirNum>
           )}
-          {dirState.length == 0 ? (
+          {dirState.length == 0 && !isSearched ? (
             <EmptyView className="empty">
               <img className="img" src={meerkat} />
               <div className="desc">새 디렉토리를 만들어보세요!</div>

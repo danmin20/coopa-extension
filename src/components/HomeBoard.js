@@ -48,8 +48,8 @@ export default ({ isSearched, setIsSearched }) => {
 };
 const SearchBar = styled.div`
   position: relative;
-  /* width: 65.6rem; */
-  width: 93rem;
+  width: 65.6rem;
+  /* width: 93rem; */
   height: 7rem;
   background-color: ${({ theme }) => theme.colors.white};
   ${props =>
@@ -123,14 +123,16 @@ const HomeBoard = styled.div`
     position: absolute;
     left: 9.5rem;
     bottom: 0;
-    width: 48.7rem;
-    height: 32.1rem;
+    /* width: 48.7rem; */
+    width: 55rem;
+    /* height: 32.1rem; */
   }
   .cookies {
     position: absolute;
     right: 0;
     bottom: 0;
-    width: 54.7rem;
-    height: 32.1rem;
+    width: 65rem;
+    /* width: 54.7rem; */
+    /* height: 32.1rem; */
   }
 `;

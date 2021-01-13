@@ -67,8 +67,22 @@ export default ({ isSearched, isToggled }) => {
                   ))}
                 </Container>
               )}
-          </>
-        )}
+            </CookieNum>
+          )}
+          {cookieState.length == 0 && !isSearched ? (
+            <EmptyView className="emptyview">
+              <img className="empty-img" src={meerkat} />
+              <div className="empty-desc">아직 저장한 쿠키가 없어요!</div>
+            </EmptyView>
+          ) : (
+            <Container>
+              {cookieState.map((cookie, index) => (
+                <Card cookies={cookie} key={index} idx={cookie.id} />
+              ))}
+            </Container>
+          )}
+        </>
+      )}
     </>
   );
 };
@@ -93,7 +107,8 @@ const EmptyView = styled.div`
 
 const Container = styled.div`
   max-width: 100vw;
-  margin-top: 3.4rem;
+  /* margin-top: 3.4rem; */
+  margin-top: 5.1rem;
   margin-bottom: 3.5rem;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(32rem, auto));
