@@ -96,6 +96,7 @@ const EmptyView = styled.div`
   .empty-img {
     width: 18.2rem;
     height: 15.4rem;
+    padding-right: 7rem;
   }
   .empty-desc {
     margin-top: 3.6rem;
@@ -134,6 +135,7 @@ const CookieNum = styled.div`
     &__img {
       width: 20rem;
       height: 17rem;
+      padding-right: 5rem;
     }
     &__desc {
       margin-top: 3.6rem;

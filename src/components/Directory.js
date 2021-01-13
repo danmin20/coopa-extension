@@ -6,6 +6,8 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { DirState, SearchState } from '../states/atom';
 import dirApi from '../lib/api/directoryApi';
 import meerkat from '../assets/img/meerkat_empty.svg';
+import plusIcon from '../assets/img/icon_plus.svg';
+import plusIconWhite from '../assets/img/icon_plus_white.svg';
 // 로그인 구현되면 지우기
 const token = {
   'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4'
@@ -15,6 +17,13 @@ export default ({ isSearched, handleCreateDir }) => {
   const [loading, setLoading] = useState(true);
   const [dirState, setDirState] = useRecoilState(DirState);
   const searchValue = useRecoilValue(SearchState);
+  const [isHover, setIsHover] = useState(false);
+  const handleBtnMouseEnter = () => {
+    setIsHover(true);
+  };
+  const handleBtnMouseLeave = () => {
+    setIsHover(false);
+  };
 
   useEffect(() => {
     (async () => {
@@ -53,10 +62,9 @@ export default ({ isSearched, handleCreateDir }) => {
             <EmptyView className="empty">
               <img className="img" src={meerkat} />
               <div className="desc">새 디렉토리를 만들어보세요!</div>
-              <div className="btn" onClick={handleCreateDir}>
-                <div className="btn__content">
-                  <span style={{ fontSize: '4rem', marginRight: '1rem' }}>+</span>새 디렉토리 만들기
-                </div>
+              <div className="btn" onClick={handleCreateDir} onMouseEnter={handleBtnMouseEnter} onMouseLeave={handleBtnMouseLeave}>
+                <PlusImg isHover={isHover}></PlusImg>
+                <div className="btn__content">새 디렉토리 만들기</div>
               </div>
             </EmptyView>
           ) : (
@@ -71,6 +79,13 @@ export default ({ isSearched, handleCreateDir }) => {
     </>
   );
 };
+const PlusImg = styled.div`
+  width: 2.3rem;
+  height: 2.3rem;
+  background: url(${props => (props.isHover ? plusIconWhite : plusIcon)}) center center / cover no-repeat;
+  margin-right: 1.1rem;
+`;
+
 const EmptyView = styled.div`
   margin-top: 11.6rem;
   display: flex;
@@ -81,6 +96,7 @@ const EmptyView = styled.div`
   .img {
     width: 18.2rem;
     height: 15.4rem;
+    padding-right: 7rem;
   }
   .desc {
     margin-top: 3.6rem;
@@ -105,6 +121,7 @@ const EmptyView = styled.div`
     &__content {
       display: flex;
       align-items: center;
+      padding-top: 0.5rem; // align-item 위함
     }
     transition: all 0.3s;
     :hover {
@@ -141,6 +158,7 @@ const DirNum = styled.div`
     &__img {
       width: 20rem;
       height: 17rem;
+      padding-right: 5rem;
     }
     &__desc {
       margin-top: 3.6rem;
