@@ -3,8 +3,10 @@ import styled from 'styled-components';
 import { LoginState } from '../../states/atom';
 import { useRecoilState } from 'recoil';
 import { useState } from 'react';
-import logo from '../../assets/img/logo.svg';
 import logo_notLogin from '../../assets/img/clipper_img_hello.svg';
+import Lottie from 'react-lottie';
+import parkingmotion from '../../assets/img/cookieparking_parkingmotion_final.json';
+
 
 export default () => {
   const [isHover, setIsHover] = useState(false);
@@ -27,10 +29,22 @@ export default () => {
     window.open('https://www.cookieparking.com', '_blank');
   };
 
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: parkingmotion,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice'
+    }
+  };
+
   return (
     <Wrap>
       <LogoWrap>
-        <LogoImg src={isLogin ? logo : logo_notLogin} />
+        {isLogin? 
+        <Lottie options={defaultOptions} width={'7rem'} height={'8.6rem'} isClickToPauseDisabled/> :
+        <LogoImg src={logo_notLogin} />
+        }
         <Text>{isLogin ? '유저 인터페이스' : '반가워요!'}</Text>
         <TextTwo>{isLogin ? '파킹했어요!' : ''}</TextTwo>
       </LogoWrap>

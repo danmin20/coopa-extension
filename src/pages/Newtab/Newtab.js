@@ -39,12 +39,11 @@ export default () => {
     else setIsToggled(false);
   };
 
-  chrome.storage.sync.get('isLogin', storage => {
-    if(!storage.isLogin){
-      console.log(storage.isLogin);
-      chrome.tabs.update({url: 'https://www.cookieparking.com'});
-    }
-  });
+  localStorage.getItem('isLogin')
+  if(!JSON.parse(localStorage.getItem("isLogin"))){
+    // console.log(storage.isLogin);
+    chrome.tabs.update({url: 'https://www.cookieparking.com'});
+  }
 
   useEffect(() => {
     chrome.storage.sync.get('defaultnewtab', storage => {

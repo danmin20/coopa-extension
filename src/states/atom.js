@@ -84,3 +84,8 @@ export const NewTabToggleState = atom({
   key: 'NewTabToggleState',
   default: true
 });
+
+export const LoadingState = atom({
+  key: 'LoadingState',
+  default: true
+})
