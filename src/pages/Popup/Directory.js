@@ -7,6 +7,7 @@ import useInput from '../../hooks/useInput';
 import { ClipperPageNumState, WebClipperDirState } from '../../states/atom';
 import dirApi from '../../lib/api/directoryApi';
 import Loading from '../../components/Loading';
+import emptyMeercat from '../../assets/img/meerkat_empty.svg';
 
 // 나중에 api 연결
 const token = {
@@ -24,6 +25,8 @@ export default () => {
     const result = dirApi.getDirAll(token);
     result.then(function (dir) {
       setDirState(dir.data);
+      //dir empty뷰 test
+      //setDirState([]);
       setLoading(false);
     });
   }, []);
@@ -47,8 +50,12 @@ export default () => {
         updateAt: 'unknown',
         thumbnail: null
       };
-      const newDirList = dirState.concat(newDir);
-      setDirState(newDirList);
+      let newDirArray = [];
+      newDirArray = newDirArray.concat(newDir);
+      dirState.map(dir => {
+        newDirArray = newDirArray.concat(dir);
+      });
+      setDirState(newDirArray);
     });
 
     InputText.setValue('');
@@ -72,27 +79,31 @@ export default () => {
       {loading ? (
         <Loading />
       ) : (
-        <Wrap>
-          <HeadhWrap>
-            <BackBtn onClick={handleBackArrClick}>
-              <BackArrow src={back_arrow} />
-            </BackBtn>
-          </HeadhWrap>
-          <DirList>
-            {dirState.map((dir, index) => (
-              <ReturnDirItems item={dir.name} key={index} idx={dir.id} />
-            ))}
-            <Space />
-          </DirList>
-          <Blur />
-          <BottomWrap>
-            <SearchInput maxLength={20} placeholder={'새 디렉토리 명을 입력하세요'} value={InputText.value} onChange={InputText.onChange} />
-            <AddBtn isHover={isHover} onMouseOver={handleBtnMouseOver} onMouseLeave={handleBtnMouseLeave} onClick={handleBtnClick}>
-              저장
+          <Wrap>
+            <HeadhWrap>
+              <BackBtn onClick={handleBackArrClick}>
+                <BackArrow src={back_arrow} />
+              </BackBtn>
+            </HeadhWrap>
+            <DirList>
+              {dirState.length !== 0 ?
+                dirState.map((dir, index) => (
+                  <ReturnDirItems item={dir.name} key={index} idx={dir.id} />
+                ))
+                : (
+                  <EmptyDirView />
+                )}
+              <Space />
+            </DirList>
+            <Blur />
+            <BottomWrap>
+              <SearchInput maxLength={20} placeholder={'새 디렉토리 명을 입력하세요'} value={InputText.value} onChange={InputText.onChange} />
+              <AddBtn isHover={isHover} onMouseOver={handleBtnMouseOver} onMouseLeave={handleBtnMouseLeave} onClick={handleBtnClick}>
+                저장
             </AddBtn>
-          </BottomWrap>
-        </Wrap>
-      )}
+            </BottomWrap>
+          </Wrap>
+        )}
     </>
   );
 };
@@ -293,3 +304,32 @@ const ReturnDirItems = ({ item, idx }) => {
     </DirItemWrap>
   );
 };
+
+const EmptyDirView = () => {
+  return (
+    <EmptyWrap>
+      <img className="meerkat" src={emptyMeercat} />
+      <div className="emptyDirDiv">새 디렉토리를 만들어보세요!</div>
+    </EmptyWrap>
+  );
+};
+
+const EmptyWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .meerkat {
+    width: 11.9rem;
+    padding-top: 3.3rem; 
+  }
+  .emptyDirDiv {
+    padding-top: 2.4rem;
+    font-family: Spoqa Han Sans Neo;
+    font-style: normal;
+    font-weight: 500;
+    font-size: calc(16 / 360 * 100%);
+    line-height: calc(19 / 360 * 100%);
+
+    color: ${({ theme }) => theme.colors.gray_5};
+  }
+`;
