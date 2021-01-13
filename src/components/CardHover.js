@@ -48,16 +48,17 @@ const List = ({ dir, cookies, setParkingState }) => {
 
   const ListItemClick = async e => {
     e.stopPropagation();
+    console.log(cookieState);
 
     const newCookie = cookieState.map((c, idx) =>
       c.id === cookies.id
         ? {
-            ...c,
-            directory: {
-              name: dir.name,
-              id: dir.id
-            }
+          ...c,
+          directoryInfo: {
+            id: dir.id,
+            name: dir.name
           }
+        }
         : c
     );
     setCookieState(newCookie);
@@ -148,7 +149,7 @@ export default ({ cookies, setParkingState }) => {
           drop ? setDrop(false) : setDrop(true);
         }}
       >
-        <div className="dir-sort">{cookies.directory ? cookies.directory.name : 'All Cookies'}</div>
+        <div className="dir-sort">{cookies.directoryInfo ? cookies.directoryInfo.name : 'All Cookies'}</div>
         <img src={dropdwnImg} style={{ marginLeft: '1.3rem' }} />
       </Directory>
       {drop && (
@@ -161,9 +162,9 @@ export default ({ cookies, setParkingState }) => {
                 ))}
               </div>
             </DirList>
-          ) : (
-            <EmptyDirView />
-          )}
+            ) : (
+              <EmptyDirView />
+            )}
           <BottonWrap>
             <input className="addInput" placeholder="새 디렉토리 명을 입력하세요" onClick={e => e.stopPropagation()} onChange={inputText.onChange} value={inputText.value} maxLength={20} />
             <button className="addBtn" onClick={addDirHandler}>
