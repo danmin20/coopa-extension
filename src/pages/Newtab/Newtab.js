@@ -6,7 +6,7 @@ import Switch from '../../components/Switch';
 import Header from '../../components/Header';
 import HomeBoard from '../../components/HomeBoard';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { SelectState, ShareClickState, DeleteCookieClickState, createDirClickState } from '../../states/atom';
+import { SelectState, ShareClickState, DeleteCookieClickState, createDirClickState, OnboardingState } from '../../states/atom';
 import DirCreateModal from '../../components/DirCreateModal';
 import ToastMsg from '../../components/ToastMsg';
 import helpPopup from '../../assets/img/cookies_img_help.svg';
@@ -23,6 +23,7 @@ export default () => {
   const [isToggled, setIsToggled] = useState(false);
   const [isOpenCreateDir, setIsOpenCreateDir] = useState(false); // 새 디렉토리 만들기 모달
   const [isHover, setIsHover] = useState(false);
+  const Onboarding = useRecoilValue(OnboardingState);
 
   const handleTab = tab => {
     if (tab === 'cookie') setSelectState('cookie');
@@ -59,7 +60,7 @@ export default () => {
 
   return (
     <>
-      {/* <OnBoarding /> */}
+      {Onboarding && <OnBoarding />}
       <div className="container">
         <Header isSearched={isSearched} setIsSearched={setIsSearched} />
         <HomeBoard setIsSearched={setIsSearched} isSearched={isSearched} />
@@ -85,12 +86,12 @@ export default () => {
                   </span>
                 </div>
               ) : (
-                  <div className="dirbtn" onClick={handleCreateDir}>
-                    <div className="dirbtn__desc">
-                      <span style={{ fontSize: '4rem', marginRight: '1.7rem' }}>+</span> 새 디렉토리 만들기
+                <div className="dirbtn" onClick={handleCreateDir}>
+                  <div className="dirbtn__desc">
+                    <span style={{ fontSize: '4rem', marginRight: '1.7rem' }}>+</span> 새 디렉토리 만들기
                   </div>
-                  </div>
-                ))}
+                </div>
+              ))}
           </div>
         </ContentsHeader>
         <Contents>

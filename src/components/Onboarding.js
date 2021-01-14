@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import React, { useState, useRef, useEffect } from 'react';
+import { useSetRecoilState } from 'recoil';
+import { OnboardingState } from '../states/atom';
 import OnbrdImg1 from '../assets/img/onbrd_img_step1.svg';
 import OnbrdImg2 from '../assets/img/onbrd_img_step2.svg';
 import OnbrdImg3 from '../assets/img/onbrd_img_step3.svg';
@@ -7,6 +9,7 @@ import OnbrdImg4 from '../assets/img/onbrd_img_step4.svg';
 
 export default () => {
   const [isClose, setIsClose] = useState(false);
+  const setOnboarding = useSetRecoilState(OnboardingState);
 
   const [currentSlide, setCurrentSlide] = useState(0);
   const slideRef = useRef(null);
@@ -15,7 +18,7 @@ export default () => {
     e.stopPropagation();
   };
   const TOTAL_SLIDES = 3;
-  const nextSlide = (e) => {
+  const nextSlide = e => {
     e.stopPropagation();
     if (currentSlide >= TOTAL_SLIDES) {
       // 더 이상 넘어갈 슬라이드가 없으면 슬라이드를 초기화합니다.
@@ -32,14 +35,13 @@ export default () => {
     }
   };
   const closeHandler = () => {
-    //modal 끄기
-  }
+    setOnboarding(false);
+  };
 
   useEffect(() => {
-    slideRef.current.style.transition = "all 0.5s ease-in-out";
+    slideRef.current.style.transition = 'all 0.5s ease-in-out';
     slideRef.current.style.transform = `translateX(-${currentSlide}00%)`;
     // 백틱을 사용하여 슬라이드로 이동하는 애니메이션을 만듭니다.
-
   }, [currentSlide]);
 
   return (
@@ -54,16 +56,17 @@ export default () => {
           </TextContainer>
           {currentSlide != 3 ? (
             <Carousel num={currentSlide}>
-              {currentSlide == 0 && <div className='orangeCircle' style={{ marginRight: '4.4rem' }} />}
-              {currentSlide == 1 && <div className='orangeCircle' />}
-              {currentSlide == 2 && <div className='orangeCircle' style={{ marginLeft: '5rem' }} />}
+              {currentSlide == 0 && <div className="orangeCircle" style={{ marginRight: '4.4rem' }} />}
+              {currentSlide == 1 && <div className="orangeCircle" />}
+              {currentSlide == 2 && <div className="orangeCircle" style={{ marginLeft: '5rem' }} />}
               <div className="circle" />
               <div className="circle" />
               <div className="circle" />
             </Carousel>
-          ) : (<StartDiv>이제 쿠키를 파킹하러 가볼까요?</StartDiv>)}
+          ) : (
+            <StartDiv>이제 쿠키를 파킹하러 가볼까요?</StartDiv>
+          )}
           <SliderContainer>
-
             <ImgContainer ref={slideRef}>
               <Slide src={OnbrdImg1} />
               <Slide src={OnbrdImg2} />
@@ -75,7 +78,7 @@ export default () => {
             <BtnWrap>
               <CloseBtn onClick={handleCloseClick} isClose={isClose}>
                 그만볼래요
-            </CloseBtn>
+              </CloseBtn>
               <MoveWrap>
                 {currentSlide != 0 && <PrevBtn onClick={prevSlide}>이전</PrevBtn>}
                 {currentSlide == 0 && <div className="emptyBtn" />}
@@ -83,8 +86,8 @@ export default () => {
               </MoveWrap>
             </BtnWrap>
           ) : (
-              <StartBtn onClick={closeHandler}>쿠키파킹 시작하기</StartBtn>
-            )}
+            <StartBtn onClick={closeHandler}>쿠키파킹 시작하기</StartBtn>
+          )}
         </ModalWrap>
       </Wrap>
     </>
@@ -131,31 +134,31 @@ const Text = styled.div`
 `;
 
 const SliderContainer = styled.div`
-  text-align:center;
+  text-align: center;
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
   overflow: hidden; // 선을 넘어간 이미지들은 보이지 않도록
 `;
 
 const Carousel = styled.div`
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding-top: calc(25/630*100%);
-  padding-bottom: calc(25/630*100%);
-  .circle{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: calc(25 / 630 * 100%);
+  padding-bottom: calc(25 / 630 * 100%);
+  .circle {
     margin-left: 1.2rem;
     width: 0.8rem;
     height: 0.8rem;
     border-radius: 100%;
     background: ${({ theme }) => theme.colors.gray_2};
   }
-  .orangeCircle{
+  .orangeCircle {
     position: absolute;
     margin-left: 1.2rem;
     width: 1rem;
     height: 1rem;
-    border-radius: 100%;
+    border-radius: 1rem;
     background: ${({ theme }) => theme.colors.cookieOrange};
   }
 `;
@@ -163,7 +166,7 @@ const Carousel = styled.div`
 const ImgContainer = styled.div`
   display: flex;
   flex-direction: row;
-  align-items:center;
+  align-items: center;
 `;
 
 const Slide = styled.img`
@@ -188,10 +191,10 @@ const CloseBtn = styled.div`
 `;
 
 const MoveWrap = styled.div`
-  display:flex;
-  flex-direction:row;
-  .emptyBtn{
-    width:9rem;
+  display: flex;
+  flex-direction: row;
+  .emptyBtn {
+    width: 9rem;
   }
 `;
 
@@ -241,13 +244,13 @@ const StartBtn = styled.div`
 
   padding-top: 1.8rem;
   padding-bottom: 1.8rem;
-  padding-left:10.7rem;
-  padding-right:10.7rem;
-  border:none;
+  padding-left: 10.7rem;
+  padding-right: 10.7rem;
+  border: none;
   border-radius: 1rem;
   background: ${({ theme }) => theme.colors.cookieOrange};
   color: ${({ theme }) => theme.colors.white};
-  &:active{
+  &:active {
     outline: none;
   }
 `;
