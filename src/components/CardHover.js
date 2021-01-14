@@ -90,6 +90,7 @@ const ListItem = styled.div`
   justify-content: space-between;
   padding: 0.7rem;
   max-width: 26.8rem;
+  margin-right: 1rem;
 
   color: ${({ theme }) => theme.colors.black_1};
   &:hover {
@@ -106,9 +107,10 @@ const ListItem = styled.div`
 
 const ListItemBtn = styled.div`
   display: ${props => (props.itemHover ? 'box' : 'none')};
-  width: 1.4rem;
+  min-width: 1.4rem;
   height: 1.4rem;
-  border-radius: 50%;
+  border-radius: 100%;
+  margin-right: 0.9rem;
   background: ${({ theme }) => theme.colors.cookieOrange};
 `;
 
@@ -135,8 +137,12 @@ export default ({ cookies, setParkingState }) => {
         userId: 1,
         thumbnail: null
       };
-      const newDirList = dirState.concat(newDir);
-      setDirState(newDirList);
+      let newDirArray = [];
+      newDirArray = newDirArray.concat(newDir);
+      dirState.map(dir => {
+        newDirArray = newDirArray.concat(dir);
+      });
+      setDirState(newDirArray);
       inputText.setValue('');
     });
   };
@@ -166,7 +172,7 @@ export default ({ cookies, setParkingState }) => {
             <EmptyDirView />
           )}
           <BottonWrap>
-            <input className="addInput" placeholder="새 디렉토리 명을 입력하세요" onClick={e => e.stopPropagation()} onChange={inputText.onChange} value={inputText.value} maxLength={20} />
+            <input className="addInput" placeholder="새 디렉토리 명을 입력하세요" onClick={e => e.stopPropagation()} onChange={inputText.onChange} value={inputText.value} maxLength={30} />
             <button className="addBtn" onClick={addDirHandler}>
               저장
             </button>
@@ -214,6 +220,7 @@ const Directory = styled.div`
 const ListWrap = styled.div`
   border-radius: 1.2rem;
   margin: 2rem;
+  margin-top:1.5rem;
   background: ${({ theme }) => theme.colors.white};
   box-shadow: 0px 0.2rem 2rem rgba(0, 0, 0, 0.2);
 `;
@@ -245,6 +252,7 @@ const DirList = styled.div`
       background: #f1f1f1;
     }
     max-height: 26rem;
+    min-height: 26rem;
     overflow: auto;
   }
 `;
@@ -284,9 +292,10 @@ const BottonWrap = styled.div`
     }
   }
   .addInput {
-    width: calc(204 / 292 * 100%);
+    width: calc(230 / 292 * 100%);
     height: 4.6rem;
     padding-left: 1rem;
+    padding-right: 1rem;
     background: ${({ theme }) => theme.colors.gray_2};
     border-radius: 0.8rem;
     border: none;
@@ -304,5 +313,8 @@ const BottonWrap = styled.div`
         font-size: 1.5rem;
       }
     }
+    ::placeholder {
+      font-size: 0.1rem;
+      }
   }
 `;
