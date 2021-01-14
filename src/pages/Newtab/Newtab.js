@@ -138,8 +138,17 @@ const ContentsHeader = styled.div`
     align-items: center;
     &__help {
       cursor: pointer;
+      font-family: 'Poppins', sans-serif;
       width: 2.8rem;
       height: 2.8rem;
+      background: ${({ theme }) => theme.colors.gray_4};
+      border-radius: 2.8rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: ${({ theme }) => theme.colors.white};
+      font-size: 1.6rem;
+      font-weight: 500;
     }
     &__title {
       min-width: 18rem;
@@ -154,16 +163,11 @@ const ContentsHeader = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    &__icon {
-      width: 2.3rem;
-      height: 2.3rem;
-      padding-bottom: 0.5rem;
-    }
     &__desc {
       /* width: 20rem; */
       display: flex;
       align-items: center;
-      margin-left: 1.3rem;
+      margin-left: 1.7rem;
       color: ${({ theme }) => theme.colors.cookieOrange};
       font-size: 2.4rem;
       font-weight: 500;
