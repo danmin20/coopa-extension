@@ -53,12 +53,12 @@ const List = ({ dir, cookies, setParkingState }) => {
     const newCookie = cookieState.map((c, idx) =>
       c.id === cookies.id
         ? {
-          ...c,
-          directoryInfo: {
-            id: dir.id,
-            name: dir.name
+            ...c,
+            directoryInfo: {
+              id: dir.id,
+              name: dir.name
+            }
           }
-        }
         : c
     );
     setCookieState(newCookie);
@@ -80,7 +80,7 @@ const List = ({ dir, cookies, setParkingState }) => {
 const ListItem = styled.div`
   font-family: Spoqa Han Sans Neo;
   font-style: normal;
-  font-weight: bold;
+  font-weight: 500;
   font-size: 2rem;
   line-height: 2.4rem;
   letter-spacing: -0.02em;
@@ -154,17 +154,17 @@ export default ({ cookies, setParkingState }) => {
       </Directory>
       {drop && (
         <ListWrap>
-          {dirState.length !== 0 ?
-            (<DirList>
+          {dirState.length !== 0 ? (
+            <DirList>
               <div className="list-div">
                 {dirState.map(dir => (
                   <List dir={dir} key={dir.id} cookies={cookies} setParkingState={setParkingState} />
                 ))}
               </div>
             </DirList>
-            ) : (
-              <EmptyDirView />
-            )}
+          ) : (
+            <EmptyDirView />
+          )}
           <BottonWrap>
             <input className="addInput" placeholder="새 디렉토리 명을 입력하세요" onClick={e => e.stopPropagation()} onChange={inputText.onChange} value={inputText.value} maxLength={20} />
             <button className="addBtn" onClick={addDirHandler}>
@@ -199,7 +199,7 @@ const Directory = styled.div`
   .dir-sort {
     font-family: Spoqa Han Sans Neo;
     font-style: normal;
-    font-weight: bold;
+    font-weight: 500;
     font-size: 1.8rem;
     line-height: 2.2rem;
     display: block;
@@ -261,7 +261,7 @@ const BottonWrap = styled.div`
     justify-content: center;
     font-family: Spoqa Han Sans Neo;
     font-style: normal;
-    font-weight: bold;
+    font-weight: 500;
     font-size: 1.6rem;
     line-height: 1.9rem;
     align-items: center;
@@ -292,7 +292,7 @@ const BottonWrap = styled.div`
     border: none;
     margin-right: 0.8rem;
     font-family: Spoqa Han Sans Neo;
-    font-weight: bold;
+    font-weight: 500;
     font-size: 1.7rem;
     text-align: center;
     color: #b7b7b7;
