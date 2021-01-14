@@ -142,7 +142,7 @@ const ContentsHeader = styled.div`
       height: 2.8rem;
     }
     &__title {
-      width: 17.5rem;
+      min-width: 18rem;
       font-size: 2rem;
       color: ${({ theme }) => theme.colors.gray_5};
       margin-left: 0.8rem;
