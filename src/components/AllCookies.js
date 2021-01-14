@@ -47,29 +47,15 @@ export default ({ isSearched, isToggled }) => {
       {loading ? (
         <Loading />
       ) : (
-          <>
-            {isSearched && (
-              <CookieNum>
-                <span>&nbsp;{cookieState.length}개의</span> 쿠키
-                {cookieState.length == 0 && (
-                  <div className="emptyview">
-                    <img className="emptyview__img" src={meerkat} />
-                    <div className="emptyview__desc">검색된 쿠키가 없어요!</div>
-                  </div>
-                )}
-              </CookieNum>
-            )}
-            {cookieState.length == 0 ? (
-              <EmptyView className="emptyview">
-                <img className="empty-img" src={meerkat} />
-                <div className="empty-desc">아직 저장한 쿠키가 없어요!</div>
-              </EmptyView>
-            ) : (
-                <Container>
-                  {cookieState.map((cookie, index) => (
-                    <Card cookies={cookie} key={index} idx={cookie.id} />
-                  ))}
-                </Container>
+        <>
+          {isSearched && (
+            <CookieNum>
+              <span>&nbsp;{cookieState.length}개의</span> 쿠키
+              {cookieState.length == 0 && (
+                <div className="emptyview">
+                  <img className="emptyview__img" src={meerkat} />
+                  <div className="emptyview__desc">검색된 쿠키가 없어요!</div>
+                </div>
               )}
             </CookieNum>
           )}
