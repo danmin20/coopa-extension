@@ -19,7 +19,7 @@ export default ({ msg }) => {
       setDelToastState(false);
       setCreateDirClick(false);
       setUpdateDirClick(false);
-    }, 2000);
+    }, 5000);
   }, []);
 
   return <Wrap isFlex={isFlex}>{msg}</Wrap>;
@@ -44,7 +44,7 @@ const Wrap = styled.div`
   justify-content: center;
   opacity: 0;
   z-index: 100;
-  animation: fadeout 2s;
+  animation: fadeout 5s;
   animation-fill-mode: forwards;
   @keyframes fadeout {
     from {

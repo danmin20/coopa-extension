@@ -10,9 +10,9 @@ const token = {
 
 export default ({ setIsOpen, setIsDelOpen, dir }) => {
   const [dirState, setDirState] = useRecoilState(DirState);
-  const [isDelHover, setIsDelHover] = useState(false);
-  const [isCancleHover, setIsCancleHover] = useState(false);
-  const [isFixHover, setIsFixHover] = useState(false);
+  // const [isDelHover, setIsDelHover] = useState(false);
+  // const [isCancleHover, setIsCancleHover] = useState(false);
+  // const [isFixHover, setIsFixHover] = useState(false);
   const [isClose, setIsClose] = useState(false);
   const setUpdateDirClick = useSetRecoilState(updateDirClickState);
   const modalInput = useInput(dir.name);
@@ -51,29 +51,29 @@ export default ({ setIsOpen, setIsDelOpen, dir }) => {
     setDirCardHover(true);
   };
 
-  const handleDelMouseMove = () => {
-    setIsDelHover(true);
-  };
+  // const handleDelMouseMove = () => {
+  //   setIsDelHover(true);
+  // };
 
-  const handleDelMouseLeave = () => {
-    setIsDelHover(false);
-  };
+  // const handleDelMouseLeave = () => {
+  //   setIsDelHover(false);
+  // };
 
-  const handleCancleMouseMove = () => {
-    setIsCancleHover(true);
-  };
+  // const handleCancleMouseMove = () => {
+  //   setIsCancleHover(true);
+  // };
 
-  const handleCancleMouseLeave = () => {
-    setIsCancleHover(false);
-  };
+  // const handleCancleMouseLeave = () => {
+  //   setIsCancleHover(false);
+  // };
 
-  const handleFixMouseMove = () => {
-    setIsFixHover(true);
-  };
+  // const handleFixMouseMove = () => {
+  //   setIsFixHover(true);
+  // };
 
-  const handleFixMouseLeave = () => {
-    setIsFixHover(false);
-  };
+  // const handleFixMouseLeave = () => {
+  //   setIsFixHover(false);
+  // };
 
   const handleModalClick = e => {
     e.stopPropagation();
@@ -94,15 +94,15 @@ export default ({ setIsOpen, setIsDelOpen, dir }) => {
         </DetailWrap>
         <InputBox value={modalInput.value} type="text" maxLength={20} onChange={modalInput.onChange} />
         <BtnWrap>
-          <Btn isHover={isDelHover} onClick={handleDelClick} onMouseLeave={handleDelMouseLeave} onMouseMove={handleDelMouseMove}>
+          <Btn onClick={handleDelClick} colorProps={({ theme }) => theme.colors.gray_6} background={({ theme }) => theme.colors.gray_2}>
             삭제
           </Btn>
           <Space width={'28.6rem'} />
-          <Btn isHover={isCancleHover} onClick={handleClick} onMouseLeave={handleCancleMouseLeave} onMouseMove={handleCancleMouseMove}>
+          <Btn onClick={handleClick} colorProps={({ theme }) => theme.colors.gray_6} background={({ theme }) => theme.colors.gray_2}>
             취소
           </Btn>
           <Space width={'1.5rem'} />
-          <Btn isHover={isFixHover} onClick={handleFixClick} onMouseLeave={handleFixMouseLeave} onMouseMove={handleFixMouseMove}>
+          <Btn onClick={handleFixClick} colorProps={({ theme }) => theme.colors.white} background={({ theme }) => theme.colors.cookieOrange}>
             수정
           </Btn>
         </BtnWrap>
@@ -186,8 +186,8 @@ const Btn = styled.div`
   cursor: pointer;
   width: 9.8rem;
   height: 5.2rem;
-  background: ${props => (props.isHover ? '#FF7134' : '#F3F3F4')};
-  color: ${props => (props.isHover ? 'white' : '#404040')};
+  background-color: ${props => props.background};
+  color: ${props => props.colorProps};
   border-radius: 1rem;
   font-style: normal;
   font-weight: 500;

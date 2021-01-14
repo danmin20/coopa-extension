@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import Logo from '../assets/img/logo_main.svg';
-import Profile from '../assets/img/profile.svg';
+import alarm from '../assets/img/icon_alarm';
+import mypage from '../assets/img/icon_mypage';
+import onboarding from '../assets/img/icon_onboarding';
 import { useSetRecoilState } from 'recoil';
 import { SearchState, SelectState } from '../states/atom';
 
@@ -15,13 +17,19 @@ export default ({ isSearched, setIsSearched }) => {
     setSearchState([]); // 이정민이 시킨건데 왜 하라고 한진 잘 모르겠다.. api 콜하면 어차피 덮어 씌워지지 않나?
     setIsSearched(false);
   };
+  const handleClickMypage = () => {
+    window.open('https://www.cookieparking.com/mypage', '_self');
+  };
+
   return (
     <Header isSearched={isSearched}>
       <div className="main-logo" onClick={handleRefresh}>
         <img style={{ width: '20.2rem', height: '3.8rem' }} className="main-logo__img" src={Logo} />
       </div>
-      <div className="profile" onClick={() => window.open('https://www.cookieparking.com/mypage', '_self')}>
-        <img style={{ width: '3.6rem', height: '3.6rem' }} className="profile__img" src={Profile} />
+      <div className="icon">
+        <img className="icon__onboarding" src={onboarding} alt="onboarding" />
+        <img className="icon__alarm" src={alarm} alt="alert" />
+        <img className="icon__mypage" src={mypage} alt="mypage" onClick={handleClickMypage} />
       </div>
     </Header>
   );
@@ -43,8 +51,26 @@ const Header = styled.div`
     justify-content: center;
     margin-left: 2.2rem;
   }
-  .profile {
-    cursor: pointer;
-    margin-right: 2.2rem;
+  .icon {
+    display: flex;
+    align-items: center;
+    &__onboarding {
+      cursor: pointer;
+      width: 3.2rem;
+      height: 3.2rem;
+      margin-right: 3rem;
+    }
+    &__alarm {
+      cursor: pointer;
+      width: 2.4rem;
+      height: 3.2rem;
+      margin-right: 3rem;
+    }
+    &__mypage {
+      cursor: pointer;
+      width: 3.2rem;
+      height: 3.2rem;
+      margin-right: 2.5rem;
+    }
   }
 `;

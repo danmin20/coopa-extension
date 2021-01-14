@@ -10,6 +10,8 @@ import { SelectState, ShareClickState, DeleteCookieClickState, createDirClickSta
 import DirCreateModal from '../../components/DirCreateModal';
 import ToastMsg from '../../components/ToastMsg';
 import helpPopup from '../../assets/img/cookies_img_help.svg';
+import helpIcon from '../../assets/img/icon_help.svg';
+import plusIcon from '../../assets/img/icon_plus.svg';
 
 export default () => {
   const [selectState, setSelectState] = useRecoilState(SelectState);
@@ -71,9 +73,7 @@ export default () => {
           {!isSearched &&
             (selectState === 'cookie' ? (
               <div className="toggle">
-                <div className="toggle__help" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-                  ?
-                </div>
+                <img className="toggle__help" src={helpIcon} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} alt="icon_help" />
                 <div className="toggle__title">안 읽은 쿠키 모아보기</div>
                 <span style={{ marginLeft: '1.5rem' }}>
                   <Switch onChange={onToggleSwitch} />
@@ -81,9 +81,8 @@ export default () => {
               </div>
             ) : (
               <div className="dirbtn" onClick={handleCreateDir}>
-                <div className="dirbtn__desc">
-                  <span style={{ fontSize: '4rem', marginRight: '1.7rem' }}>+</span> 새 디렉토리 만들기
-                </div>
+                <img className="dirbtn__icon" src={plusIcon} alt="plus_icon" />
+                <div className="dirbtn__desc">새 디렉토리 만들기</div>
               </div>
             ))}
         </div>
@@ -131,17 +130,8 @@ const ContentsHeader = styled.div`
     align-items: center;
     &__help {
       cursor: pointer;
-      font-family: 'Poppins', sans-serif;
       width: 2.8rem;
       height: 2.8rem;
-      background: ${({ theme }) => theme.colors.gray_4};
-      border-radius: 2.8rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: ${({ theme }) => theme.colors.white};
-      font-size: 1.6rem;
-      font-weight: 500;
     }
     &__title {
       width: 17.5rem;
@@ -156,11 +146,16 @@ const ContentsHeader = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    &__icon {
+      width: 2.3rem;
+      height: 2.3rem;
+      padding-bottom: 0.5rem;
+    }
     &__desc {
       /* width: 20rem; */
       display: flex;
       align-items: center;
-      margin-left: 1.7rem;
+      margin-left: 1.3rem;
       color: ${({ theme }) => theme.colors.cookieOrange};
       font-size: 2.4rem;
       font-weight: 500;

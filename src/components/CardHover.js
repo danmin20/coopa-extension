@@ -299,7 +299,9 @@ const BottonWrap = styled.div`
     &:focus {
       outline: none;
       ::placeholder {
+        text-align: left;
         color: transparent;
+        font-size: 1.5rem;
       }
     }
   }

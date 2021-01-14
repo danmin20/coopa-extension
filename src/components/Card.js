@@ -119,7 +119,7 @@ const ThumbnailHover = styled.div`
   width: 100%;
   height: 0;
   padding-bottom: ${props => (!props.thumbnail ? 'calc((160 / 360) * 100%)' : 'calc((220 / 360) * 100%)')};
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.55);
   border-radius: 1.2rem;
   position: absolute;
   z-index: 9;
@@ -228,7 +228,7 @@ const Parking = styled.div`
   padding-bottom: ${props => (!props.thumbnail ? 'calc((160 / 360) * 100%)' : 'calc((220 / 360) * 100%)')};
   border-radius: 1.2rem;
   z-index: 10;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.55);
 
   .parking--title {
     font-size: 1.8rem;

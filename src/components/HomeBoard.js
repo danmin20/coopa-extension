@@ -48,8 +48,7 @@ export default ({ isSearched, setIsSearched }) => {
 };
 const SearchBar = styled.div`
   position: relative;
-  /* width: 65.6rem; */
-  width: 93rem;
+  width: 65.6rem;
   height: 7rem;
   background-color: ${({ theme }) => theme.colors.white};
   ${props =>
@@ -57,8 +56,7 @@ const SearchBar = styled.div`
     css`
       background-color: ${({ theme }) => theme.colors.gray_1};
     `}
-  /* border-radius: 1rem; 10px일때 크기*/
-    border-radius: 12px;
+  border-radius: 1.2rem;
   border: 2px solid ${props => (props.isFocused ? ({ theme }) => theme.colors.cookieOrange : ({ theme }) => theme.colors.gray_3)};
   display: flex;
   align-items: center;
@@ -68,14 +66,13 @@ const SearchBar = styled.div`
     transition: all 0.3s;
     background: url(${props => (props.isFocused ? homebrdIconSearchOr : homebrdIconSearch)}) center center / cover no-repeat;
     position: absolute;
-    left: 4rem;
+    left: 2.1rem;
     width: 2.8rem;
     height: 2.8rem;
   }
   .search-bar__input {
-    /* width: 40rem; 10px일때 크기*/
-    margin-left: 6rem;
-    width: 80rem;
+    margin-left: 7rem;
+    width: 57.1rem;
     max-height: 100%;
     border: none;
     outline: none;
@@ -123,14 +120,16 @@ const HomeBoard = styled.div`
     position: absolute;
     left: 9.5rem;
     bottom: 0;
-    width: 48.7rem;
-    height: 32.1rem;
+    /* width: 48.7rem; */
+    width: 55rem;
+    /* height: 32.1rem; */
   }
   .cookies {
     position: absolute;
     right: 0;
     bottom: 0;
-    width: 54.7rem;
-    height: 32.1rem;
+    width: 65rem;
+    /* width: 54.7rem; */
+    /* height: 32.1rem; */
   }
 `;
