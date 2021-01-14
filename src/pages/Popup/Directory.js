@@ -76,12 +76,15 @@ export default () => {
           <HeadhWrap>
             <BackBtn src={back_arrow} onClick={handleBackArrClick}/>
           </HeadhWrap>
+          <DirListWrap>
           <DirList>
             {dirState.map((dir, index) => (
               <ReturnDirItems item={dir.name} key={index} idx={dir.id} />
             ))}
             <Space />
           </DirList>
+          </DirListWrap>
+          <Wraps>
           <Blur />
           <BottomWrap>
             <SearchInput maxLength={20} placeholder={'새 디렉토리 명을 입력하세요'} value={InputText.value} onChange={InputText.onChange} />
@@ -89,6 +92,7 @@ export default () => {
               저장
             </AddBtn>
           </BottomWrap>
+          </Wraps>
         </Wrap>
       )}
     </>
@@ -158,15 +162,10 @@ const DirItemHoverCircle = styled.div`
   display: ${props => (props.isHover ? 'box' : 'none')};
 `;
 
-const DirList = styled.div`
-  display: grid;
-
-  grid-template-columns: 1fr;
-  position: relative;
+const DirListWrap = styled.div`
   overflow: auto;
   width: 33rem;
   height: 20rem;
-  /* width */
   ::-webkit-scrollbar {
     width: 1rem;
   }
@@ -187,23 +186,34 @@ const DirList = styled.div`
   }
 `;
 
+const DirList = styled.div`
+  display: grid;
+  justify-items: start;
+  grid-template-columns: 1fr;
+  position: relative;
+`;
+
+const Wraps = styled.div`
+  width: 36rem;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  bottom: 0%;
+`;
+
 const Blur = styled.div`
   width: 29rem;
-  /* height: 0.1rem; */
-  box-shadow: 0rem -1rem 1.5rem 0.8rem rgba(255, 255, 255, 0.75);
+  box-shadow: 0rem -1rem 1.5rem 0.8rem rgba(255, 255, 255, 0.8);
   z-index: 5;
 `;
 
 const BottomWrap = styled.div`
-  bottom: 7.85%;
-  width: 36.1rem;
+  width: 36rem;
   height: 8.9rem;
   background-color: ${({ theme }) => theme.colors.white};
-  /* background: linear-gradient(to top, white); */
   display: flex;
   flex-direction: row;
   align-items: center;
-  /* box-shadow: 0rem -1rem 1.5rem 0.8rem rgba(255, 255, 255, 0.75); */
 `;
 
 const SearchInput = styled.input`
@@ -262,7 +272,6 @@ const ReturnDirItems = ({ item, idx }) => {
   const [pageNum, setPageNum] = useRecoilState(ClipperPageNumState);
 
   const handleDirClick = e => {
-    // 디렉토리에 데이터 넣기
     chrome.storage.sync.get('cookieId', function (storage) {
       let data = {
         directoryId: idx,

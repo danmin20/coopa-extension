@@ -60,6 +60,10 @@ export default ({ setIsDelOpen, id }) => {
     setIsCancleHover(false);
   };
 
+  const handleModalClick = (e) => {
+    e.stopPropagation();
+  }
+
   useEffect(() => {
     return () => {
       setIsDelOpen(false);
@@ -69,9 +73,9 @@ export default ({ setIsDelOpen, id }) => {
   return (
     <>
       <Wrap onClick={handleClick} isClose={isClose} />
-      <ModalWrap isClose={isClose}>
+      <ModalWrap isClose={isClose} onClick={handleModalClick}>
         <Text>{selectState === 'cookie' ? '쿠키 삭제' : '디렉토리 삭제'}</Text>
-        <SmallText>이 {selectState === 'cookie' ? '이 쿠키를 정말 삭제하시겠어요?' : '포함된 모든 쿠키가 영구 삭제됩니다. 삭제하시겠어요?'}</SmallText>
+        <SmallText> {selectState === 'cookie' ? '이 쿠키를 정말 삭제하시겠어요?' : '포함된 모든 쿠키가 영구 삭제됩니다. 삭제하시겠어요?'}</SmallText>
         <BtnWrap>
           <Btn onClick={handleClick} isHover={isCancleHover} onMouseMove={handleCancleMouseMove} onMouseLeave={handleCancleMouseLeave}>
             취소
