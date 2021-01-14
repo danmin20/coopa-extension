@@ -36,6 +36,10 @@ export default ({ isSearched, isToggled }) => {
       setDirState(dirRes.data);
     })();
     setLoading(false);
+    // 로딩 에셋 들어오면 timeout 조금 줘서 변경하기
+    // setTimeout(() => {
+    //   setLoading(false);
+    // }, 300);
   }, [searchValue, isToggled]);
 
   return (

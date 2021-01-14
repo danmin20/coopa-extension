@@ -38,6 +38,10 @@ export default ({ isSearched, handleCreateDir }) => {
       }
       setDirState(result.data);
       setLoading(false);
+      // 로딩 에셋 들어오면 timeout 조금 주기
+      // setTimeout(() => {
+      //   setLoading(false);
+      // }, 300);
     })();
   }, [searchValue]);
 
