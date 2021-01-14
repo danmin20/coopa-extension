@@ -303,8 +303,7 @@ const BottonWrap = styled.div`
     margin-right: 0.8rem;
     font-family: Spoqa Han Sans Neo;
     font-weight: 500;
-    font-size: 1.7rem;
-    text-align: center;
+    font-size: 1.5rem;
     color: #b7b7b7;
     &:focus {
       outline: none;
@@ -315,7 +314,7 @@ const BottonWrap = styled.div`
       }
     }
     ::placeholder {
-      font-size: 0.1rem;
+      font-size: 1.5rem;
       }
   }
 `;
