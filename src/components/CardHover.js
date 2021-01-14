@@ -53,12 +53,12 @@ const List = ({ dir, cookies, setParkingState }) => {
     const newCookie = cookieState.map((c, idx) =>
       c.id === cookies.id
         ? {
-            ...c,
-            directoryInfo: {
-              id: dir.id,
-              name: dir.name
-            }
+          ...c,
+          directoryInfo: {
+            id: dir.id,
+            name: dir.name
           }
+        }
         : c
     );
     setCookieState(newCookie);
@@ -90,6 +90,7 @@ const ListItem = styled.div`
   justify-content: space-between;
   padding: 0.7rem;
   max-width: 26.8rem;
+  margin-right: 1rem;
 
   color: ${({ theme }) => theme.colors.black_1};
   &:hover {
@@ -106,9 +107,10 @@ const ListItem = styled.div`
 
 const ListItemBtn = styled.div`
   display: ${props => (props.itemHover ? 'box' : 'none')};
-  width: 1.4rem;
+  min-width: 1.4rem;
   height: 1.4rem;
-  border-radius: 50%;
+  border-radius: 100%;
+  margin-right: 0.9rem;
   background: ${({ theme }) => theme.colors.cookieOrange};
 `;
 
@@ -135,8 +137,12 @@ export default ({ cookies, setParkingState }) => {
         userId: 1,
         thumbnail: null
       };
-      const newDirList = dirState.concat(newDir);
-      setDirState(newDirList);
+      let newDirArray = [];
+      newDirArray = newDirArray.concat(newDir);
+      dirState.map(dir => {
+        newDirArray = newDirArray.concat(dir);
+      });
+      setDirState(newDirArray);
       inputText.setValue('');
     });
   };
@@ -163,8 +169,8 @@ export default ({ cookies, setParkingState }) => {
               </div>
             </DirList>
           ) : (
-            <EmptyDirView />
-          )}
+              <EmptyDirView />
+            )}
           <BottonWrap>
             <input className="addInput" placeholder="새 디렉토리 명을 입력하세요" onClick={e => e.stopPropagation()} onChange={inputText.onChange} value={inputText.value} maxLength={20} />
             <button className="addBtn" onClick={addDirHandler}>
@@ -189,6 +195,7 @@ const Directory = styled.div`
   margin: 2rem;
   margin-bottom: 0;
   padding: 1.9rem;
+  padding-bottom: 1rem;
   background: rgba(255, 255, 255, 0.95);
   box-shadow: 0rem 0rem 3rem rgba(0, 0, 0, 0.35);
   border-radius: 1rem;
@@ -214,6 +221,7 @@ const Directory = styled.div`
 const ListWrap = styled.div`
   border-radius: 1.2rem;
   margin: 2rem;
+  margin-top:1rem;
   background: ${({ theme }) => theme.colors.white};
   box-shadow: 0px 0.2rem 2rem rgba(0, 0, 0, 0.2);
 `;
@@ -245,6 +253,7 @@ const DirList = styled.div`
       background: #f1f1f1;
     }
     max-height: 26rem;
+    min-height: 26rem;
     overflow: auto;
   }
 `;
@@ -284,17 +293,17 @@ const BottonWrap = styled.div`
     }
   }
   .addInput {
-    width: calc(204 / 292 * 100%);
+    width: calc(230 / 292 * 100%);
     height: 4.6rem;
     padding-left: 1rem;
+    padding-right: 1rem;
     background: ${({ theme }) => theme.colors.gray_2};
     border-radius: 0.8rem;
     border: none;
     margin-right: 0.8rem;
     font-family: Spoqa Han Sans Neo;
     font-weight: 500;
-    font-size: 1.7rem;
-    text-align: center;
+    font-size: 1.5rem;
     color: #b7b7b7;
     &:focus {
       outline: none;
@@ -304,5 +313,8 @@ const BottonWrap = styled.div`
         font-size: 1.5rem;
       }
     }
+    ::placeholder {
+      font-size: 1.5rem;
+      }
   }
 `;
