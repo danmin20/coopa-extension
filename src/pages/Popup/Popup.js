@@ -10,16 +10,16 @@ import MainNotLogin from './MainNotLogin';
 export default () => {
   const [pageNum, setPageNum] = useRecoilState(ClipperPageNumState);
   const [isLogin, setIsLogin] = useRecoilState(LoginState);
-    
-  chrome.storage.sync.get('isLogin', function (storage) {
-      console.log(storage.isLogin);
-      setIsLogin(storage.isLogin);
-      console.log('after',isLogin);
-  });
-    // console.log()
+
+  // chrome.storage.sync.get('isLogin', function (storage) {
+  //     console.log(storage.isLogin);
+  //     setIsLogin(storage.isLogin);
+  //     console.log('after',isLogin);
+  // });
+
+  // console.log()
 
   // const [isLogin, setIsLogin] = useRecoilState(LoginState);
-
 
   switch (pageNum) {
     case 0:

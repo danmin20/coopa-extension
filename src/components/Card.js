@@ -146,7 +146,7 @@ const Contents = styled.div`
     color: ${({ theme }) => theme.colors.black_1};
     line-height: 3.6rem;
     font-size: 2.4rem;
-    font-weight: bold;
+    font-weight: 500;
     margin-top: 2.8rem;
     margin-left: 1rem;
     margin-bottom: 1.8rem;
