@@ -7,7 +7,7 @@ import logo from '../../assets/img/logo.svg';
 import down_arrow from '../../assets/img/icon_dropdown.svg';
 import { ClipperPageNumState, isClickNextPageState, isCheckedState, LoadingState } from '../../states/atom';
 import Lottie from 'react-lottie';
-import parkingmotion from '../../assets/img/cookieparking_parkingmotion_final.json';
+import parkingmotion from '../../assets/img/cookieparking_parkingmotion.json';
 
 export default () => {
   const [isBtnOneHover, setIsBtnOneHover] = useState(false);
@@ -42,7 +42,7 @@ export default () => {
   };
 
   const defaultOptions = {
-    loop: true,
+    loop: false,
     autoplay: true,
     animationData: parkingmotion,
     rendererSettings: {
@@ -83,7 +83,7 @@ export default () => {
       {/* <button onClick={onClick}>click</button> */}
       <LogoWrap>
         {/* <LogoImg src={logo} /> */}
-        <Lottie options={defaultOptions} width={'7rem'} height={'8.6rem'} isClickToPauseDisabled/>        
+        <Lottie options={defaultOptions} width={'12rem'} height={'12rem'} isClickToPauseDisabled/>        
         <Text>파킹했어요!</Text>
       </LogoWrap>
       <BtnWrap>
@@ -118,16 +118,17 @@ const LogoWrap = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 5.4rem;
+  margin-top: 3.3rem;
 `;
 
 const Text = styled.div`
   width: 28.9rem;
   height: 4.5rem;
+  line-height: 2.2rem;
   font-weight: medium;
   font-size: 1.8rem;
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   justify-content: center;
 `;
 
@@ -149,7 +150,7 @@ const BtnOne = styled.div`
   /* background-color: ${props => (props.isHover ? '#FF7134' : '#ffffff')}; */
   background: ${({ theme }) => theme.colors.white};
   box-shadow: 0rem 0rem 1.2rem rgba(0, 0, 0, 0.13);
-  margin-top: 1.6rem;
+  margin-top: 1rem;
   transition-duration: 0.5s;
 `;
 

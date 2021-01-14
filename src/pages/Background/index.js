@@ -15,16 +15,6 @@ console.log('Put the background scripts here.');
 
 // localStorage.setItem('isLogin', false);
 
-chrome.browserAction.setIcon({
-  path: {'32':favicon}
-});
-
-
-// chrome.runtime.onMessageExternal.addListener(
-//   function(request, sender, sendResponse) {
-//     console.log(request.isLogin);
-//     console.log(request.userToken);
-//   });
 
 localStorage.setItem( 'isLogin', false );
 chrome.runtime.onMessageExternal.addListener(function(message, sender, sendResponse) {

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import Lottie from 'react-lottie';
-import parkingmotion from '../../assets/img/cookieparking_parkingmotion_final.json';
+import parkingmotion from '../../assets/img/cookieparking_parkingmotion.json';
 import { useRecoilState } from 'recoil';
 import { LoadingState } from '../../states/atom';
 
@@ -16,7 +16,7 @@ const Loading = () => {
   }, []);
 
   const defaultOptions = {
-    loop: true,
+    loop: false,
     autoplay: true,
     animationData: parkingmotion,
     rendererSettings: {
@@ -28,7 +28,7 @@ const Loading = () => {
     <Wrap>
       <LogoWrap>
         {/* <LogoImg src={logo} /> */}
-        <Lottie options={defaultOptions} width={'7rem'} height={'8.6rem'} isClickToPauseDisabled/>
+        <Lottie options={defaultOptions} width={'12rem'} height={'12rem'} isClickToPauseDisabled/>
         <Text>쿠키 파킹 중..</Text>
       </LogoWrap>
     </Wrap>
@@ -53,7 +53,7 @@ const LogoWrap = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 5.4rem;
+  margin-top: 3rem;
 `;
 
 const LogoImg = styled.img`
