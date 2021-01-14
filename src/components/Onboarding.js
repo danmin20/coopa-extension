@@ -8,15 +8,10 @@ import OnbrdImg3 from '../assets/img/onbrd_img_step3.svg';
 import OnbrdImg4 from '../assets/img/onbrd_img_step4.svg';
 
 export default () => {
-  const [isClose, setIsClose] = useState(false);
   const setOnboarding = useSetRecoilState(OnboardingState);
 
   const [currentSlide, setCurrentSlide] = useState(0);
   const slideRef = useRef(null);
-  const handleCloseClick = () => {
-    setIsClose(true);
-    e.stopPropagation();
-  };
   const TOTAL_SLIDES = 3;
   const nextSlide = e => {
     e.stopPropagation();
@@ -64,8 +59,8 @@ export default () => {
               <div className="circle" />
             </Carousel>
           ) : (
-            <StartDiv>이제 쿠키를 파킹하러 가볼까요?</StartDiv>
-          )}
+              <StartDiv>이제 쿠키를 파킹하러 가볼까요?</StartDiv>
+            )}
           <SliderContainer>
             <ImgContainer ref={slideRef}>
               <Slide src={OnbrdImg1} />
@@ -76,7 +71,7 @@ export default () => {
           </SliderContainer>
           {currentSlide != 3 ? (
             <BtnWrap>
-              <CloseBtn onClick={handleCloseClick} isClose={isClose}>
+              <CloseBtn onClick={closeHandler}>
                 그만볼래요
               </CloseBtn>
               <MoveWrap>
@@ -86,8 +81,8 @@ export default () => {
               </MoveWrap>
             </BtnWrap>
           ) : (
-            <StartBtn onClick={closeHandler}>쿠키파킹 시작하기</StartBtn>
-          )}
+              <StartBtn onClick={closeHandler}>쿠키파킹 시작하기</StartBtn>
+            )}
         </ModalWrap>
       </Wrap>
     </>
