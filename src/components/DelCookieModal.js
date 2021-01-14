@@ -73,10 +73,10 @@ export default ({ setIsDelOpen, id }) => {
         <Text>{selectState === 'cookie' ? '쿠키 삭제' : '디렉토리 삭제'}</Text>
         <SmallText>이 {selectState === 'cookie' ? '이 쿠키를 정말 삭제하시겠어요?' : '포함된 모든 쿠키가 영구 삭제됩니다. 삭제하시겠어요?'}</SmallText>
         <BtnWrap>
-          <Btn onClick={handleClick} isHover={isCancleHover} onMouseMove={handleCancleMouseMove} onMouseLeave={handleCancleMouseLeave}>
+          <Btn onClick={handleClick} colorProps={({ theme }) => theme.colors.gray_6} background={({ theme }) => theme.colors.gray_2}>
             취소
           </Btn>
-          <Btn onClick={selectState === 'cookie' ? handleCookieDelClick : handleDelClick} isHover={isDelHover} onMouseMove={handleDelMouseMove} onMouseLeave={handleDelMouseLeave}>
+          <Btn onClick={selectState === 'cookie' ? handleCookieDelClick : handleDelClick} colorProps={({ theme }) => theme.colors.white} background={({ theme }) => theme.colors.cookieOrange}>
             삭제
           </Btn>
         </BtnWrap>
@@ -140,8 +140,8 @@ const Btn = styled.div`
   cursor: pointer;
   width: 9.8rem;
   height: 5.2rem;
-  background: ${props => (props.isHover ? ({ theme }) => theme.colors.cookieOrange : ({ theme }) => theme.colors.gray_2)};
-  color: ${props => (props.isHover ? ({ theme }) => theme.colors.white : '#404040')};
+  background: ${props => props.background};
+  color: ${props => props.colorProps};
   border-radius: 1rem;
   font-style: normal;
   font-weight: 500;

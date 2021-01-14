@@ -36,6 +36,10 @@ export default ({ isSearched, isToggled }) => {
       setDirState(dirRes.data);
     })();
     setLoading(false);
+    // 로딩 에셋 들어오면 timeout 조금 줘서 변경하기
+    // setTimeout(() => {
+    //   setLoading(false);
+    // }, 300);
   }, [searchValue, isToggled]);
 
   return (
@@ -43,32 +47,32 @@ export default ({ isSearched, isToggled }) => {
       {loading ? (
         <Loading />
       ) : (
-          <>
-            {isSearched && (
-              <CookieNum>
-                <span>&nbsp;{cookieState.length}개의</span> 쿠키
-                {cookieState.length == 0 && (
-                  <div className="emptyview">
-                    <img className="emptyview__img" src={meerkat} />
-                    <div className="emptyview__desc">검색된 쿠키가 없어요!</div>
-                  </div>
-                )}
-              </CookieNum>
-            )}
-            {cookieState.length == 0 ? (
-              <EmptyView className="emptyview">
-                <img className="empty-img" src={meerkat} />
-                <div className="empty-desc">아직 저장한 쿠키가 없어요!</div>
-              </EmptyView>
-            ) : (
-                <Container>
-                  {cookieState.map((cookie, index) => (
-                    <Card cookies={cookie} key={index} idx={cookie.id} />
-                  ))}
-                </Container>
+        <>
+          {isSearched && (
+            <CookieNum>
+              <span>&nbsp;{cookieState.length}개의</span> 쿠키
+              {cookieState.length == 0 && (
+                <div className="emptyview">
+                  <img className="emptyview__img" src={meerkat} />
+                  <div className="emptyview__desc">검색된 쿠키가 없어요!</div>
+                </div>
               )}
-          </>
-        )}
+            </CookieNum>
+          )}
+          {cookieState.length == 0 && !isSearched ? (
+            <EmptyView className="emptyview">
+              <img className="empty-img" src={meerkat} />
+              <div className="empty-desc">아직 저장한 쿠키가 없어요!</div>
+            </EmptyView>
+          ) : (
+            <Container>
+              {cookieState.map((cookie, index) => (
+                <Card cookies={cookie} key={index} idx={cookie.id} />
+              ))}
+            </Container>
+          )}
+        </>
+      )}
     </>
   );
 };
@@ -82,6 +86,7 @@ const EmptyView = styled.div`
   .empty-img {
     width: 18.2rem;
     height: 15.4rem;
+    padding-right: 7rem;
   }
   .empty-desc {
     margin-top: 3.6rem;
@@ -93,7 +98,8 @@ const EmptyView = styled.div`
 
 const Container = styled.div`
   max-width: 100vw;
-  margin-top: 3.4rem;
+  /* margin-top: 3.4rem; */
+  margin-top: 5.1rem;
   margin-bottom: 3.5rem;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(32rem, auto));
@@ -119,6 +125,7 @@ const CookieNum = styled.div`
     &__img {
       width: 20rem;
       height: 17rem;
+      padding-right: 5rem;
     }
     &__desc {
       margin-top: 3.6rem;

@@ -11,8 +11,8 @@ const token = {
 export default ({ setIsOpenCreateDir }) => {
   const [dirState, setDirState] = useRecoilState(DirState);
   const setCreateDirClick = useSetRecoilState(createDirClickState);
-  const [isCancleHover, setIsCancleHover] = useState(false);
-  const [isFixHover, setIsFixHover] = useState(false);
+  // const [isCancleHover, setIsCancleHover] = useState(false);
+  // const [isFixHover, setIsFixHover] = useState(false);
   const [isClose, setIsClose] = useState(false);
   const modalInput = useInput('');
 
@@ -27,32 +27,35 @@ export default ({ setIsOpenCreateDir }) => {
     };
     const res = await dirApi.postDir(token, body);
     body = {
-      cookieCnt: 0,
       id: res.data.directoryId,
       name: modalInput.value,
+      cookieCnt: 0,
       thumbnail: null
     };
-    const newDirList = dirState.concat(body);
+    // const newDirList = dirState.concat(body);
+    let newDirList = dirState.slice(0, dirState.length - 1);
+    newDirList.unshift(body);
+    console.log('새로운 dirList', newDirList);
     setDirState(newDirList);
     setCreateDirClick(true);
     setIsClose(true);
   };
 
-  const handleCancleMouseMove = () => {
-    setIsCancleHover(true);
-  };
+  // const handleCancleMouseMove = () => {
+  //   setIsCancleHover(true);
+  // };
 
-  const handleCancleMouseLeave = () => {
-    setIsCancleHover(false);
-  };
+  // const handleCancleMouseLeave = () => {
+  //   setIsCancleHover(false);
+  // };
 
-  const handleFixMouseMove = () => {
-    setIsFixHover(true);
-  };
+  // const handleFixMouseMove = () => {
+  //   setIsFixHover(true);
+  // };
 
-  const handleFixMouseLeave = () => {
-    setIsFixHover(false);
-  };
+  // const handleFixMouseLeave = () => {
+  //   setIsFixHover(false);
+  // };
 
   useEffect(() => {
     isClose && setIsOpenCreateDir(false);
@@ -69,10 +72,10 @@ export default ({ setIsOpenCreateDir }) => {
         </DetailWrap>
         <InputBox value={modalInput.value} maxLength={20} type="text" onChange={modalInput.onChange} />
         <BtnWrap>
-          <Btn isHover={isCancleHover} onClick={handleClick} onMouseLeave={handleCancleMouseLeave} onMouseMove={handleCancleMouseMove}>
+          <Btn onClick={handleClick} colorProps={({ theme }) => theme.colors.gray_6} background={({ theme }) => theme.colors.gray_2}>
             취소
           </Btn>
-          <Btn style={{ marginLeft: '1.5rem' }} isHover={isFixHover} onClick={handleFixClick} onMouseLeave={handleFixMouseLeave} onMouseMove={handleFixMouseMove}>
+          <Btn style={{ marginLeft: '1.5rem' }} onClick={handleFixClick} colorProps={({ theme }) => theme.colors.white} background={({ theme }) => theme.colors.cookieOrange}>
             생성
           </Btn>
         </BtnWrap>
@@ -155,8 +158,8 @@ const Btn = styled.div`
   cursor: pointer;
   width: 9.8rem;
   height: 5.2rem;
-  background: ${props => (props.isHover ? '#FF7134' : '#F3F3F4')};
-  color: ${props => (props.isHover ? 'white' : '#404040')};
+  background: ${props => props.background};
+  color: ${props => props.colorProps};
   border-radius: 1rem;
   font-style: normal;
   font-weight: 500;
