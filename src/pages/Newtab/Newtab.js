@@ -6,12 +6,13 @@ import Switch from '../../components/Switch';
 import Header from '../../components/Header';
 import HomeBoard from '../../components/HomeBoard';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { SelectState, ShareClickState, DeleteCookieClickState, createDirClickState } from '../../states/atom';
+import { SelectState, ShareClickState, DeleteCookieClickState, createDirClickState, OnboardingState } from '../../states/atom';
 import DirCreateModal from '../../components/DirCreateModal';
 import ToastMsg from '../../components/ToastMsg';
 import helpPopup from '../../assets/img/cookies_img_help.svg';
 import helpIcon from '../../assets/img/icon_help.svg';
 import plusIcon from '../../assets/img/icon_plus.svg';
+import OnBoarding from '../../components/Onboarding';
 
 export default () => {
   const [selectState, setSelectState] = useRecoilState(SelectState);
@@ -22,6 +23,7 @@ export default () => {
   const [isToggled, setIsToggled] = useState(false);
   const [isOpenCreateDir, setIsOpenCreateDir] = useState(false); // 새 디렉토리 만들기 모달
   const [isHover, setIsHover] = useState(false);
+  const Onboarding = useRecoilValue(OnboardingState);
 
   const handleTab = tab => {
     if (tab === 'cookie') setSelectState('cookie');
@@ -41,12 +43,12 @@ export default () => {
     else setIsToggled(false);
   };
 
-  chrome.storage.sync.get('isLogin', storage => {
-    if(!storage.isLogin){
-      console.log(storage.isLogin);
-      chrome.tabs.update({url: 'https://www.cookieparking.com'});
-    }
-  });
+  // chrome.storage.sync.get('isLogin', storage => {
+  //   if(!storage.isLogin){
+  //     console.log(storage.isLogin);
+  //     chrome.tabs.update({url: 'https://www.cookieparking.com'});
+  //   }
+  // });
 
   useEffect(() => {
     chrome.storage.sync.get('defaultnewtab', storage => {
@@ -55,46 +57,52 @@ export default () => {
       }
     });
   }, []);
-  
+
   return (
-    <div className="container">
-      <Header isSearched={isSearched} setIsSearched={setIsSearched} />
-      <HomeBoard setIsSearched={setIsSearched} isSearched={isSearched} />
-      {isSearched && <Shadow />}
-      <ContentsHeader isSearched={isSearched} selected>
-        <TabBtn selectState={selectState === 'cookie'} onClick={() => handleTab('cookie')}>
-          {isSearched ? 'Cookies' : 'All cookies'}
-        </TabBtn>
-        <TabBtn style={{ marginLeft: '2rem' }} selectState={selectState === 'directory'} onClick={() => handleTab('directory')}>
-          Directory
-        </TabBtn>
-        <PopupHelp isHover={isHover} src={helpPopup} alt="help-popup"></PopupHelp>
-        <div style={{ marginLeft: 'auto' }}>
-          {!isSearched &&
-            (selectState === 'cookie' ? (
-              <div className="toggle">
-                <img className="toggle__help" src={helpIcon} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} alt="icon_help" />
-                <div className="toggle__title">안 읽은 쿠키 모아보기</div>
-                <span style={{ marginLeft: '1.5rem' }}>
-                  <Switch onChange={onToggleSwitch} />
-                </span>
-              </div>
-            ) : (
-              <div className="dirbtn" onClick={handleCreateDir}>
-                <img className="dirbtn__icon" src={plusIcon} alt="plus_icon" />
-                <div className="dirbtn__desc">새 디렉토리 만들기</div>
-              </div>
-            ))}
-        </div>
-      </ContentsHeader>
-      <Contents>
-        {selectState === 'cookie' ? <AllCookies isSearched={isSearched} isToggled={isToggled} /> : <Directory isSearched={isSearched} handleCreateDir={handleCreateDir} />}
-        {isOpenCreateDir && <DirCreateModal setIsOpenCreateDir={setIsOpenCreateDir} />}
-        {createDirClick && <ToastMsg msg="디렉토리를 생성했어요!" />}
-      </Contents>
-      {ShareClick && <ToastMsg msg="링크가 복사되었어요!" />}
-      {DeleteCookieClick && <ToastMsg msg="쿠키를 삭제했어요!" />}
-    </div>
+    <>
+      {Onboarding && <OnBoarding />}
+      <div className="container">
+        <Header isSearched={isSearched} setIsSearched={setIsSearched} />
+        <HomeBoard setIsSearched={setIsSearched} isSearched={isSearched} />
+        {isSearched && <Shadow />}
+        <ContentsHeader isSearched={isSearched} selected>
+          <TabBtn selectState={selectState === 'cookie'} onClick={() => handleTab('cookie')}>
+            {isSearched ? 'Cookies' : 'All cookies'}
+          </TabBtn>
+          <TabBtn style={{ marginLeft: '2rem' }} selectState={selectState === 'directory'} onClick={() => handleTab('directory')}>
+            Directory
+          </TabBtn>
+          <PopupHelp isHover={isHover} src={helpPopup} alt="help-popup"></PopupHelp>
+          <div style={{ marginLeft: 'auto' }}>
+            {!isSearched &&
+              (selectState === 'cookie' ? (
+                <div className="toggle">
+                  <div className="toggle__help" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+                    ?
+                  </div>
+                  <div className="toggle__title">안 읽은 쿠키 모아보기</div>
+                  <span style={{ marginLeft: '1.5rem' }}>
+                    <Switch onChange={onToggleSwitch} />
+                  </span>
+                </div>
+              ) : (
+                <div className="dirbtn" onClick={handleCreateDir}>
+                  <div className="dirbtn__desc">
+                    <span style={{ fontSize: '4rem', marginRight: '1.7rem' }}>+</span> 새 디렉토리 만들기
+                  </div>
+                </div>
+              ))}
+          </div>
+        </ContentsHeader>
+        <Contents>
+          {selectState === 'cookie' ? <AllCookies isSearched={isSearched} isToggled={isToggled} /> : <Directory isSearched={isSearched} handleCreateDir={handleCreateDir} />}
+          {isOpenCreateDir && <DirCreateModal setIsOpenCreateDir={setIsOpenCreateDir} />}
+          {createDirClick && <ToastMsg msg="디렉토리를 생성했어요!" />}
+        </Contents>
+        {ShareClick && <ToastMsg msg="링크가 복사되었어요!" />}
+        {DeleteCookieClick && <ToastMsg msg="쿠키를 삭제했어요!" />}
+      </div>
+    </>
   );
 };
 
