@@ -52,7 +52,7 @@ export default () => {
             {currentSlide == 2 && <Text>나만의 콘텐츠 파킹랏을 친구에게 공유해봐요!</Text>}
             {currentSlide == 3 && <Text>환영합니다!</Text>}
           </TextContainer>
-          {currentSlide != 3 && (
+          {currentSlide != 3 ? (
             <Carousel num={currentSlide}>
               {currentSlide == 0 && <div className='orangeCircle' style={{ marginRight: '4.4rem' }} />}
               {currentSlide == 1 && <div className='orangeCircle' />}
@@ -61,7 +61,7 @@ export default () => {
               <div className="circle" />
               <div className="circle" />
             </Carousel>
-          )}
+          ) : (<StartDiv>이제 쿠키를 파킹하러 가볼까요?</StartDiv>)}
           <SliderContainer>
 
             <ImgContainer ref={slideRef}>
@@ -167,14 +167,11 @@ const ImgContainer = styled.div`
 `;
 
 const Slide = styled.img`
-  width: calc(366/630*100%);
-  padding-left: 21%;
-  margin-right: 21%;
+  width: 100%;
 `;
 
 const BtnWrap = styled.div`
   display: flex;
-  padding-top: 5rem;
   justify-content: space-between;
   align-items: center;
 `;
@@ -185,8 +182,9 @@ const CloseBtn = styled.div`
   cursor: pointer;
   color: ${({ theme }) => theme.colors.gray_5};
   font-size: 2rem;
-  text-decoration: underline;
-  padding-right: 20rem;
+  border-bottom: solid 1px ${({ theme }) => theme.colors.gray_5};
+  margin-right: 20rem;
+  padding-bottom: 0.5rem;
 `;
 
 const MoveWrap = styled.div`
@@ -228,11 +226,18 @@ const NextBtn = styled.div`
   justify-content: center;
   margin-left: 1.5rem;
 `;
-const StartBtn = styled.button`
+const StartBtn = styled.div`
+  cursor: pointer;
   display: flex;
-  margin-top: 6rem;
+  //margin-top: 6rem;
   justify-content: space-between;
   align-items: center;
+
+  font-family: Spoqa Han Sans Neo;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 2.2rem;
+  line-height: 2.6rem;
 
   padding-top: 1.8rem;
   padding-bottom: 1.8rem;
@@ -243,6 +248,16 @@ const StartBtn = styled.button`
   background: ${({ theme }) => theme.colors.cookieOrange};
   color: ${({ theme }) => theme.colors.white};
   &:active{
-    border: none;
+    outline: none;
   }
+`;
+const StartDiv = styled.div`
+  padding: 0.9rem;
+  font-family: Spoqa Han Sans Neo;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.8rem;
+  line-height: 2.2rem;
+
+  color: #999999;
 `;
