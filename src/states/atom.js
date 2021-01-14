@@ -84,3 +84,7 @@ export const NewTabToggleState = atom({
   key: 'NewTabToggleState',
   default: true
 });
+export const OnboardingState = atom({
+  key: 'OnboardingState',
+  default: false
+});

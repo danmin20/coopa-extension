@@ -15,7 +15,7 @@ export default ({ setIsOpen, setIsDelOpen, dir }) => {
   // const [isFixHover, setIsFixHover] = useState(false);
   const [isClose, setIsClose] = useState(false);
   const setUpdateDirClick = useSetRecoilState(updateDirClickState);
-  const modalInput = useInput(dir.name);
+  const modalInput = useInput(dir.directory.name);
   const [DirCardHover, setDirCardHover] = useRecoilState(DirCardHoverState);
 
   const handleClick = e => {
@@ -36,12 +36,15 @@ export default ({ setIsOpen, setIsDelOpen, dir }) => {
       name: modalInput.value,
       description: '설명은 없어질 예정'
     };
-    await dirApi.updateDir(token, body, dir.id);
+    await dirApi.updateDir(token, body, dir.directory.id);
     const newDirList = dirState.map(directory =>
-      directory.id === dir.id
+      directory.directory.id === dir.directory.id
         ? {
-            ...directory,
-            name: modalInput.value
+            directory: {
+              ...directory.directory,
+              name: modalInput.value
+            },
+            thumbnail: directory.thumbnail
           }
         : directory
     );

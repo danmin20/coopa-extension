@@ -5,11 +5,12 @@ import alarm from '../assets/img/icon_alarm';
 import mypage from '../assets/img/icon_mypage';
 import onboarding from '../assets/img/icon_onboarding';
 import { useSetRecoilState } from 'recoil';
-import { SearchState, SelectState } from '../states/atom';
+import { SearchState, SelectState, OnboardingState } from '../states/atom';
 
 export default ({ isSearched, setIsSearched }) => {
   const setSelectState = useSetRecoilState(SelectState);
   const setSearchState = useSetRecoilState(SearchState);
+  const setOnboardingState = useSetRecoilState(OnboardingState);
   const handleRefresh = () => {
     // 메인 로고 클릭시 Allcookies 컴포넌트 렌더링
     console.log('mainLogo clicked');
@@ -27,7 +28,7 @@ export default ({ isSearched, setIsSearched }) => {
         <img style={{ width: '20.2rem', height: '3.8rem' }} className="main-logo__img" src={Logo} />
       </div>
       <div className="icon">
-        <img className="icon__onboarding" src={onboarding} alt="onboarding" />
+        <img className="icon__onboarding" src={onboarding} alt="onboarding" onClick={() => setOnboardingState(true)} />
         <img className="icon__alarm" src={alarm} alt="alert" />
         <img className="icon__mypage" src={mypage} alt="mypage" onClick={handleClickMypage} />
       </div>
