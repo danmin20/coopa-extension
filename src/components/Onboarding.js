@@ -4,7 +4,6 @@ import OnbrdImg1 from '../assets/img/onbrd_img_step1.svg';
 import OnbrdImg2 from '../assets/img/onbrd_img_step2.svg';
 import OnbrdImg3 from '../assets/img/onbrd_img_step3.svg';
 import OnbrdImg4 from '../assets/img/onbrd_img_step4.svg';
-import { theme } from '../assets/themes/index';
 
 export default () => {
   const [isClose, setIsClose] = useState(false);
@@ -38,24 +37,31 @@ export default () => {
 
   useEffect(() => {
     slideRef.current.style.transition = "all 0.5s ease-in-out";
-    slideRef.current.style.transform = `translateX(-${currentSlide}00%)`; // 백틱을 사용하여 슬라이드로 이동하는 애니메이션을 만듭니다.
+    slideRef.current.style.transform = `translateX(-${currentSlide}00%)`;
+    // 백틱을 사용하여 슬라이드로 이동하는 애니메이션을 만듭니다.
+
   }, [currentSlide]);
 
   return (
     <>
       <Wrap>
         <ModalWrap>
-          <TextContainer ref={slideRef}>
+          <TextContainer>
             {currentSlide == 0 && <Text>쿠키파킹 아이콘을 상단에 고정해요!!</Text>}
             {currentSlide == 1 && <Text>아이콘을 눌러 킵하고 싶은 콘텐츠를 파킹해요!</Text>}
             {currentSlide == 2 && <Text>나만의 콘텐츠 파킹랏을 친구에게 공유해봐요!</Text>}
             {currentSlide == 3 && <Text>환영합니다!</Text>}
           </TextContainer>
-          <Carousel num={currentSlide}>
-            <div className="circle" />
-            <div className="circle" />
-            <div className="circle" />
-          </Carousel>
+          {currentSlide != 3 && (
+            <Carousel num={currentSlide}>
+              {currentSlide == 0 && <div className='orangeCircle' style={{ marginRight: '4.4rem' }} />}
+              {currentSlide == 1 && <div className='orangeCircle' />}
+              {currentSlide == 2 && <div className='orangeCircle' style={{ marginLeft: '5rem' }} />}
+              <div className="circle" />
+              <div className="circle" />
+              <div className="circle" />
+            </Carousel>
+          )}
           <SliderContainer>
 
             <ImgContainer ref={slideRef}>
@@ -70,7 +76,6 @@ export default () => {
               <CloseBtn onClick={handleCloseClick} isClose={isClose}>
                 그만볼래요
             </CloseBtn>
-              {/* <Space width={'22.4rem'} /> */}
               <MoveWrap>
                 {currentSlide != 0 && <PrevBtn onClick={prevSlide}>이전</PrevBtn>}
                 {currentSlide == 0 && <div className="emptyBtn" />}
@@ -135,16 +140,24 @@ const SliderContainer = styled.div`
 const Carousel = styled.div`
   display:flex;
   justify-content:center;
+  align-items:center;
   padding-top: calc(25/630*100%);
   padding-bottom: calc(25/630*100%);
   .circle{
     margin-left: 1.2rem;
-    width: 8px;
-    height: 8px;
-    border-radius: 4px;
+    width: 0.8rem;
+    height: 0.8rem;
+    border-radius: 100%;
     background: ${({ theme }) => theme.colors.gray_2};
   }
-
+  .orangeCircle{
+    position: absolute;
+    margin-left: 1.2rem;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 100%;
+    background: ${({ theme }) => theme.colors.cookieOrange};
+  }
 `;
 
 const ImgContainer = styled.div`
@@ -217,7 +230,7 @@ const NextBtn = styled.div`
 `;
 const StartBtn = styled.button`
   display: flex;
-  margin-top: 3rem;
+  margin-top: 6rem;
   justify-content: space-between;
   align-items: center;
 
