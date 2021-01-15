@@ -1,7 +1,7 @@
 ## 🍪 Cookie Parking : 쿠키파킹의 귀염탱, WEB
 
 ## [웹페이지] 랜딩페이지
-
+![landing](https://sopt-juno.s3.ap-northeast-2.amazonaws.com/landing.png)
 
 **프로덕트 마케팅을 위한 랜딩 페이지**
 
@@ -13,7 +13,7 @@
 - react-reveal 라이브러리 사용
 
 ## [웹페이지] 로그인
-
+![login](https://sopt-juno.s3.ap-northeast-2.amazonaws.com/login.png)
 
 **사용자 로그인을 위한 로그인 페이지**
 
@@ -24,6 +24,7 @@
 - 반응형 구현
 
 ## [익스텐션]  뉴탭_온보딩
+![onboarding](https://sopt-juno.s3.ap-northeast-2.amazonaws.com/onboarding.png)
 
 
 **신입 사용자를 위한 온보딩 페이지**
@@ -37,9 +38,7 @@
 - recoil의 atom에 `OnboardingState`를 두어 헤더의 아이콘을 누르면 모달창이 뜨도록 구현
 
 ## [익스텐션] 팝업_웹 클리퍼
-
-파비콘 보이게 찍기
-
+![webclipper](https://sopt-juno.s3.ap-northeast-2.amazonaws.com/webclipper.png)
 
 **파비콘을 통해 손쉽게 웹페이지를 저장할 수 있는 웹 클리퍼**
 
@@ -52,6 +51,7 @@
 - react-lottie 라이브러리 사용
 
 ## [익스텐션] 뉴탭_ 올쿠키(메인페이지)
+![allcookies](https://sopt-juno.s3.ap-northeast-2.amazonaws.com/allcookies.png)
 
 
 **새 창을 띄울 때 마다 사용자가 저장했던 웹페이지를 모아보는 뉴탭 익스텐션** 
@@ -64,6 +64,7 @@
 - 저장한 쿠키가 없을 경우 empty 뷰를 보여줌
 
 ## [익스텐션] 뉴탭_디렉토리
+![directory](https://sopt-juno.s3.ap-northeast-2.amazonaws.com/directory.png)
 
 
 **디렉토리 생성과 분류를 통해,\ 가장 익숙하고 단순한 방식으로 정리**
@@ -73,7 +74,7 @@
 - cookie가 비었을땐, empty 뷰를 보여줌
 
 ## [웹페이지] 디렉토리 상세
-
+![directory_detail](https://sopt-juno.s3.ap-northeast-2.amazonaws.com/directory+detail.png)
 
 **분류한 웹페이지를 확인하고 공유할 수 있는 디렉토리 상세 페이지**
 
@@ -84,6 +85,7 @@
 - 공유 링크와 내 디렉토리 상세 링크를 다르게 하여 공유 링크의 경우, 추후 링크 파쇄가 가능함
 
 ## [웹페이지] 마이페이지
+![directory_detail](https://sopt-juno.s3.ap-northeast-2.amazonaws.com/mypage.png)
 
 
 **사용자 정보를 수정하고 확인할 수 있는 마이페이지**
