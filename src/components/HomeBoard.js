@@ -41,8 +41,8 @@ export default ({ isSearched, setIsSearched }) => {
           placeholder="내가 추가한 쿠키를 검색해 보세요!"
         />
       </SearchBar>
-      {!isSearched && <img src={meerkat} className="meerkat" alt="homeboard-cookies" />}
-      {!isSearched && <img src={cookies} className="cookies" alt="homeboard-meerkat" />}
+      {!isSearched && <img src={meerkat} className="meerkat" alt="homeboard-cookies" style={{ minWidth: '48.7rem', minHeight: '32.1rem' }} />}
+      {!isSearched && <img src={cookies} className="cookies" alt="homeboard-meerkat" style={{ minWidth: '54.7rem', minHeight: '32.1rem' }} />}
     </HomeBoard>
   );
 };
@@ -51,6 +51,7 @@ const SearchBar = styled.div`
   width: 65.6rem;
   height: 7rem;
   background-color: ${({ theme }) => theme.colors.white};
+  z-index: 5;
   ${props =>
     props.isSearched &&
     css`

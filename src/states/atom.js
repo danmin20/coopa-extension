@@ -92,4 +92,9 @@ export const OnboardingState = atom({
 export const LoadingState = atom({
   key: 'LoadingState',
   default: true
-})
+});
+
+export const PrepareModalState = atom({
+  key: 'PrepareModalState',
+  default: false
+});

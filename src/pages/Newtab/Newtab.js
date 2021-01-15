@@ -6,13 +6,14 @@ import Switch from '../../components/Switch';
 import Header from '../../components/Header';
 import HomeBoard from '../../components/HomeBoard';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { SelectState, ShareClickState, DeleteCookieClickState, createDirClickState, OnboardingState } from '../../states/atom';
+import { SelectState, ShareClickState, DeleteCookieClickState, createDirClickState, OnboardingState, PrepareModalState } from '../../states/atom';
 import DirCreateModal from '../../components/DirCreateModal';
 import ToastMsg from '../../components/ToastMsg';
 import helpPopup from '../../assets/img/cookies_img_help.svg';
 import helpIcon from '../../assets/img/icon_help.svg';
 import plusIcon from '../../assets/img/icon_plus.svg';
 import OnBoarding from '../../components/Onboarding';
+import PrepareModalComponent from '../../components/PrepareModal';
 
 export default () => {
   const [selectState, setSelectState] = useRecoilState(SelectState);
@@ -24,6 +25,7 @@ export default () => {
   const [isOpenCreateDir, setIsOpenCreateDir] = useState(false); // 새 디렉토리 만들기 모달
   const [isHover, setIsHover] = useState(false);
   const Onboarding = useRecoilValue(OnboardingState);
+  const PrepareModal = useRecoilValue(PrepareModalState);
 
   const handleTab = tab => {
     if (tab === 'cookie') setSelectState('cookie');
@@ -60,6 +62,7 @@ export default () => {
   return (
     <>
       {Onboarding && <OnBoarding />}
+      {PrepareModal && <PrepareModalComponent />}
       <div className="container">
         <Header isSearched={isSearched} setIsSearched={setIsSearched} />
         <HomeBoard setIsSearched={setIsSearched} isSearched={isSearched} />
@@ -83,12 +86,8 @@ export default () => {
                 </div>
               ) : (
                 <div className="dirbtn" onClick={handleCreateDir}>
-                  <div className="dirbtn__desc">
-                    <span style={{ fontSize: '4rem', marginRight: '1.7rem' }}>
-                      <plusIcon />
-                    </span>{' '}
-                    새 디렉토리 만들기
-                  </div>
+                  <img className="dirbtn__icon" src={plusIcon} alt="plusIcon" />
+                  <div className="dirbtn__desc">새 디렉토리 만들기</div>
                 </div>
               ))}
           </div>
@@ -153,11 +152,16 @@ const ContentsHeader = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    &__icon {
+      width: 2.37rem;
+      height: 2.37rem;
+      padding-bottom: 0.5rem;
+    }
     &__desc {
       /* width: 20rem; */
       display: flex;
       align-items: center;
-      margin-left: 1.7rem;
+      margin-left: 1.34rem;
       color: ${({ theme }) => theme.colors.cookieOrange};
       font-size: 2.4rem;
       font-weight: 500;
@@ -180,7 +184,6 @@ const TabBtn = styled.div`
       border-bottom: 4px solid ${({ theme }) => theme.colors.cookieOrange};
     `}
   font-size: 2.8rem;
-  font-weight: 600;
   line-height: 4.2rem;
   padding: 1.5rem;
   :hover {
