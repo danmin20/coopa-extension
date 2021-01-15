@@ -160,6 +160,7 @@ JavaScript es6
 axios
 recoil
 react-google-login
+react-lottie
 styled-components
 material-ui
 webpack
