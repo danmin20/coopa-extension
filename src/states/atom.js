@@ -98,3 +98,7 @@ export const PrepareModalState = atom({
   key: 'PrepareModalState',
   default: false
 });
+export const SelectedListState = atom({
+  key: 'SelectedListState',
+  default: ''
+});

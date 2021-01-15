@@ -4,7 +4,7 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import { useState } from 'react';
 import back_arrow from '../../assets/img/icon_left.svg';
 import useInput from '../../hooks/useInput';
-import { ClipperPageNumState, WebClipperDirState } from '../../states/atom';
+import { ClipperPageNumState, WebClipperDirState, SelectedListState } from '../../states/atom';
 import dirApi from '../../lib/api/directoryApi';
 import Loading from '../../components/Loading';
 import emptyMeercat from '../../assets/img/meerkat_empty.svg';
@@ -73,37 +73,32 @@ export default () => {
     setIsHover(false);
   };
 
-
   return (
     <>
       {loading ? (
         <Loading />
       ) : (
-          <Wrap>
-            <HeadhWrap>
-              <BackBtn onClick={handleBackArrClick}>
-                <BackArrow src={back_arrow} />
-              </BackBtn>
-            </HeadhWrap>
+        <Wrap>
+          <HeadhWrap>
+            <BackBtn onClick={handleBackArrClick} src={back_arrow}>
+              {/* <BackArrow  /> */}
+            </BackBtn>
+          </HeadhWrap>
+          <DirListWrap>
             <DirList>
-              {dirState.length !== 0 ?
-                dirState.map((dir, index) => (
-                  <ReturnDirItems item={dir.name} key={index} idx={dir.id} />
-                ))
-                : (
-                  <EmptyDirView />
-                )}
+              {dirState.length !== 0 ? dirState.map((dir, index) => <ReturnDirItems item={dir.name} key={index} idx={dir.id} />) : <EmptyDirView />}
               <Space />
             </DirList>
             <Blur />
-            <BottomWrap>
-              <SearchInput maxLength={20} placeholder={'새 디렉토리 명을 입력하세요'} value={InputText.value} onChange={InputText.onChange} />
-              <AddBtn isHover={isHover} onMouseOver={handleBtnMouseOver} onMouseLeave={handleBtnMouseLeave} onClick={handleBtnClick}>
-                저장
+          </DirListWrap>
+          <BottomWrap>
+            <SearchInput maxLength={20} placeholder={'새 디렉토리 명을 입력하세요'} value={InputText.value} onChange={InputText.onChange} />
+            <AddBtn isHover={isHover} onMouseOver={handleBtnMouseOver} onMouseLeave={handleBtnMouseLeave} onClick={handleBtnClick}>
+              저장
             </AddBtn>
-            </BottomWrap>
-          </Wrap>
-        )}
+          </BottomWrap>
+        </Wrap>
+      )}
     </>
   );
 };
@@ -279,6 +274,7 @@ const Space = styled.div`
 const ReturnDirItems = ({ item, idx }) => {
   const [isHover, setIsHover] = useState(false);
   const [pageNum, setPageNum] = useRecoilState(ClipperPageNumState);
+  const setSelectedList = useSetRecoilState(SelectedListState);
 
   const handleDirClick = e => {
     chrome.storage.sync.get('cookieId', function (storage) {
@@ -291,6 +287,7 @@ const ReturnDirItems = ({ item, idx }) => {
         setPageNum(2);
       });
     });
+    setSelectedList(item);
   };
 
   const handleMouseMove = () => {
@@ -324,7 +321,7 @@ const EmptyWrap = styled.div`
   align-items: center;
   .meerkat {
     width: 11.9rem;
-    padding-top: 3.3rem; 
+    padding-top: 3.3rem;
   }
   .emptyDirDiv {
     padding-top: 2.4rem;

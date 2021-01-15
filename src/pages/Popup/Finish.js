@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { LoginState } from '../../states/atom';
-import { useRecoilState } from 'recoil';
+import { LoginState, SelectedListState } from '../../states/atom';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { useState } from 'react';
 import logo_notLogin from '../../assets/img/clipper_img_hello.svg';
 import Lottie from 'react-lottie';
 import parkingmotion from '../../assets/img/cookieparking_parkingmotion.json';
 
-
 export default () => {
   const [isHover, setIsHover] = useState(false);
   const [isLogin, setIsLogin] = useRecoilState(LoginState);
+  const selectedList = useRecoilValue(SelectedListState);
   // const [isLogin, setIsLogin] = useRecoilState(LoginState);
 
   const handleBtnMouseOver = () => {
@@ -41,11 +41,8 @@ export default () => {
   return (
     <Wrap>
       <LogoWrap isLogin={isLogin}>
-        {isLogin? 
-        <Lottie options={defaultOptions} width={'12rem'} height={'12rem'} isClickToPauseDisabled/> :
-        <LogoImg src={logo_notLogin} />
-        }
-        <Text>{isLogin ? '유저 인터페이스' : '반가워요!'}</Text>
+        {isLogin ? <Lottie options={defaultOptions} width={'12rem'} height={'12rem'} isClickToPauseDisabled /> : <LogoImg src={logo_notLogin} />}
+        <Text>{isLogin ? selectedList : '반가워요!'}</Text>
         <TextTwo>{isLogin ? '파킹했어요!' : ''}</TextTwo>
       </LogoWrap>
       <Btn isHover={isHover} onMouseMove={handleBtnMouseOver} onMouseLeave={handleBtnMouseLeave} onClick={isLogin ? handleBtnClick : handleLogin}>
@@ -70,7 +67,7 @@ const LogoWrap = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: ${props=>props.isLogin? '5rem' : '7.4rem' } ;
+  margin-top: ${props => (props.isLogin ? '5rem' : '7.4rem')};
 `;
 
 const Text = styled.div`
@@ -83,7 +80,7 @@ const Text = styled.div`
   justify-content: center;
   /* margin-top: 1.495rem; */
 `;
-  
+
 const TextTwo = styled.div`
   width: 28.9rem;
   font-weight: 500;
