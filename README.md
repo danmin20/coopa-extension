@@ -41,7 +41,7 @@
 - recoil의 atom에 `OnboardingState`를 두어 헤더의 아이콘을 누르면 모달창이 뜨도록 구현
 
 ### 팝업_웹 클리퍼
-![webclipper](https://sopt-juno.s3.ap-northeast-2.amazonaws.com/webclipper.png)
+![webclipper](https://sopt-juno.s3.ap-northeast-2.amazonaws.com/webclipperGIF.gif)
 
 **파비콘을 통해 손쉽게 웹페이지를 저장할 수 있는 웹 클리퍼**
 
