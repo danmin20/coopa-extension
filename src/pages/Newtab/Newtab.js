@@ -182,6 +182,7 @@ const TabBtn = styled.div`
     css`
       color: ${({ theme }) => theme.colors.cookieOrange};
       border-bottom: 4px solid ${({ theme }) => theme.colors.cookieOrange};
+      font-weight: 600;
     `}
   font-size: 2.8rem;
   line-height: 4.2rem;

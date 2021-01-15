@@ -25,20 +25,24 @@ export default ({ setIsOpenCreateDir }) => {
       name: modalInput.value,
       description: '설명은 없어질 예정'
     };
-    const res = await dirApi.postDir(token, body);
-    body = {
-      id: res.data.directoryId,
-      name: modalInput.value,
-      cookieCnt: 0,
-      thumbnail: null
-    };
-    // const newDirList = dirState.concat(body);
-    let newDirList = dirState.slice(0, dirState.length - 1);
-    newDirList.unshift(body);
-    console.log('새로운 dirList', newDirList);
-    setDirState(newDirList);
-    setCreateDirClick(true);
-    setIsClose(true);
+    dirApi.postDir(token, body).then(() => {
+      dirApi.getDirAll(token).then(r => {
+        setDirState(r.data);
+      });
+      // body = {
+      //   id: res.data.directoryId,
+      //   name: modalInput.value,
+      //   cookieCnt: 0,
+      //   thumbnail: null
+      // };
+      // const newDirList = dirState.concat(body);
+      // let newDirList = dirState.slice(0, dirState.length - 1);
+      // newDirList.unshift(body);
+      // console.log('새로운 dirList', newDirList);
+      // setDirState(newDirList);
+      setCreateDirClick(true);
+      setIsClose(true);
+    });
   };
 
   // const handleCancleMouseMove = () => {
