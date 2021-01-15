@@ -88,3 +88,8 @@ export const OnboardingState = atom({
   key: 'OnboardingState',
   default: false
 });
+
+export const LoadingState = atom({
+  key: 'LoadingState',
+  default: true
+})

@@ -9,29 +9,19 @@ import cookieAPI from '../../lib/api/cookieApi';
 console.log('This is the background page.');
 console.log('Put the background scripts here.');
 
-const token = {
-  'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4'
-};
+// const token = {
+//   'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4'
+// };
 
-localStorage.setItem('isLogin', false);
-
-chrome.browserAction.setIcon({
-  path: {'32':favicon}
-});
+// localStorage.setItem('isLogin', false);
 
 
-// chrome.runtime.onMessageExternal.addListener(
-//   function(request, sender, sendResponse) {
-//     console.log(request.isLogin);
-//     console.log(request.userToken);
-//   });
-
-chrome.storage.sync.set({ isLogin: false });
+localStorage.setItem( 'isLogin', false );
 chrome.runtime.onMessageExternal.addListener(function(message, sender, sendResponse) {
   console.log(message.isLogin);
   console.log(message.userToken);
-  chrome.storage.sync.set({ isLogin: message.isLogin });
-  chrome.storage.sync.set({ userToken: message.userToken });
+  localStorage.setItem( 'isLogin', message.isLogin );
+  localStorage.setItem( 'userToken', message.userToken );
 });
 
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
@@ -62,6 +52,10 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
         console.log(data);
         console.log(data.thumbnail);
         console.log(data.favicon);
+
+        const token = {
+          'x-access-token': localStorage.getItem('userToken')
+        }
         const Response = cookieAPI.postCookie(token, data);
           Response.then(function(response) {
             chrome.storage.sync.set({ cookieId: response.data.cookieId});

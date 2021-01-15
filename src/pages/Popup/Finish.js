@@ -3,8 +3,10 @@ import styled from 'styled-components';
 import { LoginState } from '../../states/atom';
 import { useRecoilState } from 'recoil';
 import { useState } from 'react';
-import logo from '../../assets/img/logo.svg';
 import logo_notLogin from '../../assets/img/clipper_img_hello.svg';
+import Lottie from 'react-lottie';
+import parkingmotion from '../../assets/img/cookieparking_parkingmotion.json';
+
 
 export default () => {
   const [isHover, setIsHover] = useState(false);
@@ -27,15 +29,27 @@ export default () => {
     window.open('https://www.cookieparking.com', '_blank');
   };
 
+  const defaultOptions = {
+    loop: false,
+    autoplay: true,
+    animationData: parkingmotion,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice'
+    }
+  };
+
   return (
     <Wrap>
-      <LogoWrap>
-        <LogoImg src={isLogin ? logo : logo_notLogin} />
+      <LogoWrap isLogin={isLogin}>
+        {isLogin? 
+        <Lottie options={defaultOptions} width={'12rem'} height={'12rem'} isClickToPauseDisabled/> :
+        <LogoImg src={logo_notLogin} />
+        }
         <Text>{isLogin ? '유저 인터페이스' : '반가워요!'}</Text>
         <TextTwo>{isLogin ? '파킹했어요!' : ''}</TextTwo>
       </LogoWrap>
       <Btn isHover={isHover} onMouseMove={handleBtnMouseOver} onMouseLeave={handleBtnMouseLeave} onClick={isLogin ? handleBtnClick : handleLogin}>
-        {isLogin ? '홈으로 가기' : '쿠키를 모으러 가볼까요?'}
+        {isLogin ? '파킹랏으로 가기' : '쿠키를 모으러 가볼까요?'}
       </Btn>
     </Wrap>
   );
@@ -56,7 +70,7 @@ const LogoWrap = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 6.6rem;
+  margin-top: ${props=>props.isLogin? '5rem' : '7.4rem' } ;
 `;
 
 const Text = styled.div`
@@ -67,9 +81,9 @@ const Text = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 1.495rem;
+  /* margin-top: 1.495rem; */
 `;
-
+  
 const TextTwo = styled.div`
   width: 28.9rem;
   font-weight: 500;
