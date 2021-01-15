@@ -43,10 +43,10 @@ export default () => {
     else setIsToggled(false);
   };
 
-  localStorage.getItem('isLogin')
-  if(!JSON.parse(localStorage.getItem("isLogin"))){
+  localStorage.getItem('isLogin');
+  if (!JSON.parse(localStorage.getItem('isLogin'))) {
     // console.log(storage.isLogin);
-    chrome.tabs.update({url: 'https://www.cookieparking.com'});
+    chrome.tabs.update({ url: 'https://www.cookieparking.com' });
   }
 
   useEffect(() => {
@@ -76,10 +76,7 @@ export default () => {
             {!isSearched &&
               (selectState === 'cookie' ? (
                 <div className="toggle">
-                  <div className="toggle__help" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-                    ?
-                  </div>
-                  <div className="toggle__title">안 읽은 쿠키 모아보기</div>
+                  <img alt="" src={helpIcon} className="toggle__help" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} /> <div className="toggle__title">안 읽은 쿠키 모아보기</div>
                   <span style={{ marginLeft: '1.5rem' }}>
                     <Switch onChange={onToggleSwitch} />
                   </span>
@@ -87,7 +84,10 @@ export default () => {
               ) : (
                 <div className="dirbtn" onClick={handleCreateDir}>
                   <div className="dirbtn__desc">
-                    <span style={{ fontSize: '4rem', marginRight: '1.7rem' }}>+</span> 새 디렉토리 만들기
+                    <span style={{ fontSize: '4rem', marginRight: '1.7rem' }}>
+                      <plusIcon />
+                    </span>{' '}
+                    새 디렉토리 만들기
                   </div>
                 </div>
               ))}
@@ -137,17 +137,8 @@ const ContentsHeader = styled.div`
     align-items: center;
     &__help {
       cursor: pointer;
-      font-family: 'Poppins', sans-serif;
-      width: 2.8rem;
-      height: 2.8rem;
-      background: ${({ theme }) => theme.colors.gray_4};
-      border-radius: 2.8rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: ${({ theme }) => theme.colors.white};
-      font-size: 1.6rem;
-      font-weight: 500;
+      width: 3.5rem;
+      height: 3.5rem;
     }
     &__title {
       min-width: 18rem;
