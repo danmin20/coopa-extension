@@ -168,7 +168,7 @@ webpack
 
 | **🙋🏻 [이준호](https://github.com/juno7803)** | **🙋🏻‍♀️ [이정민](https://github.com/danmin20)** | **🙋🏻‍♀️ [이현진](https://github.com/junyup0319)** |
 | :---: | :---: | :---: |
-| ![준호사진](https://sopt-juno.s3.ap-northeast-2.amazonaws.com/junoposter.jpeg) | ![정민사진]()  | ![현진사진](https://sopt-juno.s3.ap-northeast-2.amazonaws.com/hj.gif) |
+| ![준호사진](https://sopt-juno.s3.ap-northeast-2.amazonaws.com/junoposter.jpeg) | ![정민사진](https://sopt-juno.s3.ap-northeast-2.amazonaws.com/jm.jpeg)  | ![현진사진](https://sopt-juno.s3.ap-northeast-2.amazonaws.com/hj.gif) |
 | 웹 개발자 | 웹 개발자 | 웹 개발자 |
 | directory detail 페이지 구현(web) <br/>newtab extension 구현 <br /> 랜딩 페이지 제작 |프로젝트 세팅 (웹팩, 린트 등) 및 관리  <br /> 리팩토링 및 전체적인 코드 리뷰 |popup extension 구현 <br /> 웹클리퍼 기능 구현 <br /> 구글 로그인 연동 |
 
