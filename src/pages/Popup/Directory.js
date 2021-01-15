@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { useState } from 'react';
-import back_arrow from '../../assets/img/back_arrow.svg';
+import back_arrow from '../../assets/img/icon_left.svg';
 import useInput from '../../hooks/useInput';
 import { ClipperPageNumState, WebClipperDirState } from '../../states/atom';
 import dirApi from '../../lib/api/directoryApi';
@@ -11,7 +11,7 @@ import emptyMeercat from '../../assets/img/meerkat_empty.svg';
 
 // 나중에 api 연결
 const token = {
-  'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJFbWFpbCI6IndqZGRuMDcyOEBuYXZlci5jb20iLCJpYXQiOjE2MDkzMzI1ODB9.T_GvqbwUHtBfjqgZj_Uki2R4woTN1djhf71lAabnOm4'
+  'x-access-token': localStorage.getItem('userToken')
 };
 
 export default () => {
@@ -129,17 +129,15 @@ const HeadhWrap = styled.div`
   margin-bottom: 0.7rem;
 `;
 
-const BackBtn = styled.div`
+const BackBtn = styled.img`
   cursor: pointer;
-  width: 4.2rem;
-  height: 4.2rem;
+  width: 3.2rem;
+  height: 3.2rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: 1.2rem;
+  margin-left: 2rem;
 `;
-
-const BackArrow = styled.img``;
 
 const DirItemWrap = styled.div`
   cursor: pointer;
@@ -151,11 +149,11 @@ const DirItemWrap = styled.div`
   background: ${props => (props.isHover ? ({ theme }) => theme.colors.gray_2 : ({ theme }) => theme.colors.white)};
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 `;
 
 const DirItem = styled.div`
-  width: 25rem;
+  width: 26rem;
   font-size: 2rem;
   font-weight: 500;
   line-height: 2.4rem;
@@ -173,14 +171,10 @@ const DirItemHoverCircle = styled.div`
   display: ${props => (props.isHover ? 'box' : 'none')};
 `;
 
-const DirList = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  position: relative;
+const DirListWrap = styled.div`
   overflow: auto;
   width: 33rem;
   height: 20rem;
-  /* width */
   ::-webkit-scrollbar {
     width: 1rem;
   }
@@ -201,23 +195,34 @@ const DirList = styled.div`
   }
 `;
 
+const DirList = styled.div`
+  display: grid;
+  justify-items: start;
+  grid-template-columns: 1fr;
+  position: relative;
+`;
+
+const Wraps = styled.div`
+  width: 36rem;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  bottom: 0%;
+`;
+
 const Blur = styled.div`
   width: 29rem;
-  /* height: 0.1rem; */
-  box-shadow: 0rem -1rem 1.5rem 0.8rem rgba(255, 255, 255, 0.75);
+  box-shadow: 0rem -1rem 1.5rem 0.8rem rgba(255, 255, 255, 0.8);
   z-index: 5;
 `;
 
 const BottomWrap = styled.div`
-  bottom: 7.85%;
-  width: 36.1rem;
+  width: 36rem;
   height: 8.9rem;
   background-color: ${({ theme }) => theme.colors.white};
-  /* background: linear-gradient(to top, white); */
   display: flex;
   flex-direction: row;
   align-items: center;
-  /* box-shadow: 0rem -1rem 1.5rem 0.8rem rgba(255, 255, 255, 0.75); */
 `;
 
 const SearchInput = styled.input`
@@ -276,7 +281,6 @@ const ReturnDirItems = ({ item, idx }) => {
   const [pageNum, setPageNum] = useRecoilState(ClipperPageNumState);
 
   const handleDirClick = e => {
-    // 디렉토리에 데이터 넣기
     chrome.storage.sync.get('cookieId', function (storage) {
       let data = {
         directoryId: idx,

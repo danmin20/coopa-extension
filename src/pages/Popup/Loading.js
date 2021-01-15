@@ -1,16 +1,34 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import logo from '../../assets/img/logo.svg';
+import Lottie from 'react-lottie';
+import parkingmotion from '../../assets/img/cookieparking_parkingmotion.json';
+import { useRecoilState } from 'recoil';
+import { LoadingState } from '../../states/atom';
 
 const Loading = () => {
+  const [isLoading, setIsLoading] = useRecoilState(LoadingState);
+
   useEffect(() => {
     chrome.runtime.sendMessage({ popupOpen: true });
+    setInterval(()=>{
+      setIsLoading(false);
+    }, 1000);
   }, []);
+
+  const defaultOptions = {
+    loop: false,
+    autoplay: true,
+    animationData: parkingmotion,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice'
+    }
+  };
 
   return (
     <Wrap>
       <LogoWrap>
-        <LogoImg src={logo} />
+        {/* <LogoImg src={logo} /> */}
+        <Lottie options={defaultOptions} width={'12rem'} height={'12rem'} isClickToPauseDisabled/>
         <Text>쿠키 파킹 중..</Text>
       </LogoWrap>
     </Wrap>
@@ -35,7 +53,7 @@ const LogoWrap = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 5.4rem;
+  margin-top: 3rem;
 `;
 
 const LogoImg = styled.img`

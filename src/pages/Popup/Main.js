@@ -4,9 +4,10 @@ import styled from 'styled-components';
 import Loading from './Loading';
 import { useRecoilState } from 'recoil';
 import logo from '../../assets/img/logo.svg';
-import down_arrow from '../../assets/img/down_arrow.svg';
-import down_arrow_white from '../../assets/img/down_arrow_white';
-import { ClipperPageNumState, isClickNextPageState, isCheckedState } from '../../states/atom';
+import down_arrow from '../../assets/img/icon_dropdown.svg';
+import { ClipperPageNumState, isClickNextPageState, isCheckedState, LoadingState } from '../../states/atom';
+import Lottie from 'react-lottie';
+import parkingmotion from '../../assets/img/cookieparking_parkingmotion.json';
 
 export default () => {
   const [isBtnOneHover, setIsBtnOneHover] = useState(false);
@@ -40,8 +41,17 @@ export default () => {
     window.open('newtab.html', '_blank');
   };
 
+  const defaultOptions = {
+    loop: false,
+    autoplay: true,
+    animationData: parkingmotion,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice'
+    }
+  };
+
   // 몇초간만 Loading 컴포넌트 return 하기
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useRecoilState(LoadingState);
   const [isChecked, setIsChecked] = useRecoilState(isCheckedState);
 
   const onChangeCb = e => {
@@ -57,9 +67,11 @@ export default () => {
   };
 
   useEffect(() => {
-    setInterval(() => {
-      setIsLoading(false);
-    }, 1000);
+    // setTimeout(()=>{
+    //   if(!isclickNextPage){
+    //     window.close();
+    //   }
+    // }, 8000)
   }, []);
 
   if (isLoading & !isclickNextPage) {
@@ -70,7 +82,8 @@ export default () => {
     <Wrap>
       {/* <button onClick={onClick}>click</button> */}
       <LogoWrap>
-        <LogoImg src={logo} />
+        {/* <LogoImg src={logo} /> */}
+        <Lottie options={defaultOptions} width={'12rem'} height={'12rem'} isClickToPauseDisabled/>        
         <Text>파킹했어요!</Text>
       </LogoWrap>
       <BtnWrap>
@@ -82,7 +95,7 @@ export default () => {
           </BtnOneWrap>
         </BtnOne>
         <BtnTwo onMouseOver={handleBtnTwoMouseOver} onMouseLeave={handleBtnTwoMouseLeave} onClick={handleBtnTwoClick} isHover={isBtnTwoHover}>
-          홈으로 가기
+          파킹랏으로 가기
         </BtnTwo>
       </BtnWrap>
     </Wrap>
@@ -105,16 +118,17 @@ const LogoWrap = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 5.4rem;
+  margin-top: 3.3rem;
 `;
 
 const Text = styled.div`
   width: 28.9rem;
   height: 4.5rem;
-  font-weight: 500;
+  line-height: 2.2rem;
+  font-weight: medium;
   font-size: 1.8rem;
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   justify-content: center;
 `;
 
@@ -136,7 +150,7 @@ const BtnOne = styled.div`
   /* background-color: ${props => (props.isHover ? '#FF7134' : '#ffffff')}; */
   background: ${({ theme }) => theme.colors.white};
   box-shadow: 0rem 0rem 1.2rem rgba(0, 0, 0, 0.13);
-  margin-top: 1.6rem;
+  margin-top: 1rem;
   transition-duration: 0.5s;
 `;
 
@@ -156,14 +170,14 @@ const BtnOneText = styled.div`
   color: ${({ theme }) => theme.colors.black_2};
   font-weight: 500;
   transition-duration: 0.2s;
+  margin-left: 2.5rem;
 `;
 
 const BtnOneArrow = styled.img`
-  /* display: ${props => (props.isHover ? 'none' : 'box')}; */
-  width: 1.6rem;
-  height: 0.988rem;
+  width: 2.4rem;
+  height: 2.4rem;
   position: relative;
-  right: -28%;
+  right: -23%;
 `;
 
 // const BtnOneArrowHover = styled.img`
