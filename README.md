@@ -26,7 +26,7 @@
 - localStorage에 로그인 여부 변수, 사용자 토큰 저장
 - 반응형 구현
 
-### 뉴탭_온보딩
+### 뉴탭/온보딩
 ![onboarding](https://sopt-juno.s3.ap-northeast-2.amazonaws.com/onboarding.png)
 
 
@@ -40,8 +40,8 @@
 - 페이지별 텍스트, carousel 설정
 - recoil의 atom에 `OnboardingState`를 두어 헤더의 아이콘을 누르면 모달창이 뜨도록 구현
 
-### 팝업_웹 클리퍼
-![webclipper](https://sopt-juno.s3.ap-northeast-2.amazonaws.com/webclipperGIF.gif)
+### 팝업/웹 클리퍼
+![webclipper](https://sopt-juno.s3.ap-northeast-2.amazonaws.com/webclipperlow.gif)
 
 **파비콘을 통해 손쉽게 웹페이지를 저장할 수 있는 웹 클리퍼**
 
@@ -53,7 +53,7 @@
 - popup extension 설정
 - react-lottie 라이브러리 사용
 
-### 뉴탭_ 올쿠키(메인페이지)
+### 뉴탭/올쿠키(메인페이지)
 ![allcookies](https://sopt-juno.s3.ap-northeast-2.amazonaws.com/allcookies.png)
 
 
@@ -66,7 +66,7 @@
 - `읽지 않은 쿠키` 버튼 토글 한번으로 사용자가 읽지 않은 쿠키로 `atom` 의 state를 변경하여 리렌더링하여 보여줌
 - 저장한 쿠키가 없을 경우 empty 뷰를 보여줌
 
-### 뉴탭_디렉토리
+### 뉴탭/디렉토리
 ![directory](https://sopt-juno.s3.ap-northeast-2.amazonaws.com/directory.png)
 
 
@@ -159,6 +159,7 @@ axios
 recoil
 react-google-login
 react-lottie
+react-reveal
 styled-components
 material-ui
 webpack
