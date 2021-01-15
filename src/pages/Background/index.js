@@ -22,6 +22,9 @@ chrome.runtime.onMessageExternal.addListener(function(message, sender, sendRespo
   console.log(message.userToken);
   localStorage.setItem( 'isLogin', message.isLogin );
   localStorage.setItem( 'userToken', message.userToken );
+  if(!message.isLogin){
+    localStorage.removeItem("userToken");
+  }
 });
 
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
