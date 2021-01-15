@@ -104,7 +104,7 @@ const PopupHelp = styled.img`
   width: 54.8rem;
   height: 11.2rem;
   top: -10rem;
-  right: 34rem;
+  right: 34.5rem;
 `;
 
 const Contents = styled.div`
