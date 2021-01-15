@@ -5,6 +5,7 @@
 ![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e1a5c5df-82f9-4055-a0cb-7f6c125b2078/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e1a5c5df-82f9-4055-a0cb-7f6c125b2078/Untitled.png)
 
 **프로덕트 마케팅을 위한 랜딩 페이지**
+
  다양한 인터렉션, 반응형을 통해 사용자에게 매력적으로 보일 수 있도록 도움
 
 - 반응형 설정
@@ -29,6 +30,7 @@
 ![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/b944f5a5-ca25-48c9-a8f7-f75da72d9b6f/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/b944f5a5-ca25-48c9-a8f7-f75da72d9b6f/Untitled.png)
 
 **신입 사용자를 위한 온보딩 페이지**
+
 이미지와 문구를 사용 스탭별로 안내하여 처음 진입한 사용자의 적응을 도움
 
 - 이미지 슬라이더를 구현하여 페이지별로 사진이 자연스럽게 넘어가도록 함
@@ -44,6 +46,7 @@
 ![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ceb928bf-7926-450a-bb29-5b4be1553b85/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ceb928bf-7926-450a-bb29-5b4be1553b85/Untitled.png)
 
 **파비콘을 통해 손쉽게 웹페이지를 저장할 수 있는 웹 클리퍼**
+
 원하는 웹 페이지를 빠르게 저장하고 분류할 수 있도록 플로우 최적화
 
 - 라우팅과 같은 효과를 주기 위해 페이지 넘버 변수 사용
@@ -59,6 +62,7 @@
 ![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/41febf47-d3e6-4287-aaec-6bdcdf098b14/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/41febf47-d3e6-4287-aaec-6bdcdf098b14/Untitled.png)
 
 **새 창을 띄울 때 마다 사용자가 저장했던 웹페이지를 모아보는 뉴탭 익스텐션** 
+
 웹 클리퍼를 통해 파킹해온 쿠키들을 그리드 뷰를 통해 보여줌으로써 편의성을 더함
 
 - 쿠키의 이름, 내용 등 키워드 검색을 통해 간편하게 원하는 쿠키를 바로 찾을 수 있음
@@ -108,7 +112,9 @@
 - manifest 파일 설정을 통해 기본, 확장 프로그램 파비콘
 - chrome.API를 통한 타 도메인과의 메시징
 - 웹팩에서 뉴탭, 백그라운드, 옵션, 웹클리퍼 등의 익스텐션 환경을
-- 뉴탭 익스텐션과 웹클리퍼 익스텐션을 모두 리액트로 빌드할 수 있게
+- 뉴탭 익스텐션과 웹클리퍼 익스텐션을 모두 리액트로 빌드할 수 있도록 
+
+
 ### 🏡 프로젝트 구조
 
 ```
@@ -177,10 +183,10 @@ webpack
 | :---: | :---: | :---: |
 | ![준호사진](https://sopt-juno.s3.ap-northeast-2.amazonaws.com/junoposter.jpeg) | ![정민사진]()  | ![현진사진](https://sopt-juno.s3.ap-northeast-2.amazonaws.com/hj.gif) |
 | 웹 개발자 | 웹 개발자 | 웹 개발자 |
-| directory detail 페이지 구현(web) <br/>newtab extension 구현|프로젝트 세팅 (웹팩, 린트 등) 및 관리 <br /> 랜딩 페이지 제작 <br /> 리팩토링 및 전체적인 코드 리뷰 |popup extension 구현 <br /> 웹클리퍼 기능 구현 <br /> 구글 로그인 연동 |
+| directory detail 페이지 구현(web) <br/>newtab extension 구현 <br /> 랜딩 페이지 제작 |프로젝트 세팅 (웹팩, 린트 등) 및 관리  <br /> 리팩토링 및 전체적인 코드 리뷰 |popup extension 구현 <br /> 웹클리퍼 기능 구현 <br /> 구글 로그인 연동 |
 
 |**🙋🏻‍♀️ [안채린](https://github.com/achrvv)** | **🙋🏻‍♀️ [천주윤](https://github.com/ewq3167)** |
 | :---: | :---: |
 | ![채린사진](https://sopt-juno.s3.ap-northeast-2.amazonaws.com/bong.gif) | ![주윤사진](https://sopt-juno.s3.ap-northeast-2.amazonaws.com/jyun.gif) |
 | 웹 개발자 | 웹 개발자 |
-|상세 디렉토리 리스트 구현 <br /> 프로젝트 세팅 선 구현|Card 컴포넌트 구현 <br />|
+|상세 디렉토리 리스트 구현 <br /> 온보딩 구현 <br /> 프로젝트 세팅 선 구현|Card 컴포넌트 구현 <br /> 프로젝트 매니징 <br />|
