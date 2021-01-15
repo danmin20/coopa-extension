@@ -1,6 +1,7 @@
 ## 🍪 Cookie Parking : 쿠키파킹의 귀염탱, WEB
 
-## 🖥 CookieParking의 뷰 소개
+
+### 🖥 CookieParking의 뷰 소개
 
 ### 랜딩페이지
 ![landing](https://sopt-juno.s3.ap-northeast-2.amazonaws.com/landingpage.png)
