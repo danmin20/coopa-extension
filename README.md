@@ -2,7 +2,6 @@
 
 ## [웹페이지] 랜딩페이지
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e1a5c5df-82f9-4055-a0cb-7f6c125b2078/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e1a5c5df-82f9-4055-a0cb-7f6c125b2078/Untitled.png)
 
 **프로덕트 마케팅을 위한 랜딩 페이지**
 
@@ -15,7 +14,6 @@
 
 ## [웹페이지] 로그인
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ec042f8a-3597-4cf8-b904-e385c720b910/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ec042f8a-3597-4cf8-b904-e385c720b910/Untitled.png)
 
 **사용자 로그인을 위한 로그인 페이지**
 
@@ -27,7 +25,6 @@
 
 ## [익스텐션]  뉴탭_온보딩
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/b944f5a5-ca25-48c9-a8f7-f75da72d9b6f/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/b944f5a5-ca25-48c9-a8f7-f75da72d9b6f/Untitled.png)
 
 **신입 사용자를 위한 온보딩 페이지**
 
@@ -43,7 +40,6 @@
 
 파비콘 보이게 찍기
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ceb928bf-7926-450a-bb29-5b4be1553b85/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ceb928bf-7926-450a-bb29-5b4be1553b85/Untitled.png)
 
 **파비콘을 통해 손쉽게 웹페이지를 저장할 수 있는 웹 클리퍼**
 
@@ -57,9 +53,6 @@
 
 ## [익스텐션] 뉴탭_ 올쿠키(메인페이지)
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ab74d421-9718-4d9e-90fc-d0dc7b242377/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ab74d421-9718-4d9e-90fc-d0dc7b242377/Untitled.png)
-
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/41febf47-d3e6-4287-aaec-6bdcdf098b14/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/41febf47-d3e6-4287-aaec-6bdcdf098b14/Untitled.png)
 
 **새 창을 띄울 때 마다 사용자가 저장했던 웹페이지를 모아보는 뉴탭 익스텐션** 
 
@@ -72,9 +65,6 @@
 
 ## [익스텐션] 뉴탭_디렉토리
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/54f40099-d48c-489e-b42c-976f4e679ae9/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/54f40099-d48c-489e-b42c-976f4e679ae9/Untitled.png)
-
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/01b00d3e-cf85-432e-8d14-2de9e5276049/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/01b00d3e-cf85-432e-8d14-2de9e5276049/Untitled.png)
 
 **디렉토리 생성과 분류를 통해,\ 가장 익숙하고 단순한 방식으로 정리**
 
@@ -84,7 +74,6 @@
 
 ## [웹페이지] 디렉토리 상세
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/695f8b5e-7c97-41dc-9d1d-4b7c32ad6300/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/695f8b5e-7c97-41dc-9d1d-4b7c32ad6300/Untitled.png)
 
 **분류한 웹페이지를 확인하고 공유할 수 있는 디렉토리 상세 페이지**
 
@@ -96,7 +85,6 @@
 
 ## [웹페이지] 마이페이지
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/888ccf32-c297-40c5-b6bd-3f6f3bc20833/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/888ccf32-c297-40c5-b6bd-3f6f3bc20833/Untitled.png)
 
 **사용자 정보를 수정하고 확인할 수 있는 마이페이지**
 
