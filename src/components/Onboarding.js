@@ -71,9 +71,7 @@ export default () => {
           </SliderContainer>
           {currentSlide != 3 ? (
             <BtnWrap>
-              <CloseBtn onClick={closeHandler}>
-                그만볼래요
-              </CloseBtn>
+              <CloseBtn onClick={closeHandler}>그만볼래요</CloseBtn>
               <MoveWrap>
                 {currentSlide != 0 && <PrevBtn onClick={prevSlide}>이전</PrevBtn>}
                 {currentSlide == 0 && <div className="emptyBtn" />}
@@ -122,10 +120,11 @@ const TextContainer = styled.div`
 `;
 const Text = styled.div`
   width: 63rem;
-  font-weight: bold;
+  font-weight: normal;
   font-size: 2.4rem;
   text-align: center;
   margin-top: 5.4rem;
+  color: ${({ theme }) => theme.colors.black_1};
 `;
 
 const SliderContainer = styled.div`
@@ -170,8 +169,6 @@ const Slide = styled.img`
 
 const BtnWrap = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
 `;
 
 const CloseBtn = styled.div`
@@ -180,14 +177,16 @@ const CloseBtn = styled.div`
   cursor: pointer;
   color: ${({ theme }) => theme.colors.gray_5};
   font-size: 2rem;
-  border-bottom: solid 1px ${({ theme }) => theme.colors.gray_5};
-  margin-right: 20rem;
-  padding-bottom: 0.5rem;
+  margin-top: 1.2rem;
+  margin-right: 22.4rem;
+  text-decoration: underline;
+  font-weight: 400;
 `;
 
 const MoveWrap = styled.div`
   display: flex;
   flex-direction: row;
+  //margin-bottom: 4.2rem;
   .emptyBtn {
     width: 9rem;
   }
