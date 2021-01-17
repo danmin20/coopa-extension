@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
-import { useRecoilState } from 'recoil';
-import { ClipperPageNumState, LoginState } from '../../states/atom';
+import React from 'react';
 import Finish from './Finish';
 import Main from './Main';
 import Directory from './Directory';
 import MainNotLogin from './MainNotLogin';
-// import Login from './Login';
+// recoil
+import { useRecoilState } from 'recoil';
+import { ClipperPageNumState, LoginState } from '../../states/atom';
 
 export default () => {
   const [pageNum, setPageNum] = useRecoilState(ClipperPageNumState);

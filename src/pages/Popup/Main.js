@@ -1,11 +1,14 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import styled from 'styled-components';
-import Loading from './Loading';
-import { useRecoilState } from 'recoil';
-import down_arrow from '../../assets/img/icon_dropdown.svg';
-import { ClipperPageNumState, isClickNextPageState, LoadingState } from '../../states/atom';
 import Lottie from 'react-lottie';
+// components
+import Loading from './Loading';
+// recoil
+import { useRecoilState } from 'recoil';
+import { ClipperPageNumState, isClickNextPageState, LoadingState } from '../../states/atom';
+// assets
+import down_arrow from '../../assets/img/icon_dropdown.svg';
 import parkingmotion from '../../assets/img/cookieparking_parkingmotion.json';
 
 export default () => {

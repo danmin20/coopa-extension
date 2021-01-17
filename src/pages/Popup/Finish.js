@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import Lottie from 'react-lottie';
+// recoil
 import { LoginState, SelectedListState } from '../../states/atom';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { useState } from 'react';
+// assets
 import logo_notLogin from '../../assets/img/clipper_img_hello.svg';
-import Lottie from 'react-lottie';
 import parkingmotion from '../../assets/img/cookieparking_parkingmotion.json';
 
 export default () => {

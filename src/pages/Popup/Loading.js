@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import Lottie from 'react-lottie';
+// assets
 import parkingmotion from '../../assets/img/cookieparking_parkingmotion.json';
+// recoil
 import { useRecoilState } from 'recoil';
 import { LoadingState } from '../../states/atom';
 

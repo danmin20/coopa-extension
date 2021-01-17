@@ -1,22 +1,24 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useRecoilState, useSetRecoilState } from 'recoil';
-import { useState } from 'react';
-import back_arrow from '../../assets/img/icon_left.svg';
 import useInput from '../../hooks/useInput';
-import { ClipperPageNumState, WebClipperDirState, SelectedListState } from '../../states/atom';
-import dirApi from '../../lib/api/directoryApi';
+// components
 import { Loading } from '../../common';
+// recoil
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { ClipperPageNumState, SelectedListState } from '../../states/atom';
+// assets
+import back_arrow from '../../assets/img/icon_left.svg';
 import emptyMeercat from '../../assets/img/meerkat_empty.svg';
+// api
+import dirApi from '../../lib/api/directoryApi';
 
-// 나중에 api 연결
 const token = {
   'x-access-token': localStorage.getItem('userToken')
 };
 
 export default () => {
   const setPageNum = useSetRecoilState(ClipperPageNumState);
-  const [dirState, setDirState] = useRecoilState(WebClipperDirState);
+  const [dirState, setDirState] = useState(null);
   const [isHover, setIsHover] = useState(false);
   const [loading, setLoading] = useState(true);
   const InputText = useInput('');
@@ -25,8 +27,6 @@ export default () => {
     const result = dirApi.getDirAll(token);
     result.then(function (dir) {
       setDirState(dir.data);
-      //dir empty뷰 test
-      //setDirState([]);
       setLoading(false);
     });
   }, []);

@@ -1,9 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
+// components
 import { Switch } from '../../common';
+// assets
 import meerkat from '../../assets/img/meerkat_option.svg';
-import { NewTabToggleState } from '../../states/atom';
+// recoil
 import { useRecoilState } from 'recoil';
+import { NewTabToggleState } from '../../states/atom';
 
 export default () => {
   const [toggleState, setToggleState] = useRecoilState(NewTabToggleState);
