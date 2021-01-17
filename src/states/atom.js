@@ -1,34 +1,36 @@
 import { atom } from 'recoil';
 
+// All cookies
 export const CookieState = atom({
   key: 'CookieState',
   default: []
 });
 
+// All directories
 export const DirState = atom({
   key: 'DirState',
   deafult: []
 });
 
+// For web clipper
 export const ClipperPageNumState = atom({
   key: 'ClipperPageNumState',
   default: 0
 });
-
 export const isClickNextPageState = atom({
   key: 'isClickNextPageState',
   default: false
 });
 
-export const listSelectState = atom({
-  key: 'listSelectState',
-  value: false
-});
+// export const listSelectState = atom({
+//   key: 'listSelectState',
+//   value: false
+// });
 
-export const isCheckedState = atom({
-  key: 'isCheckedState',
-  default: false
-});
+// export const isCheckedState = atom({
+//   key: 'isCheckedState',
+//   default: false
+// });
 
 export const WebClipperDirState = atom({
   key: 'WebClipperDirState',

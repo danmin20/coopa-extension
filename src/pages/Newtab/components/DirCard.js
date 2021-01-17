@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
-import cookieIcon from '../assets/img/cookie_icon.svg';
-import cookieIconW from '../assets/img/cookie_icon_white.svg';
-import updateDirIcon from '../assets/img/update_dir_icon.svg';
-import DirFixModal from '../components/DirFixModal';
-import DelCookieModal from '../components/DelCookieModal';
-import ToastMsg from '../components/ToastMsg';
-import { DelToastState, updateDirClickState, DirCardHoverState } from '../states/atom';
+// components
+import { DirFixModal, DelCookieModal, ToastMsg } from '../components';
+// assets
+import cookieIcon from '../../../assets/img/cookie_icon.svg';
+import cookieIconW from '../../../assets/img/cookie_icon_white.svg';
+import updateDirIcon from '../../../assets/img/update_dir_icon.svg';
+// recoil
 import { useRecoilValue, useRecoilState } from 'recoil';
+import { DelToastState, updateDirClickState, DirCardHoverState } from '../../../states/atom';
 
 export default ({ dir }) => {
   const [DirCardHover, setDirCardHover] = useRecoilState(DirCardHoverState);

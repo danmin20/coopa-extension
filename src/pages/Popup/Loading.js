@@ -5,12 +5,12 @@ import parkingmotion from '../../assets/img/cookieparking_parkingmotion.json';
 import { useRecoilState } from 'recoil';
 import { LoadingState } from '../../states/atom';
 
-const Loading = () => {
+export default () => {
   const [isLoading, setIsLoading] = useRecoilState(LoadingState);
 
   useEffect(() => {
     chrome.runtime.sendMessage({ popupOpen: true });
-    setInterval(()=>{
+    setInterval(() => {
       setIsLoading(false);
     }, 1000);
   }, []);
@@ -27,15 +27,12 @@ const Loading = () => {
   return (
     <Wrap>
       <LogoWrap>
-        {/* <LogoImg src={logo} /> */}
-        <Lottie options={defaultOptions} width={'12rem'} height={'12rem'} isClickToPauseDisabled/>
+        <Lottie options={defaultOptions} width={'12rem'} height={'12rem'} isClickToPauseDisabled />
         <Text>쿠키 파킹 중..</Text>
       </LogoWrap>
     </Wrap>
   );
 };
-
-export default Loading;
 
 const Wrap = styled.div`
   width: 36rem;

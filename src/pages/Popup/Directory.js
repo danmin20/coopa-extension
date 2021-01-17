@@ -6,7 +6,7 @@ import back_arrow from '../../assets/img/icon_left.svg';
 import useInput from '../../hooks/useInput';
 import { ClipperPageNumState, WebClipperDirState, SelectedListState } from '../../states/atom';
 import dirApi from '../../lib/api/directoryApi';
-import Loading from '../../components/Loading';
+import { Loading } from '../../common';
 import emptyMeercat from '../../assets/img/meerkat_empty.svg';
 
 // 나중에 api 연결

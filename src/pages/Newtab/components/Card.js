@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
-import defaultImg from '../assets/img/img_default.svg';
+// components
 import CardHover from './CardHover';
-import { listSelectState, ShareClickState, CookieState } from '../states/atom';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import deleteicon from '../assets/img/icon_delete_hover.svg';
-import shereicon from '../assets/img/icon_share_hover.svg';
-import logo from '../assets/img/logo_white.svg';
+import { DelCookieModal } from '../components';
+// recoil
+import { ShareClickState } from '../../../states/atom';
+import { useSetRecoilState } from 'recoil';
+// assets
+import defaultImg from '../../../assets/img/img_default.svg';
+import deleteicon from '../../../assets/img/icon_delete_hover.svg';
+import shereicon from '../../../assets/img/icon_share_hover.svg';
+import logo from '../../../assets/img/logo_white.svg';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import DelCookieModal from '../components/DelCookieModal';
-import cookieApi from '../lib/api/cookieApi';
+// api
+import cookieApi from '../../../lib/api/cookieApi';
 
 const token = {
   'x-access-token': localStorage.getItem('userToken')
@@ -18,7 +22,7 @@ const token = {
 export default ({ cookies, idx }) => {
   const [cardHover, setCardHover] = useState(false);
   const [parkingState, setParkingState] = useState(false);
-  const listSelect = useRecoilValue(listSelectState);
+  // const listSelect = useRecoilValue(listSelectState);
   const setShareClick = useSetRecoilState(ShareClickState);
   const [isDelOpen, setIsDelOpen] = useState(false);
 
@@ -54,7 +58,7 @@ export default ({ cookies, idx }) => {
       <Contents thumbnail={cookies.thumbnail}>
         <div className="thumbnail">
           {parkingState && (
-            <Parking listSelect={listSelect} thumbnail={cookies.thumbnail}>
+            <Parking thumbnail={cookies.thumbnail}>
               <div className="parking--title">{cookies.directoryInfo.name}</div>
               <ParkingLogoWrap>
                 <ParkingLogo src={logo} />

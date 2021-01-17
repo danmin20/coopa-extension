@@ -1,12 +1,14 @@
 import styled from 'styled-components';
 import React, { useState } from 'react';
-import dropdwnImg from '../assets/img/dropdown.svg';
-import { CookieState } from '../states/atom';
+import useInput from '../../../hooks/useInput';
+// assets
+import dropdwnImg from '../../../assets/img/dropdown.svg';
+import { CookieState, DirState } from '../../../states/atom';
+import emptyMeercat from '../../../assets/img/meerkat_empty.svg';
+// recoil
 import { useRecoilState } from 'recoil';
-import { DirState } from '../states/atom';
-import dirApi from '../lib/api/directoryApi';
-import useInput from '../hooks/useInput';
-import emptyMeercat from '../assets/img/meerkat_empty.svg';
+// api
+import dirApi from '../../../lib/api/directoryApi';
 
 const token = {
   'x-access-token': localStorage.getItem('userToken')
@@ -53,12 +55,12 @@ const List = ({ dir, cookies, setParkingState }) => {
     const newCookie = cookieState.map((c, idx) =>
       c.id === cookies.id
         ? {
-          ...c,
-          directoryInfo: {
-            id: dir.id,
-            name: dir.name
+            ...c,
+            directoryInfo: {
+              id: dir.id,
+              name: dir.name
+            }
           }
-        }
         : c
     );
     setCookieState(newCookie);
@@ -169,8 +171,8 @@ export default ({ cookies, setParkingState }) => {
               </div>
             </DirList>
           ) : (
-              <EmptyDirView />
-            )}
+            <EmptyDirView />
+          )}
           <BottonWrap>
             <input className="addInput" placeholder="새 디렉토리 명을 입력하세요" onClick={e => e.stopPropagation()} onChange={inputText.onChange} value={inputText.value} maxLength={20} />
             <button className="addBtn" onClick={addDirHandler}>
@@ -221,7 +223,7 @@ const Directory = styled.div`
 const ListWrap = styled.div`
   border-radius: 1.2rem;
   margin: 2rem;
-  margin-top:1rem;
+  margin-top: 1rem;
   background: ${({ theme }) => theme.colors.white};
   box-shadow: 0px 0.2rem 2rem rgba(0, 0, 0, 0.2);
 `;
@@ -315,6 +317,6 @@ const BottonWrap = styled.div`
     }
     ::placeholder {
       font-size: 1.5rem;
-      }
+    }
   }
 `;

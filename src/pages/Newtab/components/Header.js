@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Logo from '../assets/img/logo_main.svg';
-import alarm from '../assets/img/icon_alarm';
-import mypage from '../assets/img/icon_mypage';
-import onboarding from '../assets/img/icon_onboarding';
-import helptooltip from '../assets/img/header_help_popup.svg';
+// assets
+import Logo from '../../../assets/img/logo_main.svg';
+import alarm from '../../../assets/img/icon_alarm';
+import mypage from '../../../assets/img/icon_mypage';
+import onboarding from '../../../assets/img/icon_onboarding';
+import helptooltip from '../../../assets/img/header_help_popup.svg';
+// recoil
 import { useSetRecoilState } from 'recoil';
-import { SearchState, SelectState, OnboardingState, PrepareModalState } from '../states/atom';
+import { SearchState, SelectState, OnboardingState, PrepareModalState } from '../../../states/atom';
 
 export default ({ isSearched, setIsSearched }) => {
   const setSelectState = useSetRecoilState(SelectState);

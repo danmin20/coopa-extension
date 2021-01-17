@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+// components
 import DirCard from './DirCard';
-import Loading from './Loading';
+import Loading from '../../../common/Loading';
+// recoil
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { DirState, SearchState } from '../states/atom';
-import dirApi from '../lib/api/directoryApi';
-import meerkat from '../assets/img/meerkat_empty.svg';
-import plusIcon from '../assets/img/icon_plus.svg';
-import plusIconWhite from '../assets/img/icon_plus_white.svg';
-// 로그인 구현되면 지우기
+import { DirState, SearchState } from '../../../states/atom';
+// api
+import dirApi from '../../../lib/api/directoryApi';
+// assets
+import meerkat from '../../../assets/img/meerkat_empty.svg';
+import plusIcon from '../../../assets/img/icon_plus.svg';
+import plusIconWhite from '../../../assets/img/icon_plus_white.svg';
+
 const token = {
   'x-access-token': localStorage.getItem('userToken')
 };

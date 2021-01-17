@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
-import homebrdIconSearch from '../assets/img/homebrd_icn_search.svg';
-import homebrdIconSearchOr from '../assets/img/homebrd_icn_search_orange.svg';
-import useInput from '../hooks/useInput';
+import useInput from '../../../hooks/useInput';
+// assets
+import homebrdIconSearch from '../../../assets/img/homebrd_icn_search.svg';
+import homebrdIconSearchOr from '../../../assets/img/homebrd_icn_search_orange.svg';
+import meerkat from '../../../assets/img/meerkat_home.svg';
+import cookies from '../../../assets/img/cookies_home.svg';
+// recoil
 import { useSetRecoilState } from 'recoil';
-import { SearchState } from '../states/atom';
-import meerkat from '../assets/img/meerkat_home.svg';
-import cookies from '../assets/img/cookies_home.svg';
+import { SearchState } from '../../../states/atom';
 
 export default ({ isSearched, setIsSearched }) => {
   const [isFocused, setIsFocused] = useState(false);

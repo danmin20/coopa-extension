@@ -1,9 +1,11 @@
 import styled from 'styled-components';
 import React, { useState, useEffect } from 'react';
+// recoil
 import { useRecoilValue, useSetRecoilState, useRecoilState } from 'recoil';
-import { DirState, SelectState, DeleteCookieClickState, CookieState, DelToastState } from '../states/atom';
-import dirApi from '../lib/api/directoryApi';
-import cookieAPI from '../lib/api/cookieApi';
+import { DirState, SelectState, DeleteCookieClickState, CookieState, DelToastState } from '../../../states/atom';
+// api
+import dirApi from '../../../lib/api/directoryApi';
+import cookieAPI from '../../../lib/api/cookieApi';
 
 const token = {
   'x-access-token': localStorage.getItem('userToken')
@@ -60,9 +62,9 @@ export default ({ setIsDelOpen, id }) => {
     setIsCancleHover(false);
   };
 
-  const handleModalClick = (e) => {
+  const handleModalClick = e => {
     e.stopPropagation();
-  }
+  };
 
   useEffect(() => {
     return () => {

@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+// components
 import Card from './Card';
-import Loading from './Loading';
+import Loading from '../../../common/Loading';
+// recoil
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import { CookieState, SearchState, DirState } from '../states/atom';
-import cookieApi from '../lib/api/cookieApi';
-import dirApi from '../lib/api/directoryApi';
-import meerkat from '../assets/img/meerkat_empty.svg';
-// 로그인 구현되면 지우기
+import { CookieState, SearchState, DirState } from '../../../states/atom';
+// assets
+import cookieApi from '../../../lib/api/cookieApi';
+import dirApi from '../../../lib/api/directoryApi';
+import meerkat from '../../../assets/img/meerkat_empty.svg';
+
 const token = {
   'x-access-token': localStorage.getItem('userToken')
 };
@@ -72,6 +75,7 @@ export default ({ isSearched, isToggled }) => {
     </>
   );
 };
+
 const EmptyView = styled.div`
   margin-top: 17.2rem;
   display: flex;

@@ -3,9 +3,8 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import Loading from './Loading';
 import { useRecoilState } from 'recoil';
-import logo from '../../assets/img/logo.svg';
 import down_arrow from '../../assets/img/icon_dropdown.svg';
-import { ClipperPageNumState, isClickNextPageState, isCheckedState, LoadingState } from '../../states/atom';
+import { ClipperPageNumState, isClickNextPageState, LoadingState } from '../../states/atom';
 import Lottie from 'react-lottie';
 import parkingmotion from '../../assets/img/cookieparking_parkingmotion.json';
 
@@ -52,19 +51,19 @@ export default () => {
 
   // 몇초간만 Loading 컴포넌트 return 하기
   const [isLoading, setIsLoading] = useRecoilState(LoadingState);
-  const [isChecked, setIsChecked] = useRecoilState(isCheckedState);
+  // const [isChecked, setIsChecked] = useRecoilState(isCheckedState);
 
-  const onChangeCb = e => {
-    if (e.target.checked) {
-      setIsChecked(true);
-      console.log('checked!');
-      chrome.storage.sync.set({ defaultnewtab: isChecked });
-    } else {
-      setIsChecked(false);
-      console.log('unchecked!');
-      chrome.storage.sync.set({ defaultnewtab: isChecked });
-    }
-  };
+  // const onChangeCb = e => {
+  //   if (e.target.checked) {
+  //     setIsChecked(true);
+  //     console.log('checked!');
+  //     chrome.storage.sync.set({ defaultnewtab: isChecked });
+  //   } else {
+  //     setIsChecked(false);
+  //     console.log('unchecked!');
+  //     chrome.storage.sync.set({ defaultnewtab: isChecked });
+  //   }
+  // };
 
   useEffect(() => {
     // setTimeout(()=>{
@@ -80,10 +79,8 @@ export default () => {
 
   return (
     <Wrap>
-      {/* <button onClick={onClick}>click</button> */}
       <LogoWrap>
-        {/* <LogoImg src={logo} /> */}
-        <Lottie options={defaultOptions} width={'12rem'} height={'12rem'} isClickToPauseDisabled/>        
+        <Lottie options={defaultOptions} width={'12rem'} height={'12rem'} isClickToPauseDisabled />
         <Text>파킹했어요!</Text>
       </LogoWrap>
       <BtnWrap>
@@ -91,7 +88,6 @@ export default () => {
           <BtnOneWrap>
             <BtnOneText isHover={isBtnOneHover}>디렉토리 선택</BtnOneText>
             <BtnOneArrow src={down_arrow} isHover={isBtnOneHover} />
-            {/* <BtnOneArrowHover src={down_arrow_white} isHover={isBtnOneHover} /> */}
           </BtnOneWrap>
         </BtnOne>
         <BtnTwo onMouseOver={handleBtnTwoMouseOver} onMouseLeave={handleBtnTwoMouseLeave} onClick={handleBtnTwoClick} isHover={isBtnTwoHover}>
@@ -179,14 +175,6 @@ const BtnOneArrow = styled.img`
   position: relative;
   right: -23%;
 `;
-
-// const BtnOneArrowHover = styled.img`
-//   display: ${props => (props.isHover ? 'box' : 'none')};
-//   width: 1.6rem;
-//   height: 0.988rem;
-//   position: relative;
-//   right: -28%;
-// `;
 
 const BtnTwo = styled.div`
   cursor: pointer;

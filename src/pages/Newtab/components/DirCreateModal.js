@@ -1,9 +1,12 @@
 import styled from 'styled-components';
 import React, { useState, useEffect } from 'react';
-import useInput from '../hooks/useInput';
-import dirApi from '../lib/api/directoryApi';
+import useInput from '../../../hooks/useInput';
+// recoil
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { DirState, createDirClickState } from '../states/atom';
+import { DirState, createDirClickState } from '../../../states/atom';
+// api
+import dirApi from '../../../lib/api/directoryApi';
+
 const token = {
   'x-access-token': localStorage.getItem('userToken')
 };

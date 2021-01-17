@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { ShareClickState, DeleteCookieClickState, DelToastState, createDirClickState, updateDirClickState } from '../states/atom';
+// recoil
 import { useSetRecoilState } from 'recoil';
+import { ShareClickState, DeleteCookieClickState, DelToastState, createDirClickState, updateDirClickState } from '../../../states/atom';
 
 export default ({ msg }) => {
   const [isFlex, setIsFlex] = useState(true);

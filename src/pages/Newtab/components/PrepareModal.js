@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 import React, { useState } from 'react';
-import img from '../assets/img/ready_img_meerkat.svg';
+// assets
+import img from '../../../assets/img/ready_img_meerkat.svg';
+import { PrepareModalState } from '../../../states/atom';
+// recoil
 import { useSetRecoilState } from 'recoil';
-import { PrepareModalState } from '../states/atom';
 
 export default () => {
   const [isClose, setIsClose] = useState(false);

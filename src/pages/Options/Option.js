@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Switch from '../../components/Switch';
+import { Switch } from '../../common';
 import meerkat from '../../assets/img/meerkat_option.svg';
 import { NewTabToggleState } from '../../states/atom';
 import { useRecoilState } from 'recoil';

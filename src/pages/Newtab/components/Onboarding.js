@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 import React, { useState, useRef, useEffect } from 'react';
+// recoil
 import { useSetRecoilState } from 'recoil';
-import { OnboardingState } from '../states/atom';
-import OnbrdImg1 from '../assets/img/onbrd_img_step1.svg';
-import OnbrdImg2 from '../assets/img/onbrd_img_step2.svg';
-import OnbrdImg3 from '../assets/img/onbrd_img_step3.svg';
-import OnbrdImg4 from '../assets/img/onbrd_img_step4.svg';
+import { OnboardingState } from '../../../states/atom';
+// assets
+import OnbrdImg1 from '../../../assets/img/onbrd_img_step1.svg';
+import OnbrdImg2 from '../../../assets/img/onbrd_img_step2.svg';
+import OnbrdImg3 from '../../../assets/img/onbrd_img_step3.svg';
+import OnbrdImg4 from '../../../assets/img/onbrd_img_step4.svg';
 
 export default () => {
   const setOnboarding = useSetRecoilState(OnboardingState);
@@ -59,8 +61,8 @@ export default () => {
               <div className="circle" />
             </Carousel>
           ) : (
-              <StartDiv>이제 쿠키를 파킹하러 가볼까요?</StartDiv>
-            )}
+            <StartDiv>이제 쿠키를 파킹하러 가볼까요?</StartDiv>
+          )}
           <SliderContainer>
             <ImgContainer ref={slideRef}>
               <Slide src={OnbrdImg1} />
@@ -79,8 +81,8 @@ export default () => {
               </MoveWrap>
             </BtnWrap>
           ) : (
-              <StartBtn onClick={closeHandler}>쿠키파킹 시작하기</StartBtn>
-            )}
+            <StartBtn onClick={closeHandler}>쿠키파킹 시작하기</StartBtn>
+          )}
         </ModalWrap>
       </Wrap>
     </>

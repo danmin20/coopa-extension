@@ -1,19 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
-import AllCookies from '../../components/AllCookies';
-import Directory from '../../components/Directory';
-import Switch from '../../components/Switch';
-import Header from '../../components/Header';
-import HomeBoard from '../../components/HomeBoard';
+
+import { AllCookies, Directory, Header, HomeBoard, ToastMsg, DirCreateModal, Onboarding, PrepareModal } from './components';
+import { Switch } from '../../common';
+
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { SelectState, ShareClickState, DeleteCookieClickState, createDirClickState, OnboardingState, PrepareModalState } from '../../states/atom';
-import DirCreateModal from '../../components/DirCreateModal';
-import ToastMsg from '../../components/ToastMsg';
 import helpPopup from '../../assets/img/cookies_img_help.svg';
 import helpIcon from '../../assets/img/icon_help.svg';
 import plusIcon from '../../assets/img/icon_plus.svg';
-import OnBoarding from '../../components/Onboarding';
-import PrepareModalComponent from '../../components/PrepareModal';
 
 export default () => {
   const [selectState, setSelectState] = useRecoilState(SelectState);
@@ -61,8 +56,8 @@ export default () => {
 
   return (
     <>
-      {Onboarding && <OnBoarding />}
-      {PrepareModal && <PrepareModalComponent />}
+      {Onboarding && <Onboarding />}
+      {PrepareModal && <PrepareModal />}
       <div className="container">
         <Header isSearched={isSearched} setIsSearched={setIsSearched} />
         <HomeBoard setIsSearched={setIsSearched} isSearched={isSearched} />
